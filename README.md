@@ -4,61 +4,53 @@ CPSC436I_Project
 ## Project Description
 
 ### Who is it for?
-People who have needs for exchange second-hand stuff.
+People with needs to exchange second-hand goods.
 ### What will it do? (What "human activity" will it support?)
-Users will be able to search, buy, and sell items stored on the website.
-Users can manage their own items for sale.
+Users will be able to search, buy, and sell items.
+Users will also be able to manage their items for sale.
 ### What type of data will it store?
-* User personal data
-    * Avatar
-    * Username
-    * Password
+* User data
+    * avatar
+    * username
+    * password
 * Item data
-    * Picture
-    * Title
-    * Description
-    * Price
-    * Date (posting date and/or expired date)
-Items information corresponding to a specific user or a category.
+    * picture
+    * title
+    * description
+    * price
+    * date (posting date and/or expired date)
+Item information is arranged by user and by category.
 ### What will users be able to do with this data?
-* To user data: Edit their profile 
-* To item data: Users will be able to add new items, modify existing items(edit or delete)
+* For user data: users will be able edit their profile. 
+* For item data: users will be able to add new items and modify (edit and delete) existing items.
 ### What is some additional functionality you can add/remove based on time constraints?
 * Group(community) module
-* Virtual currency module
+* virtual currency module
 
 ## Project task requirements
 
 ### 3-5 minimal requirements & "standard" requirements
-* SignUp & Login (minimal)
+* Sign up & Log in (minimal)
+* Post new items (minimal)
 * Search items (minimal) based on some filters (standard)
 * Render items that meet the requirement onto the website (minimal)
-* Display a particular item(photo, description, price, posted date and so on)
-* Post new item(minimal)
+* Display a specific item (i.e., photo, description, price, posted date) (standard)
 * Edit & delete existing item (standard)
 ### 2-3 stretch requirements (hope to complete 1!)
-* Write tests for most of the functions
-* Comments and rating of an item
-* Goods will automatically be removed from the list after the set expiration time 
-* User group of some concrete category
+* Write tests for most functions
+* Comment and rate items
+* Automatically remove goods from the list after the expiration time set by the website
+* User group of specific subcategory
 * Virtual currency system
 
 ## Mockup
-
 ###Index
-
-![alt text](mockup/my_index.png)
-
+![alt text](./mockup/Index.png)
 ###Login
-
-![alt text](mockup/my_register.png)
-
+![alt text](./mockup/register.png)
 ###List items in one category
-
-![alt text](mockup/my_list.png)
-
+![alt text](./mockup/List.png)
 ###List one item
-
-![alt text](mockup/one_item_display.png)
+![alt text](./mockup/One_item_display.png)
 
 
