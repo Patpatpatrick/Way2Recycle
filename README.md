@@ -47,10 +47,10 @@ Items information corresponding to a specific user or a category.
 ###Index
 ![alt text](./mockup/index.png)
 ###Login
-![alt text](./mockup/register.png)
+![alt text](mockup/my_register.png)
 ###List items in one category
-![alt text](./mockup/List.png)
+![alt text](mockup/my_list.png)
 ###List one item
-![alt text](./mockup/One item display.png)
+![alt text](mockup/one_item_display.png)
 
 
