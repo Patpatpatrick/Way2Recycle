@@ -45,12 +45,12 @@ Item information is arranged by user and by category.
 
 ## Mockup
 ###Index
-![alt text](./mockup/Index.png)
+![alt text](./mockup/my_index.png)
 ###Login
-![alt text](./mockup/register.png)
+![alt text](./mockup/my_register.png)
 ###List items in one category
-![alt text](./mockup/List.png)
+![alt text](./mockup/my_list.png)
 ###List one item
-![alt text](./mockup/One_item_display.png)
+![alt text](./mockup/one_item_display.png)
 
 
