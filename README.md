@@ -47,7 +47,7 @@ Items information corresponding to a specific user or a category.
 
 ###Index
 
-![alt text](./mockup/my_index.png)
+![alt text](mockup/my_index.png)
 
 ###Login
 
