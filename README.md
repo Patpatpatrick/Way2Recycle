@@ -51,6 +51,6 @@ Items information corresponding to a specific user or a category.
 ###List items in one category
 ![alt text](./mockup/List.png)
 ###List one item
-![alt text](./mockup/One item display.png)
+![alt text](./mockup/One_item_display.png)
 
 
