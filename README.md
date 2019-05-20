@@ -45,7 +45,7 @@ Items information corresponding to a specific user or a category.
 
 ## Mockup
 ###Index
-![alt text](./mockup/index.png)
+![alt text](./mockup/Index.png)
 ###Login
 ![alt text](./mockup/register.png)
 ###List items in one category
