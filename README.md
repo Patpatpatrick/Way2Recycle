@@ -46,12 +46,19 @@ Items information corresponding to a specific user or a category.
 ## Mockup
 
 ###Index
-![alt text](./mockup/index.png)
+
+![alt text](./mockup/my_index.png)
+
 ###Login
+
 ![alt text](mockup/my_register.png)
+
 ###List items in one category
+
 ![alt text](mockup/my_list.png)
+
 ###List one item
+
 ![alt text](mockup/one_item_display.png)
 
 
