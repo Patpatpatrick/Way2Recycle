@@ -45,6 +45,7 @@ Item information is arranged by user and by category.
 
 ## Mockup
 ###Index
+
 ![alt text](./mockup/my_index.png)
 ###Login
 ![alt text](./mockup/my_register.png)
