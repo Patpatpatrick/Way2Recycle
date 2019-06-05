@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-
+import ClearOne from './PostAdPortalSubComponent/ClearOne';
+import SeeOne from './PostAdPortalSubComponent/ViewOneItem';
 class List_ele extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
 
     render() {
         return (
@@ -19,24 +16,24 @@ class List_ele extends Component {
                 <div className="col-md-5">
                     <div className="row">
                         <div className="col-md-10">
-                            <a href="#">                        <h5>Equipment Innovations PC-14 Plasma cutter NEW with Warranty</h5>
+                            <a href="#">                        <h5>{this.props.element.itemname}</h5>
                             </a>
                         </div>
 
                         <div className="col-md-2">
-                        <h4>$500</h4>
+                        <h4>{'$'+ this.props.element.price}</h4>
+                        <h4>{this.props.element.category}</h4>
                         </div>
 
                     </div>
 
-                    <p>PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?</p>
+                    <p>{this.props.element.description}</p>
                     {/*<a className="btn btn-primary" href="#">View Product</a>*/}
 
                 </div>
-
             </div>
         );
     }
     }
 
-    export default List_ele;
+export default List_ele;
