@@ -1,10 +1,8 @@
 import React from 'react';
-import './style.css'
 import ClearOne from './ClearOne';
-import SeeOne from './ViewOneitem';
+import SeeOne from './ViewOneItem';
 import { connect } from 'react-redux';
-
-class ItemList extends React.Component { 
+class ItemsBox extends React.Component { 
  
 	render() {
         return (
@@ -15,7 +13,7 @@ class ItemList extends React.Component {
                             <th style={{width: '50px'}}>Name</th>
                             <th style={{width: '50px'}}>Price</th>
                             <th style={{width: '50px'}}>Category</th>
-                            <th>Content</th>
+                            <th>Description</th>
                             <th style={{width: '190px'}} >Added Date</th>
                             <th style={{width: '20px'}}>Operation</th>
                         </tr>
@@ -41,4 +39,4 @@ class ItemList extends React.Component {
 const mapStateToProps = (state) => {
     return { itemArray: state.itemProcess.itemArray};
 }
-export default connect(mapStateToProps,null)(ItemList);
+export default connect(mapStateToProps,null)(ItemsBox);

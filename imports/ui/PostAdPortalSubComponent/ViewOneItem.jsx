@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { popUpMessage}  from '../actions/index.js';
-import './style.css'
+import { popUpItem}  from '../../actions';
 import Popup from './PopUp'
 class SeeOne extends React.Component {
     constructor(props) {
@@ -10,7 +9,7 @@ class SeeOne extends React.Component {
     }
     handleClick(){
         console.log(this.props.index);
-        this.props.showIndexMessage(this.props.index);
+        this.props.showIndex(this.props.index);
     }
 	render() {
         return (
@@ -23,13 +22,13 @@ class SeeOne extends React.Component {
 }
 const mapStateToProps = (state) => {
     return { 
-        toPop: state.messageProcess.popUp,
+        toPop: state.itemProcess.popUp,
     };
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-      showIndexMessage: (index) => {
-        dispatch(popUpMessage(index));
+      showIndex: (index) => {
+        dispatch(popUpItem(index));
       }
     }
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { clearMessage}  from '../actions/index.js';
-import './style.css'
+import { clearItem}  from '../../actions/index.js';
 class ClearOne extends React.Component {
     constructor(props) {
         super(props);
@@ -19,7 +18,7 @@ class ClearOne extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
       cOne: (index) => {
-        dispatch(clearMessage(index));
+        dispatch(clearItem(index));
       }
     }
 };

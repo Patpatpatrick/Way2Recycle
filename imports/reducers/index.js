@@ -2,84 +2,84 @@ import { combineReducers } from 'redux';
 import * as actions from '../actions';
 const defaultState = {
 	count : 1,
-	unsubmittedMessage : {
-		fromname: '',
-		toname: '',
-		category : 'A',
-		textcontent : '',
+	unsubmitteditem : {
+		itemname: 'An item',
+		price: 0,
+		category : 'Book',
+		description : 'Description',
 		date : new Date().toLocaleString()
 	},
 	popUp: false,
-	popUpMessageIndex : 0,
-	messageArray : [{
-		fromname: 'LGY',
-		toname: 'YGL',
-		category : 'A',
-		textcontent : 'Hello!',
+	popUpitemIndex : 0,
+	itemArray : [{
+		itemname: 'I am an Item!',
+		price: 10000,
+		category : 'Book',
+		description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
 		date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
 	}]
 };
-const messageReducer = (state = defaultState, action) => {
+const itemReducer = (state = defaultState, action) => {
 	switch(action.type){
-		case actions.GEN_MESSAGE :
+		case actions.GEN_ITEM :
 			// console.log(state);
-			// console.log([...state.messageArray,state.unsubmittedMessage]);
+			//console.log([...state.itemArray,state.unsubmitteditem]);
 			console.log(state.count);
 			return {
 				count : state.count + 1,
-				unsubmittedMessage : state.unsubmittedMessage,
+				unsubmitteditem : state.unsubmitteditem,
 				popUp:  state.popUp,
-				popUpMessageIndex : state.popUpMessageIndex,
-				messageArray: [...state.messageArray,state.unsubmittedMessage]
+				popUpitemIndex : state.popUpitemIndex,
+				itemArray: [...state.itemArray,state.unsubmitteditem]
 			};
 		case actions.CLEAR_ALL:
 			// console.log(state);
 			return {
 				count : 0,
-				unsubmittedMessage : state.unsubmittedMessage,
+				unsubmitteditem : state.unsubmitteditem,
 				popUp:  state.popUp,
-				popUpMessageIndex : state.popUpMessageIndex,
-				messageArray: []
+				popUpitemIndex : state.popUpitemIndex,
+				itemArray: []
 			};
 		case actions.CLEAR_ONE:
 			return	{
 				count : state.count - 1,
-				unsubmittedMessage : state.unsubmittedMessage,
+				unsubmitteditem : state.unsubmitteditem,
 				popUp: state.popUp,
-				popUpMessageIndex : state.popUpMessageIndex,
-				messageArray: [...state.messageArray.slice(0,action.toDelIndex).concat(state.messageArray.slice(action.toDelIndex+1))]
+				popUpitemIndex : state.popUpitemIndex,
+				itemArray: [...state.itemArray.slice(0,action.toDelIndex).concat(state.itemArray.slice(action.toDelIndex+1))]
 			};
 		case actions.VIEW_ONE:
 			console.log('wwww'+action.toViewIndex);
 			return	{
 				count : state.count,
-				unsubmittedMessage : state.unsubmittedMessage,
+				unsubmitteditem : state.unsubmitteditem,
 				popUp : true,
-				popUpMessageIndex : action.toViewIndex,
-				messageArray: state.messageArray
+				popUpitemIndex : action.toViewIndex,
+				itemArray: state.itemArray
 			};
 		case actions.UNVIEW_ONE:
 			return	{
 				count : state.count,
-				unsubmittedMessage : state.unsubmittedMessage,
+				unsubmitteditem : state.unsubmitteditem,
 				popUp : false,
-				popUpMessageIndex : 0,
-				messageArray: state.messageArray
+				popUpitemIndex : 0,
+				itemArray: state.itemArray
 			};
 		case actions.CHANGE_INPUT :
-			var newMessage = Object.assign({}, state.unsubmittedMessage, 
+			var newitem = Object.assign({}, state.unsubmitteditem, 
 				{ 
 					[action.keyToChange]: action.valueToUpdate,
 					'date' : new Date()
 				}
 			);
-			console.log(newMessage);
+			console.log(newitem);
 			return {
 				count : state.count,
-				unsubmittedMessage : newMessage,
+				unsubmitteditem : newitem,
 				popUp : state.popUp,
-				popUpMessageIndex : state.popUpMessageIndex,
-				messageArray: state.messageArray
+				popUpitemIndex : state.popUpitemIndex,
+				itemArray: state.itemArray
 			};
 		default:
 			return state;
@@ -88,6 +88,6 @@ const messageReducer = (state = defaultState, action) => {
 
 
 export default combineReducers({ 
-	messageProcess: messageReducer,
+	itemProcess: itemReducer,
     //anotherKey: anotherReducer //all your reducers should be combined
 });

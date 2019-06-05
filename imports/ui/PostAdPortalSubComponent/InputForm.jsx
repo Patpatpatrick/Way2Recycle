@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { generateMessage } from './actions';
-import { changeUnsubmittedMessage } from './actions';
-import './style/style.css'
+import { generateItem } from '../../actions';
+import { changeUnsubmittedItem } from '../../actions';
 class InputForm extends Component {
     constructor(props) {
         super(props);
@@ -11,21 +10,21 @@ class InputForm extends Component {
     }
     handleSubmit (event) {
         event.preventDefault();
-        this.props.generateMessage();
+        this.props.generateItem();
     }
     handleChange (event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        this.props.changeUnsubmittedMessage(name,value);
+        this.props.changeUnsubmittedItem(name,value);
     }
 	render() {
         return (
             <div className="container" >
                 <form onSubmit={this.handleSubmit} onChange={this.handleChange} className="form" ref = "inputform">
-                    <label htmlFor="iname">From</label>
+                    <label htmlFor="iname">Item's Name is</label>
                     <input type="text" id="iname" name="itemname" placeholder="Item's name.."></input>
-                    <label htmlFor="lname">To</label>
+                    <label htmlFor="lname">Price</label>
                     <input type="text" id="price" name="price" placeholder="Price.."></input>
                 
                     <label htmlFor="Category">Category</label>
@@ -48,4 +47,4 @@ class InputForm extends Component {
     }
 }
 
-export default connect(null, { generateMessage, changeUnsubmittedMessage })(InputForm);
+export default connect(null, { generateItem, changeUnsubmittedItem })(InputForm);

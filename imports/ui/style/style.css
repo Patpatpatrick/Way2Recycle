@@ -1,17 +1,6 @@
 body{
-	background-color: blanchedalmond
+	background-color: #f4f09f
 }
-p {
-	display: block;
-	text-align: left;
-	margin-top: 2em;
-	margin-bottom: 2em;
-	margin-left: 300px;
-	margin-right: 300px;
-  }
-	p:hover { 
-		font-weight: bold;
-	}
   /* Slideshow container */
   .slideshow-container {
 	max-width: 1000px;
@@ -230,14 +219,6 @@ button[type=submit]:hover,button[type=reset]:hover,button[type=del]:hover,button
 
 
 /* Add a background color and some padding around the form */
-.container {
-	width: 300px;
-	height : 550px;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-	padding: 20px;
-	margin-bottom: 0%;
-}
 .messages {
 	width: 880px;
 	height : 500px;

@@ -1,4 +1,4 @@
-export const GEN_MESSAGE = 'GEN_MESSAGE';
+export const GEN_ITEM = 'GEN_ITEM';
 export const CLEAR_ALL = 'CLEAR_ALL';
 export const CLEAR_ONE = 'CLEAR_ONE';
 export const VIEW_ONE = 'VIEW_ONE';
@@ -6,34 +6,34 @@ export const UNVIEW_ONE = 'UNVIEW_ONE';
 
 export const CHANGE_INPUT = 'CHANGE_INPUT';
 
-export const generateMessage = () => {
+export const generateItem = () => {
 	return {
-        	type: GEN_MESSAGE,
+        	type: GEN_ITEM,
 	};
 };
-export const clearAllMessages = () => {
+export const clearAllItems = () => {
 	return {
         	type: CLEAR_ALL,
 	};
 };
-export const clearMessage = (index) => {
+export const clearItem = (index) => {
 	return {
 		type: CLEAR_ONE,
 		toDelIndex : index
 	};
 };
-export const popUpMessage = (index) => {
+export const popUpItem = (index) => {
 	return {
 		type: VIEW_ONE,
 		toViewIndex : index
 	};
 };
-export const closePopedMessage = () => {
+export const closePopedItem = () => {
 	return {
 		type: UNVIEW_ONE,
 	};
 };
-export const changeUnsubmittedMessage = (key,value) => {
+export const changeUnsubmittedItem = (key,value) => {
 	return {
 		type: CHANGE_INPUT,
 		keyToChange: key,

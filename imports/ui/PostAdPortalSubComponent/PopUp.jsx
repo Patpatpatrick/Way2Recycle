@@ -1,7 +1,6 @@
 import React from 'react';
-import './style.css'
 import { connect } from 'react-redux';
-import { closePopeditem } from '../actions';
+import { closePopedItem } from '../../actions';
 
 
 class Popup extends React.Component {
@@ -29,7 +28,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       closePopeditem: () => {
-        dispatch(closePopeditem());
+        dispatch(closePopedItem());
       }
     }
 };

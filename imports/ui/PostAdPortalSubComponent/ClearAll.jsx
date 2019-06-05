@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { clearAllMessages}  from '../actions/index.js';
-import './style.css'
+import { clearAllItems}  from '../../actions/index.js';
 class ClearAll extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +20,7 @@ class ClearAll extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
       cAll: () => {
-        dispatch(clearAllMessages());
+        dispatch(clearAllItems());
       }
     }
 };
