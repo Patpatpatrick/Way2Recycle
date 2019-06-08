@@ -11,6 +11,6 @@ const App = () => (
         <Categories categories={['Car', 'Rental', 'Textbook', 'Computer']}/>
         <List/>
     </div>
-        );
+);
 
-        export default App;
+export default App;
