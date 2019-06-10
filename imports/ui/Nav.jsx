@@ -1,13 +1,19 @@
 import React, {Component} from 'react';
-
-import List_ele from "./List_ele";
-
+import { NavLink } from "react-router-dom";
 
 class Nav extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         popLogIn :false
+    //     }
+    //     this.handleClickOnLogin = this.handleClickOnLogin.bind(this);
+    // }
+    // handleClickOnLogin(){
+    //     this.setState({
+    //         popLogIn :true
+    //     })
+    // }
 
     render() {
         return (
@@ -28,7 +34,24 @@ class Nav extends Component {
                     </button>
 
                     <div className="collapse navbar-collapse" id="navbarResponsive">
-                        <ul className="navbar-nav ml-auto">
+                        <NavLink to="/" activeClassName="hurray">
+                            Home
+                        </NavLink>
+                        <NavLink to="/login" activeClassName="hurray">
+                            Login
+                        </NavLink>
+                        <NavLink to="/postAd" activeClassName="hurray">
+                            postAd
+                        </NavLink>
+                        <NavLink to="/about" activeClassName="hurray">
+                            About Us
+                        </NavLink>
+
+                    {/* <Route exact path="/" component={Home} />
+                <Route path="/about" component={AboutUs} />
+                <Route path="/login" component={Login} />
+                <Route path="/postAd" component={PostAdPortal} /> */}
+                        {/* <ul className="navbar-nav ml-auto">
                             <li className="nav-item active">
                                 <a className="nav-link" href="#">
                                     Home
@@ -49,12 +72,12 @@ class Nav extends Component {
                             </li>
 
                             <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    Contact
-                                </a>
+                                <button onClick = {this.handleClickOnLogin}>
+                                    LogIn
+                                </button>
                             </li>
 
-                        </ul>
+                        </ul> */}
                     </div>
                 </div>
             </nav>
