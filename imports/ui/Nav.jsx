@@ -1,14 +1,7 @@
 import React, {Component} from 'react';
-
-import List_ele from "./List_ele";
-
+import { NavLink } from "react-router-dom";
 
 class Nav extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
-
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
@@ -28,33 +21,18 @@ class Nav extends Component {
                     </button>
 
                     <div className="collapse navbar-collapse" id="navbarResponsive">
-                        <ul className="navbar-nav ml-auto">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="#">
-                                    Home
-                                    <span className="sr-only">(current)</span>
-                                </a>
-                            </li>
-
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    About
-                                </a>
-                            </li>
-
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    List
-                                </a>
-                            </li>
-
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    Contact
-                                </a>
-                            </li>
-
-                        </ul>
+                        <NavLink to="/" activeClassName="hurray">
+                            Home
+                        </NavLink>
+                        <NavLink to="/login" activeClassName="hurray">
+                            Login
+                        </NavLink>
+                        <NavLink to="/postAd" activeClassName="hurray">
+                            postAd
+                        </NavLink>
+                        <NavLink to="/about" activeClassName="hurray">
+                            About Us
+                        </NavLink>
                     </div>
                 </div>
             </nav>
