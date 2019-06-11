@@ -2,19 +2,6 @@ import React, {Component} from 'react';
 import { NavLink } from "react-router-dom";
 
 class Nav extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         popLogIn :false
-    //     }
-    //     this.handleClickOnLogin = this.handleClickOnLogin.bind(this);
-    // }
-    // handleClickOnLogin(){
-    //     this.setState({
-    //         popLogIn :true
-    //     })
-    // }
-
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
@@ -46,38 +33,6 @@ class Nav extends Component {
                         <NavLink to="/about" activeClassName="hurray">
                             About Us
                         </NavLink>
-
-                    {/* <Route exact path="/" component={Home} />
-                <Route path="/about" component={AboutUs} />
-                <Route path="/login" component={Login} />
-                <Route path="/postAd" component={PostAdPortal} /> */}
-                        {/* <ul className="navbar-nav ml-auto">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="#">
-                                    Home
-                                    <span className="sr-only">(current)</span>
-                                </a>
-                            </li>
-
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    About
-                                </a>
-                            </li>
-
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    List
-                                </a>
-                            </li>
-
-                            <li className="nav-item">
-                                <button onClick = {this.handleClickOnLogin}>
-                                    LogIn
-                                </button>
-                            </li>
-
-                        </ul> */}
                     </div>
                 </div>
             </nav>
