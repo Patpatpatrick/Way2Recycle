@@ -24,11 +24,14 @@ export default function Nav() {
             <Link variant="button" color="textPrimary" href="/" className={classes.link}>
               Home
             </Link>
-            <Link variant="button" color="textPrimary" href="/postAd" className={classes.link}>
+            <Link variant="button" color="textPrimary" href="/postedAd" className={classes.link}>
+              View Posted Ad
+            </Link>
+            <Link variant="button" color="textPrimary" href="/postNewAd" className={classes.link}>
               Post ad
             </Link>
-            <Link variant="button" color="textPrimary" href="/group" className={classes.link}>
-              Group
+            <Link variant="button" color="textPrimary" href="/signup" className={classes.link}>
+              Sign Up
             </Link>
           </nav>
           <Button href="/login" color="primary" variant="outlined" className={classes.link}>

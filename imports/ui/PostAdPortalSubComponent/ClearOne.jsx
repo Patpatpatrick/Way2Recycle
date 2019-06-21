@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { clearItem}  from '../../actions/index.js';
+import Button from '@material-ui/core/Button';
+
 class ClearOne extends React.Component {
     constructor(props) {
         super(props);
@@ -11,7 +13,7 @@ class ClearOne extends React.Component {
     }
 	render() {
         return (
-            <button type="del" onClick = {this.handleClick} id={this.props.index + 'Clear'}>Clear</button>
+            <Button type="del" onClick = {this.handleClick} id={this.props.index + 'Clear'}>Clear</Button>
         );
     }
 }

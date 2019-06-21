@@ -1,5 +1,5 @@
 body{
-	background-color: #f4f09f
+	background-color: white
 }
   /* Slideshow container */
   .slideshow-container {
@@ -195,7 +195,7 @@ input[type=text], select, textarea {
 /* Style the submit button with a specific background color etc */
 button[type=submit],button[type=view]{
 	width: 4cm;
-  background-color: tan;
+  background-color: rgb(83, 74, 211);
   color: white;
   padding: 12px 20px;
   border: none;
@@ -205,7 +205,7 @@ button[type=submit],button[type=view]{
 button[type=reset],button[type=del],button[type=close] {
 	width: 4cm;
 	text-align: center;
-	background-color: rgb(165, 81, 42);
+	background-color: rgb(11, 135, 207);
   color: white;
   padding: 12px 20px;
   border: none;
@@ -253,5 +253,4 @@ button[type=submit]:hover,button[type=reset]:hover,button[type=del]:hover,button
   padding-bottom: 12px;
   text-align: left;
   background-color: tan;
-  color: white;
-}
+  color: white;} 

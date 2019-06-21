@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { popUpItem}  from '../../actions';
+import Button from '@material-ui/core/Button';
 import Popup from './PopUp'
 class SeeOne extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class SeeOne extends React.Component {
 	render() {
         return (
             <div>
-                <button type="view" onClick = {this.handleClick} id={this.props.index + 'View'}>ViewInPopUp</button>
+                <Button type="view" onClick = {this.handleClick} id={this.props.index + 'View'}>ViewInPopUp</Button>
                 {this.props.toPop && <Popup />}
             </div>   
         );
