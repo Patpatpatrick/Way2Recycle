@@ -2,28 +2,60 @@ import { combineReducers } from 'redux';
 import * as actions from '../actions';
 const defaultState = {
 	count : 1,
+	chosenCategory: 'Car',
 	unsubmitteditem : {
 		itemname: 'An item',
 		price: 0,
-		category : 'Book',
+		category : 'Textbook',
 		description : 'Description',
 		date : new Date().toLocaleString()
 	},
 	popUp: false,
 	popUpitemIndex : 0,
 	itemArray : [{
-		itemname: 'I am an Item!',
-		price: 10000,
-		category : 'Book',
+		itemname: 'I am a BMW!',
+		price: 20000,
+		category : 'Car',
 		description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
 		date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
-	}]
+	},{
+		itemname: 'I am a Honda!',
+		price: 10000,
+		category : 'Car',
+		description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
+		date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
+	},{
+		itemname: 'I am a book!',
+		price: 10,
+		category : 'Textbook',
+		description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
+		date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
+	},{
+		itemname: 'I am an MacBook!',
+		price: 1000,
+		category : 'Computer',
+		description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
+		date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
+	},{
+		itemname: 'I am an MacBook!',
+		price: 2000,
+		category : 'Computer',
+		description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
+		date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
+	},{
+		itemname: 'I am an MacBook!',
+		price: 3000,
+		category : 'Computer',
+		description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
+		date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
+	}
+	]
 };
 const itemReducer = (state = defaultState, action) => {
 	switch(action.type){
 		case actions.GEN_ITEM :
 			// console.log(state);
-			//console.log([...state.itemArray,state.unsubmitteditem]);
+			console.log([...state.itemArray,state.unsubmitteditem]);
 			console.log(state.count);
 			return {
 				count : state.count + 1,
@@ -81,6 +113,13 @@ const itemReducer = (state = defaultState, action) => {
 				popUpitemIndex : state.popUpitemIndex,
 				itemArray: state.itemArray
 			};
+		case actions.CHANGE_CATEGORY :
+			console.log('change cate');
+			return Object.assign({}, state, 
+				{ 
+					[action.chosenCategory]: action.chosenCategory,
+				}
+			);
 		default:
 			return state;
 	}

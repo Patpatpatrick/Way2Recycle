@@ -16,7 +16,7 @@ export default useStyles = makeStyles(theme => ({
         width: 'auto',
       },
     },
-    searchIcon: {
+    searchBtn: {
       width: theme.spacing(7),
       height: '100%',
       position: 'relative',
@@ -24,6 +24,7 @@ export default useStyles = makeStyles(theme => ({
       display: 'flex',
       alignItems: 'right',
       justifyContent: 'right',
+      marginRight: 3
     },
     inputRoot: {
       color: 'inherit',

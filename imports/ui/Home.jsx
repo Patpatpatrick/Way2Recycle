@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Categories from "./Categories";
+import Categories from "./Categories/Categories";
 import List from "./List";
 
 import AppBar from '@material-ui/core/AppBar';
@@ -9,7 +9,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import useStyles from './style/NavStyle';
-import SearchBar from './SearchBar.jsx';
 
 export default function home() {
   const classes = useStyles();
@@ -22,11 +21,6 @@ export default function home() {
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
         <Categories categories>
         </Categories>
-
-        <List variant="h6" postion = "static" color = "default" elevation={0} className={classes.list}>
-          
-        </List>
-  
       </React.Fragment>
     );
 }
