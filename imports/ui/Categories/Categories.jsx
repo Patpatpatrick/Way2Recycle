@@ -7,7 +7,9 @@ import Typography from '../Typography';
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import images from './CategoryImgs';
 import { connect } from 'react-redux';
-import changeCategory from '../../actions'
+import List from '../List';
+
+// import changeCategory from '../../actions'
 const styles = theme => ({
     root: {
       marginTop: theme.spacing(8),
@@ -103,8 +105,8 @@ function Categories(props) {
               style={{
                 width: image.width,
               }}
-              href = {'/categories/'+image.title}
-              // onClick = {props.changeCategory(image.title)}
+              onClick = {() => props.dispatch({type:'CHANGE_CATEGORY',chosenCategory:image.title})}
+              // href = {'/categories/'+image.title}
             >
               <div
                 className={classes.imageSrc}
@@ -128,6 +130,7 @@ function Categories(props) {
           ))}
         </div>
       </Container>
+      <Route path="/categories/" component={List} />
     </BrowserRouter>
   );
 }
@@ -136,17 +139,8 @@ Categories.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     changeCategory: (cate) => {
-//       dispatch(changeCategory(cate));
-//     }
-//   }
-// };
+export default withStylesCategories = withStyles(styles)(connect(null,null)(Categories));
 
-export default  withStylesCategories = withStyles(styles)(Categories);
-
-// connect(null,mapDispatchToProps)(withStylesCategories);
 
 
 // import React, {Component} from 'react';
