@@ -9,7 +9,6 @@ export default function SearchBar() {
 
   return (
         <React.Fragment>           
-            
             <div className={classes.search}>
                 <InputBase
                 placeholder="Search…"
