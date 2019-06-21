@@ -6,11 +6,11 @@ class List extends React.Component {
  
 	render() {
         return (
-            <div className="items">		
+            <div  className="items">		
                 {this.props.itemArray.map( (item, idx) => {
                     return (
                         <div>
-                            <List_ele element = {item} index = {idx}/>
+                            <List_ele style ={{alignItems: 'center'}} element = {item} index = {idx}/>
                         </div>
                     )
                     })

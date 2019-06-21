@@ -1,19 +1,19 @@
 import React from 'react';
 import ClearOne from './PostAdPortalSubComponent/ClearOne';
 import SeeOne from './PostAdPortalSubComponent/ViewOneItem';
-class List_ele extends Component {
+class List_ele extends React.Component {
 
     render() {
         return (
             <div className="row">
 
-                <div className="col-md-3">
+                <div className="col-md-6">
                     <a href="#">
                         <img className="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/200X200" alt=""/>
                     </a>
                 </div>
 
-                <div className="col-md-5">
+                <div className="col-md-6">
                     <div className="row">
                         <div className="col-md-10">
                             <a href="#">                        <h5>{this.props.element.itemname}</h5>

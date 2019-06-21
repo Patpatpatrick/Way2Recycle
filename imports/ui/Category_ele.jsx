@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-
-import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -87,7 +85,7 @@ const styles = theme => ({
     },
   });
   
-  function Categories(props) {
+  function Category_ele(props) {
     const { classes } = props;
   
     const images = [
@@ -127,24 +125,6 @@ const styles = theme => ({
         title: 'Pet',
         width: '24%',
       },
-      // {
-      //   url:
-      //     'https://images.unsplash.com/photo-1506941433945-99a2aa4bd50a?auto=format&fit=crop&w=400&q=80',
-      //   title: 'Walking',
-      //   width: '40%',
-      // },
-      // {
-      //   url:
-      //     'https://images.unsplash.com/photo-1533727937480-da3a97967e95?auto=format&fit=crop&w=400&q=80',
-      //   title: 'Fitness',
-      //   width: '20%',
-      // },
-      // {
-      //   url:
-      //     'https://images.unsplash.com/photo-1518136247453-74e7b5265980?auto=format&fit=crop&w=400&q=80',
-      //   title: 'Reading',
-      //   width: '40%',
-      // },
     ];
   
     return (
@@ -182,42 +162,15 @@ const styles = theme => ({
             </ButtonBase>
           ))}
         </div>
-  
-        <div className="row">
-              <div className="col-md-3">
-                       <a href="#">
-                       </a>
-                   </div>
-  
-                   <div className="col-md-5">
-                      <div className="row">
-                           <div className="col-md-10">
-                               <a href="#">
-                                  <h5>{this.props.element.itemname}</h5>
-                               </a>
-                           </div>
-  
-                           <div className="col-md-2">
-                  
-                           <h4>{'$'+ this.props.element.price}</h4>
-                           <h4>{this.props.element.category}</h4>
-                           </div>
-  
-                       </div>
-  
-                    <p>{this.props.element.description}</p>
-  
-                  </div>
-               </div>
       </Container>
     );
   }
   
-  List_ele.propTypes = {
+  Category_ele.propTypes = {
     classes: PropTypes.object.isRequired,
   };
   
-  export default withStyles(styles)(Categories);
+  export default withStyles(styles)(Category_ele);
   
 // class Category_ele extends Component {
 //     constructor(props) {

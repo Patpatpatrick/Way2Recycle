@@ -20,9 +20,8 @@ export default function home() {
       
        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-        {/* <Categories categories={['Car', 'Rental', 'Textbook', 'Computer']} postion = "static" color = "default" elevation={0}
-        className={classes.categories}>
-        </Categories> */}
+        <Categories categories>
+        </Categories>
 
         <List variant="h6" postion = "static" color = "default" elevation={0} className={classes.list}>
           

@@ -13,10 +13,10 @@ export default useStyles = makeStyles(theme => ({
       //   listStyle: 'none',
       // },
     },
-    categories: {
-      // borderBottom: `1px solid ${theme.palette.divider}`,
-    },
-    list: {
-      // flexWrap: 'wrap',
-    }
+    // categories: {
+    //   // borderBottom: `1px solid ${theme.palette.divider}`,
+    // },
+    // list: {
+    //   // flexWrap: 'wrap',
+    // }
   }));
