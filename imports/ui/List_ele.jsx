@@ -20,12 +20,12 @@ class List_ele extends Component {
                             </a>
                         </div>
 
-                        <div className="col-md-2">
+                    <div className="col-md-2">
                         <h4>{'$'+ this.props.element.price}</h4>
                         <h4>{this.props.element.category}</h4>
-                        </div>
-
                     </div>
+
+                </div>
 
                     <p>{this.props.element.description}</p>
                     {/*<a className="btn btn-primary" href="#">View Product</a>*/}

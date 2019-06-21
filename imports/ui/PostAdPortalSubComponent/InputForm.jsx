@@ -21,7 +21,7 @@ class InputForm extends Component {
 	render() {
         return (
             <div className="container" >
-                <form onSubmit={this.handleSubmit} onChange={this.handleChange} className="form" ref = "inputform">
+                <form style={{"width": "350px","verticalAlign": "0%"}} onSubmit={this.handleSubmit} onChange={this.handleChange} className="form" ref = "inputform">
                     <label htmlFor="iname">Item's Name is</label>
                     <input type="text" id="iname" name="itemname" placeholder="Item's name.."></input>
                     <label htmlFor="lname">Price</label>

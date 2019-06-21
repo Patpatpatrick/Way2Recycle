@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import './style/style.css';
 // import List from "./PostAdPortalSubComponent/List";
-import ItemList from './PostAdPortalSubComponent/ItemsBox';
+import ItemList from './PostAdPortalSubComponent/ItemsBox/ItemsBox';
 import InputForm from './PostAdPortalSubComponent/InputForm';
 import ClearAll from './PostAdPortalSubComponent/ClearAll';
 
@@ -17,7 +18,7 @@ class PostAdPortal extends Component {
                       <ItemList/>
                       <ClearAll/>
                     </td>
-                    <td style={{"width": "280px","verticalAlign": "0%"}}>
+                    <td style={{"width": "400px","verticalAlign": "0%"}}>
                       <br></br>
                       <InputForm/>
                     </td>
