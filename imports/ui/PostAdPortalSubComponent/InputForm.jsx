@@ -29,10 +29,12 @@ class InputForm extends Component {
                 
                     <label htmlFor="Category">Category</label>
                     <select id="category" name="category">
-                        <option value="appliance">appliance</option>
-                        <option value="furniture">furniture</option>
-                        <option value="Automobile">Automobile</option>
-                        <option value="Book">Book</option>
+                        <option value="Car">Car</option>
+                        <option value="Rental">Rental</option>
+                        <option value="Textbook">Textbook</option>
+                        <option value="Computer">Computer</option>
+                        <option value="Job">Job</option>
+                        <option value="Pet">Pet</option>
                     </select>
 
                     <label htmlFor="subject">description</label>

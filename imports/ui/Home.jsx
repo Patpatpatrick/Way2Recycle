@@ -15,12 +15,11 @@ export default function home() {
 
     return (
        <React.Fragment>
-       <CssBaseline />
-      
-       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+        <CssBaseline/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-        <Categories categories>
-        </Categories>
+        <Categories/>
+        <List/>
       </React.Fragment>
     );
 }

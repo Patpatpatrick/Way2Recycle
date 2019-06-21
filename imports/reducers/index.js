@@ -113,11 +113,11 @@ const itemReducer = (state = defaultState, action) => {
 				popUpitemIndex : state.popUpitemIndex,
 				itemArray: state.itemArray
 			};
-		case actions.CHANGE_CATEGORY :
+		case 'CHANGE_CATEGORY' :
 			console.log('change cate');
 			return Object.assign({}, state, 
 				{ 
-					[action.chosenCategory]: action.chosenCategory,
+					chosenCategory: action.chosenCategory,
 				}
 			);
 		default:

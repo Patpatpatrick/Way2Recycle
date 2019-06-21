@@ -20,7 +20,6 @@ const App = () => (
                 <Route exact path="/" component={Home} />
                 <Route path="/signup" component={SignUp} />
                 <Route path="/login" component={Login} />
-                <Route path="/categories/" component={List} />
                 <Route path="/postedAd" component={PostAdPortal} />
                 <Route path="/postNewAd" component={Checkout} />
             </Switch> 
