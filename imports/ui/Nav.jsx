@@ -1,66 +1,41 @@
-import React, {Component} from 'react';
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import useStyles from './style/NavStyle';
+import SearchBar from './SearchBar.jsx';
 
-import List_ele from "./List_ele";
+export default function Nav() {
+  const classes = useStyles();
 
-
-class Nav extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
-
-    render() {
-        return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-                <div className="container">
-
-                    {/*logo*/}
-                    <a className="navbar-brand" href="#">
-                        <img src="http://placehold.it/150x50?text=Logo" alt=""/>
-                    </a>
-                    {/*logo*/}
-
-
-                    <button className="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarResponsive"
-                            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"/>
-                    </button>
-
-                    <div className="collapse navbar-collapse" id="navbarResponsive">
-                        <ul className="navbar-nav ml-auto">
-                            <li className="nav-item active">
-                                <a className="nav-link" href="#">
-                                    Home
-                                    <span className="sr-only">(current)</span>
-                                </a>
-                            </li>
-
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    About
-                                </a>
-                            </li>
-
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    List
-                                </a>
-                            </li>
-
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    Contact
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-        )
-    }
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
+        <Toolbar className={classes.toolbar}>
+          <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
+            Way2Recycle
+          </Typography>
+          <SearchBar/>
+          <nav>
+            <Link variant="button" color="textPrimary" href="/" className={classes.link}>
+              Home
+            </Link>
+            <Link variant="button" color="textPrimary" href="/postAd" className={classes.link}>
+              Post ad
+            </Link>
+            <Link variant="button" color="textPrimary" href="/group" className={classes.link}>
+              Group
+            </Link>
+          </nav>
+          <Button href="/login" color="primary" variant="outlined" className={classes.link}>
+            Login
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </React.Fragment>
+  );
 }
-
-export default Nav;

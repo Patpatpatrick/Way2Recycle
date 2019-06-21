@@ -5,7 +5,6 @@ class aboutUs extends Component {
         super(props);
         this.state = {}
     }
-
     render (){
         return (
             <div className="aboutUs">
@@ -26,5 +25,4 @@ class aboutUs extends Component {
         );
     }
 }
-
 export default aboutUs;
