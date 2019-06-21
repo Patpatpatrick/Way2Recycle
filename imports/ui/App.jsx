@@ -18,7 +18,7 @@ const App = () => (
             {/* There are two route matching components: <Route> and <Switch>. */}
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route path="/about" component={AboutUs} />
+                <Route path="/group" component={AboutUs} />
                 <Route path="/login" component={Login} />
                 <Route path="/postAd" component={PostAdPortal} />
             </Switch> 
