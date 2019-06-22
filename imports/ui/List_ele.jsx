@@ -45,8 +45,17 @@ class List_ele extends React.Component {
               <CssBaseline />
               <Container maxWidth="lg">
                 <main>
+                
                   <Grid container spacing={4} className={classes.cardGrid}>
-                      <Grid item key={this.props.element.itemname} xs={12} md={12}>
+                      <Paper className="col-md-3">
+                        <div className="col-md-12">
+                            <a href="#">
+                                <img className="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/200X200" alt=""/>
+                            </a>
+                        </div>
+                      </Paper>
+                        
+                      <Grid item key={this.props.element.itemname} xs={12} md={9}>
                         <CardActionArea component="a" href="#">
                           <Card className={classes.card}>
                             <div className={classes.cardDetails}>
@@ -90,11 +99,7 @@ class List_ele extends React.Component {
 //         return (
 //             <div className="row">
 
-//                 <div className="col-md-6">
-//                     <a href="#">
-//                         <img className="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/200X200" alt=""/>
-//                     </a>
-//                 </div>
+//                 
 
 //                 <div className="col-md-6">
 //                     <div className="row">
