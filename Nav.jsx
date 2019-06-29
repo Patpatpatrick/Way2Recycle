@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {Link} from "react-router-dom";
+
+import aboutUs from "./AboutUs"
 import List_ele from "./List_ele";
 
 
@@ -12,6 +15,7 @@ class Nav extends Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
                 <div className="container">
+                   
 
                     {/*logo*/}
                     <a className="navbar-brand" href="#">
@@ -35,10 +39,8 @@ class Nav extends Component {
                                 </a>
                             </li>
 
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    About
-                                </a>
+                            {/*About us*/}
+                            <li className="nav-item"><a className="nav-link" href= "/Hello" target="_blank">About</a>                      
                             </li>
 
                             <li className="nav-item">

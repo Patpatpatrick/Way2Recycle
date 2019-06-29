@@ -44,14 +44,14 @@ Item information is arranged by user and by category.
 * Virtual currency system
 
 ## Mockup
-###Index
+### Index
 
 ![alt text](./mockup/my_index.png)
-###Login
+### Login
 ![alt text](./mockup/my_register.png)
-###List items in one category
+### List items in one category
 ![alt text](./mockup/my_list.png)
-###List one item
+### List one item
 ![alt text](./mockup/one_item_display.png)
 
 
