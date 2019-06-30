@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Categories from "./Categories/Categories";
 import List from "./List";
 
@@ -9,18 +9,21 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import useStyles from './style/NavStyle';
+import {Meteor} from 'meteor/meteor'
+
+// import { Tasks } from '../imports/api/items';
+
 
 export default function home() {
-  const classes = useStyles();
 
     return (
-       <React.Fragment>
-        <CssBaseline/>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-        <Categories/>
-        <List/>
-      </React.Fragment>
+        <React.Fragment>
+            <CssBaseline/>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+            <Categories/>
+            <List/>
+        </React.Fragment>
     );
 }
 
