@@ -6,19 +6,8 @@ import { Meteor } from 'meteor/meteor';
 class ApplianceDetail extends Component {
     constructor(props) {
         super(props);
-        // const new_obj = {
-        //     "user_id" : "test2",
-        //     "title" : "car1",
-        //     "description" : " a nice car",
-        //     "location" : "1231,123",
-        //     "price" : 50,
-        //     "category" : "Auto",
-        //     "date" : "2019-6-29 16:38:10",
-        //     "imagePreviewUrl" : "123456",
-        //     "attribute" : ""
-        // };
         this.state = {
-            user_id : "test2",
+            user_id : Meteor.userId(),
             title: 'An item',
             price: 0,
             category : 'Appliance',
