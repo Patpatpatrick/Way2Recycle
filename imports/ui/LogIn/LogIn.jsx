@@ -13,57 +13,54 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-const useStyles = makeStyles(theme => ({
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.common.white,
-    },
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
-export default function SignIn() {
-  const classes = useStyles();
+import { updateEmailInputBox }  from '../../actions/index.js';
+import { updatePasswordInputBox }  from '../../actions/index.js';
+import {connect} from "react-redux";
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
+
+class LogIn extends React.Component{
+
+  changedEmailInputBox  = (event) =>  {
+    this.props.updateEmailText(event.target.value)
+  };
+
+  changedPasswordInputBox  = (event) =>  {
+    this.props.updatePasswordText(event.target.value)
+  };
+
+  pressLogIn = () => {
+    Meteor.loginWithPassword(this.props.emailInput, this.props.passwordInput, (err)=> {
+      if (Meteor.user()) {
+        console.log("Log in successful with id: " + Meteor.userId())
+        this.props.updateEmailText('')
+        this.props.updatePasswordText('')
+      } else {
+        alert("Password or Id does not exist")
+      }
+      if (err){
+        console.log(err)
+      }
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <form>
           <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange = {this.changedEmailInputBox}
+        />
+        <TextField
             variant="outlined"
             margin="normal"
             required
@@ -73,34 +70,50 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
-          />
-          <FormControlLabel
+            onChange = {this.changedPasswordInputBox}
+        />
+        <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
-          <Button
+        />
+        <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
+            onClick = {this.pressLogIn}
+        >
+          Sign In
+        </Button>
+        <Grid container>
+          <Grid item xs>
+            <Link href="#" variant="body2">
+              Forgot password?
+            </Link>
           </Grid>
-        </form>
+          <Grid item>
+            <Link href="#" variant="body2">
+              {"Don't have an account? Sign Up"}
+            </Link>
+          </Grid>
+        </Grid>
+      </form>
       </div>
-    </Container>
-  );
+    )}
 }
+
+const mapStateToProps = (state) => {
+  return {
+    emailInput: state.emailInput,
+    passwordInput: state.passwordInput
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      updateEmailText: (text) => dispatch(updateEmailInputBox(text)),
+      updatePasswordText: (text) => dispatch(updatePasswordInputBox(text))
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

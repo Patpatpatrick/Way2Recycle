@@ -6,6 +6,16 @@ export const UNVIEW_ONE = 'UNVIEW_ONE';
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
 export const CHANGE_INPUT = 'CHANGE_INPUT';
 
+// for LogIn Page
+export const CHANGE_EMAIL_INPUT = 'CHANGE_EMAIL_INPUT'
+export const CHANGE_PASSWORD_INPUT = 'CHANGE_PASSWORD_INPUT'
+
+// for Sign Up
+export const CHANGE_FNAME_INPUT = 'CHANGE_FNAME_INPUT'
+export const CHANGE_LNAME_INPUT = 'CHANGE_LNAME_INPUT'
+export const CHANGE_CREATE_PW_INPUT = 'CHANGE_CREATE_PW_INPUT'
+export const CHANGE_CREATE_EMAIL_INPUT = 'CHANGE_CREATE_EMAIL_INPUT'
+
 export const generateItem = () => {
 	return {
         	type: GEN_ITEM,
@@ -47,3 +57,45 @@ export const changeCategory = (chosenCategory) => {
 	};
 };
 
+// For LogIn Page
+export const updateEmailInputBox = (text) => {
+	return {
+		type: CHANGE_EMAIL_INPUT,
+		payload: text,
+	}
+}
+
+export const updatePasswordInputBox = (text) => {
+	return {
+		type: 'CHANGE_PASSWORD_INPUT',
+		payload: text,
+	}
+}
+
+// For Create User Page
+export const updateFirstNameInputBox = (text) => {
+	return {
+		type: CHANGE_FNAME_INPUT,
+		payload: text,
+	}
+}
+
+export const updateLastNameInputBox = (text) => {
+	return {
+		type: CHANGE_LNAME_INPUT,
+		payload: text,
+	}
+}
+
+export const updateCreatePasswordInputPage = (text) => {
+	return {
+		type: CHANGE_CREATE_PW_INPUT,
+		payload: text,
+	}
+}
+export const updateCreateEmailInputPage = (text) => {
+	return {
+		type: CHANGE_CREATE_EMAIL_INPUT,
+		payload: text,
+	}
+}

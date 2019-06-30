@@ -9,21 +9,25 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import useStyles from './style/NavStyle';
-import {Meteor} from 'meteor/meteor'
-
-// import { Tasks } from '../imports/api/items';
-
+import CustomizedMenus from './postProcedures/PostUI'
 
 export default function home() {
 
     return (
-        <React.Fragment>
-            <CssBaseline/>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-            <Categories/>
-            <List/>
-        </React.Fragment>
+       <React.Fragment>
+        <CssBaseline/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+        <Categories/>
+        <List/>
+        <Button
+          containerElement='label' // <-- Just add me!
+          variant="contained"
+          label='My Label'>
+          <input type="file" />
+        </Button>
+        <CustomizedMenus/>
+      </React.Fragment>
     );
 }
 
