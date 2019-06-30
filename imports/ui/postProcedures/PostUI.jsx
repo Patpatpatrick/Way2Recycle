@@ -7,8 +7,6 @@ class PostUI extends Component {
             <div>
                 <ChooseCategory/>
                 <PostDetailUnderOneCategory/>
-                {/* <UploadPic/> */}
-                {/* <button>Submit</button> */}
             </div>
         );
     }

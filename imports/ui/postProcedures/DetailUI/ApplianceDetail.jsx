@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import MapContainer from './googleMap';
 import Geosuggest from 'react-geosuggest';
+import { Meteor } from 'meteor/meteor';
 
 class ApplianceDetail extends Component {
     constructor(props) {
         super(props);
+        // const new_obj = {
+        //     "user_id" : "test2",
+        //     "title" : "car1",
+        //     "description" : " a nice car",
+        //     "location" : "1231,123",
+        //     "price" : 50,
+        //     "category" : "Auto",
+        //     "date" : "2019-6-29 16:38:10",
+        //     "imagePreviewUrl" : "123456",
+        //     "attribute" : ""
+        // };
         this.state = {
-            itemname: 'An item',
+            user_id : "test2",
+            title: 'An item',
             price: 0,
             category : 'Appliance',
             description : 'Description',
+            location : "1231,123",
             date : new Date().toLocaleString(),
             file : '',
-            imagePreviewUrl : ''
+            imagePreviewUrl : '',
+            attribute : ""
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
@@ -44,6 +59,7 @@ class ApplianceDetail extends Component {
     }
     handleSubmit (event) {
         event.preventDefault();
+        Meteor.call("createItem",this.state);
         console.log(this.state);
     }
     onSuggestSelect(suggest) {
@@ -59,7 +75,7 @@ class ApplianceDetail extends Component {
                             <br></br>
                             <form style={{"width": "350px","verticalAlign": "0%"}} onSubmit={this.handleSubmit} className="form" ref = "inputform">
                                 <label htmlFor="iname">Item's Name is</label>
-                                <input type="text" onChange={this.handleChange} id="iname" name="itemname" placeholder="Item's name.." required = "required"></input>
+                                <input type="text" onChange={this.handleChange} id="title" name="title" placeholder="Item's name.." required = "required"></input>
                                 <label htmlFor="lname">Price</label>
                                 <input type="text" onChange={this.handleChange} id="price" name="price" placeholder="Price.." required = "required" ></input>
                                 <label htmlFor="subject">description</label>

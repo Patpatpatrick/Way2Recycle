@@ -10,19 +10,9 @@ function insertLink(title, url) {
 
 
 Meteor.methods({
-    'createItem': function () {
+    'createItem': function (item) {
 
-        Items.insert({
-            user_id: "test1",
-            title: "car1",
-            description: " a nice car",
-            location: '1231,123',
-            price: 50,
-            category: "Auto",
-            date: new Date().toLocaleString(),
-            imagePreviewUrl: "123456",
-            attribute: ''
-        });
+        Items.insert(item);
 
         console.log("add one");
     }
