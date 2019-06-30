@@ -11,47 +11,59 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {connect} from "react-redux";
 
+import { updateFirstNameInputBox, updateLastNameInputBox, updateCreatePasswordInputPage,
+  updateCreateEmailInputPage}  from '../actions/index.js';
 
-const useStyles = makeStyles(theme => ({
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.common.black,
-    },
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+class SignUp extends React.Component{
+  pressSignUp = () => {
+    let registerForm =
+         { email: this.props.createEmailInput,
+           profile: {
+              FirstName: this.props.fNameInput,
+              LastName: this.props.lNameInput,
+            },
+           password:this.props.createPasswordInput}
 
-export default class SignUp extends React.Component{
+    Accounts.createUser(registerForm, (err) => {
+      this.props.updateFirstNameInputBox('')
+      this.props.updateLastNameInputBox('')
+      this.props.updateCreatePasswordInputPage('')
+      this.props.updateCreateEmailInputPage('')
+      if (err) {
+        alert("Failed to create new user")
+        alert(JSON.stringify(registerForm))
+      }
+    })
+  }
+
+  changeFNameInputBox  = (event) =>  {
+    this.props.updateFirstNameInputBox(event.target.value)
+  };
+  changeLNameInputBox  = (event) =>  {
+    this.props.updateLastNameInputBox(event.target.value)
+  };
+  changeCreatePasswordInputBox  = (event) =>  {
+    this.props.updateCreatePasswordInputPage(event.target.value)
+  };
+  changeCreateEmailInputBox  = (event) =>  {
+    this.props.updateCreateEmailInputPage(event.target.value)
+  };
+
   render(){
-    const classes = useStyles;
+    /*const classes = useStyles;*/
     return(
       <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+      <div>
+        <Avatar>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -63,6 +75,7 @@ export default class SignUp extends React.Component{
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={this.changeFNameInputBox}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -74,6 +87,8 @@ export default class SignUp extends React.Component{
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={this.changeLNameInputBox}
+
               />
             </Grid>
             <Grid item xs={12}>
@@ -85,6 +100,8 @@ export default class SignUp extends React.Component{
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={this.changeCreateEmailInputBox }
+
               />
             </Grid>
             <Grid item xs={12}>
@@ -97,6 +114,7 @@ export default class SignUp extends React.Component{
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={this.changeCreatePasswordInputBox}
               />
             </Grid>
             <Grid item xs={12}>
@@ -111,7 +129,7 @@ export default class SignUp extends React.Component{
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            onClick = {this.pressSignUp}
           >
             Sign Up
           </Button>
@@ -128,3 +146,23 @@ export default class SignUp extends React.Component{
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    fNameInput: state.fNameInput,
+    lNameInput: state.lNameInput,
+    createEmailInput: state.createEmailInput,
+    createPasswordInput: state.createPasswordInput,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateFirstNameInputBox: (text) => dispatch(updateFirstNameInputBox(text)),
+    updateLastNameInputBox: (text) => dispatch(updateLastNameInputBox(text)),
+    updateCreatePasswordInputPage: (text) => dispatch(updateCreatePasswordInputPage(text)),
+    updateCreateEmailInputPage: (text) => dispatch(updateCreateEmailInputPage(text)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

@@ -125,8 +125,57 @@ const itemReducer = (state = defaultState, action) => {
 	}
 };
 
+// Reducer for LogIn Page
+const updateEmailInput = (str = '', action) => {
+	if (action.type===actions.CHANGE_EMAIL_INPUT) {
+		return action.payload
+	}
+	return str
+};
+
+const updatePasswordInput = (str = '', action) => {
+	if (action.type===actions.CHANGE_PASSWORD_INPUT) {
+		return action.payload
+	}
+	return str
+};
+
+// Reducer for Sign Up Page
+
+const updateFNameInput = (str = '', action) => {
+	if (action.type===actions.CHANGE_FNAME_INPUT) {
+		return action.payload
+	}
+	return str
+};
+const updateLNameInput = (str = '', action) => {
+	if (action.type===actions.CHANGE_LNAME_INPUT) {
+		return action.payload
+	}
+	return str
+};
+const updateCreateEmailInput = (str = '', action) => {
+	if (action.type===actions.CHANGE_CREATE_EMAIL_INPUT) {
+		return action.payload
+	}
+	return str
+};
+const updateCreatePasswordInput = (str = '', action) => {
+	if (action.type===actions.CHANGE_CREATE_PW_INPUT) {
+		return action.payload
+	}
+	return str
+};
 
 export default combineReducers({ 
 	itemProcess: itemReducer,
-    //anotherKey: anotherReducer //all your reducers should be combined
+	// for LogIn Page
+	emailInput: updateEmailInput,
+	passwordInput: updatePasswordInput,
+
+	// for Sign Up Page
+	fNameInput: updateFNameInput,
+	lNameInput: updateLNameInput,
+	createEmailInput: updateCreateEmailInput,
+	createPasswordInput: updateCreatePasswordInput,
 });
