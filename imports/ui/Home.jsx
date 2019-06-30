@@ -9,6 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import useStyles from './style/NavStyle';
+import CustomizedMenus from './postProcedures/PostUI'
 
 export default function home() {
   const classes = useStyles();
@@ -20,6 +21,13 @@ export default function home() {
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
         <Categories/>
         <List/>
+        <Button
+          containerElement='label' // <-- Just add me!
+          variant="contained"
+          label='My Label'>
+          <input type="file" />
+        </Button>
+        <CustomizedMenus/>
       </React.Fragment>
     );
 }

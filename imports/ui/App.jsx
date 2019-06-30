@@ -5,7 +5,7 @@ import PostAdPortal from './PostAdPortal.jsx';
 import Login from '../ui/LogIn/LogIn';
 import SignUp from './SignUp'
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
-import Checkout from './postProcedures/PostProcedure.js';
+import PostUI from './postProcedures/PostUI';
 import List from './List';
 
 // import './style/style.css'
@@ -21,7 +21,7 @@ const App = () => (
                 <Route path="/signup" component={SignUp} />
                 <Route path="/login" component={Login} />
                 <Route path="/postedAd" component={PostAdPortal} />
-                <Route path="/postNewAd" component={Checkout} />
+                <Route path="/postNewAd" component={PostUI} />
             </Switch> 
         </div>
     </BrowserRouter>

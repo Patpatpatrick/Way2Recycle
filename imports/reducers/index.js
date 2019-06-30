@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import * as actions from '../actions';
 const defaultState = {
 	count : 1,
-	chosenCategory: 'Car',
+	chosenCategory: 'Undefined',
 	unsubmitteditem : {
 		itemname: 'An item',
 		price: 0,
-		category : 'Textbook',
+		category : 'Undefined',
 		description : 'Description',
 		date : new Date().toLocaleString()
 	},
@@ -99,6 +99,8 @@ const itemReducer = (state = defaultState, action) => {
 				itemArray: state.itemArray
 			};
 		case actions.CHANGE_INPUT :
+			console.log(action.keyToChange);
+			console.log(action.valueToUpdate);
 			var newitem = Object.assign({}, state.unsubmitteditem, 
 				{ 
 					[action.keyToChange]: action.valueToUpdate,
