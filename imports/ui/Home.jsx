@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Categories from "./Categories/Categories";
 import List from "./List";
 
@@ -12,7 +12,6 @@ import useStyles from './style/NavStyle';
 import CustomizedMenus from './postProcedures/PostUI'
 
 export default function home() {
-  const classes = useStyles();
 
     return (
        <React.Fragment>
