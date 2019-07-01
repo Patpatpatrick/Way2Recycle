@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MapContainer from './googleMap';
 import Geosuggest from 'react-geosuggest';
 import { Meteor } from 'meteor/meteor';
-
+import '../../style/style.css';
 class ApplianceDetail extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +12,8 @@ class ApplianceDetail extends Component {
             price: 0,
             category : 'Appliance',
             description : 'Description',
-            location : "1231,123",
+            location :  {lat: 49.2827291, lng: -123.12073750000002},
+            locationStr : "Vancouver,BC,Canada",
             date : new Date().toLocaleString(),
             file : '',
             imagePreviewUrl : '',
@@ -52,6 +53,10 @@ class ApplianceDetail extends Component {
         console.log(this.state);
     }
     onSuggestSelect(suggest) {
+        this.setState({
+            location : suggest.location,
+            locationStr : suggest.description
+        });
         console.log(suggest);
     }
 	render() {
@@ -80,12 +85,13 @@ class ApplianceDetail extends Component {
                             <br></br>
                             <div>Where is the seller?</div>
                             <div>
-                                <MapContainer/>
+                                <MapContainer locationInfo = {this.state.location}/>
                                 <Geosuggest
-                                    initialValue="Hamburg"
+                                    initialValue="UBC"
                                     onSuggestSelect={this.onSuggestSelect}
                                     location={new google.maps.LatLng(53.558572, 9.9278215)}
                                     radius="20"
+                                    className = 'geoLocation'
                                 />
                             </div>
                         </td>

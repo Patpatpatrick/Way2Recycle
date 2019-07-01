@@ -254,3 +254,9 @@ button[type=submit]:hover,button[type=reset]:hover,button[type=del]:hover,button
   text-align: left;
   background-color: tan;
   color: white;} 
+
+  .geosuggest__suggests--hidden {
+    max-height: 0;
+    overflow: hidden;
+    border-width: 0;
+  }
