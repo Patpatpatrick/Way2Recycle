@@ -168,6 +168,17 @@ const updateCreatePasswordInput = (str = '', action) => {
 	}
 	return str
 };
+const displayReview = (popReviewWindow = false, action) => {
+	if (action.type === actions.SHOW_REVIEW){
+		console.log('fffffffffffffffffffff');
+		return true;
+	}
+	if (action.type === actions.CLOSE_REVIEW){
+		return false;
+	}
+	return popReviewWindow;
+}
+
 
 export default combineReducers({ 
 	itemProcess: itemReducer,
@@ -180,4 +191,7 @@ export default combineReducers({
 	lNameInput: updateLNameInput,
 	createEmailInput: updateCreateEmailInput,
 	createPasswordInput: updateCreatePasswordInput,
+
+	// for postItem show review
+	displayReview
 });

@@ -6,6 +6,10 @@ export const UNVIEW_ONE = 'UNVIEW_ONE';
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
 export const CHANGE_INPUT = 'CHANGE_INPUT';
 
+// for post page
+export const SHOW_REVIEW = 'SHOW_REVIEW';
+export const CLOSE_REVIEW = 'CLOSE_REVIEW';
+
 // for LogIn Page
 export const CHANGE_EMAIL_INPUT = 'CHANGE_EMAIL_INPUT'
 export const CHANGE_PASSWORD_INPUT = 'CHANGE_PASSWORD_INPUT'
@@ -38,6 +42,7 @@ export const popUpItem = (index) => {
 		toViewIndex : index
 	};
 };
+
 export const closePopedItem = () => {
 	return {
 		type: UNVIEW_ONE,
@@ -99,3 +104,17 @@ export const updateCreateEmailInputPage = (text) => {
 		payload: text,
 	}
 }
+
+// action creators for prepost review
+
+export const showPostReview = () => {
+	return {
+		type: SHOW_REVIEW
+	};
+};
+
+export const closePostReview = () => {
+	return {
+		type: CLOSE_REVIEW
+	};
+};

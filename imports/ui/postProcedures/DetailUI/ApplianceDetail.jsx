@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import MapContainer from './googleMap';
 import Geosuggest from 'react-geosuggest';
 import { Meteor } from 'meteor/meteor';
+import { connect } from 'react-redux';
+import { showPostReview}  from '../../../actions';
 import '../../style/style.css';
+import Review from '../Review';
 class ApplianceDetail extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +20,7 @@ class ApplianceDetail extends Component {
             date : new Date().toLocaleString(),
             file : '',
             imagePreviewUrl : '',
-            attribute : ""
+            attribute : "",
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
@@ -49,7 +52,8 @@ class ApplianceDetail extends Component {
     }
     handleSubmit (event) {
         event.preventDefault();
-        Meteor.call("createItem",this.state);
+        console.log(this.state);
+        this.props.showReview();
         console.log(this.state);
     }
     onSuggestSelect(suggest) {
@@ -74,20 +78,22 @@ class ApplianceDetail extends Component {
                                 <input type="text" onChange={this.handleChange} id="price" name="price" placeholder="Price.." required = "required" ></input>
                                 <label htmlFor="subject">description</label>
                                 <textarea onChange={this.handleChange} id="subject" name="description" placeholder="Write something.."></textarea>
+                                <label htmlFor="uploadImg">Upload Picture</label>
                                 <input type="file" onChange={this.handleImageChange} />
                                 <div>
                                     {this.state.imagePreviewUrl !== '' ? <img src={this.state.imagePreviewUrl} style={{"width": "350px", "height": "200px"}}/> : <span></span>}
                                 </div>
-                                <button type="submit">Submit</button>
+                                <br></br>
+                                <button type="submit">Confirm</button>
                             </form>
                         </td>
                         <td style={{"verticalAlign": "0%"}}>
                             <br></br>
-                            <div>Where is the seller?</div>
                             <div>
                                 <MapContainer locationInfo = {this.state.location}/>
+                                <div>Where is the seller?</div>
                                 <Geosuggest
-                                    initialValue="UBC"
+                                    placeholder="Search Your Place!"
                                     onSuggestSelect={this.onSuggestSelect}
                                     location={new google.maps.LatLng(53.558572, 9.9278215)}
                                     radius="20"
@@ -98,9 +104,22 @@ class ApplianceDetail extends Component {
                     </tr>
                     </tbody>
                 </table>
+                <p>{this.props.shouldShowReview}</p>
+                {this.props.shouldShowReview && <Review detail = {this.state} />}
             </div>
         );
     }
 }
-
-export default ApplianceDetail;
+const mapStateToProps = (state) => {
+    return { 
+        shouldShowReview: state.displayReview,
+    };
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+      showReview: () => {
+        dispatch(showPostReview());
+      }
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ApplianceDetail);
