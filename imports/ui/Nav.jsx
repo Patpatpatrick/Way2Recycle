@@ -8,37 +8,74 @@ import Link from '@material-ui/core/Link';
 import useStyles from './style/NavStyle';
 import SearchBar from './SearchBar.jsx';
 
-export default function Nav() {
-  const classes = useStyles();
 
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
-        <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            Way2Recycle
-          </Typography>
-          <SearchBar/>
-          <nav>
-            <Link variant="button" color="textPrimary" href="/" className={classes.link}>
-              Home
-            </Link>
-            <Link variant="button" color="textPrimary" href="/postedAd" className={classes.link}>
-              View Posted Ad
-            </Link>
-            <Link variant="button" color="textPrimary" href="/postNewAd" className={classes.link}>
-              Post ad
-            </Link>
-            <Link variant="button" color="textPrimary" href="/signup" className={classes.link}>
-              Sign Up
-            </Link>
-          </nav>
-          <Button href="/login" color="primary" variant="outlined" className={classes.link}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </React.Fragment>
-  );
+
+let loggedIn
+export default class Nav extends React.Component{
+  //const classes = useStyles();
+
+
+
+  loggedIn = false;
+/*  if (Meteor.userId()) {
+    console.log('Logged In:user ID: '+Meteor.userId())
+    loggedIn = true
+  }*/
+
+
+
+  logOut = () => {
+    //alert('logging out')
+   // alert(Meteor.userId())
+    Meteor.logout((err) => {
+      if (err) {
+        alert('Failed to log out!')
+      }
+    })
+  }
+  render() {
+    if (Meteor.userId()) {
+      console.log('Logged In:user ID: '+ Meteor.userId())
+      loggedIn = true
+  }
+    return (
+        <React.Fragment>
+          <CssBaseline />
+          <AppBar position="static" color="default" elevation={0} className={''}>
+            <Toolbar className={''}>
+              <Typography variant="h6" color="inherit" noWrap className={''}>
+                Way2Recycle
+              </Typography>
+              <SearchBar/>
+              <nav>
+                <Link variant="button" color="textPrimary" href="/" className={''}>
+                  Home
+                </Link>
+                <Link variant="button" color="textPrimary" href="/postedAd" className={''}>
+                  View Posted Ad
+                </Link>
+                {
+                  loggedIn?
+                      <Link variant="button" color="textPrimary" href="/postNewAd" className={''}>
+                        Post ad
+                      </Link>: null
+                }
+                <Link variant="button" color="textPrimary" href="/signup" className={''}>
+                  Sign Up
+                </Link>
+              </nav>
+              {
+                loggedIn?
+                    <Button href="/" color="primary" variant="outlined" className={''} onClick={this.logOut}>
+                      LogOut
+                    </Button>:
+                    <Button href="/login" color="primary" variant="outlined" className={''}>
+                      Login
+                    </Button>
+              }
+            </Toolbar>
+          </AppBar>
+        </React.Fragment>
+    );
+  }
 }

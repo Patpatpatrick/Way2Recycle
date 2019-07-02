@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,11 +15,17 @@ import Container from '@material-ui/core/Container';
 
 
 import { updateEmailInputBox }  from '../../actions/index.js';
-import { updatePasswordInputBox }  from '../../actions/index.js';
+import { updatePasswordInputBox, logInFlag}  from '../../actions/index.js';
 import {connect} from "react-redux";
 
 
 class LogIn extends React.Component{
+
+
+    constructor(props) {
+        super(props);
+        this.state = {logging: false}
+    }
 
   changedEmailInputBox  = (event) =>  {
     this.props.updateEmailText(event.target.value)
@@ -29,25 +35,74 @@ class LogIn extends React.Component{
     this.props.updatePasswordText(event.target.value)
   };
 
-  pressLogIn = () => {
-    Meteor.loginWithPassword(this.props.emailInput, this.props.passwordInput, (err)=> {
-      if (Meteor.user()) {
-        console.log("Log in successful with id: " + Meteor.userId())
+    componentDidUpdate(prevProps) {
+        if (this.props.toggleLogin !== prevProps.toggleLogin) {
+           //alert(Meteor.userId())
+            i = i++
+        }
+    }
+
+
+   pressLogIn = () => {
+      // alert(Meteor.loggingIn())
+       //window.location.assign("/")
+      //this.props.logInFlag()
+      //console.log('logIn button pressed!')
+       let id = (String(this.props.emailInput).trim())
+       let pass = (String(this.props.passwordInput).trim())
+    Meteor.loginWithPassword(id, pass, (err)=> {
+        console.log("meteor login invoked")
+        if (err){
+            console.log(err)
+        }
+
+        if (!Meteor.userId()) {
+            alert('failed')
+            return
+        }
+
+       //console.log("Log in successful with id: " + Meteor.userId())
+        window.location.assign("/")
         this.props.updateEmailText('')
         this.props.updatePasswordText('')
-      } else {
-        alert("Password or Id does not exist")
-      }
-      if (err){
-        console.log(err)
-      }
+        this.props.logInFlag()
+
+
+        /*        if (Meteor.userId()) {
+                    this.props.logInFlag()
+                    console.log("Log in successful with id: " + Meteor.userId())
+                    window.location.assign("/")
+                    this.props.updateEmailText('')
+                    this.props.updatePasswordText('')
+
+
+                } else {
+
+                    alert("Failed to log in")
+
+              }*/
+
+
     })
-  }
+
+   
+
+       if (Meteor.loggingIn()===true) {
+           alert('still logging in...')
+       }
+
+
+
+   }
+
 
   render() {
     return (
       <div>
+          <div>{this.props.emailInput.toString()}</div>
+          <div> Test</div>
         <form>
+
           <TextField
               variant="outlined"
               margin="normal"
@@ -105,14 +160,16 @@ class LogIn extends React.Component{
 const mapStateToProps = (state) => {
   return {
     emailInput: state.emailInput,
-    passwordInput: state.passwordInput
+    passwordInput: state.passwordInput,
+      toggleLogin: state.toggleLogin
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
       updateEmailText: (text) => dispatch(updateEmailInputBox(text)),
-      updatePasswordText: (text) => dispatch(updatePasswordInputBox(text))
+      updatePasswordText: (text) => dispatch(updatePasswordInputBox(text)),
+      logInFlag: () => dispatch(logInFlag())
     }
   }
 

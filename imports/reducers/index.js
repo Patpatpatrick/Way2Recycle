@@ -169,11 +169,25 @@ const updateCreatePasswordInput = (str = '', action) => {
 	return str
 };
 
+const toggleLogin = (bool = false, action) => {
+	switch (action.type) {
+		case 'LOG_IN_OUT':
+			return !bool
+		default:
+			return bool;
+	}
+}
+
+
+
 export default combineReducers({ 
 	itemProcess: itemReducer,
 	// for LogIn Page
 	emailInput: updateEmailInput,
 	passwordInput: updatePasswordInput,
+	toggleLogin: toggleLogin,
+
+
 
 	// for Sign Up Page
 	fNameInput: updateFNameInput,

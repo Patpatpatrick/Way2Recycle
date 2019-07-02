@@ -99,3 +99,10 @@ export const updateCreateEmailInputPage = (text) => {
 		payload: text,
 	}
 }
+
+export const logInFlag = () => {
+	return {
+		type: 'LOG_IN_OUT'
+	}
+
+}
