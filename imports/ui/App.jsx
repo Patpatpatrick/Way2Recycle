@@ -4,31 +4,47 @@ import Home from './Home';
 import PostAdPortal from './PostAdPortal.jsx';
 import Login from '../ui/LogIn/LogIn';
 import SignUp from './SignUp'
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import PostUI from './postProcedures/PostUI';
-import List from './List';
-import {Items} from "../api/items";
-import {withTracker} from 'meteor/react-meteor-data';
+
 
 
 // import './style/style.css'
-const App = () => (
-    <BrowserRouter> {/* browserRouter is a router component Generally speaking, you should use a <BrowserRouter> if you have a server that responds to requests and a <HashRouter> if you are using a static file server.*/}
+
+class App extends React.Component{
+    constructor(props) {
+        super(props);
+        this.conditionalRender = this.conditionalRender.bind(this);
+    }
+// const renderChoices = ['home','post','viewPost','login','signup']
+
+    conditionalRender(){
+        if (this.props.choice === "home") {
+            return (<Home/>);
+        } else if (this.props.choice === "post") {
+            return (<PostUI/>);
+        } else if (this.props.choice === "signup") {
+            return (<SignUp/>);
+        } else if (this.props.choice === "login") {
+            return (<Login/>);
+        } else if (this.props.choice === "viewPost") {
+            return (<PostAdPortal/>);
+        }
+    }
+
+    render() {
+      return (
         <div>
             <Nav/>
-            {/* //There are three types of components in React Router:*/}
-            {/* // router components, route matching components, and navigation components.*/}
-            {/*// There are two route matching components:*/}
-            {/*<Route> and <Switch>*/}
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/signup" component={SignUp} />
-                <Route path="/login" component={Login} />
-                <Route path="/postedAd" component={PostAdPortal} />
-                <Route path="/postNewAd" component={PostUI} />
-            </Switch> 
+            {this.conditionalRender()}
         </div>
-    </BrowserRouter>
-);
-
-export default App;
+      )}
+  }
+  
+  const mapStateToProps = (state) => {
+    return {
+      choice: state.renderChoiceAssigner.renderChoice,
+    }
+  };
+  
+  
+  export default connect(mapStateToProps, null)(App);
