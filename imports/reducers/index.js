@@ -168,6 +168,18 @@ const updateCreatePasswordInput = (str = '', action) => {
 	}
 	return str
 };
+
+const toggleLogin = (bool = false, action) => {
+	switch (action.type) {
+		case 'LOG_IN_OUT':
+			return !bool
+		default:
+			return bool;
+	}
+}
+
+
+
 const displayReview = (popReviewWindow = false, action) => {
 	if (action.type === actions.SHOW_REVIEW){
 		console.log('fffffffffffffffffffff');
@@ -187,11 +199,14 @@ const renderChoiceAssigner = (renderChoice = 'home', action) => {
 			return renderChoice;
 	}
 }
-export default combineReducers({ 
+export default combineReducers({
 	itemProcess: itemReducer,
 	// for LogIn Page
 	emailInput: updateEmailInput,
 	passwordInput: updatePasswordInput,
+	toggleLogin: toggleLogin,
+
+
 
 	// for Sign Up Page
 	fNameInput: updateFNameInput,

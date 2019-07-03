@@ -61,6 +61,10 @@ Meteor.methods({
 
 
 Meteor.startup(() => {
+    // Not yet implemented but may need it in the future
+ /*   console.log('Setting up email environment for forgot password')
+    process.env.MAIL_URL = 'smtp://way2recycle%40gmail.com:cpsc436i@smtp.gmail.com:587';*/
+
     // If the Links collection is empty, add some data.
     if (Links.find().count() === 0) {
         insertLink(

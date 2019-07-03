@@ -7,38 +7,107 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import useStyles from './style/NavStyle';
 import SearchBar from './SearchBar.jsx';
+import {connect} from "react-redux";
+import {changeChoiceOnNav, updateEmailInputBox, updatePasswordInputBox} from "../actions";
 
-export default function Nav() {
-  const classes = useStyles();
 
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
-        <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            Way2Recycle
-          </Typography>
-          <SearchBar/>
-          <nav>
-            <Link variant="button" color="textPrimary" href="/" className={classes.link}>
-              Home
-            </Link>
-            <Link variant="button" color="textPrimary" href="/postedAd" className={classes.link}>
-              View Posted Ad
-            </Link>
-            <Link variant="button" color="textPrimary" href="/postNewAd" className={classes.link}>
-              Post ad
-            </Link>
-            <Link variant="button" color="textPrimary" href="/signup" className={classes.link}>
-              Sign Up
-            </Link>
-          </nav>
-          <Button href="/login" color="primary" variant="outlined" className={classes.link}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </React.Fragment>
-  );
+
+class Nav extends React.Component{
+
+  constructor(props) {
+    super(props);
+    this.state = {loginFlag: false}
+  }
+
+  /*
+   TODO: if user log out INSIDE dashboard, should redirect to hompage
+   TO BE Done after DashBoard is added
+  */
+  logOut = () => {
+    Meteor.logout((err) => {
+      if (err) {
+        alert('Failed to logout for the user: ' + Meteor.userId())
+      }
+      console.log("Successfully logged out for user: " + Meteor.userId())
+      //this.props.changeChoiceOnNav("home")
+      this.setState({flag: !this.state.loginFlag})
+    })
+  }
+
+
+  // click login button to go to login page(component)
+  loadLogInPage = () => {
+    this.props.changeChoiceOnNav("login")
+  }
+
+  loadSignUpPage = () => {
+    this.props.changeChoiceOnNav("signup")
+  }
+
+
+  // TODO: for now, POST AD is showing up whether log in or not (just for easy debug for others)
+  render() {
+    return (
+        <React.Fragment>
+          <CssBaseline/>
+          <AppBar position="static" color="default" elevation={0} className={''}>
+            <Toolbar className={''}>
+              <Typography variant="h6" color="inherit" noWrap className={''}>
+                Way2Recycle
+              </Typography>
+              <SearchBar/>
+              <nav>
+                <Link variant="button" color="textPrimary" className={''} onClick ={()=>this.props.changeChoiceOnNav('home')}>
+                  Home &nbsp;
+                </Link>
+                <Link variant="button" color="textPrimary" className={''} onClick = {()=>this.props.changeChoiceOnNav('viewPost')}>
+                  View Posted Ad &nbsp;
+                </Link>
+                {
+                  Meteor.userId() ?
+                      <Link variant="button" color="textPrimary" className={''} onClick = {()=>this.props.changeChoiceOnNav('post')} >
+                        Post ad &nbsp;
+                      </Link> :
+                      <Link variant="button" color="textPrimary" className={''} onClick = {()=>this.props.changeChoiceOnNav('post')}>
+                        Post ad &nbsp;
+                      </Link>
+                }
+                {
+                  Meteor.userId() ? null :
+                      <Link variant="button" color="textPrimary" className={''} onClick={this.loadSignUpPage}>
+                        Sign Up &nbsp;
+                      </Link>
+                }
+              </nav>
+              {
+                Meteor.userId() ?
+                    <Button color="primary" variant="outlined" className={''} onClick={this.logOut}>
+                      LogOut
+                    </Button> :
+                    <Button color="primary" variant="outlined" className={''} onClick={this.loadLogInPage}>
+                      Login
+                    </Button>
+              }
+            </Toolbar>
+          </AppBar>
+        </React.Fragment>
+    );
+  }
 }
+const mapStateToProps = (state) => {
+  return {
+    emailInput: state.emailInput,
+    passwordInput: state.passwordInput,
+    renderChoiceAssigner: state.renderChoiceAssigner
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateEmailText: (text) => dispatch(updateEmailInputBox(text)),
+    updatePasswordText: (text) => dispatch(updatePasswordInputBox(text)),
+    changeChoiceOnNav: (choice) => dispatch(changeChoiceOnNav(choice))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

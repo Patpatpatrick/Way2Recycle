@@ -108,6 +108,12 @@ export const updateCreateEmailInputPage = (text) => {
 	}
 }
 
+export const logInFlag = () => {
+	return {
+		type: 'LOG_IN_OUT'
+	}
+
+}
 // action creators for prepost review
 
 export const showPostReview = () => {
