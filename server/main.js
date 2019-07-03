@@ -11,16 +11,13 @@ function insertLink(title, url) {
 
 Meteor.methods({
     'createItem': function (item) {
-
         Items.insert(item);
-
         console.log("add one");
     }
 });
 
 Meteor.methods({
     'getItems': function () {
-
         let items = Items.find({}, {sort: {createdAt: -1}}).fetch();
         console.log("get all items");
         return items;
