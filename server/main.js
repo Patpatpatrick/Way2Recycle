@@ -11,16 +11,13 @@ function insertLink(title, url) {
 
 Meteor.methods({
     'createItem': function (item) {
-
         Items.insert(item);
-
         console.log("add one");
     }
 });
 
 Meteor.methods({
     'getItems': function () {
-
         let items = Items.find({}, {sort: {createdAt: -1}}).fetch();
         console.log("get all items");
         return items;
@@ -64,6 +61,10 @@ Meteor.methods({
 
 
 Meteor.startup(() => {
+    // Not yet implemented but may need it in the future
+ /*   console.log('Setting up email environment for forgot password')
+    process.env.MAIL_URL = 'smtp://way2recycle%40gmail.com:cpsc436i@smtp.gmail.com:587';*/
+
     // If the Links collection is empty, add some data.
     if (Links.find().count() === 0) {
         insertLink(

@@ -12,19 +12,13 @@ class MyComponents extends Component {
                     width: "600px"
                 }}
                 zoom={11}
-                center={{
-                    lat: 49.2827,
-                    lng: -123.1207
-                }}
+                center={this.props.locationInfo}
             >
                 <Marker
                 onLoad={marker => {
                     console.log('marker: ', marker)
                 }}
-                position={{
-                    lat: 49.2827,
-                    lng: -123.1207
-                }}
+                position={this.props.locationInfo}
                 />
             </GoogleMap>
      )

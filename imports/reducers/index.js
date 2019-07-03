@@ -180,7 +180,26 @@ const toggleLogin = (bool = false, action) => {
 
 
 
-export default combineReducers({ 
+const displayReview = (popReviewWindow = false, action) => {
+	if (action.type === actions.SHOW_REVIEW){
+		console.log('fffffffffffffffffffff');
+		return true;
+	}
+	if (action.type === actions.CLOSE_REVIEW){
+		return false;
+	}
+	return popReviewWindow;
+}
+// const renderChoices = ['home','post','viewPost','login','signup']
+const renderChoiceAssigner = (renderChoice = 'home', action) => {
+	switch(action.type){
+		case actions.CHANGE_CHOICE_ON_NAV:
+			return action.choice;
+		default:
+			return renderChoice;
+	}
+}
+export default combineReducers({
 	itemProcess: itemReducer,
 	// for LogIn Page
 	emailInput: updateEmailInput,
@@ -194,4 +213,10 @@ export default combineReducers({
 	lNameInput: updateLNameInput,
 	createEmailInput: updateCreateEmailInput,
 	createPasswordInput: updateCreatePasswordInput,
+
+	// for postItem show review
+	displayReview,
+
+	// for change choice on Nav
+	renderChoiceAssigner
 });

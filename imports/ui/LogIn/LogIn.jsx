@@ -17,114 +17,58 @@ import Container from '@material-ui/core/Container';
 import { updateEmailInputBox }  from '../../actions/index.js';
 import { updatePasswordInputBox, logInFlag}  from '../../actions/index.js';
 import {connect} from "react-redux";
+import {changeChoiceOnNav} from "../../actions/index";
 
 
 class LogIn extends React.Component{
 
-
-    constructor(props) {
-        super(props);
-        this.state = {logging: false}
-    }
-
-  changedEmailInputBox  = (event) =>  {
+  changedEmailInputBox  = (event) => {
     this.props.updateEmailText(event.target.value)
   };
 
-  changedPasswordInputBox  = (event) =>  {
+  changedPasswordInputBox  = (event) => {
     this.props.updatePasswordText(event.target.value)
   };
 
-    componentDidUpdate(prevProps) {
-        if (this.props.toggleLogin !== prevProps.toggleLogin) {
-           //alert(Meteor.userId())
-            i = i++
-        }
+    pressLogIn = () => {
+        let id = (String(this.props.emailInput).trim())
+        let pass = (String(this.props.passwordInput).trim())
+
+        Meteor.loginWithPassword(id, pass, (err) => {
+            console.log("meteor login invoked")
+            if (err) {
+                alert("Please check your id/pass")
+                console.log(err)
+            }
+            if (Meteor.userId()) {
+                this.props.updateEmailText('')
+                this.props.updatePasswordText('')
+                this.props.changeChoiceOnNav('home')
+            }
+        })
     }
-
-
-   pressLogIn = () => {
-      // alert(Meteor.loggingIn())
-       //window.location.assign("/")
-      //this.props.logInFlag()
-      //console.log('logIn button pressed!')
-       let id = (String(this.props.emailInput).trim())
-       let pass = (String(this.props.passwordInput).trim())
-    Meteor.loginWithPassword(id, pass, (err)=> {
-        console.log("meteor login invoked")
-        if (err){
-            console.log(err)
-        }
-
-        if (!Meteor.userId()) {
-            alert('failed')
-            return
-        }
-
-       //console.log("Log in successful with id: " + Meteor.userId())
-        window.location.assign("/")
-        this.props.updateEmailText('')
-        this.props.updatePasswordText('')
-        this.props.logInFlag()
-
-
-        /*        if (Meteor.userId()) {
-                    this.props.logInFlag()
-                    console.log("Log in successful with id: " + Meteor.userId())
-                    window.location.assign("/")
-                    this.props.updateEmailText('')
-                    this.props.updatePasswordText('')
-
-
-                } else {
-
-                    alert("Failed to log in")
-
-              }*/
-
-
-    })
-
-   
-
-       if (Meteor.loggingIn()===true) {
-           alert('still logging in...')
-       }
-
-
-
-   }
-
 
   render() {
     return (
       <div>
-          <div>{this.props.emailInput.toString()}</div>
-          <div> Test</div>
         <form>
-
           <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
               id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              label="Your email address"
               autoFocus
               onChange = {this.changedEmailInputBox}
-        />
+         />
         <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
             type="password"
-            id="password"
-            autoComplete="current-password"
+            label = "Your Password"
             onChange = {this.changedPasswordInputBox}
         />
         <FormControlLabel
@@ -132,7 +76,6 @@ class LogIn extends React.Component{
             label="Remember me"
         />
         <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
@@ -147,7 +90,7 @@ class LogIn extends React.Component{
             </Link>
           </Grid>
           <Grid item>
-            <Link href="#" variant="body2">
+            <Link variant="body2" onClick = {()=>this.props.changeChoiceOnNav('signup')}>
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>
@@ -169,8 +112,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
       updateEmailText: (text) => dispatch(updateEmailInputBox(text)),
       updatePasswordText: (text) => dispatch(updatePasswordInputBox(text)),
-      logInFlag: () => dispatch(logInFlag())
-    }
+      logInFlag: () => dispatch(logInFlag()),
+      changeChoiceOnNav: (choice) => dispatch(changeChoiceOnNav(choice))
+  }
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

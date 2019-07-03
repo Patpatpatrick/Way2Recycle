@@ -14,7 +14,7 @@ import Container from '@material-ui/core/Container';
 import {connect} from "react-redux";
 
 import { updateFirstNameInputBox, updateLastNameInputBox, updateCreatePasswordInputPage,
-  updateCreateEmailInputPage}  from '../actions/index.js';
+  updateCreateEmailInputPage, changeChoiceOnNav}  from '../actions/index.js';
 
 class SignUp extends React.Component{
   pressSignUp = () => {
@@ -31,6 +31,8 @@ class SignUp extends React.Component{
       this.props.updateLastNameInputBox('')
       this.props.updateCreatePasswordInputPage('')
       this.props.updateCreateEmailInputPage('')
+      this.props.changeChoiceOnNav('home')
+
       if (err) {
         alert("Failed to create new user")
         alert(JSON.stringify(registerForm))
@@ -51,6 +53,10 @@ class SignUp extends React.Component{
     this.props.updateCreateEmailInputPage(event.target.value)
   };
 
+  redirectToLogIn = () => {
+    this.props.changeChoiceOnNav('login')
+  }
+
   render(){
     /*const classes = useStyles;*/
     return(
@@ -68,7 +74,6 @@ class SignUp extends React.Component{
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
-                name="firstName"
                 variant="outlined"
                 required
                 fullWidth
@@ -85,7 +90,6 @@ class SignUp extends React.Component{
                 fullWidth
                 id="lastName"
                 label="Last Name"
-                name="lastName"
                 autoComplete="lname"
                 onChange={this.changeLNameInputBox}
 
@@ -98,7 +102,6 @@ class SignUp extends React.Component{
                 fullWidth
                 id="email"
                 label="Email Address"
-                name="email"
                 autoComplete="email"
                 onChange={this.changeCreateEmailInputBox }
 
@@ -109,7 +112,6 @@ class SignUp extends React.Component{
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
                 label="Password"
                 type="password"
                 id="password"
@@ -125,7 +127,6 @@ class SignUp extends React.Component{
             </Grid>
           </Grid>
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
@@ -135,7 +136,7 @@ class SignUp extends React.Component{
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link variant="body2" onClick= {this.redirectToLogIn}>
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -162,6 +163,7 @@ const mapDispatchToProps = (dispatch) => {
     updateLastNameInputBox: (text) => dispatch(updateLastNameInputBox(text)),
     updateCreatePasswordInputPage: (text) => dispatch(updateCreatePasswordInputPage(text)),
     updateCreateEmailInputPage: (text) => dispatch(updateCreateEmailInputPage(text)),
+    changeChoiceOnNav: (choice) => dispatch(changeChoiceOnNav(choice))
   }
 }
 
