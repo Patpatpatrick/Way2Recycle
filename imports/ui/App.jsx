@@ -5,6 +5,7 @@ import PostAdPortal from './PostAdPortal.jsx';
 import Login from '../ui/LogIn/LogIn';
 import SignUp from './SignUp'
 import PostUI from './postProcedures/PostUI';
+import {connect} from "react-redux";
 
 
 
@@ -19,6 +20,7 @@ class App extends React.Component{
 
     conditionalRender(){
         if (this.props.choice === "home") {
+            console.log('should be here');
             return (<Home/>);
         } else if (this.props.choice === "post") {
             return (<PostUI/>);
@@ -42,7 +44,7 @@ class App extends React.Component{
   
   const mapStateToProps = (state) => {
     return {
-      choice: state.renderChoiceAssigner.renderChoice,
+      choice: state.renderChoiceAssigner
     }
   };
   
