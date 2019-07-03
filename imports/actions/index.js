@@ -20,6 +20,9 @@ export const CHANGE_LNAME_INPUT = 'CHANGE_LNAME_INPUT'
 export const CHANGE_CREATE_PW_INPUT = 'CHANGE_CREATE_PW_INPUT'
 export const CHANGE_CREATE_EMAIL_INPUT = 'CHANGE_CREATE_EMAIL_INPUT'
 
+// for change the choice of Nav bar
+export const CHANGE_CHOICE_ON_NAV = 'CHANGE_CHOICE_ON_NAV'
+
 export const generateItem = () => {
 	return {
         	type: GEN_ITEM,
@@ -116,5 +119,13 @@ export const showPostReview = () => {
 export const closePostReview = () => {
 	return {
 		type: CLOSE_REVIEW
+	};
+};
+
+// create an action to indicate a change of choice
+export const changeChoiceOnNav = (choice) => {
+	return {
+		type: CHANGE_CHOICE_ON_NAV,
+		choice
 	};
 };

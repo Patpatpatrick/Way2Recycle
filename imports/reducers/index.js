@@ -178,8 +178,15 @@ const displayReview = (popReviewWindow = false, action) => {
 	}
 	return popReviewWindow;
 }
-
-
+// const renderChoices = ['home','post','viewPost','login','signup']
+const renderChoiceAssigner = (renderChoice = 'home', action) => {
+	switch(action.type){
+		case actions.CHANGE_CHOICE_ON_NAV:
+			return action.choice;
+		default:
+			return renderChoice;
+	}
+}
 export default combineReducers({ 
 	itemProcess: itemReducer,
 	// for LogIn Page
@@ -193,5 +200,8 @@ export default combineReducers({
 	createPasswordInput: updateCreatePasswordInput,
 
 	// for postItem show review
-	displayReview
+	displayReview,
+
+	// for change choice on Nav
+	renderChoiceAssigner
 });
