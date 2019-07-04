@@ -44,7 +44,6 @@ class Nav extends React.Component{
     this.props.changeChoiceOnNav("signup")
   }
 
-
   // TODO: for now, POST AD is showing up whether log in or not (just for easy debug for others)
   render() {
     return (
@@ -79,6 +78,7 @@ class Nav extends React.Component{
                       </Link>
                 }
               </nav>
+              {Meteor.user()? <div>&nbsp;&nbsp;&nbsp;&nbsp;HELLO! {Meteor.user().profile.FirstName}</div>:null}
               {
                 Meteor.userId() ?
                     <Button color="primary" variant="outlined" className={''} onClick={this.logOut}>

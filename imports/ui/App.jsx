@@ -5,11 +5,23 @@ import PostAdPortal from './PostAdPortal.jsx';
 import Login from '../ui/LogIn/LogIn';
 import SignUp from './SignUp'
 import PostUI from './postProcedures/PostUI';
+import ResetPasswordByEmail from './ResetPasswordByEmail'
 import {connect} from "react-redux";
-
+import {changeChoiceOnNav} from "../actions";
+import SendPasswordToEmail from "./SendPasswordToEmail";
 
 
 // import './style/style.css'
+let renderResetPasswordPage = false
+let passwordTokenFromEmail ='default'
+
+Accounts.onResetPasswordLink((token,done)=>{
+    console.log('token received from email URL')
+    console.log(token)
+    renderResetPasswordPage = true
+    passwordTokenFromEmail = token
+})
+
 
 class App extends React.Component{
     constructor(props) {
@@ -19,6 +31,18 @@ class App extends React.Component{
 // const renderChoices = ['home','post','viewPost','login','signup']
 
     conditionalRender(){
+
+        if (this.props.choice ==='resetPasswordByEmail') {
+            console.log(passwordTokenFromEmail)
+            return (<ResetPasswordByEmail token={passwordTokenFromEmail}/>)
+        }
+
+
+        if (this.props.choice ==='sendPasswordToEmail') {
+            return (<SendPasswordToEmail/>)
+        }
+
+
         if (this.props.choice === "home") {
             console.log('should be here');
             return (<Home/>);
@@ -34,6 +58,11 @@ class App extends React.Component{
     }
 
     render() {
+      if (renderResetPasswordPage) {
+          this.props.changeChoiceOnNav('resetPasswordByEmail')
+          renderResetPasswordPage = false
+      }
+
       return (
         <div>
             <Nav/>
@@ -47,6 +76,12 @@ class App extends React.Component{
       choice: state.renderChoiceAssigner
     }
   };
-  
-  
-  export default connect(mapStateToProps, null)(App);
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeChoiceOnNav: (choice) => dispatch(changeChoiceOnNav(choice))
+    }
+}
+
+
+  export default connect(mapStateToProps, mapDispatchToProps)(App);
