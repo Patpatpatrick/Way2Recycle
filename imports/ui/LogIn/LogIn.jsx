@@ -30,6 +30,9 @@ class LogIn extends React.Component{
     this.props.updatePasswordText(event.target.value)
   };
 
+  pressForgotPassword = () => {
+      this.props.changeChoiceOnNav('sendPasswordToEmail')
+  }
     pressLogIn = () => {
         let id = (String(this.props.emailInput).trim())
         let pass = (String(this.props.passwordInput).trim())
@@ -85,7 +88,7 @@ class LogIn extends React.Component{
         </Button>
         <Grid container>
           <Grid item xs>
-            <Link href="#" variant="body2">
+            <Link href="#" variant="body2" onClick = {this.pressForgotPassword}>
               Forgot password?
             </Link>
           </Grid>
