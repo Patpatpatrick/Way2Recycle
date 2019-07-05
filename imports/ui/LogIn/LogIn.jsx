@@ -18,6 +18,7 @@ import { updateEmailInputBox }  from '../../actions/index.js';
 import { updatePasswordInputBox, logInFlag}  from '../../actions/index.js';
 import {connect} from "react-redux";
 import {changeChoiceOnNav} from "../../actions/index";
+import { GoogleLoginButton } from "react-social-login-buttons";
 
 
 class LogIn extends React.Component{
@@ -105,14 +106,7 @@ class LogIn extends React.Component{
             </div>
             <br />
             <div>
-            <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick = {this.pressLogInWithGoogle}
-            >
-                SIGN IN WITH GOOGLE (TO BE REPLACED WITH GOOGLE ICON)
-            </Button>
+                <GoogleLoginButton onClick={this.pressLogInWithGoogle} />
             </div>
         <Grid container>
           <Grid item xs>
