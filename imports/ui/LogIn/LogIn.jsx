@@ -51,9 +51,24 @@ class LogIn extends React.Component{
         })
     }
 
+    pressLogInWithGoogle  = () => {
+        Meteor.loginWithGoogle({}, (err) => {
+            if (err) {
+                console.log('google log in fail')
+            } else {
+                console.log('google login success for : '+ JSON.stringify(Meteor.user()));
+                this.props.changeChoiceOnNav('home')
+            }
+        })
+    }
+
+
+
+
   render() {
     return (
       <div>
+
         <form>
           <TextField
               variant="outlined"
@@ -78,6 +93,7 @@ class LogIn extends React.Component{
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
         />
+            <div>
         <Button
             fullWidth
             variant="contained"
@@ -86,6 +102,18 @@ class LogIn extends React.Component{
         >
           Sign In
         </Button>
+            </div>
+            <br />
+            <div>
+            <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick = {this.pressLogInWithGoogle}
+            >
+                SIGN IN WITH GOOGLE (TO BE REPLACED WITH GOOGLE ICON)
+            </Button>
+            </div>
         <Grid container>
           <Grid item xs>
             <Link href="#" variant="body2" onClick = {this.pressForgotPassword}>

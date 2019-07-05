@@ -62,6 +62,8 @@ Meteor.methods({
 
 Meteor.startup(() => {
 
+    // password and token, etc should be moved out as env variable when deployed
+
     console.log('Setting up email environment for forgot password')
     process.env.MAIL_URL = 'smtp://way2recycle%40gmail.com:cpsc436i@smtp.gmail.com:587';
 
@@ -70,6 +72,21 @@ Meteor.startup(() => {
         //url = url.replace('resetPassword-password/', '')
         return `Click this link to reset your password: ${url}`;
     }
+
+    Accounts.emailTemplates.from = "Way2Recycle <no-reply@example.com>"
+
+
+    // For google log in: Need to go to console.developers.google.com --> credential
+    // TODO: need to go to console.developers.google.com and change configurations when deployed to real site
+    // right now , it is set for localhost:3000
+    ServiceConfiguration.configurations.remove({service:'google'})
+    ServiceConfiguration.configurations.insert({
+        service: 'google',
+        clientId: '1056358074723-ge6pncu7ifjsj1i2f27tfb0ugseiothc.apps.googleusercontent.com',
+        secret: 'jFNRcJtereoiESUv3H3HrSl_'
+    });
+
+
 
 
     // If the Links collection is empty, add some data.
