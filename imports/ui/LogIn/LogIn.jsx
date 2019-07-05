@@ -18,6 +18,7 @@ import { updateEmailInputBox }  from '../../actions/index.js';
 import { updatePasswordInputBox, logInFlag}  from '../../actions/index.js';
 import {connect} from "react-redux";
 import {changeChoiceOnNav} from "../../actions/index";
+import { GoogleLoginButton } from "react-social-login-buttons";
 
 
 class LogIn extends React.Component{
@@ -51,9 +52,24 @@ class LogIn extends React.Component{
         })
     }
 
+    pressLogInWithGoogle  = () => {
+        Meteor.loginWithGoogle({}, (err) => {
+            if (err) {
+                console.log('google log in fail')
+            } else {
+                console.log('google login success for : '+ JSON.stringify(Meteor.user()));
+                this.props.changeChoiceOnNav('home')
+            }
+        })
+    }
+
+
+
+
   render() {
     return (
       <div>
+
         <form>
           <TextField
               variant="outlined"
@@ -78,6 +94,7 @@ class LogIn extends React.Component{
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
         />
+            <div>
         <Button
             fullWidth
             variant="contained"
@@ -86,6 +103,11 @@ class LogIn extends React.Component{
         >
           Sign In
         </Button>
+            </div>
+            <br />
+            <div>
+                <GoogleLoginButton onClick={this.pressLogInWithGoogle} />
+            </div>
         <Grid container>
           <Grid item xs>
             <Link href="#" variant="body2" onClick = {this.pressForgotPassword}>

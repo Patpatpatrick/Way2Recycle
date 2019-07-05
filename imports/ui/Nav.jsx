@@ -78,7 +78,8 @@ class Nav extends React.Component{
                       </Link>
                 }
               </nav>
-              {Meteor.user()? <div>&nbsp;&nbsp;&nbsp;&nbsp;HELLO! {Meteor.user().profile.FirstName}</div>:null}
+              {/*{Meteor.user()? <div>&nbsp;&nbsp;&nbsp;&nbsp;HELLO! {Meteor.user().profile.FirstName}</div>:null}*/}
+              {Meteor.user()? <div>&nbsp;&nbsp;&nbsp;&nbsp;HELLO! {Meteor.user().profile.name}</div>:null}
               {
                 Meteor.userId() ?
                     <Button color="primary" variant="outlined" className={''} onClick={this.logOut}>

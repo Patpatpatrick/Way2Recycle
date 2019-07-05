@@ -23,6 +23,7 @@ class SignUp extends React.Component{
            profile: {
               FirstName: this.props.fNameInput,
               LastName: this.props.lNameInput,
+              name: this.props.fNameInput + " " + this.props.lNameInput
             },
            password:this.props.createPasswordInput}
 
