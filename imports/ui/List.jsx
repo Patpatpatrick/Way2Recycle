@@ -16,8 +16,8 @@ class List extends React.Component {
                 <div align="center">
                     {this.props.itemArray.filter((item) => item.category === this.props.chosenCategory).map( (item, idx) => {
                         return (
-                            <div>
-                                <List_ele element = {item} index = {idx} key = {item.itemname + idx}/>
+                            <div key = {item.itemname + '_'+idx}>
+                                <List_ele element = {item} index = {idx}/>
                             </div>
                         )
                         })
