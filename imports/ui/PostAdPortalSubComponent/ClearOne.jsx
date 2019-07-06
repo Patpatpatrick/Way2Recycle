@@ -9,11 +9,17 @@ class ClearOne extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(){
+        Meteor.call('deleteOneItem', this.props.index, function (err, result) {
+            if(err){
+                console.log("error");
+            }
+            // console.log(result);
+        });
         this.props.cOne(this.props.index);
     }
 	render() {
         return (
-            <Button type="del" onClick = {this.handleClick} id={this.props.index + 'Clear'}>Clear</Button>
+            <Button type="button" onClick = {this.handleClick} id={this.props.index + 'Clear'}>Clear</Button>
         );
     }
 }
