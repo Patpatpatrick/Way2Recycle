@@ -52,6 +52,7 @@ class ApplianceDetail extends Component {
         console.log(this.state);
     }
     onSuggestSelect(suggest) {
+
         console.log(suggest);
     }
 	render() {
