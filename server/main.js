@@ -18,7 +18,10 @@ Meteor.methods({
 
 Meteor.methods({
     'getItems': function () {
-        let items = Items.find({}, {sort: {createdAt: -1}}).fetch();
+        let items = [];
+        Items.find({}, {sort: {createdAt: -1}}).forEach((entry)=>{
+            items.push(entry);
+        })
         console.log("get all items");
         return items;
     }
