@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,38 +15,61 @@ import Container from '@material-ui/core/Container';
 
 
 import { updateEmailInputBox }  from '../../actions/index.js';
-import { updatePasswordInputBox }  from '../../actions/index.js';
+import { updatePasswordInputBox, logInFlag}  from '../../actions/index.js';
 import {connect} from "react-redux";
+import {changeChoiceOnNav} from "../../actions/index";
+import { GoogleLoginButton } from "react-social-login-buttons";
 
 
 class LogIn extends React.Component{
 
-  changedEmailInputBox  = (event) =>  {
+  changedEmailInputBox  = (event) => {
     this.props.updateEmailText(event.target.value)
   };
 
-  changedPasswordInputBox  = (event) =>  {
+  changedPasswordInputBox  = (event) => {
     this.props.updatePasswordText(event.target.value)
   };
 
-  pressLogIn = () => {
-    Meteor.loginWithPassword(this.props.emailInput, this.props.passwordInput, (err)=> {
-      if (Meteor.user()) {
-        console.log("Log in successful with id: " + Meteor.userId())
-        this.props.updateEmailText('')
-        this.props.updatePasswordText('')
-      } else {
-        alert("Password or Id does not exist")
-      }
-      if (err){
-        console.log(err)
-      }
-    })
+  pressForgotPassword = () => {
+      this.props.changeChoiceOnNav('sendPasswordToEmail')
   }
+    pressLogIn = () => {
+        let id = (String(this.props.emailInput).trim())
+        let pass = (String(this.props.passwordInput).trim())
+
+        Meteor.loginWithPassword(id, pass, (err) => {
+            console.log("meteor login invoked")
+            if (err) {
+                alert("Please check your id/pass")
+                console.log(err)
+            }
+            if (Meteor.userId()) {
+                this.props.updateEmailText('')
+                this.props.updatePasswordText('')
+                this.props.changeChoiceOnNav('home')
+            }
+        })
+    }
+
+    pressLogInWithGoogle  = () => {
+        Meteor.loginWithGoogle({}, (err) => {
+            if (err) {
+                console.log('google log in fail')
+            } else {
+                console.log('google login success for : '+ JSON.stringify(Meteor.user()));
+                this.props.changeChoiceOnNav('home')
+            }
+        })
+    }
+
+
+
 
   render() {
     return (
       <div>
+
         <form>
           <TextField
               variant="outlined"
@@ -54,30 +77,25 @@ class LogIn extends React.Component{
               required
               fullWidth
               id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              label="Your email address"
               autoFocus
               onChange = {this.changedEmailInputBox}
-        />
+         />
         <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
             type="password"
-            id="password"
-            autoComplete="current-password"
+            label = "Your Password"
             onChange = {this.changedPasswordInputBox}
         />
         <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
         />
+            <div>
         <Button
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
@@ -85,14 +103,19 @@ class LogIn extends React.Component{
         >
           Sign In
         </Button>
+            </div>
+            <br />
+            <div>
+                <GoogleLoginButton onClick={this.pressLogInWithGoogle} />
+            </div>
         <Grid container>
           <Grid item xs>
-            <Link href="#" variant="body2">
+            <Link href="#" variant="body2" onClick = {this.pressForgotPassword}>
               Forgot password?
             </Link>
           </Grid>
           <Grid item>
-            <Link href="#" variant="body2">
+            <Link variant="body2" onClick = {()=>this.props.changeChoiceOnNav('signup')}>
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>
@@ -105,15 +128,18 @@ class LogIn extends React.Component{
 const mapStateToProps = (state) => {
   return {
     emailInput: state.emailInput,
-    passwordInput: state.passwordInput
+    passwordInput: state.passwordInput,
+      toggleLogin: state.toggleLogin
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
       updateEmailText: (text) => dispatch(updateEmailInputBox(text)),
-      updatePasswordText: (text) => dispatch(updatePasswordInputBox(text))
-    }
+      updatePasswordText: (text) => dispatch(updatePasswordInputBox(text)),
+      logInFlag: () => dispatch(logInFlag()),
+      changeChoiceOnNav: (choice) => dispatch(changeChoiceOnNav(choice))
+  }
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

@@ -4,31 +4,84 @@ import Home from './Home';
 import PostAdPortal from './PostAdPortal.jsx';
 import Login from '../ui/LogIn/LogIn';
 import SignUp from './SignUp'
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import PostUI from './postProcedures/PostUI';
-import List from './List';
-import {Items} from "../api/items";
-import {withTracker} from 'meteor/react-meteor-data';
+import ResetPasswordByEmail from './ResetPasswordByEmail'
+import {connect} from "react-redux";
+import {changeChoiceOnNav} from "../actions";
+import SendPasswordToEmail from "./SendPasswordToEmail";
 
 
 // import './style/style.css'
-const App = () => (
-    <BrowserRouter> {/* browserRouter is a router component Generally speaking, you should use a <BrowserRouter> if you have a server that responds to requests and a <HashRouter> if you are using a static file server.*/}
+let renderResetPasswordPage = false
+let passwordTokenFromEmail ='default'
+
+Accounts.onResetPasswordLink((token,done)=>{
+    console.log('token received from email URL')
+    console.log(token)
+    renderResetPasswordPage = true
+    passwordTokenFromEmail = token
+})
+
+
+class App extends React.Component{
+    constructor(props) {
+        super(props);
+        this.conditionalRender = this.conditionalRender.bind(this);
+    }
+// const renderChoices = ['home','post','viewPost','login','signup']
+
+    conditionalRender(){
+
+        if (this.props.choice ==='resetPasswordByEmail') {
+            console.log(passwordTokenFromEmail)
+            return (<ResetPasswordByEmail token={passwordTokenFromEmail}/>)
+        }
+
+
+        if (this.props.choice ==='sendPasswordToEmail') {
+            return (<SendPasswordToEmail/>)
+        }
+
+
+        if (this.props.choice === "home") {
+            console.log('should be here');
+            return (<Home/>);
+        } else if (this.props.choice === "post") {
+            return (<PostUI/>);
+        } else if (this.props.choice === "signup") {
+            return (<SignUp/>);
+        } else if (this.props.choice === "login") {
+            return (<Login/>);
+        } else if (this.props.choice === "viewPost") {
+            return (<PostAdPortal/>);
+        }
+    }
+
+    render() {
+      if (renderResetPasswordPage) {
+          this.props.changeChoiceOnNav('resetPasswordByEmail')
+          renderResetPasswordPage = false
+      }
+
+      return (
         <div>
             <Nav/>
-            {/* //There are three types of components in React Router:*/}
-            {/* // router components, route matching components, and navigation components.*/}
-            {/*// There are two route matching components:*/}
-            {/*<Route> and <Switch>*/}
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/signup" component={SignUp} />
-                <Route path="/login" component={Login} />
-                <Route path="/postedAd" component={PostAdPortal} />
-                <Route path="/postNewAd" component={PostUI} />
-            </Switch> 
+            {this.conditionalRender()}
         </div>
-    </BrowserRouter>
-);
+      )}
+  }
+  
+  const mapStateToProps = (state) => {
+    return {
+      choice: state.renderChoiceAssigner
+    }
+  };
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeChoiceOnNav: (choice) => dispatch(changeChoiceOnNav(choice))
+    }
+}
+
+
+  export default connect(mapStateToProps, mapDispatchToProps)(App);

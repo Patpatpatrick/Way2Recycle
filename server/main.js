@@ -11,16 +11,13 @@ function insertLink(title, url) {
 
 Meteor.methods({
     'createItem': function (item) {
-
         Items.insert(item);
-
         console.log("add one");
     }
 });
 
 Meteor.methods({
     'getItems': function () {
-
         let items = Items.find({}, {sort: {createdAt: -1}}).fetch();
         console.log("get all items");
         return items;
@@ -64,6 +61,34 @@ Meteor.methods({
 
 
 Meteor.startup(() => {
+
+    // password and token, etc should be moved out as env variable when deployed
+
+    console.log('Setting up email environment for forgot password')
+    process.env.MAIL_URL = 'smtp://way2recycle%40gmail.com:cpsc436i@smtp.gmail.com:587';
+
+    Accounts.emailTemplates.resetPassword.text = function(user, url) {
+        //url = url.replace('#/', '');
+        //url = url.replace('resetPassword-password/', '')
+        return `Click this link to reset your password: ${url}`;
+    }
+
+    Accounts.emailTemplates.from = "Way2Recycle <no-reply@example.com>"
+
+
+    // For google log in: Need to go to console.developers.google.com --> credential
+    // TODO: need to go to console.developers.google.com and change configurations when deployed to real site
+    // right now , it is set for localhost:3000
+    ServiceConfiguration.configurations.remove({service:'google'})
+    ServiceConfiguration.configurations.insert({
+        service: 'google',
+        clientId: '1056358074723-ge6pncu7ifjsj1i2f27tfb0ugseiothc.apps.googleusercontent.com',
+        secret: 'jFNRcJtereoiESUv3H3HrSl_'
+    });
+
+
+
+
     // If the Links collection is empty, add some data.
     if (Links.find().count() === 0) {
         insertLink(

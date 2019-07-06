@@ -4,7 +4,7 @@ import List_ele from './List_ele';
 import Typography from '@material-ui/core/Typography';
 
 class List extends React.Component { 
- 
+    
 	render() {
         return (
             <div className="items">

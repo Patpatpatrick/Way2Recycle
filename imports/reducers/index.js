@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import * as actions from '../actions';
 const defaultState = {
 	count : 1,
-	chosenCategory: 'Undefined',
+	chosenCategory: 'Car',
 	unsubmitteditem : {
 		itemname: 'An item',
 		price: 0,
-		category : 'Undefined',
+		category : 'Car',
 		description : 'Description',
 		date : new Date().toLocaleString()
 	},
@@ -53,10 +53,14 @@ const defaultState = {
 };
 const itemReducer = (state = defaultState, action) => {
 	switch(action.type){
+		case actions.ASSIGN_SERVER_ITEMS_TO_STORE :
+			console.log(action.itemsFromServer);
+			return Object.assign({}, state, 
+				{ 
+					itemArray: action.itemsFromServer,
+				}
+			);
 		case actions.GEN_ITEM :
-			// console.log(state);
-			console.log([...state.itemArray,state.unsubmitteditem]);
-			console.log(state.count);
 			return {
 				count : state.count + 1,
 				unsubmitteditem : state.unsubmitteditem,
@@ -169,15 +173,53 @@ const updateCreatePasswordInput = (str = '', action) => {
 	return str
 };
 
-export default combineReducers({ 
+const toggleLogin = (bool = false, action) => {
+	switch (action.type) {
+		case 'LOG_IN_OUT':
+			return !bool
+		default:
+			return bool;
+	}
+}
+
+
+const displayReview = (popReviewWindow = false, action) => {
+	if (action.type === actions.SHOW_REVIEW){
+		console.log('fffffffffffffffffffff');
+		return true;
+	}
+	if (action.type === actions.CLOSE_REVIEW){
+		return false;
+	}
+	return popReviewWindow;
+}
+// const renderChoices = ['home','post','viewPost','login','signup']
+const renderChoiceAssigner = (renderChoice = 'home', action) => {
+	switch(action.type){
+		case actions.CHANGE_CHOICE_ON_NAV:
+			return action.choice;
+		default:
+			return renderChoice;
+	}
+}
+export default combineReducers({
 	itemProcess: itemReducer,
 	// for LogIn Page
 	emailInput: updateEmailInput,
 	passwordInput: updatePasswordInput,
+	toggleLogin: toggleLogin,
+
+
 
 	// for Sign Up Page
 	fNameInput: updateFNameInput,
 	lNameInput: updateLNameInput,
 	createEmailInput: updateCreateEmailInput,
 	createPasswordInput: updateCreatePasswordInput,
+
+	// for postItem show review
+	displayReview,
+
+	// for change choice on Nav
+	renderChoiceAssigner
 });
