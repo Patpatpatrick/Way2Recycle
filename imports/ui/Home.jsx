@@ -10,32 +10,33 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import useStyles from './style/NavStyle';
+import UserList from "./UserList/UserList";
 
 class home extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            items: [],
-        };
-    }
-
-    componentWillMount() {
-        console.log("componentWillMount begin")
-        Meteor.call('getItems', (error, result) => {
-            if (error) {
-                console.log(error.reason);
-                return;
-            }
-            // do something with result
-            // console.log(result);
-            this.setState({
-                items: [...result]
-            })
-        });
-
-    }
+    // constructor(props) {
+    //     super(props);
+    //
+    //     this.state = {
+    //         items: [],
+    //     };
+    // }
+    //
+    // componentWillMount() {
+    //     console.log("componentWillMount begin")
+    //     Meteor.call('getItems', (error, result) => {
+    //         if (error) {
+    //             console.log(error.reason);
+    //             return;
+    //         }
+    //         // do something with result
+    //         // console.log(result);
+    //         this.setState({
+    //             items: [...result]
+    //         })
+    //     });
+    //
+    // }
 
     componentDidMount() {
       // this.props.dataToStore();
@@ -43,20 +44,16 @@ class home extends Component {
           if(err){
               console.log("error");
           }
-          console.log(result);
+          // console.log(result);
           this.props.dataToStore(result);
       }.bind(this));
     }
 
 
     render() {
-        const listItems = this.state.items.map((item) =>
-            <li>{item._id}</li>
-        );
 
         return (
             <React.Fragment>
-                <ul>{listItems}</ul>
 
 
                 <CssBaseline/>

@@ -40,8 +40,9 @@ Meteor.methods({
 
 Meteor.methods({
     'getUserItem': function (user_id) {
-        let items = Items.find({user_id: user_id});
-        console.log("get user's " + user_id + "items are" + items);
+        console.log("getUserItem");
+        let items = Items.find({user_id: user_id}).fetch();
+        // console.log("get user's " + user_id + "items are" + items);
         return items;
     }
 });
