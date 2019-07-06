@@ -2,13 +2,13 @@ export default images = [
     {
       url:
         'https://images.unsplash.com/photo-1499525870663-3c9cf5a945c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-      title: 'Car',
+      title: 'Auto',
       width: '40%',
     },
     {
       url:
         'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-      title: 'Rental',
+      title: 'Appliance',
       width: '20%',
     },
     {

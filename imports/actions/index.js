@@ -22,7 +22,8 @@ export const CHANGE_CREATE_EMAIL_INPUT = 'CHANGE_CREATE_EMAIL_INPUT'
 
 // for change the choice of Nav bar
 export const CHANGE_CHOICE_ON_NAV = 'CHANGE_CHOICE_ON_NAV'
-
+// for assign fetched data to store
+export const ASSIGN_SERVER_ITEMS_TO_STORE = 'ASSIGN_SERVER_ITEMS_TO_STORE'
 export const generateItem = () => {
 	return {
         	type: GEN_ITEM,
@@ -135,3 +136,21 @@ export const changeChoiceOnNav = (choice) => {
 		choice
 	};
 };
+
+// export const dataToStore = () => {
+//     return (dispatch) => {
+// 		Meteor.call('getItems', function (err, result) {
+// 			if(err){
+// 				console.log("error");
+// 			}
+// 			console.log(result);
+// 			dispatch(assignItemsToStoreItemArray(result));
+// 		});
+//     };
+// }
+export const assignItemsToStoreItemArray = (itemsFromServer) => {
+	return {
+		type: ASSIGN_SERVER_ITEMS_TO_STORE,
+		itemsFromServer
+	}
+}
