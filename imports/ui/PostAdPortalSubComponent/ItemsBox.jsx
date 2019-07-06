@@ -19,13 +19,13 @@ class ItemsBox extends React.Component {
                         </tr>
                         {this.props.itemArray.map( (item, idx) => {
                             return (
-                                <tr id = {'itemIndex' + idx} key = {'itemIndex' + idx}>
+                                <tr key = {idx}>
                                     <td>{item.itemname}</td>
                                     <td>{item.price}</td>
                                     <td>{item.category}</td>
                                     <td>{item.description}</td>
                                     <td>{item.date.toString()}</td>
-                                    <td><ClearOne index = {idx}/><SeeOne index = {idx}/></td>
+                                    <td><ClearOne index = {item._id}/><SeeOne index = {idx}/></td>
                                 </tr>
                             )
                             })

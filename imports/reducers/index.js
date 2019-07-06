@@ -43,12 +43,16 @@ const itemReducer = (state = defaultState, action) => {
 				itemArray: []
 			};
 		case actions.CLEAR_ONE:
+			console.log('clearing ONE');
+			console.log(action.toDelIndex);
+			let newArray = [...state.itemArray.filter((item) => item._id !== action.toDelIndex)]
+			console.log(newArray);
 			return	{
 				count : state.count - 1,
 				unsubmitteditem : state.unsubmitteditem,
 				popUp: state.popUp,
 				popUpitemIndex : state.popUpitemIndex,
-				itemArray: [...state.itemArray.slice(0,action.toDelIndex).concat(state.itemArray.slice(action.toDelIndex+1))]
+				itemArray: newArray
 			};
 		case actions.VIEW_ONE:
 			console.log('wwww'+action.toViewIndex);

@@ -29,17 +29,30 @@ class ItemsBox extends React.Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
+                    {/* {this.props.itemArray.map( (item, idx) => {
+                            return (
+                                <tr key = {idx}>
+                                    <td>{item.itemname}</td>
+                                    <td>{item.price}</td>
+                                    <td>{item.category}</td>
+                                    <td>{item.description}</td>
+                                    <td>{item.date.toString()}</td>
+                                    <td><ClearOne index = {item._id}/><SeeOne index = {idx}/></td>
+                                </tr>
+                            )
+                            })
+                        } */}
                     {this.props.itemArray.map( (item, idx) => {
                         return (
-                            <TableRow key={item.itemname + idx}>
+                            <TableRow key={idx}>
                                 <TableCell component="th" scope="row">
-                                    {item.itemname}
+                                    {item.title}
                                 </TableCell>
                                 <TableCell align="right">{item.price}</TableCell>
                                 <TableCell align="right">{item.category}</TableCell>
                                 <TableCell align="left">{item.description}</TableCell>
                                 <TableCell align="right">{item.date.toString()}</TableCell>
-                                <TableCell align="right"><ClearOne index = {idx}/><SeeOne index = {idx}/></TableCell>
+                                <TableCell align="right"><ClearOne index = {item._id}/><SeeOne index = {idx}/></TableCell>
                             </TableRow>
                         )
                         })
