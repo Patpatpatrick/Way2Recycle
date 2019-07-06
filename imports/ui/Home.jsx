@@ -13,45 +13,14 @@ import useStyles from './style/NavStyle';
 
 class home extends Component{
     componentDidMount() {
-        console.log(Meteor.call('getItems'));
-        this.props.fetchData([{
-            itemname: 'I am a BMW!',
-            price: 20000,
-            category : 'Car',
-            description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
-            date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
-          },{
-            itemname: 'I am a Honda!',
-            price: 10000,
-            category : 'Car',
-            description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
-            date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
-          },{
-            itemname: 'I am a book!',
-            price: 10,
-            category : 'Textbook',
-            description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
-            date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
-          },{
-            itemname: 'I am an MacBook!',
-            price: 1000,
-            category : 'Computer',
-            description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
-            date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
-          },{
-            itemname: 'I am an MacBook!',
-            price: 2000,
-            category : 'Computer',
-            description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
-            date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
-          },{
-            itemname: 'I am an MacBook!',
-            price: 3000,
-            category : 'Computer',
-            description : 'PC-14 Plasma Cutter Severs 3/4inch Check out our website for DEMO videos and specs www.rjrequipmentinnovations.com $600 plus tax, shipping is a flat rate of $50 anywhere in Canada Ships in 1 day and takes Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eos error ex harum id ipsum nihil perspiciatis reprehenderit unde voluptates. Aut, doloremque ea in inventore iste nam perspiciatis quae quis?',
-            date : 'Mon Jun 03 2019 01:46:51 GMT-0700 (PDT)'
+      // this.props.dataToStore();
+      Meteor.call('getItems', function (err, result) {
+          if(err){
+              console.log("error");
           }
-          ]);
+          console.log(result);
+          this.props.dataToStore(result);
+      }.bind(this));
     }
 
     render(){
@@ -69,8 +38,8 @@ class home extends Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      fetchData: (items) => {
-        dispatch(assignItemsToStoreItemArray(items));
+      dataToStore: (result) => {
+        dispatch(assignItemsToStoreItemArray(result));
       }
     }
 };

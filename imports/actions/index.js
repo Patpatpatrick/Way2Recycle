@@ -137,6 +137,17 @@ export const changeChoiceOnNav = (choice) => {
 	};
 };
 
+// export const dataToStore = () => {
+//     return (dispatch) => {
+// 		Meteor.call('getItems', function (err, result) {
+// 			if(err){
+// 				console.log("error");
+// 			}
+// 			console.log(result);
+// 			dispatch(assignItemsToStoreItemArray(result));
+// 		});
+//     };
+// }
 export const assignItemsToStoreItemArray = (itemsFromServer) => {
 	return {
 		type: ASSIGN_SERVER_ITEMS_TO_STORE,
