@@ -3,11 +3,27 @@ import Links from '/imports/api/links';
 import '/imports/api/items.js';
 import {Items} from "../imports/api/items";
 import {Promise} from 'meteor/promise';
+import { WebApp } from 'meteor/webapp';
+
+
 
 
 function insertLink(title, url) {
     Links.insert({title, url, createdAt: new Date()});
 }
+
+
+// tutorial
+// https://hashnode.com/post/web-api-using-meteor-webapp-ciqgn0ukj0irtdd53uy12h6ia
+WebApp.connectHandlers.use('/hello', (req, res, next) => {
+    // res.writeHead(200);
+    // res.end(`Hello world from: ${Meteor.release}`);
+    res.setHeader('Content-Type', 'application/json');
+    res.writeHead(200);
+    const json = Meteor.call('getItems');
+    // console.log(JSON.stringify(json));
+    res.end(JSON.stringify(json));
+});
 
 
 Meteor.methods({
