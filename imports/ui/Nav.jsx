@@ -72,7 +72,7 @@ class Nav extends React.Component{
                       </Link>
                 }
 
-                {Meteor.user()?<Link variant="button" color="textPrimary" className={''} onClick = {()=>this.props.changeChoiceOnNav('user')}>
+                {Meteor.userId()?<Link variant="button" color="textPrimary" className={''} onClick = {()=>this.props.changeChoiceOnNav('user')}>
                   My items &nbsp;
                 </Link>: null}
 
