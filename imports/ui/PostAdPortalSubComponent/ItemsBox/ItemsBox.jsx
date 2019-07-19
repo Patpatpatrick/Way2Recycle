@@ -1,8 +1,10 @@
 import React from 'react';
 import ClearOne from '../ClearOne';
+// import DeleteOne from '../DeleteOne';
 import SeeOne from '../ViewOneItem';
 import { connect } from 'react-redux';
 import useStyles from '../../style/itemTableStyle';
+
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

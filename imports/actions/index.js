@@ -29,109 +29,113 @@ export const CHANGE_CREATE_EMAIL_INPUT = 'CHANGE_CREATE_EMAIL_INPUT'
 export const CHANGE_CHOICE_ON_NAV = 'CHANGE_CHOICE_ON_NAV'
 // for assign fetched data to store
 export const ASSIGN_SERVER_ITEMS_TO_STORE = 'ASSIGN_SERVER_ITEMS_TO_STORE'
+
+export const Load_User_Items = 'Load_User_Items'
+
+
 export const generateItem = () => {
-	return {
-        	type: GEN_ITEM,
-	};
+    return {
+        type: GEN_ITEM,
+    };
 };
 export const clearAllItems = () => {
-	return {
-        	type: CLEAR_ALL,
-	};
+    return {
+        type: CLEAR_ALL,
+    };
 };
 export const clearItem = (index) => {
-	return {
-		type: CLEAR_ONE,
-		toDelIndex : index
-	};
+    return {
+        type: CLEAR_ONE,
+        toDelIndex: index
+    };
 };
 export const popUpItem = (index) => {
-	return {
-		type: VIEW_ONE,
-		toViewIndex : index
-	};
+    return {
+        type: VIEW_ONE,
+        toViewIndex: index
+    };
 };
 
 export const closePopedItem = () => {
-	return {
-		type: UNVIEW_ONE,
-	};
+    return {
+        type: UNVIEW_ONE,
+    };
 };
-export const changeUnsubmittedItem = (key,value) => {
-	return {
-		type: CHANGE_INPUT,
-		keyToChange: key,
-		valueToUpdate : value
-	};
+export const changeUnsubmittedItem = (key, value) => {
+    return {
+        type: CHANGE_INPUT,
+        keyToChange: key,
+        valueToUpdate: value
+    };
 };
 export const changeCategory = (chosenCategory) => {
-	return {
-		type: CHANGE_CATEGORY,
-		chosenCategory
-	};
+    return {
+        type: CHANGE_CATEGORY,
+        chosenCategory
+    };
 };
 
 // For LogIn Page
 export const updateEmailInputBox = (text) => {
-	return {
-		type: CHANGE_EMAIL_INPUT,
-		payload: text,
-	}
+    return {
+        type: CHANGE_EMAIL_INPUT,
+        payload: text,
+    }
 }
 
 export const updatePasswordInputBox = (text) => {
-	return {
-		type: 'CHANGE_PASSWORD_INPUT',
-		payload: text,
-	}
+    return {
+        type: 'CHANGE_PASSWORD_INPUT',
+        payload: text,
+    }
 }
 
 // For Create User Page
 export const updateFirstNameInputBox = (text) => {
-	return {
-		type: CHANGE_FNAME_INPUT,
-		payload: text,
-	}
+    return {
+        type: CHANGE_FNAME_INPUT,
+        payload: text,
+    }
 }
 
 export const updateLastNameInputBox = (text) => {
-	return {
-		type: CHANGE_LNAME_INPUT,
-		payload: text,
-	}
+    return {
+        type: CHANGE_LNAME_INPUT,
+        payload: text,
+    }
 }
 
 export const updateCreatePasswordInputPage = (text) => {
-	return {
-		type: CHANGE_CREATE_PW_INPUT,
-		payload: text,
-	}
+    return {
+        type: CHANGE_CREATE_PW_INPUT,
+        payload: text,
+    }
 }
 export const updateCreateEmailInputPage = (text) => {
-	return {
-		type: CHANGE_CREATE_EMAIL_INPUT,
-		payload: text,
-	}
+    return {
+        type: CHANGE_CREATE_EMAIL_INPUT,
+        payload: text,
+    }
 }
 
 export const logInFlag = () => {
-	return {
-		type: 'LOG_IN_OUT'
-	}
+    return {
+        type: 'LOG_IN_OUT'
+    }
 
 }
 // action creators for prepost review
 
 export const showPostReview = () => {
-	return {
-		type: SHOW_REVIEW
-	};
+    return {
+        type: SHOW_REVIEW
+    };
 };
 
 export const closePostReview = () => {
-	return {
-		type: CLOSE_REVIEW
-	};
+    return {
+        type: CLOSE_REVIEW
+    };
 };
 
 
@@ -151,10 +155,10 @@ export const confirmUpdatePostedItem = () => {
 
 // create an action to indicate a change of choice
 export const changeChoiceOnNav = (choice) => {
-	return {
-		type: CHANGE_CHOICE_ON_NAV,
-		choice
-	};
+    return {
+        type: CHANGE_CHOICE_ON_NAV,
+        choice
+    };
 };
 
 // export const dataToStore = () => {
@@ -168,9 +172,17 @@ export const changeChoiceOnNav = (choice) => {
 // 		});
 //     };
 // }
+
+
 export const assignItemsToStoreItemArray = (itemsFromServer) => {
 	return {
 		type: ASSIGN_SERVER_ITEMS_TO_STORE,
 		itemsFromServer
 	}
-}
+};
+
+
+export const loadUserItems = (items) => ({
+    type: Load_User_Items,
+    items
+});
