@@ -66,6 +66,17 @@ class UserList extends React.Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.toPop !== prevProps.toPop) {
+            Meteor.call("getUserItem",  Meteor.userId(), function(error, result){
+                if(error){
+                    console.log(error.reason);
+                    return;
+                }
+                this.props.loadUserItems(result);
+            }.bind(this))
+        }
+    }
     clickDelete = (itemId) => {
         console.log('Deleting initiated for:' + itemId)
         Meteor.call("deleteOneItem",itemId, (err)=> {
