@@ -14,7 +14,8 @@ const defaultState = {
     },
     popUp: false,
     popUpitemIndex: 0,
-    itemArray: []
+	itemArray: [],
+	itemForPopUp:{}
 };
 
 const userItemReducer = (state = [], action) => {
@@ -27,6 +28,100 @@ const userItemReducer = (state = [], action) => {
 };
 
 const itemReducer = (state = defaultState, action) => {
+// 	switch(action.type){
+// 		// case actions.ASSIGN_SERVER_ITEMS_TO_STORE :
+// 		// 	console.log('=======================!!!');
+// 		// 	console.log(action.itemsFromServer);
+// 		// 	console.log('=======================!!!');
+// 		// 	return Object.assign({}, state, 
+// 		// 		{ 
+// 		// 			itemArray: action.itemsFromServer,
+// 		// 		}
+// 		// 	);
+// 		// case actions.GEN_ITEM :
+// 		// 	return {
+// 		// 		count : state.count + 1,
+// 		// 		unsubmitteditem : state.unsubmitteditem,
+// 		// 		popUp:  state.popUp,
+// 		// 		popUpitemIndex : state.popUpitemIndex,
+// 		// 		itemArray: [...state.itemArray,state.unsubmitteditem]
+// 		// 	};
+// 		// case actions.CLEAR_ALL:
+// 		// 	// console.log(state);
+// 		// 	return {
+// 		// 		count : 0,
+// 		// 		unsubmitteditem : state.unsubmitteditem,
+// 		// 		popUp:  state.popUp,
+// 		// 		popUpitemIndex : state.popUpitemIndex,
+// 		// 		itemArray: []
+// 		// 	};
+// 		// case actions.CLEAR_ONE:
+// 		// 	console.log('clearing ONE');
+// 		// 	console.log(action.toDelIndex);
+// 		// 	let newArray = [...state.itemArray.filter((item) => item._id !== action.toDelIndex)]
+// 		// 	console.log(newArray);
+// 		// 	return	{
+// 		// 		count : state.count - 1,
+// 		// 		unsubmitteditem : state.unsubmitteditem,
+// 		// 		popUp: state.popUp,
+// 		// 		popUpitemIndex : state.popUpitemIndex,
+// 		// 		itemArray: newArray
+// 		// 	};
+// 		case actions.VIEW_ONE:
+// 			console.log('wwww'+action.toViewIndex);
+// 			return	{
+// 				count : state.count,
+// 				unsubmitteditem : state.unsubmitteditem,
+// 				popUp : true,
+// 				popUpitemIndex : action.toViewIndex,
+// 				itemArray: state.itemArray
+// 			};
+// 			// added 
+// 		case actions.ALLOW_EDIT:
+// 			console.log('updating'+action.toUpdateIndex);
+// 			return {
+// 				count : state.count,
+// 				unsubmitteditem : state.unsubmitteditem,
+// 				popUp : true,
+// 				popUpitemIndex : action.toUpdateIndex,
+// 				itemArray: state.itemArray
+// 			}
+// 		case actions.UNVIEW_ONE:
+// 			return	{
+// 				count : state.count,
+// 				unsubmitteditem : state.unsubmitteditem,
+// 				popUp : false,
+// 				popUpitemIndex : 0,
+// 				itemArray: state.itemArray
+// 			};
+		// case actions.CHANGE_INPUT :
+		// 	console.log(action.keyToChange);
+		// 	console.log(action.valueToUpdate);
+		// 	var newitem = Object.assign({}, state.unsubmitteditem, 
+		// 		{ 
+		// 			[action.keyToChange]: action.valueToUpdate,
+		// 			'date' : new Date()
+		// 		}
+		// 	);
+		// 	console.log(newitem);
+		// 	return {
+		// 		count : state.count,
+		// 		unsubmitteditem : newitem,
+		// 		popUp : state.popUp,
+		// 		popUpitemIndex : state.popUpitemIndex,
+		// 		itemArray: state.itemArray
+		// 	};
+		
+		// case 'CHANGE_CATEGORY' :
+		// 	console.log('change cate');
+		// 	return Object.assign({}, state, 
+		// 		{ 
+		// 			chosenCategory: action.chosenCategory,
+		// 		}
+		// 	);
+	// 	default:
+	// 		return state;
+	// }
     switch (action.type) {
         case actions.ASSIGN_SERVER_ITEMS_TO_STORE :
             // console.log('=======================!!!');
@@ -70,8 +165,21 @@ const itemReducer = (state = defaultState, action) => {
                 unsubmitteditem: state.unsubmitteditem,
                 popUp: true,
                 popUpitemIndex: action.toViewIndex,
-                itemArray: state.itemArray
-            };
+				itemArray: state.itemArray,
+				itemForPopUp: action.itemForPopUp
+			};
+			
+		// added 
+		case actions.ALLOW_EDIT:
+			console.log('updating'+action.toUpdateIndex);
+			return {
+				count : state.count,
+				unsubmitteditem : state.unsubmitteditem,
+				popUp : true,
+				popUpitemIndex : action.toUpdateIndex,
+				itemArray: state.itemArray
+			}
+
         case actions.UNVIEW_ONE:
             return {
                 count: state.count,
@@ -83,7 +191,7 @@ const itemReducer = (state = defaultState, action) => {
         case actions.CHANGE_INPUT :
             console.log(action.keyToChange);
             console.log(action.valueToUpdate);
-            var newitem = Object.assign({}, state.unsubmitteditem,
+            var newitem = Object.assign({}, state.itemForPopUp,
                 {
                     [action.keyToChange]: action.valueToUpdate,
                     'date': new Date()
@@ -92,7 +200,8 @@ const itemReducer = (state = defaultState, action) => {
             console.log(newitem);
             return {
                 count: state.count,
-                unsubmitteditem: newitem,
+				unsubmitteditem: newitem,
+				itemForPopUp:newitem,
                 popUp: state.popUp,
                 popUpitemIndex: state.popUpitemIndex,
                 itemArray: state.itemArray
@@ -171,6 +280,19 @@ const displayReview = (popReviewWindow = false, action) => {
     }
     return popReviewWindow;
 }
+
+// update Item for ViewOneItem component
+// const updateItem = (state = defaultState, action) => { // should use 'updateOneItem'
+// 	if (action.type === actions.ALLOW_EDIT){
+// 		console.log('editing posted item!')
+// 	}
+// 	if (action.type === actions.CONFIRM_EDIT) {
+// 		console.log('confirming the update!')
+// 	}
+// 	return updateOneItem;
+// }
+
+// const renderChoices = ['home','post','viewPost','login','signup']
 // const renderChoices = ['home','post','viewPost','login','signup',''User']
 const renderChoiceAssigner = (renderChoice = 'home', action) => {
     switch (action.type) {
@@ -218,7 +340,8 @@ export default combineReducers({
 
     // for postItem show review
     displayReview,
-
+	// for viewOneItem allow edit posted items
+	// updateItem,
     // for change choice on Nav
     renderChoiceAssigner
 });

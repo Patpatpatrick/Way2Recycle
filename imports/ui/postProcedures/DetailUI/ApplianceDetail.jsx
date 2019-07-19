@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import MapContainer from './googleMap';
 import Geosuggest from 'react-geosuggest';
-import {Meteor} from 'meteor/meteor';
-import {connect} from 'react-redux';
-import {showPostReview} from '../../../actions';
+import { Meteor } from 'meteor/meteor';
+import { connect } from 'react-redux';
+import { showPostReview}  from '../../../actions';
+import { updatePostedItem} from '../../../actions';
 import '../../style/style.css';
 import Review from '../Review';
 
@@ -130,6 +131,7 @@ const mapStateToProps = (state) => {
         shouldShowReview: state.displayReview,
     };
 }
+
 const mapDispatchToProps = (dispatch) => {
     return {
         showReview: () => {

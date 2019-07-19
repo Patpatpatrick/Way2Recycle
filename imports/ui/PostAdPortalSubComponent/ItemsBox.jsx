@@ -1,6 +1,7 @@
 import React from 'react';
 import ClearOne from './ClearOne';
 import SeeOne from './ViewOneItem';
+import Popup from './PopUp';
 import { connect } from 'react-redux';
 class ItemsBox extends React.Component { 
  
@@ -25,7 +26,7 @@ class ItemsBox extends React.Component {
                                     <td>{item.category}</td>
                                     <td>{item.description}</td>
                                     <td>{item.date.toString()}</td>
-                                    <td><ClearOne index = {item._id}/><SeeOne index = {idx}/></td>
+                                    <td><ClearOne index = {item._id}/><SeeOne index = {item._id}/></td>
                                 </tr>
                             )
                             })

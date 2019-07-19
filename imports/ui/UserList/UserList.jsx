@@ -17,6 +17,11 @@ import GridListTile from "@material-ui/core/GridListTile";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import {red} from "@material-ui/core/colors";
+//import PopUp from '../PostAdPortalSubComponent/PopUp';
+
+import { popUpItem}  from '../../actions';
+import Button from '@material-ui/core/Button';
+import Popup from '../PostAdPortalSubComponent/PopUp';
 
 
 const styles = theme => {
@@ -87,6 +92,13 @@ class UserList extends React.Component {
         });
     }
 
+    clickEdit = (item) => {
+
+        this.props.showIndex(item);
+        console.log(item);
+    }
+
+
     render() {
         const { classes } = this.props;
         return (
@@ -114,10 +126,12 @@ class UserList extends React.Component {
                                 </div>
                                 <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <Grid item xs={8} >
-                                        <EditIcon className={classes.icon} />
+                                        <EditIcon className={classes.icon} onClick = {()=>this.clickEdit(item) } />
                                         <DeleteForeverIcon className={classes.iconDelete} onClick = {()=>this.clickDelete(item._id)} />
                                     </Grid>
                                 </div>
+                                <div>{this.props.toPop && <Popup/>}</div>
+
                             </Paper>
                         </GridListTile>
                     ))}
@@ -128,8 +142,21 @@ class UserList extends React.Component {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+      showIndex: (item) => {
+        dispatch(popUpItem(item));
+      },
+      loadUserItems: (result) => {
+          dispatch(loadUserItems(result));
+    }
+}
+}
+
+
 const mapStateToProps = (state) => {
-    return { itemArray: state.userItemProcess};
+    return { itemArray: state.userItemProcess, toPop: state.itemProcess.popUp};
+    
 }
 //export default connect(mapStateToProps,{loadUserItems})(UserList);
 //export const styles= withStyles(styles)(UserList);
@@ -137,7 +164,7 @@ const mapStateToProps = (state) => {
 
 export default compose (
     withStyles(styles),
-    connect(mapStateToProps,{loadUserItems})
+    connect(mapStateToProps,mapDispatchToProps)
 ) (UserList)
 
 
