@@ -53,9 +53,8 @@ class ItemsBox extends React.Component {
                                 <TableCell align="right">{item.price}</TableCell>
                                 <TableCell align="right">{item.category}</TableCell>
                                 <TableCell align="left">{item.description}</TableCell>
-                                <TableCell align="right">{item.date.toString()}</TableCell>
-                                <TableCell align="right"><ClearOne index = {idx}/><SeeOne index = {idx}/></TableCell>
-                                {/*<TableCell align="right"><DeleteOne index = {idx}/></TableCell>*/}
+                                <TableCell align="right">{item.date}</TableCell>
+                                <TableCell align="right"><ClearOne index = {item._id}/><SeeOne index = {idx}/></TableCell>
                             </TableRow>
                         )
                         })
