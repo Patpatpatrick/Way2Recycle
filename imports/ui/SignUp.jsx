@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {connect} from "react-redux";
+import './LogIn/logInStyle.css'
 
 import { updateFirstNameInputBox, updateLastNameInputBox, updateCreatePasswordInputPage,
   updateCreateEmailInputPage, changeChoiceOnNav}  from '../actions/index.js';
@@ -62,14 +63,15 @@ class SignUp extends React.Component{
     /*const classes = useStyles;*/
     return(
       <Container component="main" maxWidth="xs">
+        <div style={{paddingTop:20}}>
+        <div className={"logInBorder"}>
       <CssBaseline />
       <div>
-        <Avatar>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
+        <div>
+        <Typography component="h1" variant="h5" style={{paddingBottom:10}}>
           Sign up
         </Typography>
+        </div>
         <form noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -80,6 +82,7 @@ class SignUp extends React.Component{
                 fullWidth
                 id="firstName"
                 label="First Name"
+                type=""
                 autoFocus
                 onChange={this.changeFNameInputBox}
               />
@@ -92,6 +95,7 @@ class SignUp extends React.Component{
                 id="lastName"
                 label="Last Name"
                 autoComplete="lname"
+                type=""
                 onChange={this.changeLNameInputBox}
 
               />
@@ -103,9 +107,9 @@ class SignUp extends React.Component{
                 fullWidth
                 id="email"
                 label="Email Address"
+                type=""
                 autoComplete="email"
                 onChange={this.changeCreateEmailInputBox }
-
               />
             </Grid>
             <Grid item xs={12}>
@@ -131,19 +135,20 @@ class SignUp extends React.Component{
             fullWidth
             variant="contained"
             color="primary"
-            onClick = {this.pressSignUp}
-          >
+            onClick = {this.pressSignUp}>
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link variant="body2" onClick= {this.redirectToLogIn}>
-                Already have an account? Sign in
+              <Link variant="body2" style={{cursor:"pointer"}}	 onClick= {this.redirectToLogIn}>
+                Already have an account?
               </Link>
             </Grid>
           </Grid>
         </form>
       </div>
+        </div>
+        </div>
     </Container>
     );
   }
