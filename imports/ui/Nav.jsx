@@ -71,6 +71,12 @@ class Nav extends React.Component{
                         Post ad &nbsp;
                       </Link>
                 }
+
+                {Meteor.userId()?<Link variant="button" color="textPrimary" className={''} onClick = {()=>this.props.changeChoiceOnNav('user')}>
+                  My items &nbsp;
+                </Link>: null}
+
+
                 {
                   Meteor.userId() ? null :
                       <Link variant="button" color="textPrimary" className={''} onClick={this.loadSignUpPage}>

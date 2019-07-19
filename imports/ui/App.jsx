@@ -9,6 +9,7 @@ import ResetPasswordByEmail from './ResetPasswordByEmail'
 import {connect} from "react-redux";
 import {changeChoiceOnNav} from "../actions";
 import SendPasswordToEmail from "./SendPasswordToEmail";
+import UserList from "./UserList/UserList";
 
 
 // import './style/style.css'
@@ -44,7 +45,7 @@ class App extends React.Component{
 
 
         if (this.props.choice === "home") {
-            console.log('should be here');
+            // console.log('should be here');
             return (<Home/>);
         } else if (this.props.choice === "post") {
             return (<PostUI/>);
@@ -54,6 +55,9 @@ class App extends React.Component{
             return (<Login/>);
         } else if (this.props.choice === "viewPost") {
             return (<PostAdPortal/>);
+        } else if (this.props.choice === "user") {
+            return (<UserList/>)
+
         }
     }
 
