@@ -49,10 +49,10 @@ export const clearItem = (index) => {
         toDelIndex: index
     };
 };
-export const popUpItem = (index) => {
+export const popUpItem = (item) => {
     return {
         type: VIEW_ONE,
-        toViewIndex: index
+        itemForPopUp: item
     };
 };
 

@@ -14,7 +14,8 @@ const defaultState = {
     },
     popUp: false,
     popUpitemIndex: 0,
-    itemArray: []
+	itemArray: [],
+	itemForPopUp:{}
 };
 
 const userItemReducer = (state = [], action) => {
@@ -164,7 +165,8 @@ const itemReducer = (state = defaultState, action) => {
                 unsubmitteditem: state.unsubmitteditem,
                 popUp: true,
                 popUpitemIndex: action.toViewIndex,
-                itemArray: state.itemArray
+				itemArray: state.itemArray,
+				itemForPopUp: action.itemForPopUp
 			};
 			
 		// added 
@@ -189,7 +191,7 @@ const itemReducer = (state = defaultState, action) => {
         case actions.CHANGE_INPUT :
             console.log(action.keyToChange);
             console.log(action.valueToUpdate);
-            var newitem = Object.assign({}, state.unsubmitteditem,
+            var newitem = Object.assign({}, state.itemForPopUp,
                 {
                     [action.keyToChange]: action.valueToUpdate,
                     'date': new Date()
@@ -198,7 +200,8 @@ const itemReducer = (state = defaultState, action) => {
             console.log(newitem);
             return {
                 count: state.count,
-                unsubmitteditem: newitem,
+				unsubmitteditem: newitem,
+				itemForPopUp:newitem,
                 popUp: state.popUp,
                 popUpitemIndex: state.popUpitemIndex,
                 itemArray: state.itemArray
