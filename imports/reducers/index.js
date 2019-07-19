@@ -63,6 +63,16 @@ const itemReducer = (state = defaultState, action) => {
 				popUpitemIndex : action.toViewIndex,
 				itemArray: state.itemArray
 			};
+			// added 
+		case actions.ALLOW_EDIT:
+			console.log('updating'+action.toUpdateIndex);
+			return {
+				count : state.count,
+				unsubmitteditem : state.unsubmitteditem,
+				popUp : true,
+				popUpitemIndex : action.toUpdateIndex,
+				itemArray: state.itemArray
+			}
 		case actions.UNVIEW_ONE:
 			return	{
 				count : state.count,
@@ -88,6 +98,7 @@ const itemReducer = (state = defaultState, action) => {
 				popUpitemIndex : state.popUpitemIndex,
 				itemArray: state.itemArray
 			};
+		
 		case 'CHANGE_CATEGORY' :
 			console.log('change cate');
 			return Object.assign({}, state, 
@@ -162,6 +173,18 @@ const displayReview = (popReviewWindow = false, action) => {
 	}
 	return popReviewWindow;
 }
+
+// update Item for ViewOneItem component
+// const updateItem = (state = defaultState, action) => { // should use 'updateOneItem'
+// 	if (action.type === actions.ALLOW_EDIT){
+// 		console.log('editing posted item!')
+// 	}
+// 	if (action.type === actions.CONFIRM_EDIT) {
+// 		console.log('confirming the update!')
+// 	}
+// 	return updateOneItem;
+// }
+
 // const renderChoices = ['home','post','viewPost','login','signup']
 const renderChoiceAssigner = (renderChoice = 'home', action) => {
 	switch(action.type){
@@ -190,5 +213,8 @@ export default combineReducers({
 	displayReview,
 
 	// for change choice on Nav
-	renderChoiceAssigner
+	renderChoiceAssigner,
+
+	// for viewOneItem allow edit posted items
+	// updateItem,
 });

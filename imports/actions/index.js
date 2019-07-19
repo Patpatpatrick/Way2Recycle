@@ -5,10 +5,15 @@ export const VIEW_ONE = 'VIEW_ONE';
 export const UNVIEW_ONE = 'UNVIEW_ONE';
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
 export const CHANGE_INPUT = 'CHANGE_INPUT';
+export const UPDATE_INPUT = 'UPDATE_INPUT';
 
 // for post page
 export const SHOW_REVIEW = 'SHOW_REVIEW';
 export const CLOSE_REVIEW = 'CLOSE_REVIEW';
+
+// for edit item
+export const ALLOW_EDIT = 'ALLOW_EDIT';
+export const CONFIRM_EDIT = 'CONFIRM_EDIT';
 
 // for LogIn Page
 export const CHANGE_EMAIL_INPUT = 'CHANGE_EMAIL_INPUT'
@@ -128,6 +133,21 @@ export const closePostReview = () => {
 		type: CLOSE_REVIEW
 	};
 };
+
+
+export const updatePostedItem = (index) => {
+	return {
+		type: ALLOW_EDIT,
+		toUpdateIndex : index
+	}
+}
+
+
+export const confirmUpdatePostedItem = () => {
+	return {
+		type: CONFIRM_EDIT
+	}
+}
 
 // create an action to indicate a change of choice
 export const changeChoiceOnNav = (choice) => {
