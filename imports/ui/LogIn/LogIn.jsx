@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import './logInStyle.css'
 
 
 import { updateEmailInputBox }  from '../../actions/index.js';
@@ -64,12 +65,16 @@ class LogIn extends React.Component{
     }
 
 
-
-
   render() {
     return (
-      <div>
-
+        <Container component="main" maxWidth="xs">
+            <div style={{paddingTop:20}}>
+            <div className={"logInBorder"}>
+              <div>
+                  <Typography component="h1" variant="h5">
+                      Create account
+                  </Typography>
+              </div>
         <form>
           <TextField
               variant="outlined"
@@ -79,6 +84,7 @@ class LogIn extends React.Component{
               id="email"
               label="Your email address"
               autoFocus
+              type=""
               onChange = {this.changedEmailInputBox}
          />
         <TextField
@@ -115,13 +121,15 @@ class LogIn extends React.Component{
             </Link>
           </Grid>
           <Grid item>
-            <Link variant="body2" onClick = {()=>this.props.changeChoiceOnNav('signup')}>
+            <Link variant="body2" style={{cursor:"pointer"}} onClick={()=>this.props.changeChoiceOnNav('signup')}>
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>
         </Grid>
-      </form>
-      </div>
+         </form>
+         </div>
+        </div>
+        </Container>
     )}
 }
 

@@ -98,4 +98,10 @@
     color:white;
 }
 
-
+.logInBorder {
+    padding: 1rem;
+    border-style: solid;
+    border-color: #dddddd;
+    border-radius: 10px;
+    border-width:thin;
+}
