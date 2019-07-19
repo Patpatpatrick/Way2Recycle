@@ -120,12 +120,7 @@ class ApplianceDetail extends Component {
                     </tbody>
                 </table>
                 <p>{this.props.shouldShowReview}</p>
-<<<<<<< HEAD
-                {this.props.shouldShowReview && <Review detail = {this.state} />}
-                <p>{this.props.shouldShowReview}</p>
-=======
                 {this.props.shouldShowReview && <Review detail={this.state}/>}
->>>>>>> develop
             </div>
         );
     }
