@@ -6,7 +6,7 @@ export const UNVIEW_ONE = 'UNVIEW_ONE';
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
 export const CHANGE_INPUT = 'CHANGE_INPUT';
 export const UPDATE_INPUT = 'UPDATE_INPUT';
-
+export const CHANGE_UNSUBMITTED_ITEM = 'CHANGE_UNSUBMITTED_ITEM';
 // for post page
 export const SHOW_REVIEW = 'SHOW_REVIEW';
 export const CLOSE_REVIEW = 'CLOSE_REVIEW';
@@ -68,6 +68,14 @@ export const changeUnsubmittedItem = (key, value) => {
         valueToUpdate: value
     };
 };
+export const changeUnPostedItem = (key, value) => {
+    return {
+        type: CHANGE_UNSUBMITTED_ITEM,
+        keyToChange: key,
+        valueToUpdate: value
+    };
+};
+
 export const changeCategory = (chosenCategory) => {
     return {
         type: CHANGE_CATEGORY,

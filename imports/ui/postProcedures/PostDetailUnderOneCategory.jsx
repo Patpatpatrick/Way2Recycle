@@ -13,19 +13,21 @@ class PostDetailUnderOneCategory extends React.Component {
         this.conditionalRender = this.conditionalRender.bind(this);
     }
     conditionalRender(){
-        if (this.props.unsubmitteditem.category === "Car") {
-            return (<CarDetail/>);
-        } else if (this.props.unsubmitteditem.category === "Book") {
-            return (<BookDetail/>);
-        } else if (this.props.unsubmitteditem.category === "Appliance") {
-            return (<ApplianceDetail/>);
-        } else if (this.props.unsubmitteditem.category === "Furniture") {
-            return (<FurnitureDetail/>);
-        } else if (this.props.unsubmitteditem.category === "Computer") {
-            return (<ComputerDetail/>);
-        } else if (this.props.unsubmitteditem.category === "Other") {
-            return (<OtherCategoryDetail/>);
-        }
+        console.log(this.props.category)
+        return (<p>fff</p>)
+        // if (this.props.unsubmitteditem.category === "Car") {
+        //     return (<CarDetail/>);
+        // } else if (this.props.unsubmitteditem.category === "Book") {
+        //     return (<BookDetail/>);
+        // } else if (this.props.unsubmitteditem.category === "Appliance") {
+        //     return (<ApplianceDetail/>);
+        // } else if (this.props.unsubmitteditem.category === "Furniture") {
+        //     return (<FurnitureDetail/>);
+        // } else if (this.props.unsubmitteditem.category === "Computer") {
+        //     return (<ComputerDetail/>);
+        // } else if (this.props.unsubmitteditem.category === "Other") {
+        //     return (<OtherCategoryDetail/>);
+        // } 
     }
 	render() {
         return (
@@ -37,14 +39,7 @@ class PostDetailUnderOneCategory extends React.Component {
 }
 const mapStateToProps = (state) => {
     return { 
-        unsubmitteditem: state.itemProcess.unsubmitteditem,
+        category: state.itemProcess.unsubmitteditem.category,
     };
 }
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//       showIndex: (index) => {
-//         dispatch(popUpItem(index));
-//       }
-//     }
-// };
 export default connect(mapStateToProps, null)(PostDetailUnderOneCategory);

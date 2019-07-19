@@ -10,11 +10,13 @@ class ChooseCategory extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
+        console.log(value);
+        console.log(name);
         this.props.changeUnsubmittedItem(name,value);
     }
 	render() {
         return (
-            <div className="container" >
+            <div className="container" style={{display: 'flex', justifyContent: 'center'}}>
                 <form style={{"width": "350px","verticalAlign": "0%"}} onChange={this.handleChange} className="form" ref = "inputform">
                     <label htmlFor="Category">Category</label>
                     <select id="category" name="category">
