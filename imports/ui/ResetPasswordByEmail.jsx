@@ -16,6 +16,8 @@ import {connect} from "react-redux";
 import { updateFirstNameInputBox, updateLastNameInputBox, updateCreatePasswordInputPage,
     updateCreateEmailInputPage, changeChoiceOnNav}  from '../actions/index.js';
 
+import './LogIn/logInStyle.css'
+
 class ResetPasswordByEmail extends React.Component{
 
     constructor(props) {
@@ -55,13 +57,12 @@ class ResetPasswordByEmail extends React.Component{
     render(){
         return(
             <Container component="main" maxWidth="xs">
+                <div style={{paddingTop:20}}>
+                <div className={'logInBorder'}>
                 <CssBaseline />
                 <div>
-                    <Avatar>
-                        <LockOutlinedIcon />
-                    </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign up
+                        Reset your password
                     </Typography>
                     <form noValidate>
                         <Grid container spacing={2}>
@@ -103,12 +104,14 @@ class ResetPasswordByEmail extends React.Component{
                         </Button>
                         <Grid container justify="flex-end">
                             <Grid item>
-                                <Link variant="body2" onClick= {this.redirectToLogIn}>
+                                <Link variant="body2"  style={{cursor:"pointer"}} onClick= {this.redirectToLogIn}>
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>
                         </Grid>
                     </form>
+                </div>
+                </div>
                 </div>
             </Container>
         );

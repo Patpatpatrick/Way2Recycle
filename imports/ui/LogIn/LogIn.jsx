@@ -135,8 +135,8 @@ class LogIn extends React.Component{
 
 const mapStateToProps = (state) => {
   return {
-    emailInput: state.emailInput,
-    passwordInput: state.passwordInput,
+      emailInput: state.emailInput,
+      passwordInput: state.passwordInput,
       toggleLogin: state.toggleLogin
   }
 };
@@ -147,7 +147,7 @@ const mapDispatchToProps = (dispatch) => {
       updatePasswordText: (text) => dispatch(updatePasswordInputBox(text)),
       logInFlag: () => dispatch(logInFlag()),
       changeChoiceOnNav: (choice) => dispatch(changeChoiceOnNav(choice))
-  }
+    }
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
