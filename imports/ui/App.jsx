@@ -1,7 +1,7 @@
 import React from 'react';
 import Nav from './Nav';
 import Home from './Home';
-import PostAdPortal from './PostAdPortal.jsx';
+import ItemsBox from './PostedAd/ItemsBox/ItemsBox';
 import Login from '../ui/LogIn/LogIn';
 import SignUp from './SignUp'
 import PostUI from './postProcedures/PostUI';
@@ -54,7 +54,7 @@ class App extends React.Component{
         } else if (this.props.choice === "login") {
             return (<Login/>);
         } else if (this.props.choice === "viewPost") {
-            return (<PostAdPortal/>);
+            return (<ItemsBox/>);
         } else if (this.props.choice === "user") {
             return (<UserList/>)
 

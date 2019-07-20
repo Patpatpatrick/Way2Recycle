@@ -16,7 +16,7 @@ class SeeOne extends React.Component {
         return (
             <div>
                 <Button type="view" onClick = {this.handleClick} id={this.props.index + 'View'}>ViewInPopUp</Button>
-                {this.props.toPop && <Popup />}
+                {this.props.toPop && <Popup/>}
             </div>   
         );
     }

@@ -4,7 +4,6 @@ import Geosuggest from 'react-geosuggest';
 import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
 import { showPostReview}  from '../../../actions';
-import { updatePostedItem} from '../../../actions';
 import { changeUnPostedItem} from '../../../actions';
 
 import '../../style/style.css';
@@ -102,7 +101,6 @@ class ApplianceDetail extends Component {
                     </tr>
                     </tbody>
                 </table>
-                <p>{this.props.shouldShowReview}</p>
                 {this.props.shouldShowReview && <Review />}
             </div>
         );
@@ -112,7 +110,7 @@ class ApplianceDetail extends Component {
 const mapStateToProps = (state) => {
     return {
         shouldShowReview: state.displayReview,
-        item:state.itemProcess.unsubmitteditem
+        item:state.postItemReducer
     };
 }
 

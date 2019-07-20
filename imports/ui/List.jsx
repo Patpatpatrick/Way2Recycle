@@ -30,8 +30,8 @@ class List extends React.Component {
 }
 const mapStateToProps = (state) => {
     return { 
-        itemArray: state.homePageProcess.itemArray,
-        chosenCategory: state.homePageProcess
+        itemArray: state.homePageReducer.itemArray,
+        chosenCategory: state.homePageReducer.category
     };
 }
 export default connect(mapStateToProps,null)(List);

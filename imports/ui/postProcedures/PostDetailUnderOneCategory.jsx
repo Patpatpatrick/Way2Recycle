@@ -13,21 +13,19 @@ class PostDetailUnderOneCategory extends React.Component {
         this.conditionalRender = this.conditionalRender.bind(this);
     }
     conditionalRender(){
-        console.log(this.props.category)
-        return (<p>fff</p>)
-        // if (this.props.unsubmitteditem.category === "Car") {
-        //     return (<CarDetail/>);
-        // } else if (this.props.unsubmitteditem.category === "Book") {
-        //     return (<BookDetail/>);
-        // } else if (this.props.unsubmitteditem.category === "Appliance") {
-        //     return (<ApplianceDetail/>);
-        // } else if (this.props.unsubmitteditem.category === "Furniture") {
-        //     return (<FurnitureDetail/>);
-        // } else if (this.props.unsubmitteditem.category === "Computer") {
-        //     return (<ComputerDetail/>);
-        // } else if (this.props.unsubmitteditem.category === "Other") {
-        //     return (<OtherCategoryDetail/>);
-        // } 
+        if (this.props.unposted.category === "Car") {
+            return (<CarDetail/>);
+        } else if (this.props.unposted.category === "Book") {
+            return (<BookDetail/>);
+        } else if (this.props.unposted.category === "Appliance") {
+            return (<ApplianceDetail/>);
+        } else if (this.props.unposted.category === "Furniture") {
+            return (<FurnitureDetail/>);
+        } else if (this.props.unposted.category === "Computer") {
+            return (<ComputerDetail/>);
+        } else if (this.props.unposted.category === "Other") {
+            return (<OtherCategoryDetail/>);
+        } 
     }
 	render() {
         return (
@@ -39,7 +37,7 @@ class PostDetailUnderOneCategory extends React.Component {
 }
 const mapStateToProps = (state) => {
     return { 
-        category: state.itemProcess.unsubmitteditem.category,
+        unposted: state.postItemReducer,
     };
 }
 export default connect(mapStateToProps, null)(PostDetailUnderOneCategory);

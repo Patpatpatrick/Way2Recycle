@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeUnsubmittedItem } from '../../actions';
+import { changeUnPostedItem } from '../../actions';
 class ChooseCategory extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +12,7 @@ class ChooseCategory extends Component {
         const name = target.name;
         console.log(value);
         console.log(name);
-        this.props.changeUnsubmittedItem(name,value);
+        this.props.changeUnPostedItem(name,value);
     }
 	render() {
         return (
@@ -34,4 +34,4 @@ class ChooseCategory extends Component {
     }
 }
 
-export default connect(null, {changeUnsubmittedItem })(ChooseCategory);
+export default connect(null, {changeUnPostedItem })(ChooseCategory);

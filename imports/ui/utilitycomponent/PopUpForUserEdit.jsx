@@ -88,7 +88,7 @@ const useStyles = makeStyles(theme => ({
 
 const mapStateToProps = (state) => {
     return {
-      itemForPopUp: state.itemProcess.itemForPopUp,
+      itemForPopUp: state.userEditReducer.itemForPopUp,
       // shouldUpdateItem: state.updateItem, // updated to update item 
         // toPopThisIndex : state.itemProcess.popUpitemIndex,
         // item: state.itemProcess.itemArray[state.itemProcess.popUpitemIndex],
