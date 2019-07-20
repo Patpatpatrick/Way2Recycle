@@ -42,6 +42,12 @@ class Popup extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => {
+  return {
+      detail:state.postItemReducer
+  };
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
       close: () => {
@@ -49,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
       }
     }
 };
-export default connect(null, mapDispatchToProps)(Popup);
+export default connect(mapStateToProps, mapDispatchToProps)(Popup);

@@ -4,26 +4,14 @@ import Geosuggest from 'react-geosuggest';
 import { Meteor } from 'meteor/meteor';
 import { connect } from 'react-redux';
 import { showPostReview}  from '../../../actions';
-import { updatePostedItem} from '../../../actions';
+import { changeUnPostedItem} from '../../../actions';
+
 import '../../style/style.css';
 import Review from '../Review';
 
 class ApplianceDetail extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            user_id: Meteor.userId(),
-            title: 'An item',
-            price: 0,
-            category: 'Appliance',
-            description: 'Description',
-            location: {lat: 49.2827291, lng: -123.12073750000002},
-            locationStr: "Vancouver,BC,Canada",
-            date: new Date().toLocaleString(),
-            file: '',
-            imagePreviewUrl: '',
-            attribute: "",
-        }
         this.handleChange = this.handleChange.bind(this);
         this.handleImageChange = this.handleImageChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,10 +23,7 @@ class ApplianceDetail extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        this.setState({
-            [name]: value,
-            date: new Date().toLocaleString()
-        });
+        this.props.changeItem(name,value);
     }
 
     handleImageChange(event) {
@@ -46,29 +31,25 @@ class ApplianceDetail extends Component {
         let reader = new FileReader();
         let file = event.target.files[0];
         reader.onloadend = () => {
-            this.setState({
-                file: file,
-                imagePreviewUrl: reader.result,
-                date: new Date().toLocaleString()
-            });
+            this.props.changeItem('file',file);
+            this.props.changeItem('imagePreviewUrl',reader.result);
         }
         reader.readAsDataURL(file)
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
         this.props.showReview();
-        console.log(this.state);
     }
 
     onSuggestSelect(suggest) {
-
-        this.setState({
-            location: suggest.location,
-            locationStr: suggest.description
-        });
-        console.log(suggest);
+        this.props.changeItem('location',suggest.location);
+        this.props.changeItem('locationStr',suggest.description);
+        // this.setState({
+        //     location: suggest.location,
+        //     locationStr: suggest.description
+        // });
+        // console.log(suggest);
     }
 
     render() {
@@ -93,7 +74,7 @@ class ApplianceDetail extends Component {
                                 <label htmlFor="uploadImg">Upload Picture</label>
                                 <input type="file" onChange={this.handleImageChange}/>
                                 <div>
-                                    {this.state.imagePreviewUrl !== '' ? <img src={this.state.imagePreviewUrl} style={{
+                                    {this.props.item.imagePreviewUrl !== '' ? <img src={this.props.item.imagePreviewUrl} style={{
                                         "width": "350px",
                                         "height": "200px"
                                     }}/> : <span></span>}
@@ -105,7 +86,7 @@ class ApplianceDetail extends Component {
                         <td style={{"verticalAlign": "0%"}}>
                             <br></br>
                             <div>
-                                <MapContainer locationInfo={this.state.location}/>
+                                <MapContainer />
                                 <div>Where is the seller?</div>
                                 <Geosuggest
                                     placeholder="Search Your Place!"
@@ -113,14 +94,14 @@ class ApplianceDetail extends Component {
                                     location={new google.maps.LatLng(53.558572, 9.9278215)}
                                     radius="20"
                                     className='geoLocation'
+                                    value = {this.props.item.locationStr}
                                 />
                             </div>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <p>{this.props.shouldShowReview}</p>
-                {this.props.shouldShowReview && <Review detail={this.state}/>}
+                {this.props.shouldShowReview && <Review />}
             </div>
         );
     }
@@ -129,6 +110,7 @@ class ApplianceDetail extends Component {
 const mapStateToProps = (state) => {
     return {
         shouldShowReview: state.displayReview,
+        item:state.postItemReducer
     };
 }
 
@@ -136,6 +118,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         showReview: () => {
             dispatch(showPostReview());
+        },
+        changeItem: (key,value) => {
+            dispatch(changeUnPostedItem(key,value));
         }
     }
 };

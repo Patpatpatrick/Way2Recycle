@@ -1,218 +1,134 @@
 import {combineReducers} from 'redux';
 import * as actions from '../actions';
-import {Load_User_Items} from "../actions";
-
-const defaultState = {
-    count: 1,
-    chosenCategory: 'Auto',
-    unsubmitteditem: {
-        itemname: 'An item',
-        price: 0,
-        category: 'Auto',
-        description: 'Description',
-        date: new Date().toLocaleString()
-    },
-    popUp: false,
-    popUpitemIndex: 0,
-	itemArray: [],
-	itemForPopUp:{}
-};
-
-const userItemReducer = (state = [], action) => {
-    if (action.type === actions.Load_User_Items) {
-        return [...action.items];
-    }
-
-    return state;
-
-};
-
-const itemReducer = (state = defaultState, action) => {
-// 	switch(action.type){
-// 		// case actions.ASSIGN_SERVER_ITEMS_TO_STORE :
-// 		// 	console.log('=======================!!!');
-// 		// 	console.log(action.itemsFromServer);
-// 		// 	console.log('=======================!!!');
-// 		// 	return Object.assign({}, state, 
-// 		// 		{ 
-// 		// 			itemArray: action.itemsFromServer,
-// 		// 		}
-// 		// 	);
-// 		// case actions.GEN_ITEM :
-// 		// 	return {
-// 		// 		count : state.count + 1,
-// 		// 		unsubmitteditem : state.unsubmitteditem,
-// 		// 		popUp:  state.popUp,
-// 		// 		popUpitemIndex : state.popUpitemIndex,
-// 		// 		itemArray: [...state.itemArray,state.unsubmitteditem]
-// 		// 	};
-// 		// case actions.CLEAR_ALL:
-// 		// 	// console.log(state);
-// 		// 	return {
-// 		// 		count : 0,
-// 		// 		unsubmitteditem : state.unsubmitteditem,
-// 		// 		popUp:  state.popUp,
-// 		// 		popUpitemIndex : state.popUpitemIndex,
-// 		// 		itemArray: []
-// 		// 	};
-// 		// case actions.CLEAR_ONE:
-// 		// 	console.log('clearing ONE');
-// 		// 	console.log(action.toDelIndex);
-// 		// 	let newArray = [...state.itemArray.filter((item) => item._id !== action.toDelIndex)]
-// 		// 	console.log(newArray);
-// 		// 	return	{
-// 		// 		count : state.count - 1,
-// 		// 		unsubmitteditem : state.unsubmitteditem,
-// 		// 		popUp: state.popUp,
-// 		// 		popUpitemIndex : state.popUpitemIndex,
-// 		// 		itemArray: newArray
-// 		// 	};
-// 		case actions.VIEW_ONE:
-// 			console.log('wwww'+action.toViewIndex);
-// 			return	{
-// 				count : state.count,
-// 				unsubmitteditem : state.unsubmitteditem,
-// 				popUp : true,
-// 				popUpitemIndex : action.toViewIndex,
-// 				itemArray: state.itemArray
-// 			};
-// 			// added 
-// 		case actions.ALLOW_EDIT:
-// 			console.log('updating'+action.toUpdateIndex);
-// 			return {
-// 				count : state.count,
-// 				unsubmitteditem : state.unsubmitteditem,
-// 				popUp : true,
-// 				popUpitemIndex : action.toUpdateIndex,
-// 				itemArray: state.itemArray
-// 			}
-// 		case actions.UNVIEW_ONE:
-// 			return	{
-// 				count : state.count,
-// 				unsubmitteditem : state.unsubmitteditem,
-// 				popUp : false,
-// 				popUpitemIndex : 0,
-// 				itemArray: state.itemArray
-// 			};
-		// case actions.CHANGE_INPUT :
-		// 	console.log(action.keyToChange);
-		// 	console.log(action.valueToUpdate);
-		// 	var newitem = Object.assign({}, state.unsubmitteditem, 
-		// 		{ 
-		// 			[action.keyToChange]: action.valueToUpdate,
-		// 			'date' : new Date()
-		// 		}
-		// 	);
-		// 	console.log(newitem);
-		// 	return {
-		// 		count : state.count,
-		// 		unsubmitteditem : newitem,
-		// 		popUp : state.popUp,
-		// 		popUpitemIndex : state.popUpitemIndex,
-		// 		itemArray: state.itemArray
-		// 	};
-		
-		// case 'CHANGE_CATEGORY' :
-		// 	console.log('change cate');
-		// 	return Object.assign({}, state, 
-		// 		{ 
-		// 			chosenCategory: action.chosenCategory,
-		// 		}
-		// 	);
-	// 	default:
-	// 		return state;
-	// }
+// this reducer process state relevant to homepage, it has homePgdefaultState
+// itemArray is fetched from meteor and it is the total array regardless of user, cate ...
+const homePgdefaultState = {
+    category: 'Appliance',
+    itemArray: []
+}
+const homePageReducer = (state = homePgdefaultState, action) => {
     switch (action.type) {
+        case actions.CHANGE_CATEGORY:
+            return Object.assign({}, state,
+                {
+                    category: action.chosenCategory,
+                }
+            );
         case actions.ASSIGN_SERVER_ITEMS_TO_STORE :
-            // console.log('=======================!!!');
-            // console.log(action.itemsFromServer);
-            // console.log('=======================!!!');
             return Object.assign({}, state,
                 {
                     itemArray: action.itemsFromServer,
                 }
             );
-        case actions.GEN_ITEM :
-            return {
-                count: state.count + 1,
-                unsubmitteditem: state.unsubmitteditem,
-                popUp: state.popUp,
-                popUpitemIndex: state.popUpitemIndex,
-                itemArray: [...state.itemArray, state.unsubmitteditem]
-            };
-        case actions.CLEAR_ALL:
-            // console.log(state);
-            return {
-                count: 0,
-                unsubmitteditem: state.unsubmitteditem,
-                popUp: state.popUp,
-                popUpitemIndex: state.popUpitemIndex,
-                itemArray: []
-            };
-        case actions.CLEAR_ONE:
-            console.log("CLEAR ONE")
-            return {
-                count: state.count - 1,
-                unsubmitteditem: state.unsubmitteditem,
-                popUp: state.popUp,
-                popUpitemIndex: state.popUpitemIndex,
-                itemArray: [...state.itemArray.slice(0, action.toDelIndex).concat(state.itemArray.slice(action.toDelIndex + 1))]
-            };
-        case actions.VIEW_ONE:
-            console.log('wwww' + action.toViewIndex);
-            return {
-                count: state.count,
-                unsubmitteditem: state.unsubmitteditem,
-                popUp: true,
-                popUpitemIndex: action.toViewIndex,
-				itemArray: state.itemArray,
-				itemForPopUp: action.itemForPopUp
-			};
-			
-		// added 
-		case actions.ALLOW_EDIT:
-			console.log('updating'+action.toUpdateIndex);
-			return {
-				count : state.count,
-				unsubmitteditem : state.unsubmitteditem,
-				popUp : true,
-				popUpitemIndex : action.toUpdateIndex,
-				itemArray: state.itemArray
-			}
+        default:
+            return state;
+    }
+}
+const itemBoxfaultState = {
+    itemArray: [],
+    shouldPopUpInitemBox: false,
+    popUpItemInItemBox:{}
+}
+const itemBoxReducer = (state = itemBoxfaultState, action) => {
+    switch (action.type) {
+        case actions.ASSIGN_SERVER_ITEMS_TO_STORE :
+            return Object.assign({}, state,
+                {
+                    itemArray: action.itemsFromServer,
+                }
+            );
+        case actions.VIEW_ONE_IN_ITEM_BOX:
+            return Object.assign({}, state,
+                {
+                    shouldPopUpInitemBox: true,
+                    popUpItemInItemBox:state.itemArray[action.indexToPop]
+                }
+            );
+        case actions.CLOSE_ONE_IN_ITEM_BOX:
+            console.log('fsdfsdfa');
+            return Object.assign({}, state,
+                {
+                    shouldPopUpInitemBox: false,
+                }
+            );
+        default:
+            return state;
+    }
+}
 
+// this reducer is for showing items in dashboard, defaulte state is just an array, make by henry
+const userItemReducer = (state = [], action) => {
+    if (action.type === actions.Load_User_Items) {
+        return [...action.items];
+    }
+    return state;
+};
+// this reducer is for editing posted item, default state is named userEditReducerDefaultState, it has two 
+// fields, one is a boolean called popUp the other one is the itemjson for popup, it will be passed to
+// popup components, it will also be modified to store the latest user input of the item to edit.
+const userEditReducerDefaultState = {
+    popUp: false,
+	itemForPopUp:{}
+}
+const userEditReducer = (state = userEditReducerDefaultState, action) => {
+    switch (action.type) {
+        case actions.VIEW_ONE:
+            console.log(action.type);
+            return {
+                popUp: true,
+                itemForPopUp:action.itemForPopUp
+			};
+		case actions.ALLOW_EDIT:
+			return {
+                popUp : true,
+                itemForPopUp:state.itemForPopUp
+			}
         case actions.UNVIEW_ONE:
             return {
-                count: state.count,
-                unsubmitteditem: state.unsubmitteditem,
                 popUp: false,
-                popUpitemIndex: 0,
-                itemArray: state.itemArray
+                itemForPopUp:state.itemForPopUp
             };
         case actions.CHANGE_INPUT :
-            console.log(action.keyToChange);
-            console.log(action.valueToUpdate);
             var newitem = Object.assign({}, state.itemForPopUp,
+                {
+                    [action.keyToChange]: action.valueToUpdate,
+                    'date': new Date().toString
+                }
+            );
+            return {
+                popUp:state.popUp,
+				itemForPopUp:newitem,
+            };
+        default:
+            return state;
+    }
+};
+
+
+postDefaultState = {
+    user_id: Meteor.userId(),
+    title: 'An item',
+    price: 0,
+    category: '',
+    description: 'Description',
+    location: {lat: 49.2827291, lng: -123.12073750000002},
+    locationStr: "Vancouver,BC,Canada",
+    date: new Date().toString(),
+    file: '',
+    imagePreviewUrl: '',
+    attribute: "",
+}
+const postItemReducer = (state = postDefaultState, action) => {
+    switch (action.type) {
+        case actions.CHANGE_UNSUBMITTED_ITEM:
+            var newitem = Object.assign({}, state,
                 {
                     [action.keyToChange]: action.valueToUpdate,
                     'date': new Date()
                 }
             );
             console.log(newitem);
-            return {
-                count: state.count,
-				unsubmitteditem: newitem,
-				itemForPopUp:newitem,
-                popUp: state.popUp,
-                popUpitemIndex: state.popUpitemIndex,
-                itemArray: state.itemArray
-            };
-        case 'CHANGE_CATEGORY' :
-            console.log('change cate');
-            return Object.assign({}, state,
-                {
-                    chosenCategory: action.chosenCategory,
-                }
-            );
+            return newitem
         default:
             return state;
     }
@@ -272,7 +188,6 @@ const toggleLogin = (bool = false, action) => {
 
 const displayReview = (popReviewWindow = false, action) => {
     if (action.type === actions.SHOW_REVIEW) {
-        console.log('fffffffffffffffffffff');
         return true;
     }
     if (action.type === actions.CLOSE_REVIEW) {
@@ -323,8 +238,16 @@ const renderChoiceAssigner = (renderChoice = 'home', action) => {
 
 
 export default combineReducers({
+
+    homePageReducer,
+
     userItemProcess: userItemReducer,
-    itemProcess: itemReducer,
+    userEditReducer,
+
+    itemBoxReducer,
+
+    // for post Item change and submit
+    postItemReducer,
 
     // for LogIn Page
     emailInput: updateEmailInput,

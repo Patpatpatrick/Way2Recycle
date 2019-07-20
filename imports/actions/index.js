@@ -1,3 +1,7 @@
+// for itemsBox
+export const VIEW_ONE_IN_ITEM_BOX = 'VIEW_ONE_IN_ITEM_BOX';
+export const CLOSE_ONE_IN_ITEM_BOX = 'CLOSE_ONE_IN_ITEM_BOX';
+
 export const GEN_ITEM = 'GEN_ITEM';
 export const CLEAR_ALL = 'CLEAR_ALL';
 export const CLEAR_ONE = 'CLEAR_ONE';
@@ -6,7 +10,7 @@ export const UNVIEW_ONE = 'UNVIEW_ONE';
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
 export const CHANGE_INPUT = 'CHANGE_INPUT';
 export const UPDATE_INPUT = 'UPDATE_INPUT';
-
+export const CHANGE_UNSUBMITTED_ITEM = 'CHANGE_UNSUBMITTED_ITEM';
 // for post page
 export const SHOW_REVIEW = 'SHOW_REVIEW';
 export const CLOSE_REVIEW = 'CLOSE_REVIEW';
@@ -31,8 +35,18 @@ export const CHANGE_CHOICE_ON_NAV = 'CHANGE_CHOICE_ON_NAV'
 export const ASSIGN_SERVER_ITEMS_TO_STORE = 'ASSIGN_SERVER_ITEMS_TO_STORE'
 
 export const Load_User_Items = 'Load_User_Items'
+export const popUpItemInItemsBox = (index) => {
+    return {
+        type: VIEW_ONE_IN_ITEM_BOX,
+        indexToPop: index
+    };
+};
 
-
+export const closePopedItemInItemBox = () => {
+    return {
+        type: CLOSE_ONE_IN_ITEM_BOX
+    }
+}
 export const generateItem = () => {
     return {
         type: GEN_ITEM,
@@ -61,6 +75,7 @@ export const closePopedItem = () => {
         type: UNVIEW_ONE,
     };
 };
+// this is for user edit
 export const changeUnsubmittedItem = (key, value) => {
     return {
         type: CHANGE_INPUT,
@@ -68,6 +83,15 @@ export const changeUnsubmittedItem = (key, value) => {
         valueToUpdate: value
     };
 };
+// this is for post!
+export const changeUnPostedItem = (key, value) => {
+    return {
+        type: CHANGE_UNSUBMITTED_ITEM,
+        keyToChange: key,
+        valueToUpdate: value
+    };
+};
+
 export const changeCategory = (chosenCategory) => {
     return {
         type: CHANGE_CATEGORY,

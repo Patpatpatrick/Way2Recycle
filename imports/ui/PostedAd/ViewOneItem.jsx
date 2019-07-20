@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { popUpItem}  from '../../actions';
 import Button from '@material-ui/core/Button';
-import Popup from './PopUp';
-import { updatePostedItem} from '../../actions';
+import Popup from '../utilitycomponent/PopUpForItemBox';
+import { popUpItemInItemsBox} from '../../actions';
 
 class SeeOne extends React.Component {
     constructor(props) {
@@ -13,40 +13,32 @@ class SeeOne extends React.Component {
 
     handleClick(){
         // console.log(this.props.detail);
-        console.log(this.props);
+        // console.log(this.props);
         this.props.showIndex(this.props.index);
-        console.log(this.props.index);
-        this.props.updateIndex(this.props.index);
-        console.log(this.props.index);
-        Meteor.call('getOneItem', this.props.index);
-        console.log('get one item')
+        // Meteor.call('getOneItem', this.props.index);
+        // console.log('get one item')
     }
 
 	render() {
         return (
             <div>
                 <Button type="button" onClick = {this.handleClick} id={this.props.index + 'View'}>
-                
-                <div>{this.props.toPop && <Popup index={this.props.index}/>}</div>
-                Update
+                Show More
                 </Button>
-                
+                {this.props.toPop && <Popup/>}
             </div>   
         );
     }
 }
 const mapStateToProps = (state) => {
     return { 
-        toPop: state.itemProcess.popUp,
+        toPop: state.itemBoxReducer.shouldPopUpInitemBox,
     };
 }
 const mapDispatchToProps = (dispatch) => {
     return {
       showIndex: (index) => {
-        dispatch(popUpItem(index));
-      },
-      updateIndex: (index) => {
-        dispatch(updatePostedItem(index))
+        dispatch(popUpItemInItemsBox(index));
       }
     }
 };
