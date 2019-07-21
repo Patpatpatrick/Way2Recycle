@@ -19,10 +19,6 @@ class Nav extends React.Component{
     this.state = {loginFlag: false}
   }
 
-  /*
-   TODO: if user log out INSIDE dashboard, should redirect to hompage
-   TO BE Done after DashBoard is added
-  */
   logOut = () => {
     Meteor.logout((err) => {
       if (err) {
@@ -31,6 +27,8 @@ class Nav extends React.Component{
       console.log("Successfully logged out for user: " + Meteor.userId())
       //this.props.changeChoiceOnNav("home")
       this.setState({flag: !this.state.loginFlag})
+      //  Log-out should redirect user to home page and that dashboard and add post should be not rendered.
+      this.props.changeChoiceOnNav("home");
     })
   }
 
@@ -66,17 +64,12 @@ class Nav extends React.Component{
                   Meteor.userId() ?
                       <Link variant="button" color="textPrimary" className={''} onClick = {()=>this.props.changeChoiceOnNav('post')} >
                         Post ad &nbsp;
-                      </Link> :
-                      <Link variant="button" color="textPrimary" className={''} onClick = {()=>this.props.changeChoiceOnNav('post')}>
-                        Post ad &nbsp;
-                      </Link>
+                      </Link> :null
                 }
 
                 {Meteor.userId()?<Link variant="button" color="textPrimary" className={''} onClick = {()=>this.props.changeChoiceOnNav('user')}>
                   My items &nbsp;
                 </Link>: null}
-
-
                 {
                   Meteor.userId() ? null :
                       <Link variant="button" color="textPrimary" className={''} onClick={this.loadSignUpPage}>
