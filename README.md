@@ -3,6 +3,9 @@ CPSC436I_Project
 
 ## Project Description
 
+### Summary
+Way2Recycle is a website which allows people to exchange second-hand goods. The users can upload their own items, as well as to browse others' postings.
+
 ### Who is it for?
 People with needs to exchange second-hand goods.
 ### What will it do? (What "human activity" will it support?)

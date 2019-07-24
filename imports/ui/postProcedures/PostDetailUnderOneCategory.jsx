@@ -13,19 +13,19 @@ class PostDetailUnderOneCategory extends React.Component {
         this.conditionalRender = this.conditionalRender.bind(this);
     }
     conditionalRender(){
-        if (this.props.unsubmitteditem.category === "Car") {
+        if (this.props.unposted.category === "Car") {
             return (<CarDetail/>);
-        } else if (this.props.unsubmitteditem.category === "Book") {
+        } else if (this.props.unposted.category === "Book") {
             return (<BookDetail/>);
-        } else if (this.props.unsubmitteditem.category === "Appliance") {
+        } else if (this.props.unposted.category === "Appliance") {
             return (<ApplianceDetail/>);
-        } else if (this.props.unsubmitteditem.category === "Furniture") {
+        } else if (this.props.unposted.category === "Furniture") {
             return (<FurnitureDetail/>);
-        } else if (this.props.unsubmitteditem.category === "Computer") {
+        } else if (this.props.unposted.category === "Computer") {
             return (<ComputerDetail/>);
-        } else if (this.props.unsubmitteditem.category === "Other") {
+        } else if (this.props.unposted.category === "Other") {
             return (<OtherCategoryDetail/>);
-        }
+        } 
     }
 	render() {
         return (
@@ -37,14 +37,7 @@ class PostDetailUnderOneCategory extends React.Component {
 }
 const mapStateToProps = (state) => {
     return { 
-        unsubmitteditem: state.itemProcess.unsubmitteditem,
+        unposted: state.postItemReducer,
     };
 }
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//       showIndex: (index) => {
-//         dispatch(popUpItem(index));
-//       }
-//     }
-// };
 export default connect(mapStateToProps, null)(PostDetailUnderOneCategory);

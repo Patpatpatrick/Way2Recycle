@@ -1,7 +1,6 @@
 import React from 'react';
-import ClearOne from '../ClearOne';
 // import DeleteOne from '../DeleteOne';
-import SeeOne from '../ViewOneItem';
+import ViewOneItem from '../ViewOneItem';
 import { connect } from 'react-redux';
 import useStyles from '../../style/itemTableStyle';
 
@@ -14,7 +13,15 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 class ItemsBox extends React.Component { 
- 
+    componentDidMount() {
+        Meteor.call('getItems', function (err, result) {
+            if(err){
+                console.log("error");
+            }
+            // console.log(result);
+            this.props.dataToStore(result);
+        }.bind(this));
+    }
 	render() {
         const classes = useStyles;
         return (
@@ -33,16 +40,15 @@ class ItemsBox extends React.Component {
                     <TableBody>
                     {this.props.itemArray.map( (item, idx) => {
                         return (
-                            <TableRow key={item.itemname + idx}>
+                            <TableRow key={idx}>
                                 <TableCell component="th" scope="row">
-                                    {item.itemname}
+                                    {item.title}
                                 </TableCell>
                                 <TableCell align="right">{item.price}</TableCell>
                                 <TableCell align="right">{item.category}</TableCell>
                                 <TableCell align="left">{item.description}</TableCell>
                                 <TableCell align="right">{item.date.toString()}</TableCell>
-                                <TableCell align="right"><ClearOne index = {idx}/><SeeOne index = {idx}/></TableCell>
-                                {/*<TableCell align="right"><DeleteOne index = {idx}/></TableCell>*/}
+                                <TableCell align="right"><ViewOneItem index = {idx}/></TableCell>
                             </TableRow>
                         )
                         })
@@ -54,6 +60,6 @@ class ItemsBox extends React.Component {
     }
 }
 const mapStateToProps = (state) => {
-    return { itemArray: state.itemProcess.itemArray};
+    return { itemArray: state.itemBoxReducer.itemArray};
 }
 export default connect(mapStateToProps,null)(ItemsBox);
