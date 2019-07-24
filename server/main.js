@@ -15,7 +15,7 @@ function insertLink(title, url) {
 
 // tutorial
 // https://hashnode.com/post/web-api-using-meteor-webapp-ciqgn0ukj0irtdd53uy12h6ia
-WebApp.connectHandlers.use('/hello', (req, res, next) => {
+WebApp.connectHandlers.use('/v1/items', (req, res, next) => {
     // res.writeHead(200);
     // res.end(`Hello world from: ${Meteor.release}`);
     res.setHeader('Content-Type', 'application/json');
