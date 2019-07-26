@@ -11,6 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {assignItemsToStoreItemArray} from "../../../actions";
 
 class ItemsBox extends React.Component { 
     componentDidMount() {
@@ -18,8 +19,8 @@ class ItemsBox extends React.Component {
             if(err){
                 console.log("error");
             }
-            // console.log(result);
-            this.props.dataToStore(result);
+             console.log(result);
+             this.props.dataToStore(result);
         }.bind(this));
     }
 	render() {
@@ -59,7 +60,16 @@ class ItemsBox extends React.Component {
         );
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dataToStore: (result) => {
+            dispatch(assignItemsToStoreItemArray(result));
+        }
+    }
+};
+
 const mapStateToProps = (state) => {
     return { itemArray: state.itemBoxReducer.itemArray};
 }
-export default connect(mapStateToProps,null)(ItemsBox);
+export default connect(mapStateToProps,mapDispatchToProps)(ItemsBox);
