@@ -81,7 +81,7 @@ Meteor.methods({
                 location: obj.location,
                 price: obj.price,
                 category: obj.category,
-                date: new Date().toLocaleString(),
+                date: new Date(),
                 imagePreviewUrl: obj.imagePreviewUrl,
                 attribute: obj.attribute
 
