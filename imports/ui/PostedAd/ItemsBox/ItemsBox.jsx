@@ -23,10 +23,8 @@ import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
-
-
-
-
+import Paginate from "react-pure-pagination";
+import "react-pure-pagination/dist/Paginate.css";
 
 
 const styles = theme => {
@@ -73,30 +71,26 @@ const styles = theme => {
             selectEmpty: {
                 marginTop: theme.spacing(2),
             },
-
-
         }
     );
 };
 
-
-
-
-
-
-
-
-
+const paginationStyle = {
+    currentPage: {
+        background: '#4925bd'
+    }
+}
 
 class ItemsBox extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
             queryCategory: "None",
             queryMinPrice:-1,
             queryMaxPrice:-1,
-            queryKeyWord: ""
+            queryKeyWord: "",
+            currentPage:1,
+            itemsPerPage:5
         }
     }
 
@@ -116,10 +110,6 @@ class ItemsBox extends React.Component {
         return new Date().toISOString().replace('-', '/').split('T')[0].replace('-', '/');
     }
 
-
-
-
-
     searchByParam = () => {
         let queryParam = {
             minPrice: 0,
@@ -132,18 +122,10 @@ class ItemsBox extends React.Component {
         let category = this.state.queryCategory
         let keyWord = this.state.queryKeyWord
 
-
-
         queryParam.minPrice = minPrice
         queryParam.maxPrice = maxPrice
         queryParam.category = category
         queryParam.keyword = keyWord
-
-        //alert(JSON.stringify(queryParam))
-
-
-
-
 
         Meteor.call('getItemsByParam',queryParam, function (err, result) {
             if(err){
@@ -170,37 +152,20 @@ class ItemsBox extends React.Component {
 
     }
 
+    handlePaginate=(page) => {
+        this.setState({
+            currentPage: page
+        });
+    }
 
 
 	render() {
-       // const classes = useStyles;
         const { classes } = this.props;
         return (
             <div className={classes.root}>
 
                 <div className={classes.padding}>
                     <Paper className={classes.filterPaper}>
-                    {/*    <div> Filter </div>
-                        <div>
-                            <textarea>
-                            </textarea>
-                            <div>Category</div>
-                            <select  onChange={this.changeQueryCategory}>
-                                <option value="None">None</option>
-                                <option value="Appliance">Appliance</option>
-                                <option value="Car">Car</option>
-                                <option value="Book">Book</option>
-                                <option value="Furniture">Furniture</option>
-                                <option value="Computer">Computer</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <div>Price range</div>
-                            <button onClick={this.searchByParam}>submit</button>
-                        </div>*/}
-
-
-
-
                         <div style={{zIndex:-1}} >
                             <FormControl  className={classes.formControl}>
 
@@ -211,9 +176,6 @@ class ItemsBox extends React.Component {
                                     onChange={this.changeQueryCategory}
                                     input={<OutlinedInput labelWidth={0} name="age" id="outlined-age-simple" />}
                                 >
-                                    {/*<MenuItem value="">
-                                        <em>fff</em>
-                                    </MenuItem>*/}
                                     <MenuItem value={"Appliance"}>Appliance</MenuItem>
                                     <MenuItem value={"Car"}>Car</MenuItem>
                                     <MenuItem value={"Book"}>Book</MenuItem>
@@ -252,30 +214,15 @@ class ItemsBox extends React.Component {
                     </Paper>
                 </div>
 
-
-
-
             <Paper className={classes.paper}>
                 <Table className={classes.table}>
-                {/*    <TableHead>
-                        <TableRow>
-                            <TableCell>Item Name</TableCell>
-                            <TableCell align="right">Price</TableCell>
-                            <TableCell align="right">Category</TableCell>
-                            <TableCell align="right">Description</TableCell>
-                            <TableCell align="right">Added Date</TableCell>
-                            <TableCell align="right">Operation</TableCell>
-                        </TableRow>
-                    </TableHead>*/}
-
 
                     <TableBody>
-                    {this.props.itemArray.map( (item, idx) => {
+                    {this.props.itemArray.slice(((this.state.currentPage-1)*this.state.itemsPerPage),
+                        ((this.state.currentPage)*this.state.itemsPerPage)
+                    ).map( (item, idx) => {
                         return (
                             <TableRow key={idx}>
-                    {/*            <TableCell component="th" scope="row">
-                                    {item.title}
-                                </TableCell>*/}
                                 <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
                                 <TableCell align="left">
                                         <span className={classes.titleFont}>{item.title}</span>
@@ -287,12 +234,7 @@ class ItemsBox extends React.Component {
 
                                     <br/>
                                     <div><ViewOneItem index = {idx}/></div>
-
                                 </TableCell>
-                                {/*<TableCell align="right">{item.category}</TableCell>
-                                <TableCell align="left">{item.description}</TableCell>
-                                <TableCell align="right">{this.formatDate(item.date)}</TableCell>
-                                <TableCell align="right"><ViewOneItem index = {idx}/></TableCell>*/}
                             </TableRow>
                         )
                         })
@@ -300,6 +242,9 @@ class ItemsBox extends React.Component {
                     </TableBody>
                 </Table>
             </Paper>
+                <Paginate total={this.props.itemArray.length}
+                          perPage={this.state.itemsPerPage} current={this.state.currentPage}
+                          onChange={this.handlePaginate} styles={paginationStyle} />
             </div>
         );
     }

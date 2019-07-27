@@ -22,6 +22,7 @@
     "react-dom": "^16.8.6",
     "react-geosuggest": "^2.12.0",
     "react-location-picker": "^1.3.0",
+    "react-pure-pagination": "^1.1.3",
     "react-redux": "^7.0.3",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
