@@ -26,7 +26,9 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Paginate from "react-pure-pagination";
 import "react-pure-pagination/dist/Paginate.css";
 
-import itemBox from './itemBox.css'
+import './itemBox.css'
+import Typography from "../../Typography";
+import Slider from '@material-ui/core/Slider';
 
 const styles = theme => {
     return ({
@@ -76,6 +78,26 @@ const styles = theme => {
     );
 };
 
+
+const marks = [
+    {
+        value: 3,
+        label: '3',
+    },
+    {
+        value: 5,
+        label: '5',
+    },
+    {
+        value: 10,
+        label: '10',
+    },
+    {
+        value: 20,
+        label: '20',
+    },
+];
+
 const paginationStyle = {
     currentPage: {
         background: '#4925bd'
@@ -91,14 +113,15 @@ class ItemsBox extends React.Component {
             queryMaxPrice:-1,
             queryKeyWord: "",
             currentPage:1,
-            itemsPerPage:5
+            itemsPerPage:5,
+            predictedNumPages:0,
         }
     }
 
 
     componentDidMount() {
-        console.log("ItemBox componentdid mount")
-  /*      Meteor.call('getItems', function (err, result) {
+        // Don't delete this block of comment yet
+        /* Meteor.call('getItems', function (err, result) {
             if(err){
                 console.log("error");
             }
@@ -112,6 +135,7 @@ class ItemsBox extends React.Component {
     }
 
     searchByParam = () => {
+        this.setState({currentPage:1})
         let queryParam = {
             minPrice: 0,
             maxPrice: 0,
@@ -130,13 +154,13 @@ class ItemsBox extends React.Component {
 
         Meteor.call('getItemsByParam',queryParam, function (err, result) {
             if(err){
-                console.log("error");
+                console.log("error querying items by filter");
             }
-            // console.log(result);
             this.props.dataToStore(result);
+            this.setState({itemsPerPage:this.state.predictedNumPages})
+            //this.setState({currentPage:1})
         }.bind(this));
     }
-
 
 
     changeQueryCategory = (event) => {
@@ -160,14 +184,29 @@ class ItemsBox extends React.Component {
     }
 
 
+    numPagesLabelSlider = (value) => {
+        return marks.findIndex(mark => mark.value === value) + 1;
+    }
+
+    valuetext=(value)=> {
+        return value;
+    }
+
+    changeNumPages = (event, value) => {
+        (this.props.itemArray.length <= value)
+            ?this.setState({predictedNumPages:value})
+            :this.setState({predictedNumPages:value})
+    }
+
+
 	render() {
         const { classes } = this.props;
         return (
             <div>
-            <div className={classes.root.toString() + " row1"} id={"row1"}>
+            <div className={classes.root.toString() + " row1"}>
 
 
-                <div className={classes.padding.toString() + " column1"} id={"column1"}>
+                <div className={classes.padding.toString() + " column1"}>
                     <Paper className={classes.filterPaper}>
                         <div style={{zIndex:-1}} >
                             <div>Category</div>
@@ -177,7 +216,7 @@ class ItemsBox extends React.Component {
                                     value={this.state.queryCategory}
                                     displayEmpty
                                     onChange={this.changeQueryCategory}
-                                    input={<OutlinedInput labelWidth={0} name="age" id="outlined-age-simple" />}
+                                    input={<OutlinedInput labelWidth={0} name="" id="" />}
                                 >
                                     <MenuItem value={"Appliance"}>Appliance</MenuItem>
                                     <MenuItem value={"Car"}>Car</MenuItem>
@@ -213,17 +252,30 @@ class ItemsBox extends React.Component {
                             </span>
                         </div>
 
-                        <div> more stuff here</div>
-                        <div> more stuff here</div>
-                        <div> more stuff here</div>
 
+                        <br/>
+                        <Typography id="discrete-slider-restrict" gutterBottom>
+                            Number of Items per Page
+                        </Typography>
+                        <Slider
+                            defaultValue={5}
+                            valueLabelFormat={this.numPagesLabelSlider}
+                            getAriaValueText={this.valuetext}
+                            aria-labelledby="discrete-slider-restrict"
+                            step={null}
+                            valueLabelDisplay="auto"
+                            marks={marks}
+                            max={20}
+                            onChange={(event, value) =>this.changeNumPages(event, value)}
+                            /*onDragStop={this.changeNumPages}*/
+                        />
                         <div>
                             <button onClick={this.searchByParam}>Submit</button>
                         </div>
                     </Paper>
                 </div>
 
-            <Paper className={classes.paper.toString() + " column2"} id={"column2"}>
+            <Paper className={classes.paper.toString() + " column2"}>
                 <Table className={classes.table}>
 
                     <TableBody>
@@ -255,10 +307,7 @@ class ItemsBox extends React.Component {
                           perPage={this.state.itemsPerPage} current={this.state.currentPage}
                           onChange={this.handlePaginate} styles={paginationStyle} />
             </Paper>
-
             </div>
-
-
             </div>
         );
     }
