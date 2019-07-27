@@ -21,6 +21,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 
 
@@ -68,7 +69,10 @@ const styles = theme => {
                 marginRight: theme.spacing(1),
                 width:60,
                 fontSize: 10
-            }
+            },
+            selectEmpty: {
+                marginTop: theme.spacing(2),
+            },
 
 
         }
@@ -197,15 +201,15 @@ class ItemsBox extends React.Component {
 
 
 
-                        <div>
-                            <FormControl variant="outlined" className={classes.formControl}>
-                                <InputLabel  htmlFor="outlined-age-simple">
-                                    Category
-                                </InputLabel>
+                        <div style={{zIndex:-1}} >
+                            <FormControl  className={classes.formControl}>
+
+                                <FormHelperText>Category</FormHelperText>
                                 <Select
                                     value={this.state.queryCategory}
+                                    displayEmpty
                                     onChange={this.changeQueryCategory}
-                                    input={<OutlinedInput labelWidth={50} name="age" id="outlined-age-simple" />}
+                                    input={<OutlinedInput labelWidth={0} name="age" id="outlined-age-simple" />}
                                 >
                                     {/*<MenuItem value="">
                                         <em>fff</em>
@@ -218,19 +222,14 @@ class ItemsBox extends React.Component {
                                     <MenuItem value={"Other"}>Other</MenuItem>
                                 </Select>
                             </FormControl>
-                        </div>
-
-
+                            </div>
                         <div>
                             <div>Price Range</div>
                             <span>
                             <TextField
-                                id="outlined-email-input"
-                                label="min"
+                                placeholder="min"
                                 className={classes.textField}
-                                type="email-type"
-                                name="email-name"
-                                autoComplete="email-auto"
+                                type=""
                                 margin="normal"
                                 variant="outlined"
                                 onChange = {this.changeQueryMinPrice}
@@ -238,28 +237,19 @@ class ItemsBox extends React.Component {
 
                              <TextField
                                   id="outlined-email-input"
-                                  label="max"
+                                  placeholder={"max"}
                                   className={classes.textField}
-                                  type="email-type"
-                                  name="email-name"
-                                  autoComplete="email-auto"
+                                  type=""
                                   margin="normal"
                                   variant="outlined"
                                   onChange = {this.changeQueryMaxPrice}
                              />
                             </span>
                         </div>
-
                         <div>
                             <button onClick={this.searchByParam}>Submit</button>
                         </div>
-
-
                     </Paper>
-
-
-
-
                 </div>
 
 
@@ -279,8 +269,6 @@ class ItemsBox extends React.Component {
                     </TableHead>*/}
 
 
-
-
                     <TableBody>
                     {this.props.itemArray.map( (item, idx) => {
                         return (
@@ -292,10 +280,10 @@ class ItemsBox extends React.Component {
                                 <TableCell align="left">
                                         <span className={classes.titleFont}>{item.title}</span>
                                          <div>--------------------------</div>
-                                     <div>Price {item.price}</div>
-                                    <div>Category {item.category}</div>
+                                     <div>Price: ${item.price}</div>
+                                    <div>Category: {item.category}</div>
                                     <div>Description: {item.description}</div>
-                                    <div>Date: {item.date.toString()}</div>
+                                    <div>Date: {this.formatDate(item.date.toString())}</div>
 
                                     <br/>
                                     <div><ViewOneItem index = {idx}/></div>
