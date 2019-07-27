@@ -26,13 +26,14 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Paginate from "react-pure-pagination";
 import "react-pure-pagination/dist/Paginate.css";
 
+import itemBox from './itemBox.css'
 
 const styles = theme => {
     return ({
             root: {
                 position: 'absolute',
-                left: '15%',
-                right: '15%',
+                left: '5%',
+                right: '5%',
             },
             paper: {
                 padding: theme.spacing(1),
@@ -162,13 +163,15 @@ class ItemsBox extends React.Component {
 	render() {
         const { classes } = this.props;
         return (
-            <div className={classes.root}>
+            <div>
+            <div className={classes.root.toString() + " row1"} id={"row1"}>
 
-                <div className={classes.padding}>
+
+                <div className={classes.padding.toString() + " column1"} id={"column1"}>
                     <Paper className={classes.filterPaper}>
                         <div style={{zIndex:-1}} >
+                            <div>Category</div>
                             <FormControl  className={classes.formControl}>
-
                                 <FormHelperText>Category</FormHelperText>
                                 <Select
                                     value={this.state.queryCategory}
@@ -186,6 +189,7 @@ class ItemsBox extends React.Component {
                             </FormControl>
                             </div>
                         <div>
+                            <br/>
                             <div>Price Range</div>
                             <span>
                             <TextField
@@ -208,13 +212,18 @@ class ItemsBox extends React.Component {
                              />
                             </span>
                         </div>
+
+                        <div> more stuff here</div>
+                        <div> more stuff here</div>
+                        <div> more stuff here</div>
+
                         <div>
                             <button onClick={this.searchByParam}>Submit</button>
                         </div>
                     </Paper>
                 </div>
 
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper.toString() + " column2"} id={"column2"}>
                 <Table className={classes.table}>
 
                     <TableBody>
@@ -241,10 +250,15 @@ class ItemsBox extends React.Component {
                     }
                     </TableBody>
                 </Table>
-            </Paper>
+
                 <Paginate total={this.props.itemArray.length}
                           perPage={this.state.itemsPerPage} current={this.state.currentPage}
                           onChange={this.handlePaginate} styles={paginationStyle} />
+            </Paper>
+
+            </div>
+
+
             </div>
         );
     }
