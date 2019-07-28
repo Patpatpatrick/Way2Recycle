@@ -12,18 +12,35 @@ function insertLink(title, url) {
     Links.insert({title, url, createdAt: new Date()});
 }
 
+// http://localhost:3000/v1/item/Eb54N4kdLapYb87CC
+WebApp.connectHandlers.use('/v1/item/', (req, res, next) => {
+
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
+    var token = req.url.split('/')[1];
+    token = token || 'no token';
+    let oneItem = Items.findOne({_id: token});
+    res.setHeader('Content-Type', 'application/json');
+    res.writeHead(200);
+    // // console.log(JSON.stringify(json));
+    res.end(JSON.stringify(oneItem));
+});
 
 // tutorial
 // https://hashnode.com/post/web-api-using-meteor-webapp-ciqgn0ukj0irtdd53uy12h6ia
 WebApp.connectHandlers.use('/v1/items', (req, res, next) => {
     // res.writeHead(200);
     // res.end(`Hello world from: ${Meteor.release}`);
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
     res.setHeader('Content-Type', 'application/json');
     res.writeHead(200);
     const json = Meteor.call('getItems');
     // console.log(JSON.stringify(json));
     res.end(JSON.stringify(json));
 });
+
+
 
 
 Meteor.methods({
@@ -37,7 +54,7 @@ Meteor.methods({
     'getItems': function () {
 
         let items = [];
-        Items.find({}, {sort: {createdAt: -1}}).forEach((entry)=>{
+        Items.find({}, {sort: {date: -1}}).forEach((entry)=>{
             items.push(entry);
         })
         console.log("get all items");
