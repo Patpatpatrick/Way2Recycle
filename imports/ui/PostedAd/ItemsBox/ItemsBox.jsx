@@ -3,6 +3,7 @@ import React from 'react';
 import ViewOneItem from '../ViewOneItem';
 import { connect } from 'react-redux';
 import useStyles from '../../style/itemTableStyle';
+import {assignItemsToStoreItemArray} from '../../../actions'
 
 
 import Table from '@material-ui/core/Table';
@@ -62,4 +63,9 @@ class ItemsBox extends React.Component {
 const mapStateToProps = (state) => {
     return { itemArray: state.itemBoxReducer.itemArray};
 }
-export default connect(mapStateToProps,null)(ItemsBox);
+const mapDispatchToProps = (dispatch) => {
+    return { dataToStore: (result) => {
+        dispatch(assignItemsToStoreItemArray(result));
+      }};
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ItemsBox);

@@ -58,6 +58,7 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
 
 // this reducer is for showing items in dashboard, defaulte state is just an array, make by henry
 const userItemReducer = (state = [], action) => {
+    console.log(action.items);
     if (action.type === actions.Load_User_Items) {
         return [...action.items];
     }
@@ -125,6 +126,24 @@ const postItemReducer = (state = postDefaultState, action) => {
                 {
                     [action.keyToChange]: action.valueToUpdate,
                     'date': new Date()
+                }
+            );
+            console.log(newitem);
+            return newitem
+        case actions.reset_cate_in_post:
+            var newitem = Object.assign({}, state,
+                {
+                    user_id: Meteor.userId(),
+                    title: 'An item',
+                    price: 0,
+                    category: '',
+                    description: 'Description',
+                    location: {lat: 49.2827291, lng: -123.12073750000002},
+                    locationStr: "Vancouver,BC,Canada",
+                    date: new Date().toString(),
+                    file: '',
+                    imagePreviewUrl: '',
+                    attribute: "",
                 }
             );
             console.log(newitem);
@@ -241,7 +260,7 @@ export default combineReducers({
 
     homePageReducer,
 
-    userItemProcess: userItemReducer,
+    userItemReducer,
     userEditReducer,
 
     itemBoxReducer,

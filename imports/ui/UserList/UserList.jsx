@@ -164,7 +164,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const mapStateToProps = (state) => {
-    return { itemArray: state.userItemProcess, toPop: state.userEditReducer.popUp};
+    return { itemArray: state.userItemReducer, toPop: state.userEditReducer.popUp};
     
 }
 //export default connect(mapStateToProps,{loadUserItems})(UserList);

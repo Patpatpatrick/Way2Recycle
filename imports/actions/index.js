@@ -33,6 +33,8 @@ export const CHANGE_CREATE_EMAIL_INPUT = 'CHANGE_CREATE_EMAIL_INPUT'
 export const CHANGE_CHOICE_ON_NAV = 'CHANGE_CHOICE_ON_NAV'
 // for assign fetched data to store
 export const ASSIGN_SERVER_ITEMS_TO_STORE = 'ASSIGN_SERVER_ITEMS_TO_STORE'
+export const reset_cate_in_post = 'reset_cate_in_post'
+
 
 export const Load_User_Items = 'Load_User_Items'
 export const popUpItemInItemsBox = (index) => {
@@ -210,3 +212,7 @@ export const loadUserItems = (items) => ({
     type: Load_User_Items,
     items
 });
+
+export const resetCate = () =>({
+    type: reset_cate_in_post
+})

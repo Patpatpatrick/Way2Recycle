@@ -17,6 +17,7 @@ export default class SignUp extends React.Component{
                 id="search"
                 label="Search..."
                 name="search"
+                type=''
                 autoComplete="search"
               />
               {/* <InputBase
