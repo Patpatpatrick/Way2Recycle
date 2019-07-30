@@ -128,7 +128,8 @@ const postItemReducer = (state = postDefaultState, action) => {
                     'date': new Date()
                 }
             );
-            console.log(newitem);
+            // line for debugging change in state for changing appliance post ad fields
+            //console.log(newitem);
             return newitem
         case actions.reset_cate_in_post:
             var newitem = Object.assign({}, state,

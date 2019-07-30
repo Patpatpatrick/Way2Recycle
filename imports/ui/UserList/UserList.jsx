@@ -108,6 +108,11 @@ class UserList extends React.Component {
     }
 
 
+    formatDate = (date) => {
+       return new Date().toISOString().replace('-', '/').split('T')[0].replace('-', '/');
+    }
+
+
     render() {
         const { classes } = this.props;
         return (
@@ -131,7 +136,7 @@ class UserList extends React.Component {
                                     <div><strong>Price:</strong> ${item.price}</div>
                                     <div><strong>Category:</strong> {item.category}</div>
                                     <div><strong>Description:</strong> {(item.description)}</div>
-                                    <div><strong>Uploaded Date:</strong> {item.date.toString()}</div>
+                                    <div><strong>Uploaded Date:</strong> {this.formatDate(item.date)}</div>
                                 </div>
                                 <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <Grid item xs={8} >
