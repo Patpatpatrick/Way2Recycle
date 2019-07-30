@@ -45,6 +45,7 @@ WebApp.connectHandlers.use('/v1/items', (req, res, next) => {
 
 Meteor.methods({
     'createItem': function (item) {
+        item.price = parseInt(item['price'])
         Items.insert(item);
         console.log("add one");
     }
@@ -61,6 +62,60 @@ Meteor.methods({
         return items;
     }
 });
+
+
+Meteor.methods({
+    'getItemsByParam': function (queryParam) {
+        let queryArray = [{}]
+
+        //{category : 'Appliance'}
+
+        console.log(queryParam)
+        if (queryParam['category']!=='None') {
+            let categoryQuery = {category:''}
+            categoryQuery.category  = queryParam['category']
+            queryArray.push(categoryQuery)
+        }
+
+
+        // if user has left this field blank, then queryParam['minPrice'] will be a number
+        // else if user typed a number, the result is a string version.
+
+        let queryParamMinPrice = queryParam['minPrice']
+        let queryParamMaxPrice = queryParam['maxPrice']
+
+        //
+        if (isNaN(queryParamMinPrice)
+            || isNaN(queryParamMaxPrice)) {
+            return []
+        }
+
+        // at this point price string is guaranteed to be NON-empty
+        if (typeof queryParamMinPrice !== 'number' && queryParamMinPrice !== "") {
+            let minPrice = parseInt(queryParamMinPrice)
+            let minQuery =  {price:{$gte:''}}
+            minQuery.price.$gte = minPrice
+            queryArray.push(minQuery)
+        }
+
+        if (typeof queryParamMaxPrice !== 'number' && queryParamMaxPrice !=="") {
+            let maxPrice = parseInt(queryParamMaxPrice)
+            let maxQuery = {price:{$lte:''}}
+            maxQuery.price.$lte = maxPrice
+            queryArray.push(maxQuery)
+        }
+
+        // {sort: {createdAt: -1}}
+        let itemArray = Items.find({$and:queryArray},  ).fetch()
+        console.log("get items by query");
+        //console.log(itemArray[0])
+        return itemArray;
+    }
+});
+
+
+
+
 
 Meteor.methods({
     'getOneItem': function (pass_id) {
@@ -96,9 +151,9 @@ Meteor.methods({
                 title: obj.title,
                 description: obj.description,
                 location: obj.location,
-                price: obj.price,
+                price: parseInt(obj.price),
                 category: obj.category,
-                date: new Date().toLocaleString(),
+                date: new Date(),
                 imagePreviewUrl: obj.imagePreviewUrl,
                 attribute: obj.attribute
 

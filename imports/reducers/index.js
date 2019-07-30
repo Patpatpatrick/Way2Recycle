@@ -130,7 +130,8 @@ const postItemReducer = (state = postDefaultState, action) => {
                     'date': new_date
                 }
             );
-            console.log(newitem);
+            // line for debugging change in state for changing appliance post ad fields
+            //console.log(newitem);
             return newitem
         default:
             return state;
