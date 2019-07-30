@@ -119,12 +119,15 @@ postDefaultState = {
     attribute: "",
 }
 const postItemReducer = (state = postDefaultState, action) => {
+    let new_date = new Date();
+    new_date = new_date.toLocaleString();
     switch (action.type) {
         case actions.CHANGE_UNSUBMITTED_ITEM:
             var newitem = Object.assign({}, state,
                 {
                     [action.keyToChange]: action.valueToUpdate,
-                    'date': new Date()
+                    // 'date': new Date()
+                    'date': new_date
                 }
             );
             console.log(newitem);
