@@ -23,8 +23,8 @@ class MyComponents extends Component {
             <GoogleMap
                 id="marker-example"
                 mapContainerStyle={{
-                    height: "300px",
-                    width: "600px"
+                    height: "400px",
+                    width: "800px",
                 }}
                 zoom={11}
                 center={this.state.markerPosition}

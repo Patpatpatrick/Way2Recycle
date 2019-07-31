@@ -97,8 +97,7 @@ class ApplianceDetail extends Component {
                         <td style={{"verticalAlign": "0%"}}>
                             <br></br>
                             <div>
-                                <MapContainer />
-                                <div>Where is the seller?</div>
+                                <div style={{display: 'flex', justifyContent: 'center'}}>Type in you location</div>
                                 <Geosuggest
                                     placeholder="Search Your Place!"
                                     onSuggestSelect={this.onSuggestSelect}
@@ -107,6 +106,7 @@ class ApplianceDetail extends Component {
                                     className='geoLocation'
                                     value = {this.props.item.locationStr}
                                 />
+                                <MapContainer style={{display: 'flex', justifyContent: 'center'}} />
                             </div>
                         </td>
                     </tr>

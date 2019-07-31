@@ -15,7 +15,6 @@ import Paper from '@material-ui/core/Paper';
 import {blue, red} from "@material-ui/core/colors";
 import {compose} from "redux";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {assignItemsToStoreItemArray} from "../../../actions";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";

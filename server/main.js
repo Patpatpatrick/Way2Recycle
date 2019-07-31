@@ -139,7 +139,6 @@ Meteor.methods({
                 date: new Date(),
                 imagePreviewUrl: obj.imagePreviewUrl,
                 attribute: obj.attribute
-
             }
         });
         console.log("update one item id is " + pass_id);
