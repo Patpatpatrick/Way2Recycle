@@ -20,6 +20,7 @@
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
+    "react-geocode": "^0.1.2",
     "react-geosuggest": "^2.12.0",
     "react-location-picker": "^1.3.0",
     "react-pure-pagination": "^1.1.3",

@@ -1,33 +1,38 @@
 import React, { Component } from 'react';
-import { GoogleMap } from '@react-google-maps/api'
+import {MAP} from 'react-google-maps/lib/constants'
+import { GoogleMap } from '@react-google-maps/api';
 import { Marker } from '@react-google-maps/api';
-
+import { connect } from 'react-redux';
+import Geocode from "react-geocode";
+import { changeUnPostedItem} from '../../../actions';
+Geocode.setApiKey("AIzaSyDXBtBA9u33lDuxo11DGfD2bBmll_-5uYI");
+Geocode.enableDebug();
 class MyComponents extends Component {
     constructor(props) {
         super(props);
+        this.map = React.createRef();
         this.state = {
-            markerPosition: {lat: 49.2827291, lng: -123.12073750000002},
-            centerPosition: {lat: 49.2827291, lng: -123.12073750000002},
-            isMarkerShown:false
+            isMarkerShown:false,
         }
         this.addMarker = this.addMarker.bind(this);
-        this.setCenter = this.setCenter.bind(this);
     }
     addMarker(e) {
-        console.log('aaa');
         const newPlace = { lat: e.latLng.lat(), lng: e.latLng.lng() };
-        console.log('avvaa');
         console.log(newPlace);
         this.setState({
             isMarkerShown: true,
-            markerPosition: newPlace
         })
-    }
-    setCenter(e){
-        // console.log(e.target.getCenter());
-        // this.setState({
-        //     centerPosition: e.target.getBounds()
-        // })
+        this.props.changeItem("location",newPlace);
+        Geocode.fromLatLng(newPlace.lat, newPlace.lng).then(
+            response => {
+                const address = response.results[0].formatted_address;
+                console.log(address);
+                this.props.changeItem("locationStr",address);
+            },
+            error => {
+                console.error(error);
+            }
+        );
     }
   render() {
      return (
@@ -38,18 +43,21 @@ class MyComponents extends Component {
                     width: "800px",
                 }}
                 zoom={11}
-                center= {this.state.centerPosition}
+                center= {{lat: 49.249606, lng: -123.112262}}
                 onClick = {this.addMarker}
-                onDragEnd = {this.setCenter} 
+                ref={map => {
+                    this.map = map;
+                }}
+                // onDragEnd={this._map.getCenter().toJSON()}
             >
-                {/* {this.state.isMarkerShown && */}
+                {this.state.isMarkerShown &&
                 <Marker
                 onLoad={marker => {
                     console.log('marker: ', marker)
                 }}
-                position={this.state.markerPosition}
+                position={this.props.item.location}
                 />
-                {/* } */}
+                }
             </GoogleMap>
      )
   }
@@ -59,5 +67,11 @@ const mapStateToProps = (state) => {
         item:state.postItemReducer
     };
 }
-
-export default MyComponents;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeItem: (key,value) => {
+            dispatch(changeUnPostedItem(key,value));
+        }
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MyComponents);

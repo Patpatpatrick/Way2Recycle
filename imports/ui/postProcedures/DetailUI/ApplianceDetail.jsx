@@ -83,6 +83,10 @@ class ApplianceDetail extends Component {
                                 <label htmlFor="subject">description</label>
                                 <textarea onChange={this.handleChange} id="subject" name="description"
                                           placeholder="Write something.."></textarea>
+                                <label htmlFor="locationLabel">Your location is</label>
+                                <br/>
+                                <label htmlFor="location">{this.props.item.locationStr}</label>
+                                <br/>
                                 <label htmlFor="uploadImg">Upload Picture</label>
                                 <input type="file" onChange={this.handleImageChange}/>
                                 <div>
@@ -100,14 +104,14 @@ class ApplianceDetail extends Component {
                             <div>
                                 <div>Type in to set your location</div>
                                 <Geosuggest
-                                    initialValue = {this.props.item.locationStr}
+                                    placeholder = {"search and we'll give you suggestion"}
                                     onSuggestSelect={this.onSuggestSelect}
                                     location={new google.maps.LatLng(53.558572, 9.9278215)}
                                     radius="20"
                                     className='geoLocation'
                                 />
                                 <div>Or put a marker to set your location</div>
-                                <MapContainer />
+                                <MapContainer/>
                             </div>
                         </td>
                     </tr>
