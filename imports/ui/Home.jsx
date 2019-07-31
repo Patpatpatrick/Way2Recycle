@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import useStyles from './style/NavStyle';
 import UserList from "./UserList/UserList";
+import {Meteor} from "meteor/meteor";
 
 class home extends Component {
 
@@ -39,14 +40,24 @@ class home extends Component {
     // }
 
     componentDidMount() {
-      // this.props.dataToStore();
-      Meteor.call('getItems', function (err, result) {
-          if(err){
-              console.log("error");
-          }
-          // console.log(result);
-          this.props.dataToStore(result);
-      }.bind(this));
+        // this.props.dataToStore();
+
+
+        // Meteor.call('mySearch', "Bose", function(error, result) {
+        //     // console.log(result);
+        //     // console.log(error);
+        //     console.log(result);
+        //
+        // }.bind(this));
+
+
+        Meteor.call('getItems', function (err, result) {
+            if (err) {
+                console.log("error");
+            }
+            // console.log(result);
+            this.props.dataToStore(result);
+        }.bind(this));
     }
 
 
@@ -69,9 +80,9 @@ class home extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      dataToStore: (result) => {
-        dispatch(assignItemsToStoreItemArray(result));
-      }
+        dataToStore: (result) => {
+            dispatch(assignItemsToStoreItemArray(result));
+        }
     }
 };
 export default connect(null, mapDispatchToProps)(home);

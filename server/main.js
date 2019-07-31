@@ -3,9 +3,7 @@ import Links from '/imports/api/links';
 import '/imports/api/items.js';
 import {Items} from "../imports/api/items";
 import {Promise} from 'meteor/promise';
-import { WebApp } from 'meteor/webapp';
-
-
+import {WebApp} from 'meteor/webapp';
 
 
 function insertLink(title, url) {
@@ -40,7 +38,20 @@ WebApp.connectHandlers.use('/v1/items', (req, res, next) => {
     res.end(JSON.stringify(json));
 });
 
+Meteor.call('mySearch', "Bose", (error, result) => { console.log(result) });
+Meteor.methods({
+    'mySearch': function (searchValue) {
 
+        let items = [];
+        Items.find({$text: {$search: searchValue}}, {sort: {date: -1}}).forEach((entry) => {
+            items.push(entry);
+        });
+
+        // console.log(items);
+        return items;
+
+    }
+})
 
 
 Meteor.methods({
@@ -55,7 +66,7 @@ Meteor.methods({
     'getItems': function () {
 
         let items = [];
-        Items.find({}, {sort: {date: -1}}).forEach((entry)=>{
+        Items.find({}, {sort: {date: -1}}).forEach((entry) => {
             items.push(entry);
         })
         console.log("get all items");
@@ -71,9 +82,9 @@ Meteor.methods({
         //{category : 'Appliance'}
 
         console.log(queryParam)
-        if (queryParam['category']!=='None') {
-            let categoryQuery = {category:''}
-            categoryQuery.category  = queryParam['category']
+        if (queryParam['category'] !== 'None') {
+            let categoryQuery = {category: ''}
+            categoryQuery.category = queryParam['category']
             queryArray.push(categoryQuery)
         }
 
@@ -93,28 +104,25 @@ Meteor.methods({
         // at this point price string is guaranteed to be NON-empty
         if (typeof queryParamMinPrice !== 'number' && queryParamMinPrice !== "") {
             let minPrice = parseInt(queryParamMinPrice)
-            let minQuery =  {price:{$gte:''}}
+            let minQuery = {price: {$gte: ''}}
             minQuery.price.$gte = minPrice
             queryArray.push(minQuery)
         }
 
-        if (typeof queryParamMaxPrice !== 'number' && queryParamMaxPrice !=="") {
+        if (typeof queryParamMaxPrice !== 'number' && queryParamMaxPrice !== "") {
             let maxPrice = parseInt(queryParamMaxPrice)
-            let maxQuery = {price:{$lte:''}}
+            let maxQuery = {price: {$lte: ''}}
             maxQuery.price.$lte = maxPrice
             queryArray.push(maxQuery)
         }
 
         // {sort: {createdAt: -1}}
-        let itemArray = Items.find({$and:queryArray},  ).fetch()
+        let itemArray = Items.find({$and: queryArray},).fetch()
         console.log("get items by query");
         //console.log(itemArray[0])
         return itemArray;
     }
 });
-
-
-
 
 
 Meteor.methods({
@@ -165,6 +173,14 @@ Meteor.methods({
 
 
 Meteor.startup(() => {
+
+    if (Meteor.isServer) {
+        Items.rawCollection().createIndex({
+            "title": "text",
+            "description": "text"
+        })
+    }
+
 
     // password and token, etc should be moved out as env variable when deployed
 

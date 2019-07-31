@@ -105,7 +105,7 @@ const userEditReducer = (state = userEditReducerDefaultState, action) => {
 };
 
 
-postDefaultState = {
+const postDefaultState = {
     user_id: Meteor.userId(),
     title: 'An item',
     price: 0,
