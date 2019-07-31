@@ -114,20 +114,20 @@ class ItemsBox extends React.Component {
             queryKeyWord: "",
             currentPage:1,
             itemsPerPage:5,
-            predictedNumPages:0,
+            predictedNumPages:5,
         }
     }
 
 
     componentDidMount() {
         // Don't delete this block of comment yet
-        /* Meteor.call('getItems', function (err, result) {
+         Meteor.call('getItems', function (err, result) {
             if(err){
                 console.log("error");
             }
             // console.log(result);
             this.props.dataToStore(result);
-        }.bind(this))*/;
+        }.bind(this));
     }
 
     formatDate = (date) => {
