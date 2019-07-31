@@ -15,14 +15,15 @@ handleClick(){
   console.log(this.props);
   //this.props.updatePostedItem(this.props.index);
   // var newOBJ = Object.assign(this.props.itemForPopUp,)
-  Meteor.call('updateOneItem', this.props.itemForPopUp._id, this.props.itemForPopUp); // need to confirm
+  console.log(this.props.itemForPopUp);
+  // var newItemWithLikeUpdated = Object.assign({},this.props.itemForPopUp,{
+  //   like:[...this.itemForPopUp.like,Meteor.userId()]
+  // });
+  Meteor.call('updateOneItem', this.props.itemForPopUp._id, this.props.itemForPopU); // need to confirm
   console.log(this.props.itemForPopUp._id);
   alert('Update one item!');
   // this.props.close();
 }
-
-
-
 
 // handleImageChange(event) {
 //   event.preventDefault();
@@ -50,6 +51,7 @@ handleClick(){
           <div>date: {this.props.itemForPopUp.date.toString()}</div>
               {/*  {console.log(this.props.itemForPopUp.date)}*/}
           <button type='close' onClick={this.props.closePopeditem}>close</button>
+          <button type='like' onClick={this.handleClick}>like</button>
           </div>
         </div>
       );
