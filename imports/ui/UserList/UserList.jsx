@@ -142,6 +142,7 @@ class UserList extends React.Component {
                                     <Grid item xs={8} >
                                         <EditIcon className={classes.icon} onClick = {()=>this.clickEdit(item) } />
                                         <DeleteForeverIcon className={classes.iconDelete} onClick = {()=>this.clickDelete(item._id)} />
+                                            <p>{Array.from(item["like"]).length} likes</p>
                                     </Grid>
                                 </div>
                                 {this.props.toPop && <Popup/>}

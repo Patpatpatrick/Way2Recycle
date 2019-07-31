@@ -27,7 +27,7 @@ const homePageReducer = (state = homePgdefaultState, action) => {
 const itemBoxfaultState = {
     itemArray: [],
     shouldPopUpInitemBox: false,
-    popUpItemInItemBox:{}
+    popUpItemInItemBox:{},
 }
 const itemBoxReducer = (state = itemBoxfaultState, action) => {
     switch (action.type) {
@@ -69,7 +69,7 @@ const userItemReducer = (state = [], action) => {
 // popup components, it will also be modified to store the latest user input of the item to edit.
 const userEditReducerDefaultState = {
     popUp: false,
-	itemForPopUp:{}
+    itemForPopUp:{}
 }
 const userEditReducer = (state = userEditReducerDefaultState, action) => {
     switch (action.type) {
@@ -118,6 +118,7 @@ postDefaultState = {
     file: '',
     imagePreviewUrl: '',
     attribute: "",
+    like:["aaaaaa", "bbbb"]
 }
 const postItemReducer = (state = postDefaultState, action) => {
     switch (action.type) {

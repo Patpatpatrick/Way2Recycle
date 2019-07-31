@@ -201,7 +201,7 @@ button[type=submit],button[type=view]{
   border-radius: 4px;
   cursor: pointer;
 }
-button[type=reset],button[type=del],button[type=close],button[type=update] {
+button[type=reset],button[type=del],button[type=close],button[type=update], button[type=like]{
 	width: 4cm;
 	text-align: center;
 	background-color: rgb(11, 135, 207);

@@ -54,6 +54,7 @@ class ApplianceDetail extends Component {
     }
 
     onSuggestSelect(suggest) {
+        console.log(this.props.item.locationStr);
         this.props.changeItem('location',suggest.location);
         this.props.changeItem('locationStr',suggest.description);
         // this.setState({
@@ -97,16 +98,16 @@ class ApplianceDetail extends Component {
                         <td style={{"verticalAlign": "0%"}}>
                             <br></br>
                             <div>
-                                <div style={{display: 'flex', justifyContent: 'center'}}>Type in you location</div>
+                                <div>Type in to set your location</div>
                                 <Geosuggest
-                                    placeholder="Search Your Place!"
+                                    initialValue = {this.props.item.locationStr}
                                     onSuggestSelect={this.onSuggestSelect}
                                     location={new google.maps.LatLng(53.558572, 9.9278215)}
                                     radius="20"
                                     className='geoLocation'
-                                    value = {this.props.item.locationStr}
                                 />
-                                <MapContainer style={{display: 'flex', justifyContent: 'center'}} />
+                                <div>Or put a marker to set your location</div>
+                                <MapContainer />
                             </div>
                         </td>
                     </tr>

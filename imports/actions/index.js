@@ -85,6 +85,23 @@ export const changeUnsubmittedItem = (key, value) => {
         valueToUpdate: value
     };
 };
+
+// this is for like
+export const likeItem = (userId) => {
+    return {
+        type: "LIKE_ITEM",
+        idToAddToLike: userId
+    }
+}
+
+// this is for unlike 
+export const unlikeItem = (userId) => {
+    return {
+        type: "UNLIKE_ITEM",
+        idToRemoveFromLike: userId
+    }
+} 
+
 // this is for post!
 export const changeUnPostedItem = (key, value) => {
     return {
