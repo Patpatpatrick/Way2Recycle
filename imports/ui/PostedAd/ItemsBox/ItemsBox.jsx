@@ -105,11 +105,11 @@ const styles = theme => {
                 width: '70%',
             },
             cardActionCSS: {
-                margin: 10,
-                width: '95%',
-
             },
             cardColor : {
+
+                margin: 10,
+
                 /* backgroundColor: blue[50]*/
                 '&:hover': {
                     backgroundColor: blue[50]
@@ -377,13 +377,14 @@ class ItemsBox extends React.Component {
                                         ((this.state.currentPage)*this.state.itemsPerPage)
                                     ).map( (item, idx) => {
                                         return (
-                                            <TableRow key={idx}>
+                                            <TableRow key={idx} >
                                                 <div>
+{/*
                                                     <CardActionArea className={classes.cardActionCSS}>
+*/}
                                                         <Card className={classes.cardColor}>
-
                                                             <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
-                                                            <TableCell align="left">
+                                                            <TableCell align="left" style={{verticalAlign:'top'}} >
                                                                 <span className={classes.titleFont}>{item.title}</span>
                                                                 <div>--------------------------</div>
                                                                 <div>Price: ${item.price}</div>
@@ -396,7 +397,7 @@ class ItemsBox extends React.Component {
                                                             </TableCell>
 
                                                         </Card>
-                                                    </CardActionArea>
+                                                  {/*  </CardActionArea>*/}
 
                                                 </div>
                                             </TableRow>
