@@ -11,7 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {blue, green, grey, red} from "@material-ui/core/colors";
+import {blue, grey, red} from "@material-ui/core/colors";
 import {compose} from "redux";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {assignItemsToStoreItemArray, searchFromNavBar} from "../../../actions";
@@ -44,12 +44,12 @@ const styles = theme => {
                 left: '5%',
                 right: '5%',
                 marginTop: 30,
-                marginBottom: 30
+                marginBottom:30
             },
             paper: {
                 padding: theme.spacing(1),
                 textAlign: 'center',
-               /* color: theme.palette.text.secondary,*/
+                /* color: theme.palette.text.secondary,*/
                 backgroundColor: grey[200]
             },
 
@@ -110,14 +110,10 @@ const styles = theme => {
 
             },
             cardColor : {
+                /* backgroundColor: blue[50]*/
                 '&:hover': {
                     backgroundColor: blue[50]
                 }
-                /*backgroundColor: blue[50]*/
-            },
-
-            priceStyle : {
-              color: grey[400],
             }
 
 
@@ -171,7 +167,7 @@ class ItemsBox extends React.Component {
 
         if (this.props.isSearchedFromNavBar) {
 
-           this.props.searchFromNavBar(false)
+            this.props.searchFromNavBar(false)
             let searchString = this.props.keywordFromNavBar
             Meteor.call('mySearch', searchString, (error, result) => {
                 if (error) {
@@ -277,39 +273,38 @@ class ItemsBox extends React.Component {
         this.setState({inputString:event.target.value})
     }
 
-	render() {
+    render() {
         const { classes } = this.props;
-
         return (
             <div>
-            <div className={classes.root.toString() + " row1"}>
+                <div className={classes.root.toString() + " row1"}>
 
 
-                <div className={classes.padding.toString() + " column1"}>
-                    <Paper className={classes.filterPaper}>
-                        <div style={{zIndex:-1}} >
-                            <div>Category</div>
-                            <FormControl  className={classes.formControl}>
-                                <FormHelperText>Category</FormHelperText>
-                                <Select
-                                    value={this.state.queryCategory}
-                                    displayEmpty
-                                    onChange={this.changeQueryCategory}
-                                    input={<OutlinedInput labelWidth={0} name="" id="" />}
-                                >
-                                    <MenuItem value={"Appliance"}>Appliance</MenuItem>
-                                    <MenuItem value={"Car"}>Car</MenuItem>
-                                    <MenuItem value={"Book"}>Book</MenuItem>
-                                    <MenuItem value={"Furniture"}>Furniture</MenuItem>
-                                    <MenuItem value={"Computer"}>Computer</MenuItem>
-                                    <MenuItem value={"Other"}>Other</MenuItem>
-                                </Select>
-                            </FormControl>
+                    <div className={classes.padding.toString() + " column1"}>
+                        <Paper className={classes.filterPaper}>
+                            <div style={{zIndex:-1}} >
+                                <div>Category</div>
+                                <FormControl  className={classes.formControl}>
+                                    <FormHelperText>Category</FormHelperText>
+                                    <Select
+                                        value={this.state.queryCategory}
+                                        displayEmpty
+                                        onChange={this.changeQueryCategory}
+                                        input={<OutlinedInput labelWidth={0} name="" id="" />}
+                                    >
+                                        <MenuItem value={"Appliance"}>Appliance</MenuItem>
+                                        <MenuItem value={"Car"}>Car</MenuItem>
+                                        <MenuItem value={"Book"}>Book</MenuItem>
+                                        <MenuItem value={"Furniture"}>Furniture</MenuItem>
+                                        <MenuItem value={"Computer"}>Computer</MenuItem>
+                                        <MenuItem value={"Other"}>Other</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </div>
-                        <div>
-                            <br/>
-                            <div>Price Range</div>
-                            <span>
+                            <div>
+                                <br/>
+                                <div>Price Range</div>
+                                <span>
                             <TextField
                                 placeholder="min"
                                 className={classes.textField}
@@ -320,43 +315,43 @@ class ItemsBox extends React.Component {
                             />
 
                              <TextField
-                                  id="outlined-email-input"
-                                  placeholder={"max"}
-                                  className={classes.textField}
-                                  type=""
-                                  margin="normal"
-                                  variant="outlined"
-                                  onChange = {this.changeQueryMaxPrice}
+                                 id="outlined-email-input"
+                                 placeholder={"max"}
+                                 className={classes.textField}
+                                 type=""
+                                 margin="normal"
+                                 variant="outlined"
+                                 onChange = {this.changeQueryMaxPrice}
                              />
                             </span>
-                        </div>
+                            </div>
 
 
-                        <br/>
-                        <Typography id="discrete-slider-restrict" gutterBottom>
-                            Number of Items per Page
-                        </Typography>
-                        <Slider
-                            defaultValue={5}
-                            valueLabelFormat={this.numPagesLabelSlider}
-                            getAriaValueText={this.valuetext}
-                            aria-labelledby="discrete-slider-restrict"
-                            step={null}
-                            valueLabelDisplay="auto"
-                            marks={marks}
-                            max={20}
-                            onChange={(event, value) =>this.changeNumPages(event, value)}
-                            /*onDragStop={this.changeNumPages}*/
-                        />
-                        <div>
-                            <button onClick={this.searchByParam}>Submit</button>
-                        </div>
-                    </Paper>
-                </div>
+                            <br/>
+                            <Typography id="discrete-slider-restrict" gutterBottom>
+                                Number of Items per Page
+                            </Typography>
+                            <Slider
+                                defaultValue={5}
+                                valueLabelFormat={this.numPagesLabelSlider}
+                                getAriaValueText={this.valuetext}
+                                aria-labelledby="discrete-slider-restrict"
+                                step={null}
+                                valueLabelDisplay="auto"
+                                marks={marks}
+                                max={20}
+                                onChange={(event, value) =>this.changeNumPages(event, value)}
+                                /*onDragStop={this.changeNumPages}*/
+                            />
+                            <div>
+                                <button onClick={this.searchByParam}>Submit</button>
+                            </div>
+                        </Paper>
+                    </div>
 
-            <Paper className={classes.paper.toString() + " column2"}>
-                {/*<Paper className={classes.rootSearchBar}>*/}
-                   <span>
+                    <Paper className={classes.paper.toString() + " column2"}>
+                        {/*<Paper className={classes.rootSearchBar}>*/}
+                        <span>
                     <InputBase
                         className={classes.input}
                         placeholder="Search Keywords"
@@ -369,51 +364,55 @@ class ItemsBox extends React.Component {
                         <SearchIcon />
                     </IconButton>
                    </span>
-               {/* </Paper>*/}
+                        {/* </Paper>*/}
 
-                {this.props.itemArray.length===0?
-                    <div>
-                    No result found!
-                    </div>:
-                    <Table className={classes.table}>
-                        <div>
-                        <TableBody>
-                            {this.props.itemArray.slice(((this.state.currentPage-1)*this.state.itemsPerPage),
-                                ((this.state.currentPage)*this.state.itemsPerPage)
-                            ).map( (item, idx) => {
-                                return (
-                                    <TableRow key={idx}>
-                                            <CardActionArea className={classes.cardActionCSS}>
-                                                <Card className={classes.cardColor}>
+                        {this.props.itemArray.length===0?
+                            <div>
+                                No result found!
+                            </div>:
+                            <Table className={classes.table}>
 
-                                                    <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
-                                                    <TableCell align="left">
-                                                        <div className={classes.titleFont}>{item.title}</div>
-                                                        <div>--------------------------</div>
-                                                        <div>Price: ${item.price}</div>
-                                                        <div>Category: {item.category}</div>
-                                                        <div>Description: {item.description}</div>
-                                                        <div>Date: {this.formatDate(item.date.toString())}</div>
-                                                        <div><ViewOneItem index = {idx}/></div>
-                                                    </TableCell>
+                                <TableBody>
+                                    {this.props.itemArray.slice(((this.state.currentPage-1)*this.state.itemsPerPage),
+                                        ((this.state.currentPage)*this.state.itemsPerPage)
+                                    ).map( (item, idx) => {
+                                        return (
+                                            <TableRow key={idx}>
+                                                <div>
+                                                    <CardActionArea className={classes.cardActionCSS}>
+                                                        <Card className={classes.cardColor}>
 
-                                                </Card>
-                                            </CardActionArea>
-                                    </TableRow>
-              )
-                            })
-                            }
-                        </TableBody>
-                        </div>
-                    </Table>}
+                                                            <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
+                                                            <TableCell align="left">
+                                                                <span className={classes.titleFont}>{item.title}</span>
+                                                                <div>--------------------------</div>
+                                                                <div>Price: ${item.price}</div>
+                                                                <div>Category: {item.category}</div>
+                                                                <div>Description: {item.description}</div>
+                                                                <div>Date: {this.formatDate(item.date.toString())}</div>
+
+                                                                <br/>
+                                                                <div><ViewOneItem index = {idx}/></div>
+                                                            </TableCell>
+
+                                                        </Card>
+                                                    </CardActionArea>
+
+                                                </div>
+                                            </TableRow>
+                                        )
+                                    })
+                                    }
+                                </TableBody>
+                            </Table>}
 
 
 
-                <Paginate total={this.props.itemArray.length}
-                          perPage={this.state.itemsPerPage} current={this.state.currentPage}
-                          onChange={this.handlePaginate} styles={paginationStyle} />
-            </Paper>
-            </div>
+                        <Paginate total={this.props.itemArray.length}
+                                  perPage={this.state.itemsPerPage} current={this.state.currentPage}
+                                  onChange={this.handlePaginate} styles={paginationStyle} />
+                    </Paper>
+                </div>
             </div>
         );
     }
