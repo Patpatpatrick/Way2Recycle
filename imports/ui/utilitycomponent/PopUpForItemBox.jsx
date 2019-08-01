@@ -48,6 +48,7 @@ handleClick(){
           <div>category: {this.props.itemForPopUp.category}</div>
           <div>description: {this.props.itemForPopUp.description}</div>
           <div>date: {this.props.itemForPopUp.date.toString()}</div>
+              {/*  {console.log(this.props.itemForPopUp.date)}*/}
           <button type='close' onClick={this.props.closePopeditem}>close</button>
           </div>
         </div>

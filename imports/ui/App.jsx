@@ -38,11 +38,9 @@ class App extends React.Component{
             return (<ResetPasswordByEmail token={passwordTokenFromEmail}/>)
         }
 
-
         if (this.props.choice ==='sendPasswordToEmail') {
             return (<SendPasswordToEmail/>)
         }
-
 
         if (this.props.choice === "home") {
             // console.log('should be here');

@@ -39,6 +39,17 @@ class ApplianceDetail extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        // <K:V> ==> {user_id : Meteor.userId()}
+        let key = 'user_id'
+        let meteorUserId = Meteor.userId();
+
+        if (meteorUserId==='' || meteorUserId===undefined) {
+            console.log("Error: The user is attempting to submit item without being logged in!")
+            alert("Error: The user is attempting to submit item without being logged in!")
+            return;
+        }
+        
+        this.props.changeItem(key,meteorUserId);
         this.props.showReview();
     }
 

@@ -105,7 +105,7 @@ const userEditReducer = (state = userEditReducerDefaultState, action) => {
 };
 
 
-postDefaultState = {
+const postDefaultState = {
     user_id: Meteor.userId(),
     title: 'An item',
     price: 0,
@@ -119,15 +119,19 @@ postDefaultState = {
     attribute: "",
 }
 const postItemReducer = (state = postDefaultState, action) => {
+    let new_date = new Date();
+    new_date = new_date.toLocaleString();
     switch (action.type) {
         case actions.CHANGE_UNSUBMITTED_ITEM:
             var newitem = Object.assign({}, state,
                 {
                     [action.keyToChange]: action.valueToUpdate,
-                    'date': new Date()
+                    // 'date': new Date()
+                    'date': new_date
                 }
             );
-            console.log(newitem);
+            // line for debugging change in state for changing appliance post ad fields
+            //console.log(newitem);
             return newitem
         default:
             return state;
@@ -218,6 +222,20 @@ const renderChoiceAssigner = (renderChoice = 'home', action) => {
     }
 }
 
+const isSearchedFromNavBar = (boolean = false, action) => {
+    if (action.type === 'SEARCH_FROM_NAV_BAR') {
+        return action.payload;
+    }
+    return boolean;
+}
+
+const keywordFromNavBar = (string = 'test', action) => {
+    if (action.type === 'KEYWORD_NAV_BAR') {
+        return action.payload;
+    }
+    return string;
+}
+
 // const userItemReducer = (state = defaultState, action) => {
 // 	switch(action.type){
 //
@@ -266,5 +284,10 @@ export default combineReducers({
 	// for viewOneItem allow edit posted items
 	// updateItem,
     // for change choice on Nav
-    renderChoiceAssigner
+    renderChoiceAssigner,
+
+    // Item was searched from Nav bar
+    isSearchedFromNavBar:isSearchedFromNavBar,
+    // keyword from Nav Bar
+    keywordFromNavBar: keywordFromNavBar
 });

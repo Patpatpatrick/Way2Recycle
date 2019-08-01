@@ -14,7 +14,7 @@ import Paper from '@material-ui/core/Paper';
 import {blue, red} from "@material-ui/core/colors";
 import {compose} from "redux";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {assignItemsToStoreItemArray} from "../../../actions";
+import {assignItemsToStoreItemArray, searchFromNavBar} from "../../../actions";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -29,6 +29,11 @@ import "react-pure-pagination/dist/Paginate.css";
 import './itemBox.css'
 import Typography from "../../Typography";
 import Slider from '@material-ui/core/Slider';
+import {Meteor} from "meteor/meteor";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import Divider from "@material-ui/core/Divider";
+import SearchIcon from '@material-ui/icons/Search';
 
 const styles = theme => {
     return ({
@@ -74,6 +79,28 @@ const styles = theme => {
             selectEmpty: {
                 marginTop: theme.spacing(2),
             },
+
+            rootSearchBar: {
+                padding: '2px 4px',
+                display: 'flex',
+                alignItems: 'center',
+                width: '60%',
+            },
+            iconButton: {
+                padding: 10,
+            },
+            divider: {
+                width: 1,
+                height: 28,
+                margin: 4,
+            },
+            input: {
+                marginLeft: 8,
+                flex: 1,
+                size: 35,
+            },
+
+
         }
     );
 };
@@ -115,19 +142,46 @@ class ItemsBox extends React.Component {
             currentPage:1,
             itemsPerPage:5,
             predictedNumPages:5,
+            inputString:""
         }
     }
 
 
     componentDidMount() {
-        // Don't delete this block of comment yet
-         Meteor.call('getItems', function (err, result) {
-            if(err){
-                console.log("error");
+
+        if (this.props.isSearchedFromNavBar) {
+
+           this.props.searchFromNavBar(false)
+            let searchString = this.props.keywordFromNavBar
+            Meteor.call('mySearch', searchString, (error, result) => {
+                if (error) {
+                    console.log("failed to view items searched from nav bar")
+                }
+                this.props.dataToStore(result);
+                console.log(result)
+            });
+        } else {
+            Meteor.call('getItems', function (err, result) {
+                if(err){
+                    console.log("error getting default list of items");
+                }
+                this.props.dataToStore(result);
+            }.bind(this));
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.isSearchedFromNavBar !== prevProps.isSearchedFromNavBar) {
+            // call this when search bar was clicked from view post item
+            if (this.props.renderChoiceAssigner === prevProps.renderChoiceAssigner) {
+                let searchString = this.props.keywordFromNavBar
+                Meteor.call('mySearch', searchString, (error, result) => {
+                    this.props.searchFromNavBar(false)
+                    this.props.dataToStore(result);
+                    console.log(result)
+                });
             }
-            // console.log(result);
-            this.props.dataToStore(result);
-        }.bind(this));
+        }
     }
 
     formatDate = (date) => {
@@ -139,13 +193,14 @@ class ItemsBox extends React.Component {
         let queryParam = {
             minPrice: 0,
             maxPrice: 0,
-            category: ""
+            category: "",
+            keyword: ""
         }
 
         let minPrice = this.state.queryMinPrice
         let maxPrice = this.state.queryMaxPrice
         let category = this.state.queryCategory
-        let keyWord = this.state.queryKeyWord
+        let keyWord = this.state.inputString
 
         queryParam.minPrice = minPrice
         queryParam.maxPrice = maxPrice
@@ -198,6 +253,9 @@ class ItemsBox extends React.Component {
             :this.setState({predictedNumPages:value})
     }
 
+    changeInputString = (event) => {
+        this.setState({inputString:event.target.value})
+    }
 
 	render() {
         const { classes } = this.props;
@@ -276,6 +334,19 @@ class ItemsBox extends React.Component {
                 </div>
 
             <Paper className={classes.paper.toString() + " column2"}>
+                <Paper className={classes.rootSearchBar}>
+                    <InputBase
+                        className={classes.input}
+                        placeholder="Search Keywords"
+                        inputProps={{ 'aria-label': 'Search Keywords' }}
+                        onChange={this.changeInputString}
+                    />
+                    <IconButton className={classes.iconButton} aria-label="search"
+                                onClick={()=> this.searchByParam()}>
+                        <Divider className={classes.divider} />
+                        <SearchIcon />
+                    </IconButton>
+                </Paper>
                 <Table className={classes.table}>
 
                     <TableBody>
@@ -312,17 +383,24 @@ class ItemsBox extends React.Component {
         );
     }
 }
-const mapStateToProps = (state) => {
-    return { itemArray: state.itemBoxReducer.itemArray};
-}
 
 const mapDispatchToProps = (dispatch) => {
     return {
         dataToStore: (result) => {
             dispatch(assignItemsToStoreItemArray(result));
-        }
+        },
+        searchFromNavBar: (text) => dispatch(searchFromNavBar(text)),
     }
 };
+
+const mapStateToProps = (state) => {
+    return { itemArray: state.itemBoxReducer.itemArray,
+        isSearchedFromNavBar: state.isSearchedFromNavBar,
+        keywordFromNavBar: state.keywordFromNavBar,
+        renderChoiceAssigner: state.renderChoiceAssigner
+    };
+}
+
 //export default connect(mapStateToProps,null)(ItemsBox);
 
 export default compose (
