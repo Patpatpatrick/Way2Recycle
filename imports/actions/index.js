@@ -185,6 +185,20 @@ export const changeChoiceOnNav = (choice) => {
     };
 };
 
+export const searchFromNavBar = (boolean) => {
+    return {
+        type: 'SEARCH_FROM_NAV_BAR',
+        payload:boolean
+    }
+}
+
+export const searchWordFromNav = (string) => {
+    return {
+        type: "KEYWORD_NAV_BAR",
+        payload:string
+    }
+}
+
 // export const dataToStore = () => {
 //     return (dispatch) => {
 // 		Meteor.call('getItems', function (err, result) {
