@@ -11,7 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {blue, red} from "@material-ui/core/colors";
+import {blue, grey, red} from "@material-ui/core/colors";
 import {compose} from "redux";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {assignItemsToStoreItemArray, searchFromNavBar} from "../../../actions";
@@ -34,6 +34,8 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import Divider from "@material-ui/core/Divider";
 import SearchIcon from '@material-ui/icons/Search';
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
 
 const styles = theme => {
     return ({
@@ -41,11 +43,13 @@ const styles = theme => {
                 position: 'absolute',
                 left: '5%',
                 right: '5%',
+                top:'10%',
             },
             paper: {
                 padding: theme.spacing(1),
                 textAlign: 'center',
-                color: theme.palette.text.secondary,
+               /* color: theme.palette.text.secondary,*/
+                backgroundColor: grey[200]
             },
 
             filterPaper: {
@@ -97,8 +101,16 @@ const styles = theme => {
             input: {
                 marginLeft: 8,
                 flex: 1,
-                size: 35,
+                width: '70%',
             },
+            cardActionCSS: {
+                margin: 10,
+                width: '95%',
+
+            },
+            cardColor : {
+               /* backgroundColor: blue[50]*/
+            }
 
 
         }
@@ -334,7 +346,8 @@ class ItemsBox extends React.Component {
                 </div>
 
             <Paper className={classes.paper.toString() + " column2"}>
-                <Paper className={classes.rootSearchBar}>
+                {/*<Paper className={classes.rootSearchBar}>*/}
+                   <span>
                     <InputBase
                         className={classes.input}
                         placeholder="Search Keywords"
@@ -346,7 +359,8 @@ class ItemsBox extends React.Component {
                         <Divider className={classes.divider} />
                         <SearchIcon />
                     </IconButton>
-                </Paper>
+                   </span>
+               {/* </Paper>*/}
                 <Table className={classes.table}>
 
                     <TableBody>
@@ -355,6 +369,10 @@ class ItemsBox extends React.Component {
                     ).map( (item, idx) => {
                         return (
                             <TableRow key={idx}>
+                                <div>
+                                <CardActionArea className={classes.cardActionCSS}>
+                                <Card className={classes.cardColor}>
+
                                 <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
                                 <TableCell align="left">
                                         <span className={classes.titleFont}>{item.title}</span>
@@ -367,6 +385,11 @@ class ItemsBox extends React.Component {
                                     <br/>
                                     <div><ViewOneItem index = {idx}/></div>
                                 </TableCell>
+
+                                </Card>
+                                    </CardActionArea>
+
+                                </div>
                             </TableRow>
                         )
                         })
