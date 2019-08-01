@@ -11,7 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {blue, grey, red} from "@material-ui/core/colors";
+import {blue, green, grey, red} from "@material-ui/core/colors";
 import {compose} from "redux";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {assignItemsToStoreItemArray, searchFromNavBar} from "../../../actions";
@@ -43,7 +43,8 @@ const styles = theme => {
                 position: 'absolute',
                 left: '5%',
                 right: '5%',
-                top:'10%',
+                marginTop: 30,
+                marginBottom: 30
             },
             paper: {
                 padding: theme.spacing(1),
@@ -109,7 +110,14 @@ const styles = theme => {
 
             },
             cardColor : {
-               /* backgroundColor: blue[50]*/
+                '&:hover': {
+                    backgroundColor: blue[50]
+                }
+                /*backgroundColor: blue[50]*/
+            },
+
+            priceStyle : {
+              color: grey[400],
             }
 
 
@@ -271,6 +279,7 @@ class ItemsBox extends React.Component {
 
 	render() {
         const { classes } = this.props;
+
         return (
             <div>
             <div className={classes.root.toString() + " row1"}>
@@ -367,39 +376,35 @@ class ItemsBox extends React.Component {
                     No result found!
                     </div>:
                     <Table className={classes.table}>
-
+                        <div>
                         <TableBody>
                             {this.props.itemArray.slice(((this.state.currentPage-1)*this.state.itemsPerPage),
                                 ((this.state.currentPage)*this.state.itemsPerPage)
                             ).map( (item, idx) => {
                                 return (
                                     <TableRow key={idx}>
-                                        <div>
                                             <CardActionArea className={classes.cardActionCSS}>
                                                 <Card className={classes.cardColor}>
 
                                                     <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
                                                     <TableCell align="left">
-                                                        <span className={classes.titleFont}>{item.title}</span>
+                                                        <div className={classes.titleFont}>{item.title}</div>
                                                         <div>--------------------------</div>
                                                         <div>Price: ${item.price}</div>
                                                         <div>Category: {item.category}</div>
                                                         <div>Description: {item.description}</div>
                                                         <div>Date: {this.formatDate(item.date.toString())}</div>
-
-                                                        <br/>
                                                         <div><ViewOneItem index = {idx}/></div>
                                                     </TableCell>
 
                                                 </Card>
                                             </CardActionArea>
-
-                                        </div>
                                     </TableRow>
-                                )
+              )
                             })
                             }
                         </TableBody>
+                        </div>
                     </Table>}
 
 
