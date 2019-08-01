@@ -361,41 +361,48 @@ class ItemsBox extends React.Component {
                     </IconButton>
                    </span>
                {/* </Paper>*/}
-                <Table className={classes.table}>
 
-                    <TableBody>
-                    {this.props.itemArray.slice(((this.state.currentPage-1)*this.state.itemsPerPage),
-                        ((this.state.currentPage)*this.state.itemsPerPage)
-                    ).map( (item, idx) => {
-                        return (
-                            <TableRow key={idx}>
-                                <div>
-                                <CardActionArea className={classes.cardActionCSS}>
-                                <Card className={classes.cardColor}>
+                {this.props.itemArray.length===0?
+                    <div>
+                    No result found!
+                    </div>:
+                    <Table className={classes.table}>
 
-                                <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
-                                <TableCell align="left">
-                                        <span className={classes.titleFont}>{item.title}</span>
-                                         <div>--------------------------</div>
-                                     <div>Price: ${item.price}</div>
-                                    <div>Category: {item.category}</div>
-                                    <div>Description: {item.description}</div>
-                                    <div>Date: {this.formatDate(item.date.toString())}</div>
+                        <TableBody>
+                            {this.props.itemArray.slice(((this.state.currentPage-1)*this.state.itemsPerPage),
+                                ((this.state.currentPage)*this.state.itemsPerPage)
+                            ).map( (item, idx) => {
+                                return (
+                                    <TableRow key={idx}>
+                                        <div>
+                                            <CardActionArea className={classes.cardActionCSS}>
+                                                <Card className={classes.cardColor}>
 
-                                    <br/>
-                                    <div><ViewOneItem index = {idx}/></div>
-                                </TableCell>
+                                                    <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
+                                                    <TableCell align="left">
+                                                        <span className={classes.titleFont}>{item.title}</span>
+                                                        <div>--------------------------</div>
+                                                        <div>Price: ${item.price}</div>
+                                                        <div>Category: {item.category}</div>
+                                                        <div>Description: {item.description}</div>
+                                                        <div>Date: {this.formatDate(item.date.toString())}</div>
 
-                                </Card>
-                                    </CardActionArea>
+                                                        <br/>
+                                                        <div><ViewOneItem index = {idx}/></div>
+                                                    </TableCell>
 
-                                </div>
-                            </TableRow>
-                        )
-                        })
-                    }
-                    </TableBody>
-                </Table>
+                                                </Card>
+                                            </CardActionArea>
+
+                                        </div>
+                                    </TableRow>
+                                )
+                            })
+                            }
+                        </TableBody>
+                    </Table>}
+
+
 
                 <Paginate total={this.props.itemArray.length}
                           perPage={this.state.itemsPerPage} current={this.state.currentPage}
