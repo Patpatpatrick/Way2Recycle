@@ -12,6 +12,7 @@ export const CHANGE_INPUT = 'CHANGE_INPUT';
 export const UPDATE_INPUT = 'UPDATE_INPUT';
 export const CHANGE_UNSUBMITTED_ITEM = 'CHANGE_UNSUBMITTED_ITEM';
 // for post page
+export const RESET_POST_TO_INITIAL = "RESET_POST_TO_INITIAL";
 export const SHOW_REVIEW = 'SHOW_REVIEW';
 export const CLOSE_REVIEW = 'CLOSE_REVIEW';
 
@@ -149,6 +150,13 @@ export const logInFlag = () => {
 
 }
 // action creators for prepost review
+
+export const resetPost = () => {
+    return {
+        type: RESET_POST_TO_INITIAL
+    };
+};
+
 
 export const showPostReview = () => {
     return {

@@ -109,7 +109,7 @@ const postDefaultState = {
     user_id: Meteor.userId(),
     title: 'An item',
     price: 0,
-    category: '',
+    category: "",
     description: 'Description',
     location: {lat: 49.2827291, lng: -123.12073750000002},
     locationStr: "Vancouver,BC,Canada",
@@ -133,6 +133,8 @@ const postItemReducer = (state = postDefaultState, action) => {
             // line for debugging change in state for changing appliance post ad fields
             //console.log(newitem);
             return newitem
+        case actions.RESET_POST_TO_INITIAL:
+            return postDefaultState;
         default:
             return state;
     }
