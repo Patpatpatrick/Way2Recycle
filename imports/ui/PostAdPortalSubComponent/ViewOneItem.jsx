@@ -11,13 +11,12 @@ class SeeOne extends React.Component {
     handleClick(){
         console.log(this.props.index);
         this.props.showIndex(this.props.index);
-        console.log("showing item index" + this.props.index);
     }
 	render() {
         return (
             <div>
                 <Button type="view" onClick = {this.handleClick} id={this.props.index + 'View'}>ViewInPopUp</Button>
-                {this.props.toPop && <Popup/>}
+                {this.props.toPop && <Popup />}
             </div>   
         );
     }

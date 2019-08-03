@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { popUpItem}  from '../../actions';
 import Button from '@material-ui/core/Button';
-import Popup from '../utilitycomponent/PopUpForItemBox';
+import Popup from '../utilitycomponent/PopUpForItemBoxDialog';
 import { popUpItemInItemsBox} from '../../actions';
 
 class SeeOne extends React.Component {

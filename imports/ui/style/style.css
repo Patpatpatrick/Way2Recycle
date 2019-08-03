@@ -101,14 +101,14 @@ body{
   right: 0;
   bottom: 0;
   margin-left: 100 px;
-  background-color: rgba(0,0,0, 0.5);
+  background-color: rgb(0, 0, 0);
 }
 .popup_inner {
   position: absolute;
-  left: 30%;
-  right: 30%;
+  left: 15%;
+  right: 15%;
   top: 10%;
-  bottom: 10%;
+  bottom: 0%;
   margin-left: 100;
   text-align: center;
   background: white;
@@ -201,7 +201,7 @@ button[type=submit],button[type=view]{
   border-radius: 4px;
   cursor: pointer;
 }
-button[type=reset],button[type=del],button[type=close],button[type=update] {
+button[type=reset],button[type=del],button[type=close],button[type=update], button[type=like]{
 	width: 4cm;
 	text-align: center;
 	background-color: rgb(11, 135, 207);

@@ -2,6 +2,9 @@
 export const VIEW_ONE_IN_ITEM_BOX = 'VIEW_ONE_IN_ITEM_BOX';
 export const CLOSE_ONE_IN_ITEM_BOX = 'CLOSE_ONE_IN_ITEM_BOX';
 
+export const LIKE_ITEM = 'LIKE_ITEM';
+export const UNLIKE_ITEM = 'UNLIKE_ITEM';
+
 export const GEN_ITEM = 'GEN_ITEM';
 export const CLEAR_ALL = 'CLEAR_ALL';
 export const CLEAR_ONE = 'CLEAR_ONE';
@@ -33,6 +36,8 @@ export const CHANGE_CREATE_EMAIL_INPUT = 'CHANGE_CREATE_EMAIL_INPUT'
 export const CHANGE_CHOICE_ON_NAV = 'CHANGE_CHOICE_ON_NAV'
 // for assign fetched data to store
 export const ASSIGN_SERVER_ITEMS_TO_STORE = 'ASSIGN_SERVER_ITEMS_TO_STORE'
+export const reset_cate_in_post = 'reset_cate_in_post'
+
 
 export const Load_User_Items = 'Load_User_Items'
 export const popUpItemInItemsBox = (index) => {
@@ -76,13 +81,32 @@ export const closePopedItem = () => {
     };
 };
 // this is for user edit
-export const changeUnsubmittedItem = (key, value) => {
+export const updateItem = (key, value) => {
     return {
         type: CHANGE_INPUT,
         keyToChange: key,
         valueToUpdate: value
     };
 };
+
+// this is for like
+export const likeItem = (userId, postId) => {
+    return {
+        type: LIKE_ITEM,
+        idToAddToLike: userId,
+        postLiked: postId
+    }
+}
+
+// this is for unlike 
+export const unlikeItem = (userId, postId) => {
+    return {
+        type: UNLIKE_ITEM,
+        idToRemoveFromLike: userId,
+        postUnliked: postId
+    }
+} 
+
 // this is for post!
 export const changeUnPostedItem = (key, value) => {
     return {
@@ -224,3 +248,7 @@ export const loadUserItems = (items) => ({
     type: Load_User_Items,
     items
 });
+
+export const resetCate = () =>({
+    type: reset_cate_in_post
+})

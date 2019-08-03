@@ -160,6 +160,9 @@ Meteor.methods({
 
 Meteor.methods({
     'updateOneItem': function (pass_id, obj) {
+        console.log("liked" + pass_id);
+        console.log(obj);
+        console.log(obj.like.join());
         Items.update({_id: pass_id}, {
             $set: {
                 title: obj.title,
@@ -169,11 +172,12 @@ Meteor.methods({
                 category: obj.category,
                 date: new Date(),
                 imagePreviewUrl: obj.imagePreviewUrl,
-                attribute: obj.attribute
-
+                attribute: obj.attribute,
+                like: obj.like,
             }
         });
         console.log("update one item id is " + pass_id);
+       
     }
 });
 

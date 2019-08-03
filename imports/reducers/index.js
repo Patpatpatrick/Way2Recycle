@@ -27,7 +27,11 @@ const homePageReducer = (state = homePgdefaultState, action) => {
 const itemBoxfaultState = {
     itemArray: [],
     shouldPopUpInitemBox: false,
-    popUpItemInItemBox:{}
+    popUpItemInItemBox:{},
+    // likedItemList:[],
+    // likedUserList:[],
+    Liked: false,
+    Unliked: false,
 }
 const itemBoxReducer = (state = itemBoxfaultState, action) => {
     switch (action.type) {
@@ -38,6 +42,7 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
                 }
             );
         case actions.VIEW_ONE_IN_ITEM_BOX:
+            console.log('View one item!')
             return Object.assign({}, state,
                 {
                     shouldPopUpInitemBox: true,
@@ -45,10 +50,56 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
                 }
             );
         case actions.CLOSE_ONE_IN_ITEM_BOX:
-            console.log('fsdfsdfa');
+            console.log('Close one item!');
             return Object.assign({}, state,
                 {
                     shouldPopUpInitemBox: false,
+                }
+            );
+        
+        case actions.LIKE_ITEM:
+            console.log('like one item!');
+            let newLike = [...state.popUpItemInItemBox.like];
+            console.log(newLike);
+            console.log(newLike.length);
+            newLike.splice(newLike.length, 0, action.idToAddToLike);
+            console.log(newLike);
+            let revisedPopUpItem=  Object.assign({},state.popUpItemInItemBox, 
+                {
+                like: newLike,
+            }
+            );
+            console.log(newLike);
+            console.log(revisedPopUpItem);
+            console.log(Object.assign({}, state,
+                {
+                    shouldPopUpInitemBox: true,
+                    popUpItemInItemBox:revisedPopUpItem,
+                    liked: true,
+                }
+            ));
+            return Object.assign({}, state,
+                {
+                    shouldPopUpInitemBox: true,
+                    popUpItemInItemBox:revisedPopUpItem,
+                    liked: true,
+                }
+            );
+        
+        case actions.UNLIKE_ITEM:
+            console.log('unlike one item!');
+            var newLikeList = [...state.likedItemList];
+            newLikeList.splice(action.postUnliked, 1);
+            var newUserList = [...state.likedUserList];
+            newUserList.splice(action.idToRemoveFromLike, 1);
+
+            return Object.assign({}, state,
+                {
+                    shouldPopUpInitemBox: true,
+                    popUpItemInItemBox:state.itemArray[action.indexToPop],
+                    likedItemList:newLikeList,
+                    likedUserList:newUserList,
+                    unliked: true,
                 }
             );
         default:
@@ -58,6 +109,7 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
 
 // this reducer is for showing items in dashboard, defaulte state is just an array, make by henry
 const userItemReducer = (state = [], action) => {
+    console.log(action.items);
     if (action.type === actions.Load_User_Items) {
         return [...action.items];
     }
@@ -68,7 +120,7 @@ const userItemReducer = (state = [], action) => {
 // popup components, it will also be modified to store the latest user input of the item to edit.
 const userEditReducerDefaultState = {
     popUp: false,
-	itemForPopUp:{}
+    itemForPopUp:{}
 }
 const userEditReducer = (state = userEditReducerDefaultState, action) => {
     switch (action.type) {
@@ -111,18 +163,20 @@ const postDefaultState = {
     price: 0,
     category: '',
     description: 'Description',
-    location: {lat: 49.2827291, lng: -123.12073750000002},
-    locationStr: "Vancouver,BC,Canada",
+    location: {lat: 48.2827291, lng: -120.12073750000002},
+    locationStr: "Ready to show your location!",
     date: new Date().toString(),
     file: '',
     imagePreviewUrl: '',
     attribute: "",
+    like:["aaaaaa", "bbbb"]
 }
 const postItemReducer = (state = postDefaultState, action) => {
     let new_date = new Date();
     new_date = new_date.toLocaleString();
     switch (action.type) {
         case actions.CHANGE_UNSUBMITTED_ITEM:
+            console.log("change unsubmitted item!");
             var newitem = Object.assign({}, state,
                 {
                     [action.keyToChange]: action.valueToUpdate,
@@ -132,6 +186,24 @@ const postItemReducer = (state = postDefaultState, action) => {
             );
             // line for debugging change in state for changing appliance post ad fields
             //console.log(newitem);
+            return newitem
+        case actions.reset_cate_in_post:
+            var newitem = Object.assign({}, state,
+                {
+                    user_id: Meteor.userId(),
+                    title: 'An item',
+                    price: 0,
+                    category: '',
+                    description: 'Description',
+                    location: {lat: 49.2827291, lng: -123.12073750000002},
+                    locationStr: "Vancouver,BC,Canada",
+                    date: new Date().toString(),
+                    file: '',
+                    imagePreviewUrl: '',
+                    attribute: "",
+                }
+            );
+            console.log(newitem);
             return newitem
         default:
             return state;
@@ -259,7 +331,7 @@ export default combineReducers({
 
     homePageReducer,
 
-    userItemProcess: userItemReducer,
+    userItemReducer,
     userEditReducer,
 
     itemBoxReducer,

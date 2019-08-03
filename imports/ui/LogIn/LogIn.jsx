@@ -72,7 +72,7 @@ class LogIn extends React.Component{
             <div className={"logInBorder"}>
               <div>
                   <Typography component="h1" variant="h5">
-                      Create account
+                      Welcome back!
                   </Typography>
               </div>
         <form>
@@ -107,7 +107,7 @@ class LogIn extends React.Component{
             color="primary"
             onClick = {this.pressLogIn}
         >
-          Sign In
+          Log In
         </Button>
             </div>
             <br />
