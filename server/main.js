@@ -162,6 +162,7 @@ Meteor.methods({
     'updateOneItem': function (pass_id, obj) {
         console.log("liked" + pass_id);
         console.log(obj);
+        console.log(obj.like.join());
         Items.update({_id: pass_id}, {
             $set: {
                 title: obj.title,

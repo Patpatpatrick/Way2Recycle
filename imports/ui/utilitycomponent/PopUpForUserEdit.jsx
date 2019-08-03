@@ -46,7 +46,7 @@ handleImageChange(event) {
   reader.onloadend = () => {
       this.props.changeItem('file',file);
       this.props.changeItem('imagePreviewUrl',reader.result);
-      console.log(reader.result);
+      // console.log(reader.result);
       this.props.updateItem('imagePreviewUrl',reader.result);
   }
   console.log(this.props.itemForPopUp.imagePreviewUrl);
