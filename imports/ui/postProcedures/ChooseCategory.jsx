@@ -19,8 +19,8 @@ class ChooseCategory extends Component {
             <div className="container" style={{display: 'flex', justifyContent: 'center'}}>
                 <form style={{"width": "350px","verticalAlign": "0%"}} onChange={this.handleChange} className="form" ref = "inputform">
                     <label htmlFor="Category">Category</label>
-                    <select id="category" name="category">
-                        <option value="Pleasechoose">Please Choose</option>
+                    <select id="category" name="category" value = {this.props.cateValue.category}>
+                        <option selected="selected" value="">Please Choose</option>
                         <option value="Car">Car</option>
                         <option value="Appliance">Appliance</option>
                         <option value="Furniture">Furniture</option>
@@ -33,5 +33,9 @@ class ChooseCategory extends Component {
         );
     }
 }
-
-export default connect(null, {changeUnPostedItem })(ChooseCategory);
+const mapStateToProps = (state) => {
+    return {
+        cateValue: state.postItemReducer,
+    };
+}
+export default connect(mapStateToProps, {changeUnPostedItem })(ChooseCategory);

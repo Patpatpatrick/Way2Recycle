@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { resetCate,closePostReview } from '../../actions';
+import { resetPost,closePostReview } from '../../actions';
 
 // user_id : Meteor.userId(),
 //             title: 'An item',
@@ -23,6 +23,8 @@ class Popup extends React.Component {
         alert('Add done!');
         this.props.resetCate();
         this.props.close();
+        this.props.reset();
+
     }
     render() {
       return (
@@ -54,8 +56,8 @@ const mapDispatchToProps = (dispatch) => {
       close: () => {
         dispatch(closePostReview());
       },
-      resetCate: ()=>{
-        dispatch(resetCate());
+      reset:()=>{
+        dispatch(resetPost());
       }
     }
 };
