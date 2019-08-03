@@ -12,6 +12,18 @@ import Typography from '@material-ui/core/Typography';
 import { closePopedItemInItemBox} from '../../actions';
 import MapContainer from './unModifiableMap';
 
+import {likeItem} from '../../actions';
+
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+
+import SvgIcon from '@material-ui/core/SvgIcon';
+
 const styles = theme => ({
   root: {
     margin: 0,
@@ -56,6 +68,7 @@ class CustomizedDialogs extends React.Component {
     constructor(props) {
         super(props);
         this.handleClose = this.handleClose.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
     
     handleClose () {
@@ -63,6 +76,26 @@ class CustomizedDialogs extends React.Component {
         console.log(this.props.itemForPopUp);   
         this.props.closePopeditem();
     };
+
+    handleClick(){
+      // console.log(this.props.detail);
+      console.log(this.props);
+      //this.props.updatePostedItem(this.props.index);
+      // var newOBJ = Object.assign(this.props.itemForPopUp,)
+      console.log(this.props.itemForPopUp);
+      // var newItemWithLikeUpdated = Object.assign({},this.props.itemForPopUp,{
+      //   like:[...this.itemForPopUp.like,Meteor.userId()]
+      // });
+
+      Meteor.call('updateOneItem', this.props.itemForPopUp._id, this.props.itemForPopUp);
+       console.log(this.props.itemForPopUp.user_id);
+      console.log(this.props.itemForPopUp._id);
+      console.log(this.props);
+      console.log(this.props.likeItem);
+      alert('Liked one item!');
+      // this.props.close();
+    }
+    
 
     render() {
         return (
@@ -107,9 +140,12 @@ class CustomizedDialogs extends React.Component {
                                 markerLocation = {this.props.itemForPopUp.location}/>
             </DialogContent>
             <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
-                Save changes
-                </Button>
+
+
+      <FormControlLabel
+        control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} value="checkedH" onClick={this.handleClick}/>}
+        label=""/>
+
             </DialogActions>
             </Dialog>
         </div>
@@ -132,6 +168,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
       closePopeditem: () => {
         dispatch(closePopedItemInItemBox());
+      }, 
+      likeItem: (userId, postId) => {
+        dispatch(likeItem(userId, postId));
       }
 };
 }
