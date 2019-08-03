@@ -61,14 +61,29 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
         
         case actions.LIKE_ITEM:
             console.log('like one item!');
-            let revisedPopUpItem = state.popUpItemInItemBox;
-            revisedPopUpItem.like.push(action.idToAddToLike);
+            let newLike = [...state.popUpItemInItemBox.like];
+            console.log(newLike);
+            console.log(newLike.length);
+            newLike.splice(newLike.length, 0, action.idToAddToLike);
+            console.log(newLike);
+            let revisedPopUpItem=  Object.assign({},state.popUpItemInItemBox, 
+                {
+                like: newLike,
+            }
+            );
+            console.log(newLike);
+            console.log(revisedPopUpItem);
+            console.log(Object.assign({}, state,
+                {
+                    shouldPopUpInitemBox: true,
+                    popUpItemInItemBox:revisedPopUpItem,
+                    liked: true,
+                }
+            ));
             return Object.assign({}, state,
                 {
                     shouldPopUpInitemBox: true,
                     popUpItemInItemBox:revisedPopUpItem,
-                    // likedItemList:[...likedItemList, action.postLiked],
-                    // likedUserList:[...likedUserList, action.idToAddToLike],
                     liked: true,
                 }
             );
