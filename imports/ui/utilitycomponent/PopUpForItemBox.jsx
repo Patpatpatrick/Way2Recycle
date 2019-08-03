@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { closePopedItemInItemBox} from '../../actions';
+import {likeItem} from '../../actions';
 
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -31,9 +32,13 @@ handleClick(){
   // var newItemWithLikeUpdated = Object.assign({},this.props.itemForPopUp,{
   //   like:[...this.itemForPopUp.like,Meteor.userId()]
   // });
-  Meteor.call('updateOneItem', this.props.itemForPopUp._id, this.props.itemForPopU); // need to confirm
+  Meteor.call('updateOneItem', this.props.itemForPopUp._id, this.props.itemForPopUp);
+  this.props.likeItem(this.props.itemForPopUp.user_id, this.props.itemForPopUp._id);
+  console.log(this.props.itemForPopUp.user_id);
   console.log(this.props.itemForPopUp._id);
-  alert('Update one item!');
+  console.log(this.props);
+  console.log(this.props.likeItem);
+  alert('Liked one item!');
   // this.props.close();
 }
 
@@ -58,12 +63,12 @@ handleClick(){
       return (
        <div className='popup'>
           <div className='popup_inner'>
-          <TextField InputProps={{readOnly: true}} style={{width :500, height:100}} name="title" id="align-title" label="Item Name" defaultValue={this.props.itemForPopUp.title} fullWidth inputProps={{style: { textAlign: "center" }}} />
-          <TextField InputProps={{readOnly: true}}  style={{width :500, height:100}} name="price" id="align-price" label="Price" defaultValue={this.props.itemForPopUp.price} fullWidth inputProps={{style: { textAlign: "center" }}} />
-          <TextField InputProps={{readOnly: true}} style={{width :500, height:100}} name="category" id="align-category" label="Category" defaultValue={this.props.itemForPopUp.category} fullWidth inputProps={{style: { textAlign: "center" }}} />
-          <TextField InputProps={{readOnly: true}} style={{width :500, height:100}} id="align-date" label="Posted Date" defaultValue={this.props.itemForPopUp.date} fullWidth inputProps={{style: { textAlign: "center" }}}/>
-          <TextField InputProps={{readOnly: true}} style={{width :1000, height:300}} name="description" id="align-des" label="Description" defaultValue={this.props.itemForPopUp.description} fullWidth inputProps={{style: { textAlign: "center" }}} />
-
+        
+          <div><TextField name="title" id="align" label="Item" defaultValue={this.props.itemForPopUp.title} fullWidth inputProps={{style: { textAlign: "center" }}}/></div>
+          <div><TextField name="price" id="align" label="Price" defaultValue={this.props.itemForPopUp.price} fullWidth inputProps={{style: { textAlign: "center" }}}/></div>
+          <div><TextField name="category" id="align" label="Category" defaultValue={this.props.itemForPopUp.category} fullWidth inputProps={{style: { textAlign: "center" }}}/></div>
+          <div><TextField name="description" id="align" label="Description" defaultValue={this.props.itemForPopUp.description} fullWidth inputProps={{style: { textAlign: "center" }}}/></div>
+          <div><TextField id="align" label="Posted Date" defaultValue={this.props.itemForPopUp.date} fullWidth inputProps={{style: { textAlign: "center" }}}/></div>
 
           <IconButton aria-label="home" onClick={this.props.closePopeditem}>
             <SvgIcon width="24" height="24">
@@ -96,6 +101,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
       closePopeditem: () => {
         dispatch(closePopedItemInItemBox());
+      },
+      likeItem: (userId, postId) => {
+        dispatch(likeItem(userId, postId));
       }
 };
 }

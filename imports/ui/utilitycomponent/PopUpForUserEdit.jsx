@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { closePopedItem } from '../../actions';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { changeUnsubmittedItem} from '../../actions';
+import { updateItem} from '../../actions';
+import { changeUnPostedItem} from '../../actions';
 
 class Popup extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
 }
 
 handleClick(){
@@ -33,6 +35,27 @@ handleChange(event) {
   console.log(name);
   this.props.changeUnsubmittedItem(name,value);
   console.log(this.props.changeUnsubmittedItem);
+
+}
+
+handleImageChange(event) {
+  console.log(this.props.itemForPopUp.imagePreviewUrl);
+  event.preventDefault();
+  let reader = new FileReader();
+  let file = event.target.files[0];
+  reader.onloadend = () => {
+      this.props.changeItem('file',file);
+      this.props.changeItem('imagePreviewUrl',reader.result);
+      console.log(reader.result);
+      this.props.updateItem('imagePreviewUrl',reader.result);
+  }
+  console.log(this.props.itemForPopUp.imagePreviewUrl);
+            <div>{this.props.itemForPopUp.imagePreviewUrl !== '' ? <img src={this.props.itemForPopUp.imagePreviewUrl} style={{
+                                        "width": "350px",
+                                        "height": "200px"
+                                    }}/> : <span></span>}
+          </div>
+  reader.readAsDataURL(file)
 }
 
 // handleImageChange(event) {
@@ -59,6 +82,13 @@ handleChange(event) {
           <div><TextField name="category" id="align" label="Category" defaultValue={this.props.itemForPopUp.category} fullWidth inputProps={{style: { textAlign: "center" }}} onChange={this.handleChange}/></div>
           <div><TextField name="description" id="align" label="Description" defaultValue={this.props.itemForPopUp.description} fullWidth inputProps={{style: { textAlign: "center" }}} onChange={this.handleChange}/></div>
           <div><TextField id="align" label="Posted Date" defaultValue={this.props.itemForPopUp.date} fullWidth inputProps={{style: { textAlign: "center" }}}/></div>
+          <p>Posted Image</p>
+          <div>{this.props.itemForPopUp.imagePreviewUrl !== '' ? <img src={this.props.itemForPopUp.imagePreviewUrl} style={{
+                                        "width": "350px",
+                                        "height": "200px"
+                                    }}/> : <span></span>}
+          </div>
+          <input type="file" onChange={this.handleImageChange}/>
 
           <button type='update' onClick={this.handleClick}>update</button>
           <button type='close' onClick={this.props.closePopeditem}>close</button>
@@ -89,6 +119,7 @@ const useStyles = makeStyles(theme => ({
 const mapStateToProps = (state) => {
     return {
       itemForPopUp: state.userEditReducer.itemForPopUp,
+
       // shouldUpdateItem: state.updateItem, // updated to update item 
         // toPopThisIndex : state.itemProcess.popUpitemIndex,
         // item: state.itemProcess.itemArray[state.itemProcess.popUpitemIndex],
@@ -100,9 +131,12 @@ const mapDispatchToProps = (dispatch) => {
       closePopeditem: () => {
         dispatch(closePopedItem());
       },
-      changeUnsubmittedItem: (key, value) => {
-        dispatch(changeUnsubmittedItem(key, value));
-      }
+      updateItem: (key, value) => {
+        dispatch(updateItem(key, value));
+      },
+      changeItem: (key,value) => {
+        dispatch(changeUnPostedItem(key,value));
+    }
 };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Popup)
