@@ -12,9 +12,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {blue, red} from "@material-ui/core/colors";
+import {blue, grey, red} from "@material-ui/core/colors";
 import {compose} from "redux";
 import withStyles from "@material-ui/core/styles/withStyles";
+import {assignItemsToStoreItemArray, searchFromNavBar} from "../../../actions";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -29,6 +30,13 @@ import "react-pure-pagination/dist/Paginate.css";
 import './itemBox.css'
 import Typography from "../../Typography";
 import Slider from '@material-ui/core/Slider';
+import {Meteor} from "meteor/meteor";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import Divider from "@material-ui/core/Divider";
+import SearchIcon from '@material-ui/icons/Search';
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
 
 const styles = theme => {
     return ({
@@ -36,11 +44,14 @@ const styles = theme => {
                 position: 'absolute',
                 left: '5%',
                 right: '5%',
+                marginTop: 30,
+                marginBottom:30
             },
             paper: {
                 padding: theme.spacing(1),
                 textAlign: 'center',
-                color: theme.palette.text.secondary,
+                /* color: theme.palette.text.secondary,*/
+                backgroundColor: grey[200]
             },
 
             filterPaper: {
@@ -74,6 +85,39 @@ const styles = theme => {
             selectEmpty: {
                 marginTop: theme.spacing(2),
             },
+
+            rootSearchBar: {
+                padding: '2px 4px',
+                display: 'flex',
+                alignItems: 'center',
+                width: '60%',
+            },
+            iconButton: {
+                padding: 10,
+            },
+            divider: {
+                width: 1,
+                height: 28,
+                margin: 4,
+            },
+            input: {
+                marginLeft: 8,
+                flex: 1,
+                width: '70%',
+            },
+            cardActionCSS: {
+                margin: 10,
+                width: '95%',
+
+            },
+            cardColor : {
+                /* backgroundColor: blue[50]*/
+                '&:hover': {
+                    backgroundColor: blue[50]
+                }
+            }
+
+
         }
     );
 };
@@ -114,20 +158,47 @@ class ItemsBox extends React.Component {
             queryKeyWord: "",
             currentPage:1,
             itemsPerPage:5,
-            predictedNumPages:0,
+            predictedNumPages:5,
+            inputString:""
         }
     }
 
 
     componentDidMount() {
-        // Don't delete this block of comment yet
-        /* Meteor.call('getItems', function (err, result) {
-            if(err){
-                console.log("error");
+
+        if (this.props.isSearchedFromNavBar) {
+
+            this.props.searchFromNavBar(false)
+            let searchString = this.props.keywordFromNavBar
+            Meteor.call('mySearch', searchString, (error, result) => {
+                if (error) {
+                    console.log("failed to view items searched from nav bar")
+                }
+                this.props.dataToStore(result);
+                console.log(result)
+            });
+        } else {
+            Meteor.call('getItems', function (err, result) {
+                if(err){
+                    console.log("error getting default list of items");
+                }
+                this.props.dataToStore(result);
+            }.bind(this));
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.isSearchedFromNavBar !== prevProps.isSearchedFromNavBar) {
+            // call this when search bar was clicked from view post item
+            if (this.props.renderChoiceAssigner === prevProps.renderChoiceAssigner) {
+                let searchString = this.props.keywordFromNavBar
+                Meteor.call('mySearch', searchString, (error, result) => {
+                    this.props.searchFromNavBar(false)
+                    this.props.dataToStore(result);
+                    console.log(result)
+                });
             }
-             console.log(result);
-             this.props.dataToStore(result);
-        }.bind(this))*/;
+        }
     }
 
     formatDate = (date) => {
@@ -139,13 +210,14 @@ class ItemsBox extends React.Component {
         let queryParam = {
             minPrice: 0,
             maxPrice: 0,
-            category: ""
+            category: "",
+            keyword: ""
         }
 
         let minPrice = this.state.queryMinPrice
         let maxPrice = this.state.queryMaxPrice
         let category = this.state.queryCategory
-        let keyWord = this.state.queryKeyWord
+        let keyWord = this.state.inputString
 
         queryParam.minPrice = minPrice
         queryParam.maxPrice = maxPrice
@@ -198,39 +270,42 @@ class ItemsBox extends React.Component {
             :this.setState({predictedNumPages:value})
     }
 
+    changeInputString = (event) => {
+        this.setState({inputString:event.target.value})
+    }
 
-	render() {
+    render() {
         const { classes } = this.props;
         return (
             <div>
-            <div className={classes.root.toString() + " row1"}>
+                <div className={classes.root.toString() + " row1"}>
 
 
-                <div className={classes.padding.toString() + " column1"}>
-                    <Paper className={classes.filterPaper}>
-                        <div style={{zIndex:-1}} >
-                            <div>Category</div>
-                            <FormControl  className={classes.formControl}>
-                                <FormHelperText>Category</FormHelperText>
-                                <Select
-                                    value={this.state.queryCategory}
-                                    displayEmpty
-                                    onChange={this.changeQueryCategory}
-                                    input={<OutlinedInput labelWidth={0} name="" id="" />}
-                                >
-                                    <MenuItem value={"Appliance"}>Appliance</MenuItem>
-                                    <MenuItem value={"Car"}>Car</MenuItem>
-                                    <MenuItem value={"Book"}>Book</MenuItem>
-                                    <MenuItem value={"Furniture"}>Furniture</MenuItem>
-                                    <MenuItem value={"Computer"}>Computer</MenuItem>
-                                    <MenuItem value={"Other"}>Other</MenuItem>
-                                </Select>
-                            </FormControl>
+                    <div className={classes.padding.toString() + " column1"}>
+                        <Paper className={classes.filterPaper}>
+                            <div style={{zIndex:-1}} >
+                                <div>Category</div>
+                                <FormControl  className={classes.formControl}>
+                                    <FormHelperText>Category</FormHelperText>
+                                    <Select
+                                        value={this.state.queryCategory}
+                                        displayEmpty
+                                        onChange={this.changeQueryCategory}
+                                        input={<OutlinedInput labelWidth={0} name="" id="" />}
+                                    >
+                                        <MenuItem value={"Appliance"}>Appliance</MenuItem>
+                                        <MenuItem value={"Car"}>Car</MenuItem>
+                                        <MenuItem value={"Book"}>Book</MenuItem>
+                                        <MenuItem value={"Furniture"}>Furniture</MenuItem>
+                                        <MenuItem value={"Computer"}>Computer</MenuItem>
+                                        <MenuItem value={"Other"}>Other</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </div>
-                        <div>
-                            <br/>
-                            <div>Price Range</div>
-                            <span>
+                            <div>
+                                <br/>
+                                <div>Price Range</div>
+                                <span>
                             <TextField
                                 placeholder="min"
                                 className={classes.textField}
@@ -241,73 +316,104 @@ class ItemsBox extends React.Component {
                             />
 
                              <TextField
-                                  id="outlined-email-input"
-                                  placeholder={"max"}
-                                  className={classes.textField}
-                                  type=""
-                                  margin="normal"
-                                  variant="outlined"
-                                  onChange = {this.changeQueryMaxPrice}
+                                 id="outlined-email-input"
+                                 placeholder={"max"}
+                                 className={classes.textField}
+                                 type=""
+                                 margin="normal"
+                                 variant="outlined"
+                                 onChange = {this.changeQueryMaxPrice}
                              />
                             </span>
-                        </div>
+                            </div>
 
 
-                        <br/>
-                        <Typography id="discrete-slider-restrict" gutterBottom>
-                            Number of Items per Page
-                        </Typography>
-                        <Slider
-                            defaultValue={5}
-                            valueLabelFormat={this.numPagesLabelSlider}
-                            getAriaValueText={this.valuetext}
-                            aria-labelledby="discrete-slider-restrict"
-                            step={null}
-                            valueLabelDisplay="auto"
-                            marks={marks}
-                            max={20}
-                            onChange={(event, value) =>this.changeNumPages(event, value)}
-                            /*onDragStop={this.changeNumPages}*/
-                        />
-                        <div>
-                            <button onClick={this.searchByParam}>Submit</button>
-                        </div>
+                            <br/>
+                            <Typography id="discrete-slider-restrict" gutterBottom>
+                                Number of Items per Page
+                            </Typography>
+                            <Slider
+                                defaultValue={5}
+                                valueLabelFormat={this.numPagesLabelSlider}
+                                getAriaValueText={this.valuetext}
+                                aria-labelledby="discrete-slider-restrict"
+                                step={null}
+                                valueLabelDisplay="auto"
+                                marks={marks}
+                                max={20}
+                                onChange={(event, value) =>this.changeNumPages(event, value)}
+                                /*onDragStop={this.changeNumPages}*/
+                            />
+                            <div>
+                                <button onClick={this.searchByParam}>Submit</button>
+                            </div>
+                        </Paper>
+                    </div>
+
+                    <Paper className={classes.paper.toString() + " column2"}>
+                        {/*<Paper className={classes.rootSearchBar}>*/}
+                        <span>
+                    <InputBase
+                        className={classes.input}
+                        placeholder="Search Keywords"
+                        inputProps={{ 'aria-label': 'Search Keywords' }}
+                        onChange={this.changeInputString}
+                    />
+                    <IconButton className={classes.iconButton} aria-label="search"
+                                onClick={()=> this.searchByParam()}>
+                        <Divider className={classes.divider} />
+                        <SearchIcon />
+                    </IconButton>
+                   </span>
+                        {/* </Paper>*/}
+
+                        {this.props.itemArray.length===0?
+                            <div>
+                                No result found!
+                            </div>:
+                            <Table className={classes.table}>
+
+                                <TableBody>
+                                    {this.props.itemArray.slice(((this.state.currentPage-1)*this.state.itemsPerPage),
+                                        ((this.state.currentPage)*this.state.itemsPerPage)
+                                    ).map( (item, idx) => {
+                                        return (
+                                            <TableRow key={idx}>
+                                                <div>
+                                                    <CardActionArea className={classes.cardActionCSS}>
+                                                        <Card className={classes.cardColor}>
+
+                                                            <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
+                                                            <TableCell align="left">
+                                                                <span className={classes.titleFont}>{item.title}</span>
+                                                                <div>--------------------------</div>
+                                                                <div>Price: ${item.price}</div>
+                                                                <div>Category: {item.category}</div>
+                                                                <div>Description: {item.description}</div>
+                                                                <div>Date: {this.formatDate(item.date.toString())}</div>
+
+                                                                <br/>
+                                                                <div><ViewOneItem index = {idx}/></div>
+                                                            </TableCell>
+
+                                                        </Card>
+                                                    </CardActionArea>
+
+                                                </div>
+                                            </TableRow>
+                                        )
+                                    })
+                                    }
+                                </TableBody>
+                            </Table>}
+
+
+
+                        <Paginate total={this.props.itemArray.length}
+                                  perPage={this.state.itemsPerPage} current={this.state.currentPage}
+                                  onChange={this.handlePaginate} styles={paginationStyle} />
                     </Paper>
                 </div>
-
-            <Paper className={classes.paper.toString() + " column2"}>
-                <Table className={classes.table}>
-
-                    <TableBody>
-                    {this.props.itemArray.slice(((this.state.currentPage-1)*this.state.itemsPerPage),
-                        ((this.state.currentPage)*this.state.itemsPerPage)
-                    ).map( (item, idx) => {
-                        return (
-                            <TableRow key={idx}>
-                                <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
-                                <TableCell align="left">
-                                        <span className={classes.titleFont}>{item.title}</span>
-                                         <div>--------------------------</div>
-                                     <div>Price: ${item.price}</div>
-                                    <div>Category: {item.category}</div>
-                                    <div>Description: {item.description}</div>
-                                    <div>Date: {this.formatDate(item.date.toString())}</div>
-
-                                    <br/>
-                                    <div><ViewOneItem index = {idx}/></div>
-                                </TableCell>
-                            </TableRow>
-                        )
-                        })
-                    }
-                    </TableBody>
-                </Table>
-
-                <Paginate total={this.props.itemArray.length}
-                          perPage={this.state.itemsPerPage} current={this.state.currentPage}
-                          onChange={this.handlePaginate} styles={paginationStyle} />
-            </Paper>
-            </div>
             </div>
         );
     }
@@ -317,15 +423,18 @@ const mapDispatchToProps = (dispatch) => {
     return {
         dataToStore: (result) => {
             dispatch(assignItemsToStoreItemArray(result));
-        }
+        },
+        searchFromNavBar: (text) => dispatch(searchFromNavBar(text)),
     }
 };
 
 const mapStateToProps = (state) => {
-    return { itemArray: state.itemBoxReducer.itemArray};
+    return { itemArray: state.itemBoxReducer.itemArray,
+        isSearchedFromNavBar: state.isSearchedFromNavBar,
+        keywordFromNavBar: state.keywordFromNavBar,
+        renderChoiceAssigner: state.renderChoiceAssigner
+    };
 }
-
-
 
 //export default connect(mapStateToProps,null)(ItemsBox);
 

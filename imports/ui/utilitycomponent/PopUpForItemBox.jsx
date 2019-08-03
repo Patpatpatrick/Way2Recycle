@@ -59,7 +59,6 @@ handleClick(){
        <div className='popup'>
           <div className='popup_inner'>
 
-     
           <div><TextField name="title" id="align" label="Item" defaultValue={this.props.itemForPopUp.title} fullWidth inputProps={{style: { textAlign: "center" }}} onChange={this.handleChange}/></div>
           <div><TextField name="price" id="align" label="Price" defaultValue={this.props.itemForPopUp.price} fullWidth inputProps={{style: { textAlign: "center" }}} onChange={this.handleChange}/></div>
           <div><TextField name="category" id="align" label="Category" defaultValue={this.props.itemForPopUp.category} fullWidth inputProps={{style: { textAlign: "center" }}} onChange={this.handleChange}/></div>
