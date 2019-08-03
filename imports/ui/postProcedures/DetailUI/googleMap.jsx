@@ -69,10 +69,7 @@ class MyComponents extends Component {
      return (
             <GoogleMap
                 id="marker-example"
-                mapContainerStyle={{
-                    height: "400px",
-                    width: "800px",
-                }}
+                mapContainerStyle={this.props.mapContainerSize}
                 zoom={11}
                 center= {this.state.center}
                 onClick = {this.addMarker}
@@ -82,7 +79,7 @@ class MyComponents extends Component {
                 onLoad = {this.handleMapLoad}
                 onDragEnd={this.resetCenter}
             >
-                {this.state.isMarkerShown &&
+                {(this.state.isMarkerShown||this.props.fatherLetShow) &&
                 <Marker
                 onLoad={marker => {
                     console.log('marker: ', marker)

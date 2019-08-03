@@ -101,15 +101,15 @@ body{
   right: 0;
   bottom: 0;
   margin-left: 100 px;
-  background-color: rgba(0,0,0, 0.5);
+  background-color: rgb(0, 0, 0);
 }
 .popup_inner {
-  position: absolute;
-  left: 30%;
-  right: 30%;
-  top: 10%;
-  bottom: 10%;
-  margin-left: 100;
+  position: fixed;
+  left: 10%;
+  right: 10%;
+  top: 5%;
+  bottom:5%;
+  margin-left: 10;
   text-align: center;
   background: white;
 }

@@ -1,11 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CarDetail from './DetailUI/CarDetail';
-import BookDetail from './DetailUI/BookDetail';
+
 import ItemDetail from './DetailUI/ItemDetail';
-import FurnitureDetail from './DetailUI/FurnitureDetail';
-import ComputerDetail from './DetailUI/ComputerDetail';
-import OtherCategoryDetail from './DetailUI/OtherCategoryDetail';
 
 class PostDetailUnderOneCategory extends React.Component {
     constructor(props) {

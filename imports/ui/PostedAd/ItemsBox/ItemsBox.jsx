@@ -3,7 +3,6 @@ import React from 'react';
 import ViewOneItem from '../ViewOneItem';
 import { connect } from 'react-redux';
 import useStyles from '../../style/itemTableStyle';
-import {assignItemsToStoreItemArray} from '../../../actions'
 
 
 import Table from '@material-ui/core/Table';

@@ -58,15 +58,14 @@ handleClick(){
       return (
        <div className='popup'>
           <div className='popup_inner'>
+          <TextField InputProps={{readOnly: true}} style={{width :500, height:100}} name="title" id="align-title" label="Item Name" defaultValue={this.props.itemForPopUp.title} fullWidth inputProps={{style: { textAlign: "center" }}} />
+          <TextField InputProps={{readOnly: true}}  style={{width :500, height:100}} name="price" id="align-price" label="Price" defaultValue={this.props.itemForPopUp.price} fullWidth inputProps={{style: { textAlign: "center" }}} />
+          <TextField InputProps={{readOnly: true}} style={{width :500, height:100}} name="category" id="align-category" label="Category" defaultValue={this.props.itemForPopUp.category} fullWidth inputProps={{style: { textAlign: "center" }}} />
+          <TextField InputProps={{readOnly: true}} style={{width :500, height:100}} id="align-date" label="Posted Date" defaultValue={this.props.itemForPopUp.date} fullWidth inputProps={{style: { textAlign: "center" }}}/>
+          <TextField InputProps={{readOnly: true}} style={{width :1000, height:300}} name="description" id="align-des" label="Description" defaultValue={this.props.itemForPopUp.description} fullWidth inputProps={{style: { textAlign: "center" }}} />
 
-          <div><TextField name="title" id="align" label="Item" defaultValue={this.props.itemForPopUp.title} fullWidth inputProps={{style: { textAlign: "center" }}} onChange={this.handleChange}/></div>
-          <div><TextField name="price" id="align" label="Price" defaultValue={this.props.itemForPopUp.price} fullWidth inputProps={{style: { textAlign: "center" }}} onChange={this.handleChange}/></div>
-          <div><TextField name="category" id="align" label="Category" defaultValue={this.props.itemForPopUp.category} fullWidth inputProps={{style: { textAlign: "center" }}} onChange={this.handleChange}/></div>
-          <div><TextField name="description" id="align" label="Description" defaultValue={this.props.itemForPopUp.description} fullWidth inputProps={{style: { textAlign: "center" }}} onChange={this.handleChange}/></div>
-          <div><TextField id="align" label="Posted Date" defaultValue={this.props.itemForPopUp.date} fullWidth inputProps={{style: { textAlign: "center" }}}/></div>
 
-
-            <IconButton aria-label="home" onClick={this.props.closePopeditem}>
+          <IconButton aria-label="home" onClick={this.props.closePopeditem}>
             <SvgIcon width="24" height="24">
               <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
             </SvgIcon>
@@ -82,28 +81,11 @@ handleClick(){
       );
     }
 }
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: fullWidth,
-    height: 150,
-  },
-  dense: {
-    marginTop: 19,
-  },
-  menu: {
-    width: 200,
-  },
-}));
 
 const mapStateToProps = (state) => {
     return {
       itemForPopUp: state.itemBoxReducer.popUpItemInItemBox,
+
       // shouldUpdateItem: state.updateItem, // updated to update item 
         // toPopThisIndex : state.itemProcess.popUpitemIndex,
         // item: state.itemProcess.itemArray[state.itemProcess.popUpitemIndex],
