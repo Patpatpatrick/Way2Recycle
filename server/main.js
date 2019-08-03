@@ -160,6 +160,8 @@ Meteor.methods({
 
 Meteor.methods({
     'updateOneItem': function (pass_id, obj) {
+        console.log("liked" + pass_id);
+        console.log(obj);
         Items.update({_id: pass_id}, {
             $set: {
                 title: obj.title,
@@ -174,6 +176,7 @@ Meteor.methods({
             }
         });
         console.log("update one item id is " + pass_id);
+       
     }
 });
 

@@ -86,9 +86,10 @@ class CustomizedDialogs extends React.Component {
       // var newItemWithLikeUpdated = Object.assign({},this.props.itemForPopUp,{
       //   like:[...this.itemForPopUp.like,Meteor.userId()]
       // });
-
+      this.props.likeItem(this.props.itemForPopUp.user_id, this.props.itemForPopUp._id);
       Meteor.call('updateOneItem', this.props.itemForPopUp._id, this.props.itemForPopUp);
-       console.log(this.props.itemForPopUp.user_id);
+    
+      console.log(this.props.itemForPopUp.user_id);
       console.log(this.props.itemForPopUp._id);
       console.log(this.props);
       console.log(this.props.likeItem);
