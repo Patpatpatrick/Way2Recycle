@@ -377,7 +377,7 @@ class ItemsBox extends React.Component {
                                         ((this.state.currentPage)*this.state.itemsPerPage)
                                     ).map( (item, idx) => {
                                         return (
-                                            <TableRow key={idx} >
+                                            <TableRow key={idx + (this.state.currentPage -1) * (this.state.itemsPerPage)} >
                                                 <div>
 {/*
                                                     <CardActionArea className={classes.cardActionCSS}>
@@ -393,7 +393,7 @@ class ItemsBox extends React.Component {
                                                                 <div>Date: {this.formatDate(item.date.toString())}</div>
 
                                                                 <br/>
-                                                                <div><ViewOneItem index = {idx}/></div>
+                                                                <div><ViewOneItem index = {idx + (this.state.currentPage -1) * (this.state.itemsPerPage)}/></div>
                                                             </TableCell>
 
                                                         </Card>
