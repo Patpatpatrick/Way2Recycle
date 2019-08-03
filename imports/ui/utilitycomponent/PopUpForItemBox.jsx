@@ -67,11 +67,11 @@ handleClick(){
           <div><TextField id="align" label="Posted Date" defaultValue={this.props.itemForPopUp.date} fullWidth inputProps={{style: { textAlign: "center" }}}/></div>
 
 
-  <IconButton aria-label="home" onClick={this.props.closePopeditem}>
-  <SvgIcon width="24" height="24">
-    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-  </SvgIcon>
-</IconButton>
+            <IconButton aria-label="home" onClick={this.props.closePopeditem}>
+            <SvgIcon width="24" height="24">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </SvgIcon>
+          </IconButton>
 
         <FormControlLabel
         control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} value="checkedH" onClick={this.handleClick}/>}

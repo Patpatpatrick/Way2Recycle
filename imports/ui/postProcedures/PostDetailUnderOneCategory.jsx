@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CarDetail from './DetailUI/CarDetail';
 import BookDetail from './DetailUI/BookDetail';
-import ApplianceDetail from './DetailUI/ApplianceDetail';
+import ItemDetail from './DetailUI/ItemDetail';
 import FurnitureDetail from './DetailUI/FurnitureDetail';
 import ComputerDetail from './DetailUI/ComputerDetail';
 import OtherCategoryDetail from './DetailUI/OtherCategoryDetail';
@@ -13,19 +13,9 @@ class PostDetailUnderOneCategory extends React.Component {
         this.conditionalRender = this.conditionalRender.bind(this);
     }
     conditionalRender(){
-        if (this.props.unposted.category === "Car") {
-            return (<CarDetail/>);
-        } else if (this.props.unposted.category === "Book") {
-            return (<BookDetail/>);
-        } else if (this.props.unposted.category === "Appliance") {
-            return (<ApplianceDetail/>);
-        } else if (this.props.unposted.category === "Furniture") {
-            return (<FurnitureDetail/>);
-        } else if (this.props.unposted.category === "Computer") {
-            return (<ComputerDetail/>);
-        } else if (this.props.unposted.category === "Other") {
-            return (<OtherCategoryDetail/>);
-        } 
+        if (this.props.unposted.category !== "") {
+            return (<ItemDetail/>);
+        }
     }
 	render() {
         return (

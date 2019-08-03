@@ -9,7 +9,7 @@ import { changeUnPostedItem} from '../../../actions';
 import '../../style/style.css';
 import Review from '../Review';
 
-class ApplianceDetail extends Component {
+class ItemDetail extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -54,7 +54,6 @@ class ApplianceDetail extends Component {
     }
 
     onSuggestSelect(suggest) {
-        console.log(this.props.item.locationStr);
         this.props.changeItem('location',suggest.location);
         this.props.changeItem('locationStr',suggest.description);
         // this.setState({
@@ -83,10 +82,6 @@ class ApplianceDetail extends Component {
                                 <label htmlFor="subject">description</label>
                                 <textarea onChange={this.handleChange} id="subject" name="description"
                                           placeholder="Write something.."></textarea>
-                                <label htmlFor="locationLabel">Your location is</label>
-                                <br/>
-                                <label htmlFor="location">{this.props.item.locationStr}</label>
-                                <br/>
                                 <label htmlFor="uploadImg">Upload Picture</label>
                                 <input type="file" onChange={this.handleImageChange}/>
                                 <div>
@@ -102,16 +97,16 @@ class ApplianceDetail extends Component {
                         <td style={{"verticalAlign": "0%"}}>
                             <br></br>
                             <div>
-                                <div>Type in to set your location</div>
+                                <MapContainer />
+                                <div>Where is the seller?</div>
                                 <Geosuggest
-                                    placeholder = {"search and we'll give you suggestion"}
+                                    placeholder="Search Your Place!"
                                     onSuggestSelect={this.onSuggestSelect}
                                     location={new google.maps.LatLng(53.558572, 9.9278215)}
                                     radius="20"
                                     className='geoLocation'
+                                    value = {this.props.item.locationStr}
                                 />
-                                <div>Or put a marker to set your location</div>
-                                <MapContainer/>
                             </div>
                         </td>
                     </tr>
@@ -140,4 +135,4 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ApplianceDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemDetail);
