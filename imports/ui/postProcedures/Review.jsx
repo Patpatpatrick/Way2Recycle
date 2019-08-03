@@ -19,12 +19,16 @@ class Popup extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(){
-        Meteor.call("createItem",this.props.detail);
+      console.log(Meteor.user().username);
+        let withOwnerInfo_Item = Object.assign({},this.props.detail,{
+          owner:
+              {username:Meteor.user().profile.name,
+                owner_email:Meteor.user().emails[0].address}
+        });
+        Meteor.call("createItem",withOwnerInfo_Item);
         alert('Add done!');
-        this.props.resetCate();
-        this.props.close();
         this.props.reset();
-
+        this.props.close();
     }
     render() {
       return (

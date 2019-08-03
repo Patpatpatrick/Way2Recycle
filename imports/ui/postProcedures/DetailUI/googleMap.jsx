@@ -79,7 +79,7 @@ class MyComponents extends Component {
                 onLoad = {this.handleMapLoad}
                 onDragEnd={this.resetCenter}
             >
-                {(this.state.isMarkerShown||this.props.fatherLetShow) &&
+                {(this.state.isMarkerShown) &&
                 <Marker
                 onLoad={marker => {
                     console.log('marker: ', marker)

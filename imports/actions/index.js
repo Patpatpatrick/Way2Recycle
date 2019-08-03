@@ -184,7 +184,7 @@ export const resetPost = () => {
 
 export const showPostReview = () => {
     return {
-        type: SHOW_REVIEW
+        type: SHOW_REVIEW,
     };
 };
 

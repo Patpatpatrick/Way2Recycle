@@ -127,11 +127,11 @@ class CustomizedDialogs extends React.Component {
                 </Typography>
                 <Typography gutterBottom>
                     UserEmail:                
-                    {Meteor.user().emails[0].address}
+                    {this.props.itemForPopUp.owner.owner_email}
                 </Typography>
                 <Typography gutterBottom>
                     UserName:                
-                    {Meteor.user().profile.name}
+                    {this.props.itemForPopUp.owner.username}
                 </Typography>
                 <MapContainer mapContainerSize = {{
                                                                     height: "300px",

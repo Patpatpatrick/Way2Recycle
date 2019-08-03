@@ -1,5 +1,7 @@
 import {combineReducers} from 'redux';
 import * as actions from '../actions';
+import { Meteor } from 'meteor/meteor';
+
 // this reducer process state relevant to homepage, it has homePgdefaultState
 // itemArray is fetched from meteor and it is the total array regardless of user, cate ...
 const homePgdefaultState = {
@@ -140,8 +142,6 @@ const userEditReducer = (state = userEditReducerDefaultState, action) => {
             return state;
     }
 };
-
-
 const postDefaultState = {
     user_id: Meteor.userId(),
     title: 'An item',
@@ -154,11 +154,29 @@ const postDefaultState = {
     file: '',
     imagePreviewUrl: '',
     attribute: "",
-    like:["aaaaaa", "bbbb"]
+    like:[],
+    owner: {}
+}
+const postNULLState = {
+    user_id: "",
+    title: 'An item',
+    price: 0,
+    category: "",
+    description: 'Description',
+    location: {lat: 48.2827291, lng: -120.12073750000002},
+    locationStr: "Ready to show your location!",
+    date: new Date().toString(),
+    file: '',
+    imagePreviewUrl: '',
+    attribute: "",
+    like:[],
+    owner: {}
 }
 const postItemReducer = (state = postDefaultState, action) => {
     let new_date = new Date();
     new_date = new_date.toLocaleString();
+    console.log(postDefaultState.user_id);
+    console.log(postDefaultState.owner);
     switch (action.type) {
         case actions.CHANGE_UNSUBMITTED_ITEM:
             console.log("change unsubmitted item!");
@@ -173,7 +191,7 @@ const postItemReducer = (state = postDefaultState, action) => {
             //console.log(newitem);
             return newitem
         case actions.RESET_POST_TO_INITIAL:
-            return postDefaultState;
+            return postNULLState;
         default:
             return state;
     }
