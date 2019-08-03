@@ -2,6 +2,9 @@
 export const VIEW_ONE_IN_ITEM_BOX = 'VIEW_ONE_IN_ITEM_BOX';
 export const CLOSE_ONE_IN_ITEM_BOX = 'CLOSE_ONE_IN_ITEM_BOX';
 
+export const LIKE_ITEM = 'LIKE_ITEM';
+export const UNLIKE_ITEM = 'UNLIKE_ITEM';
+
 export const GEN_ITEM = 'GEN_ITEM';
 export const CLEAR_ALL = 'CLEAR_ALL';
 export const CLEAR_ONE = 'CLEAR_ONE';
@@ -76,7 +79,7 @@ export const closePopedItem = () => {
     };
 };
 // this is for user edit
-export const changeUnsubmittedItem = (key, value) => {
+export const updateItem = (key, value) => {
     return {
         type: CHANGE_INPUT,
         keyToChange: key,
@@ -85,18 +88,20 @@ export const changeUnsubmittedItem = (key, value) => {
 };
 
 // this is for like
-export const likeItem = (userId) => {
+export const likeItem = (userId, postId) => {
     return {
-        type: "LIKE_ITEM",
-        idToAddToLike: userId
+        type: LIKE_ITEM,
+        idToAddToLike: userId,
+        postLiked: postId
     }
 }
 
 // this is for unlike 
-export const unlikeItem = (userId) => {
+export const unlikeItem = (userId, postId) => {
     return {
-        type: "UNLIKE_ITEM",
-        idToRemoveFromLike: userId
+        type: UNLIKE_ITEM,
+        idToRemoveFromLike: userId,
+        postUnliked: postId
     }
 } 
 

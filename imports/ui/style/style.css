@@ -105,10 +105,10 @@ body{
 }
 .popup_inner {
   position: absolute;
-  left: 30%;
-  right: 30%;
+  left: 15%;
+  right: 15%;
   top: 10%;
-  bottom: 10%;
+  bottom: 0%;
   margin-left: 100;
   text-align: center;
   background: white;

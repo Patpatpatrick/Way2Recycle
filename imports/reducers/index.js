@@ -28,6 +28,10 @@ const itemBoxfaultState = {
     itemArray: [],
     shouldPopUpInitemBox: false,
     popUpItemInItemBox:{},
+    likedItemList:{},
+    likedUserList:{},
+    Liked: false,
+    Unliked: false,
 }
 const itemBoxReducer = (state = itemBoxfaultState, action) => {
     switch (action.type) {
@@ -38,6 +42,7 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
                 }
             );
         case actions.VIEW_ONE_IN_ITEM_BOX:
+            console.log('View one item!')
             return Object.assign({}, state,
                 {
                     shouldPopUpInitemBox: true,
@@ -45,10 +50,39 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
                 }
             );
         case actions.CLOSE_ONE_IN_ITEM_BOX:
-            console.log('fsdfsdfa');
+            console.log('Close one item!');
             return Object.assign({}, state,
                 {
                     shouldPopUpInitemBox: false,
+                }
+            );
+        
+        case actions.LIKE_ITEM:
+            console.log('like one item!');
+            return Object.assign({}, state,
+                {
+                    shouldPopUpInitemBox: true,
+                    popUpItemInItemBox:state.itemArray[action.indexToPop],
+                    likedItemList:[...action.postLiked],
+                    likedUserList:[...action.idToAddToLike],
+                    liked: true,
+                }
+            );
+        
+        case actions.UNLIKE_ITEM:
+            console.log('unlike one item!');
+            var newLikeList = [...state.likedItemList];
+            newLikeList.splice(action.postUnliked, 1);
+            var newUserList = [...state.likedUserList];
+            newUserList.splice(action.idToRemoveFromLike, 1);
+
+            return Object.assign({}, state,
+                {
+                    shouldPopUpInitemBox: true,
+                    popUpItemInItemBox:state.itemArray[action.indexToPop],
+                    likedItemList:newLikeList,
+                    likedUserList:newUserList,
+                    unliked: true,
                 }
             );
         default:
@@ -124,6 +158,7 @@ const postItemReducer = (state = postDefaultState, action) => {
     new_date = new_date.toLocaleString();
     switch (action.type) {
         case actions.CHANGE_UNSUBMITTED_ITEM:
+            console.log("change unsubmitted item!");
             var newitem = Object.assign({}, state,
                 {
                     [action.keyToChange]: action.valueToUpdate,
