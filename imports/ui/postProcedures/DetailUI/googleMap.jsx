@@ -80,6 +80,7 @@ class MyComponents extends Component {
                 onDragEnd={this.resetCenter}
             >
                 {(this.state.isMarkerShown) &&
+
                 <Marker
                 onLoad={marker => {
                     console.log('marker: ', marker)

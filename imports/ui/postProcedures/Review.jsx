@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { resetPost,closePostReview } from '../../actions';
 
+
 // user_id : Meteor.userId(),
 //             title: 'An item',
 //             price: 0,
