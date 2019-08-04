@@ -64,6 +64,7 @@ const DialogActions = withStyles(theme => ({
   },
 }))(MuiDialogActions);
 
+
 class CustomizedDialogs extends React.Component {
     constructor(props) {
         super(props);
@@ -71,24 +72,20 @@ class CustomizedDialogs extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     
-    handleClose () {
+    handleClose() {
         console.log('close it ');
         console.log(this.props.itemForPopUp);   
         this.props.closePopeditem();
     };
 
     handleClick(){
-      // console.log(this.props.detail);
+      console.log(this.props.liked);
       console.log(this.props);
-      //this.props.updatePostedItem(this.props.index);
-      // var newOBJ = Object.assign(this.props.itemForPopUp,)
       console.log(this.props.itemForPopUp);
-      // var newItemWithLikeUpdated = Object.assign({},this.props.itemForPopUp,{
-      //   like:[...this.itemForPopUp.like,Meteor.userId()]
-      // });
       this.props.likeItem(Meteor.userId(), this.props.itemForPopUp._id);
       console.log(this.props.itemForPopUp);
 
+      if (!this.props.itemForPopUp.like.includes(Meteor.userId())) {
       let newLike = [...this.props.itemForPopUp.like];
       //console.log(newLike);
       //console.log(newLike.length);
@@ -106,10 +103,15 @@ class CustomizedDialogs extends React.Component {
       console.log(this.props.itemForPopUp._id);
       console.log(this.props);
       console.log(this.props.likeItem);
+
+      console.log('liked status is:' + this.props.liked);
       alert('Liked one item!');
+     
       // this.props.close();
+      } else {
+      //alert('Already Liked!');
+      }
     }
-    
 
     render() {
         return (
@@ -149,7 +151,7 @@ class CustomizedDialogs extends React.Component {
 
 
       <FormControlLabel
-        control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} value="checkedH" onClick={this.handleClick}/>}
+        control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} checked={this.props.itemForPopUp.like.includes(Meteor.userId())} onClick={this.handleClick}/>}
         label=""/>
 
             </DialogActions>
@@ -163,7 +165,7 @@ const mapStateToProps = (state) => {
     return {
       itemForPopUp: state.itemBoxReducer.popUpItemInItemBox,
       shouldOpen: state.itemBoxReducer.shouldPopUpInitemBox,
-
+      liked: state.itemBoxReducer.liked
       // shouldUpdateItem: state.updateItem, // updated to update item 
         // toPopThisIndex : state.itemProcess.popUpitemIndex,
         // item: state.itemProcess.itemArray[state.itemProcess.popUpitemIndex],

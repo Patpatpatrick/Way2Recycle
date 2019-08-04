@@ -28,9 +28,7 @@ const itemBoxfaultState = {
     itemArray: [],
     shouldPopUpInitemBox: false,
     popUpItemInItemBox:{},
-    // likedItemList:[],
-    // likedUserList:[],
-    Liked: false,
+    liked: false,
     Unliked: false,
 }
 const itemBoxReducer = (state = itemBoxfaultState, action) => {
@@ -58,50 +56,88 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
             );
         
         case actions.LIKE_ITEM:
-            console.log('like one item!');
-            let newLike = [...state.popUpItemInItemBox.like];
-            console.log(newLike);
-            console.log(newLike.length);
-            newLike.splice(newLike.length, 0, action.idToAddToLike);
-            console.log(newLike);
-            let revisedPopUpItem=  Object.assign({},state.popUpItemInItemBox, 
-                {
-                like: newLike,
+            if (!state.popUpItemInItemBox.like.includes(action.idToAddToLike)) {
+                console.log('like one item!');
+                let newLike = [...state.popUpItemInItemBox.like];
+                console.log(newLike);
+                console.log(newLike.length);
+                newLike.splice(newLike.length, 0, action.idToAddToLike);
+                console.log(newLike);
+                let revisedPopUpItem=  Object.assign({},state.popUpItemInItemBox, 
+                    {
+                    like: newLike,
+                }
+                );
+                console.log(newLike);
+                console.log(revisedPopUpItem);
+                console.log(Object.assign({}, state,
+                    {
+                        shouldPopUpInitemBox: true,
+                        popUpItemInItemBox:revisedPopUpItem,
+                        liked: true,
+                    }
+                ));
+                return Object.assign({}, state,
+                    {
+                        shouldPopUpInitemBox: true,
+                        popUpItemInItemBox:revisedPopUpItem,
+                        liked: true,
+                    }
+                );
+            } else {
+                alert("you have already liked this item!");
+                return Object.assign({}, state,
+                    {
+                        shouldPopUpInitemBox: true,
+                        popUpItemInItemBox:state.popUpItemInItemBox,
+                        liked: true,
+                    }
+                );
             }
-            );
-            console.log(newLike);
-            console.log(revisedPopUpItem);
-            console.log(Object.assign({}, state,
-                {
-                    shouldPopUpInitemBox: true,
-                    popUpItemInItemBox:revisedPopUpItem,
-                    liked: true,
-                }
-            ));
-            return Object.assign({}, state,
-                {
-                    shouldPopUpInitemBox: true,
-                    popUpItemInItemBox:revisedPopUpItem,
-                    liked: true,
-                }
-            );
+
+
         
         case actions.UNLIKE_ITEM:
-            console.log('unlike one item!');
-            var newLikeList = [...state.likedItemList];
-            newLikeList.splice(action.postUnliked, 1);
-            var newUserList = [...state.likedUserList];
-            newUserList.splice(action.idToRemoveFromLike, 1);
+            // if (state.popUpItemInItemBox.like.includes(action.idToRemoveFromLike)) {
+            //     console.log('unlike one item!');
+            //     let updatedLike = [...state.popUpItemInItemBox.like];
+            //     console.log(updatedLike);
+            //     console.log(updatedLike.length);
+            //     let removeIndex = updatedLike.indexOf(idToRemoveFromLike);
+            //     updatedLike.splice(removeIndex , 1, action.idToAddToLike);
+            //     console.log(updatedLike);
+            //     let revisedPopUpItem=  Object.assign({},state.popUpItemInItemBox, 
+            //         {
+            //         like: updatedLike,
+            //     }
+            //     );
+            //     console.log(updatedLike);
+            //     console.log(revisedPopUpItem);
+            //     console.log(Object.assign({}, state,
+            //         {
+            //             shouldPopUpInitemBox: true,
+            //             popUpItemInItemBox:revisedPopUpItem,
+            //             liked: true,
+            //         }
+            //     ));
 
-            return Object.assign({}, state,
-                {
-                    shouldPopUpInitemBox: true,
-                    popUpItemInItemBox:state.itemArray[action.indexToPop],
-                    likedItemList:newLikeList,
-                    likedUserList:newUserList,
-                    unliked: true,
-                }
-            );
+            //     return Object.assign({}, state,
+            //         {
+            //             shouldPopUpInitemBox: true,
+            //             popUpItemInItemBox:revisedPopUpItem,
+            //             liked: true,
+            //         }
+            //     );
+            // }
+
+
+            // return Object.assign({}, state,
+            //     {
+            //         shouldPopUpInitemBox: true,
+            //         popUpItemInItemBox:state.itemArray[action.indexToPop],
+            //         unliked: true,
+            //     }
+            // );
         default:
             return state;
     }
@@ -169,7 +205,7 @@ const postDefaultState = {
     file: '',
     imagePreviewUrl: '',
     attribute: "",
-    like:["aaaaaa", "bbbb"]
+    like:[]
 }
 const postItemReducer = (state = postDefaultState, action) => {
     let new_date = new Date();
