@@ -140,6 +140,14 @@ class CustomizedDialogs extends React.Component {
                 <Typography gutterBottom>
                     Location:                {this.props.itemForPopUp.locationStr}
                 </Typography>
+                <Typography gutterBottom>
+                    UserEmail:                
+                    {this.props.itemForPopUp.owner.owner_email}
+                </Typography>
+                <Typography gutterBottom>
+                    UserName:                
+                    {this.props.itemForPopUp.owner.username}
+                </Typography>
                 <MapContainer mapContainerSize = {{
                                                                     height: "300px",
                                                                     width: "500px",
