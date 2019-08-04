@@ -61,6 +61,7 @@ Meteor.methods({
 Meteor.methods({
     'createItem': function (item) {
         item.price = parseInt(item['price'])
+        item.date = new Date(item.date)
         Items.insert(item);
         console.log("add one");
     }
@@ -124,7 +125,13 @@ Meteor.methods({
             queryArray.push(textQuery)
         }
 
-        let itemArray = Items.find({$and: queryArray}, {sort: {createdAt: -1}}).fetch()
+        let sortDateOptions = queryParam['sortDate']
+
+        let dateQuery  = {date:1}
+
+        if (queryParam['sortDate']==="latest") dateQuery.date = -1
+
+        let itemArray = Items.find({$and: queryArray}, {sort: dateQuery}).fetch()
         console.log("get items by query params");
         return itemArray;
     }
@@ -201,7 +208,13 @@ Meteor.startup(() => {
     // password and token, etc should be moved out as env variable when deployed
 
     console.log('Setting up email environment for forgot password')
-    process.env.MAIL_URL = 'smtp://way2recycle%40gmail.com:cpsc436i@smtp.gmail.com:587';
+   // process.env.MAIL_URL = 'smtp://way2recycle%40gmail.com:cpsc436i@smtp.gmail.com:587';
+
+
+    process.env.MAIL_URL = 'smtp://apikey:' +
+        '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'+
+        '@smtp.sendgrid.net:587';
+
 
     Accounts.emailTemplates.resetPassword.text = function (user, url) {
         //url = url.replace('#/', '');
@@ -209,7 +222,7 @@ Meteor.startup(() => {
         return `Click this link to reset your password: ${url}`;
     }
 
-    Accounts.emailTemplates.from = "Way2Recycle <no-reply@example.com>"
+    Accounts.emailTemplates.from = "Way2Recycle <no-reply@way2recycle.herokuapp.com>"
 
 
     // For google log in: Need to go to console.developers.google.com --> credential
