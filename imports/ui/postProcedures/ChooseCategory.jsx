@@ -21,12 +21,12 @@ class ChooseCategory extends Component {
                     <label htmlFor="Category">Category</label>
                     <select id="category" name="category" value = {this.props.cateValue.category}>
                         <option selected="selected" value="">Please Choose</option>
-                        <option value="Auto">Auto</option>
+                        <option value="Car">Car</option>
                         <option value="Appliance">Appliance</option>
-                        <option value="Textbook">Textbook</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Book">Book</option>
                         <option value="Computer">Computer</option>
-                        <option value="Job">Job</option>
-                        <option value="Pet">Pet</option>
+                        <option value="Other">Other</option>
                     </select>
                 </form>
             </div>
