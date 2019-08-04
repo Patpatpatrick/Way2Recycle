@@ -389,7 +389,9 @@ class ItemsBox extends React.Component {
                                                                 <div>--------------------------</div>
                                                                 <div>Price: ${item.price}</div>
                                                                 <div>Category: {item.category}</div>
-                                                                <div>Description: {item.description}</div>
+                                                                <div className={"descriptionStyle"}>
+                                                                    Description: {item.description}
+                                                                </div>
                                                                 <div>Date: {this.formatDate(item.date.toString())}</div>
 
                                                                 <br/>
