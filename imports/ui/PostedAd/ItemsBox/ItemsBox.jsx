@@ -302,12 +302,12 @@ class ItemsBox extends React.Component {
                                         onChange={this.changeQueryCategory}
                                         input={<OutlinedInput labelWidth={0} name="" id="" />}
                                     >
+                                        <MenuItem value={"Auto"}>Auto</MenuItem>
                                         <MenuItem value={"Appliance"}>Appliance</MenuItem>
-                                        <MenuItem value={"Car"}>Car</MenuItem>
-                                        <MenuItem value={"Book"}>Book</MenuItem>
-                                        <MenuItem value={"Furniture"}>Furniture</MenuItem>
+                                        <MenuItem value={"Textbook"}>Textbook</MenuItem>
                                         <MenuItem value={"Computer"}>Computer</MenuItem>
-                                        <MenuItem value={"Other"}>Other</MenuItem>
+                                        <MenuItem value={"Job"}>Job</MenuItem>
+                                        <MenuItem value={"Pet"}>Pet</MenuItem>
                                     </Select>
                                 </FormControl>
                             </div>

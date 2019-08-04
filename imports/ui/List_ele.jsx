@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -13,6 +14,9 @@ import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
+
+import { changeChoiceOnNav} from '../actions';
+
 
 const useStyles = makeStyles(theme => ({
   overlay: {
@@ -38,6 +42,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 class List_ele extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+}
+
+  handleClick(){
+    console.log(this.props.element._id);
+    this.props.showIndex(this.props.element._id);
+}
+
     render() {
         const classes = useStyles;
         return (
@@ -52,17 +67,20 @@ class List_ele extends React.Component {
                             <div className={classes.cardDetails}>
                               <CardContent>
                                 <Typography component="h2" variant="h5">
-                                  {this.props.element.itemname + '   ' + this.props.element.category}
+                                  {this.props.element.title}
                                 </Typography>
+                                <Typography variant="subtitle1" color="textPrimary">
+                                  {this.props.element.date + '   Price: ' + this.props.element.price}
+                                </Typography>
+
+
                                 <Typography variant="subtitle1" color="textSecondary">
-                                  {this.props.element.date + '   ' + this.props.element.price}
+                                {'owner:' +  this.props.element.owner.username + '        email:' + this.props.element.owner.owner_email}
                                 </Typography>
-                                <Typography variant="subtitle1" paragraph>
-                                  {this.props.element.description}
-                                </Typography>
-                                <Typography variant="subtitle1" color="primary">
+
+                                <Link variant="subtitle1" color="primary" onClick={()=>this.props.changeChoiceOnNav('viewPost')}>
                                   More info...
-                                </Typography>
+                                </Link>
                               </CardContent>
                             </div>
                             <Hidden xsDown>
@@ -84,6 +102,14 @@ class List_ele extends React.Component {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showIndex: (index) => {
+      dispatch(popUpItemInItemsBox(index));
+    },
+    changeChoiceOnNav: (choice) => dispatch(changeChoiceOnNav(choice))
+  }
+};
 // class List_ele extends React.Component {
 
 //     render() {
@@ -119,4 +145,4 @@ class List_ele extends React.Component {
 //     }
 //     }
 
-export default List_ele;
+export default connect(null, mapDispatchToProps)(List_ele);
