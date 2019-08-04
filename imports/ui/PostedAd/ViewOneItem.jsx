@@ -33,6 +33,7 @@ class SeeOne extends React.Component {
 const mapStateToProps = (state) => {
     return { 
         toPop: state.itemBoxReducer.shouldPopUpInitemBox,
+        liked: state.itemBoxReducer.liked,
     };
 }
 const mapDispatchToProps = (dispatch) => {
