@@ -227,7 +227,7 @@ export const searchWordFromNav = (string) => {
 //     return (dispatch) => {
 // 		Meteor.call('getItems', function (err, result) {
 // 			if(err){
-// 				console.log("error");
+// 				console.log("failResetByMeteor");
 // 			}
 // 			console.log(result);
 // 			dispatch(assignItemsToStoreItemArray(result));

@@ -38,7 +38,7 @@ WebApp.connectHandlers.use('/v1/items', (req, res, next) => {
     res.end(JSON.stringify(json));
 });
 
-//Meteor.call('mySearch', "Bose", (error, result) => { console.log(result) });
+//Meteor.call('mySearch', "Bose", (failResetByMeteor, result) => { console.log(result) });
 Meteor.methods({
     'mySearch': function (searchValue) {
         console.log("search by keyword with search value: " + searchValue)

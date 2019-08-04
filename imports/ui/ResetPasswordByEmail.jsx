@@ -9,109 +9,126 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {connect} from "react-redux";
 
-import { updateFirstNameInputBox, updateLastNameInputBox, updateCreatePasswordInputPage,
-    updateCreateEmailInputPage, changeChoiceOnNav}  from '../actions/index.js';
+import {
+    updateFirstNameInputBox, updateLastNameInputBox, updateCreatePasswordInputPage,
+    updateCreateEmailInputPage, changeChoiceOnNav
+} from '../actions/index.js';
 
 import './LogIn/logInStyle.css'
 
-class ResetPasswordByEmail extends React.Component{
+class ResetPasswordByEmail extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = {password: '', confirmPassword:''}
-
+        this.state = {password: '', confirmPassword: '', pressedButton: false, failResetByMeteor: false}
     }
 
     resetPassword = () => {
         console.log(this.state.password)
 
-        if (this.state.password !== this.state.confirmPassword || this.state.password==='') {
-            alert("Please check that both password fields are same")
+        if (this.state.password !== this.state.confirmPassword || this.state.password === '') {
+            this.setState({pressedButton: true, failResetByMeteor: false})
+            //alert("Please check that both password fields are same")
         } else {
-            Accounts.resetPassword(this.props.token, String(this.state.password), (err)=> {
+            Accounts.resetPassword(this.props.token, String(this.state.password), (err) => {
                 if (err) {
-                    console.log("error changing password")
+                    console.log("failResetByMeteor changing password")
+                    this.setState({pressedButton: true, failResetByMeteor: true})
                 }
-                alert('password changed successfully!')
+                alert('Password changed successfully!')
                 this.props.changeChoiceOnNav('home')
 
             })
         }
     }
 
-    changePassword  = (event) =>  {
-        this.setState({password:event.target.value})
+    changePassword = (event) => {
+        this.setState({password: event.target.value})
     };
-    changeConfirmPassword  = (event) =>  {
-        this.setState({confirmPassword:event.target.value})
+    changeConfirmPassword = (event) => {
+        this.setState({confirmPassword: event.target.value})
     };
 
     redirectToLogIn = () => {
         this.props.changeChoiceOnNav('login')
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <Container component="main" maxWidth="xs">
-                <div style={{paddingTop:20}}>
-                <div className={'logInBorder'}>
-                <CssBaseline />
-                <div>
-                    <Typography component="h1" variant="h5">
-                        Reset your password
-                    </Typography>
-                    <form noValidate>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    variant="outlined"
-                                    required
+                <div style={{paddingTop: 20}}>
+                    <div className={'logInBorder'}>
+                        <CssBaseline/>
+                        <div>
+                            <Typography component="h1" variant="h5">
+                                Reset your password
+                            </Typography>
+                            {
+                                (this.state.pressedButton && this.state.failResetByMeteor) ?
+                                    <div>
+                                        <Typography component="h1" variant="h5" color={"error"}>
+                                            Fail to change password due to server issue
+                                        </Typography>
+                                    </div> : (this.state.pressedButton && !this.state.failResetByMeteor) ?
+                                    <div>
+                                        <Typography component="h1" variant="h5" color={"error"}>
+                                            Please check that both passwords fields are the same
+                                        </Typography>
+                                    </div> : null}
+
+                            <form noValidate>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} sm={6}>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            id="email"
+                                            label="Enter Password"
+                                            autoComplete="email"
+                                            onChange={this.changeConfirmPassword}
+                                            type="password"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            variant="outlined"
+                                            required
+                                            fullWidth
+                                            label="Re enter password"
+                                            type="password"
+                                            id="password"
+                                            autoComplete="current-password"
+                                            onChange={this.changePassword}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}></Grid>
+                                </Grid>
+                                <Button
                                     fullWidth
-                                    id="email"
-                                    label="Enter Password"
-                                    autoComplete="email"
-                                    onChange={this.changeConfirmPassword }
-                                    type = "password"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    label="Re enter password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="current-password"
-                                    onChange={this.changePassword}
-                                />
-                            </Grid>
-                            <Grid item xs={12}></Grid>
-                        </Grid>
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            onClick = {this.resetPassword}
-                        >
-                            Reset
-                        </Button>
-                        <Grid container justify="flex-end">
-                            <Grid item>
-                                <Link variant="body2"  style={{cursor:"pointer"}} onClick= {this.redirectToLogIn}>
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
-                        </Grid>
-                    </form>
-                </div>
-                </div>
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.resetPassword}
+                                >
+                                    Reset
+                                </Button>
+                                <Grid container justify="flex-end">
+                                    <Grid item>
+                                        <Link variant="body2" style={{cursor: "pointer"}}
+                                              onClick={this.redirectToLogIn}>
+                                            Already have an account? Sign in
+                                        </Link>
+                                    </Grid>
+                                </Grid>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </Container>
         );
