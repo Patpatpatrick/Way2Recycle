@@ -180,6 +180,13 @@ Meteor.methods({
        
     }
 });
+Meteor.methods({
+    getGoogleUserEmail() {
+        const services = Meteor.user().services;
+        // replace with actual profile picture property
+        return services.google && services.google.email;
+    }
+});
 
 
 Meteor.startup(() => {

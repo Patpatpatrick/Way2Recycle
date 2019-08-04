@@ -113,7 +113,7 @@ class ItemDetail extends Component {
                                 <MapContainer mapContainerSize = {{
                                                                     height: "400px",
                                                                     width: "800px",
-                                                                    }} fatherLetShow = {false}/>
+                                                                    }}/>
                             </div>
                         </td>
                     </tr>
