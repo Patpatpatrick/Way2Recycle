@@ -120,7 +120,7 @@ class UserList extends React.Component {
 
 
     formatDate = (date) => {
-       return new Date().toISOString().replace('-', '/').split('T')[0].replace('-', '/');
+       return new Date(date).toISOString().replace('-', '/').split('T')[0].replace('-', '/');
     }
 
 
