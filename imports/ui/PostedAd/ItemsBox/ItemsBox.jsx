@@ -179,7 +179,7 @@ class ItemsBox extends React.Component {
         } else {
             Meteor.call('getItems', function (err, result) {
                 if(err){
-                    console.log("error getting default list of items");
+                    console.log("failResetByMeteor getting default list of items");
                 }
                 this.props.dataToStore(result);
             }.bind(this));
@@ -225,7 +225,7 @@ class ItemsBox extends React.Component {
 
         Meteor.call('getItemsByParam',queryParam, function (err, result) {
             if(err){
-                console.log("error querying items by filter");
+                console.log("failResetByMeteor querying items by filter");
             }
             this.props.dataToStore(result);
             this.setState({itemsPerPage:this.state.predictedNumPages})
@@ -389,7 +389,9 @@ class ItemsBox extends React.Component {
                                                                 <div>--------------------------</div>
                                                                 <div>Price: ${item.price}</div>
                                                                 <div>Category: {item.category}</div>
-                                                                <div>Description: {item.description}</div>
+                                                                <div className={"descriptionStyle"}>
+                                                                    Description: {item.description}
+                                                                </div>
                                                                 <div>Date: {this.formatDate(item.date.toString())}</div>
 
                                                                 <br/>

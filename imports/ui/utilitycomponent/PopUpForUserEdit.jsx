@@ -145,7 +145,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Popup)
 // handleClick(){
 //   Meteor.call('deleteOneItem', this.props.index, function (err, result) {
 //       if(err){
-//           console.log("error");
+//           console.log("failResetByMeteor");
 //       }
 //       // console.log(result);
 //   });
