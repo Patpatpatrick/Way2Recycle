@@ -13,8 +13,8 @@ const styles = theme => {
             margin: theme.spacing(1),
         },
         icon: {
-            position: "fixed",
-            top: -10,
+            position: "relative",
+            top: -12,
             width: 24,
             height: 24
         }
@@ -78,7 +78,7 @@ class SearchBar extends React.Component{
 
           <Button  color="primary" variant="outlined" size = "large" className = {classes.btn} onClick = {()=> this.queryByText()}
                    >
-                                 <SearchIcon className = {classes.icon}/>
+                                 <SearchIcon/>
 
           </Button>
         </React.Fragment>  

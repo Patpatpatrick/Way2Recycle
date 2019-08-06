@@ -22,7 +22,7 @@ const styles = theme => {
               flexWrap: 'wrap',
             },
             toolbarTitle: {
-              flexGrow: 2,
+              flexGrow: 1,
               margin: theme.spacing(1, 1.5),
             },
             link: {

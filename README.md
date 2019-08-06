@@ -1,5 +1,8 @@
 # CPSC436I_Project
-CPSC436I_Project 
+CPSC436I_Project
+
+#####https://way2recycle.herokuapp.com/
+
 
 ## Project Description
 
@@ -40,7 +43,10 @@ Item information is arranged by user and by category.
 * Display a specific item (i.e., photo, description, price, posted date) (standard)
 * Edit & delete existing item (standard)
 ### 2-3 stretch requirements (hope to complete 1!)
-* Write tests for most functions
+* Provide RESTful API service
+* Build mobile app for Android and iOS
+https://github.com/zhuliangyu/ionic4-way2recycle
+
 * Comment and rate items
 * Automatically remove goods from the list after the expiration time set by the website
 * User group of specific subcategory
