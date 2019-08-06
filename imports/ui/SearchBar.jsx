@@ -5,6 +5,22 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import {changeChoiceOnNav, searchFromNavBar, searchWordFromNav} from "../actions";
+import {compose} from "redux";
+import withStyles from "@material-ui/core/styles/withStyles";
+const styles = theme => {
+    return ({
+        btn:{
+            margin: theme.spacing(1),
+        },
+        icon: {
+            position: "fixed",
+            top: -10,
+            width: 24,
+            height: 24
+        }
+    }
+    );
+  };
 
 class SearchBar extends React.Component{
 
@@ -35,7 +51,7 @@ class SearchBar extends React.Component{
     }
 
     render(){
-    const classes = useStyles;
+    const { classes } = this.props;
     return (
       <React.Fragment>           
           
@@ -59,9 +75,11 @@ class SearchBar extends React.Component{
               inputProps={{ 'aria-label': 'Search' }}
               /> */}
           </div>
-          <Button  color="primary" variant="outlined" className={classes.searchBtn} onClick = {()=> this.queryByText()}
+
+          <Button  color="primary" variant="outlined" size = "large" className = {classes.btn} onClick = {()=> this.queryByText()}
                    >
-            <SearchIcon />
+                                 <SearchIcon className = {classes.icon}/>
+
           </Button>
         </React.Fragment>  
         );
@@ -87,5 +105,7 @@ const mapStateToProps = (state) => {
         renderChoiceAssigner: state.renderChoiceAssigner
     };
 }
-
-export default connect(mapStateToProps,mapDispatchToProps)(SearchBar);
+export default compose (
+    withStyles(styles),
+    connect(mapStateToProps,mapDispatchToProps)
+  ) (SearchBar)
