@@ -16,26 +16,33 @@ class Slideshow extends React.Component{
       render() {
         var array = this.props.itemArray.filter((item) => item.category === this.props.chosenCategory);
         console.log(this.props.itemArray);
-        return (    
+
+
+        if (array.length ===0) {
+            return (<div>
+                Empty
+            </div>)
+        } else
+        return (
             <div className="slide-container">
             <Fade {...fadeProperties}>
               <div className="each-fade">
                 <div className="image-container">
                   <img src={array[0].imagePreviewUrl} />
                 </div>
-                <h2>First Slide</h2>
+                <h2>{array[0].title}</h2>
               </div>
               <div className="each-fade">
                 <div className="image-container">
                   <img src={array[1].imagePreviewUrl} />
                 </div>
-                <h2>Second Slide</h2>
+                <h2>{array[1].title}</h2>
               </div>
               <div className="each-fade">
                 <div className="image-container">
                   <img src={array[2].imagePreviewUrl} />
                 </div>
-                <h2>Third Slide</h2>
+                <h2>{array[2].title}</h2>
               </div>
               {/* {this.props.itemArray.filter((item) => item.category === this.props.chosenCategory).map( (item, idx) => {
                     console.log("1");
