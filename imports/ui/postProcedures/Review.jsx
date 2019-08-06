@@ -51,13 +51,26 @@ class Popup extends React.Component {
       return (
         <div className='popup'>
           <div className='popup_inner'>
+                <h2>Your item info :</h2>
+                <br/>
                 <div>Title: {this.props.detail.title}</div>
+                <br/>
                 <div>Price : {this.props.detail.price}</div>
+                <br/>
                 <div>Category: {this.props.detail.category}</div>
+                <br/>
                 <div>Description: {this.props.detail.description}</div>
+                <br/>
                 <div>Post Date: {this.props.detail.date.toString()}</div>
+                <br/>
                 <div>Location: {this.props.detail.locationStr}</div>
-                <img src={this.props.detail.imagePreviewUrl} style={{"width": "50px", "height": "20px"}}/>
+                <br/>
+                <div>{this.props.detail.imagePreviewUrl !== '' ? <img src={this.props.detail.imagePreviewUrl} style={{
+                                        "width": "350px",
+                                        "height": "200px"
+                                    }}/> : <span></span>}
+                </div>
+                <br/>
                 <button type = 'close' onClick={this.props.close}>Need Revise</button>
                 <button type = 'submit' onClick={this.handleClick}>Submit</button>
           </div>
