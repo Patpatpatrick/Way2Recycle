@@ -14,7 +14,7 @@ const fadeProperties = {
   indicators: true
 }
 
-export const Slideshow = () => {
+export default Slideshow = () => {
   return (
     <Fade {...fadeProperties}>
       <div className="each-fade">
