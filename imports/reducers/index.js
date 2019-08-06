@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor';
 // this reducer process state relevant to homepage, it has homePgdefaultState
 // itemArray is fetched from meteor and it is the total array regardless of user, cate ...
 const homePgdefaultState = {
-    category: 'Auto',
+    category: 'Car',
     itemArray: []
 }
 const homePageReducer = (state = homePgdefaultState, action) => {
