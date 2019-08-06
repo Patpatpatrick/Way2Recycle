@@ -18,14 +18,25 @@ class Slideshow extends React.Component{
         console.log(this.props.itemArray);
 
 
-        if (array.length ===0) {
+        if (array.length < 3) {
             return (<div>
-                Empty
             </div>)
         } else
         return (
             <div className="slide-container">
             <Fade {...fadeProperties}>
+                {/* {
+                    array.forEach((item,idx)=>{
+                        if(idx<=3){
+                            <div className="each-fade">
+                                <div className="image-container">
+                                <img src={item.imagePreviewUrl} />
+                                </div>
+                                <h2>{item.title}</h2>
+                            </div>
+                        }
+                    })
+                } */}
               <div className="each-fade">
                 <div className="image-container">
                   <img src={array[0].imagePreviewUrl} />
