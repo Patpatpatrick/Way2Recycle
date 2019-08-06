@@ -2,7 +2,7 @@ export default images = [
     {
       url:
         'https://images.unsplash.com/photo-1499525870663-3c9cf5a945c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-      title: 'Auto',
+      title: 'Car',
       width: '40%',
     },
     {
@@ -14,7 +14,7 @@ export default images = [
     {
       url:
         'https://images.unsplash.com/photo-1543165796-5426273eaab3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-      title: 'Textbook',
+      title: 'Book',
       width: '40%',
     },
     {
@@ -25,14 +25,14 @@ export default images = [
     },
     {
       url:
-        'https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-      title: 'Job',
+        'https://images.unsplash.com/photo-1551516594-56cb78394645?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2816&q=80',
+      title: 'Furniture',
       width: '38%',
     },
     {
       url:
         'https://images.unsplash.com/photo-1455970022149-a8f26b6902dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=696&q=80',
-      title: 'Pet',
+      title: 'Other',
       width: '24%',
     },
   ];
