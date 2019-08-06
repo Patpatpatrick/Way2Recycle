@@ -2,28 +2,42 @@ import React from 'react';
 import { connect } from 'react-redux';
 import List_ele from './List_ele';
 import Typography from '@material-ui/core/Typography';
+import { Fade } from 'react-slideshow-image';
 
+const fadeImages = [
+    './IMG_20190428_171852.jpg',
+    './IMG_20190428_171854.jpg',
+    './IMG_20190428_171901.jpg'
+  ];
+  
+  const fadeProperties = {
+    duration: 5000,
+    transitionDuration: 500,
+    infinite: false,
+    indicators: true
+  }
 class List extends React.Component { 
     
 	render() {
         return (
             <div className="items">
                 <Typography variant="h4" marked="center" align="center" component="h2">
-                    {this.props.chosenCategory}
+                   {"Hot "+this.props.chosenCategory}
                 </Typography>
-                <span className="Typography-markedH4Center-183"></span>
-                <br/>
-                <div align="center">
+                
+                <Fade {...fadeProperties}>
                     {this.props.itemArray.filter((item) => item.category === this.props.chosenCategory).map( (item, idx) => {
                         return (
-                            <div key = {item.itemname + '_'+idx}>
-                                <List_ele element = {item} index = {idx}/>
+                            <div className="each-fade">
+                                <div className="image-container">
+                                <img src={item.imagePreviewUrl} />
+                                </div>
+                                <h2>{item.title}</h2>
                             </div>
                         )
                         })
                     }
-                </div>
-                
+                </Fade>
             </div>
         );
     }

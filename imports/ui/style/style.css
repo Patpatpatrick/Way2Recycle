@@ -113,6 +113,86 @@ body{
   text-align: center;
   background: white;
 }
+
+.checkmark {  
+    animation-duration: 800ms;
+    animation-timing-function: ease;
+    animation-name: checkmark;
+}
+svg {
+  width: 100px;
+  display: block;
+  margin: 40px auto 0;
+}
+
+.path_circle {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+    -webkit-animation: dash 0.9s ease-in-out;
+    animation: dash 0.9s ease-in-out;
+}
+
+
+.path_line {
+  stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    -webkit-animation: dash .9s .35s ease-in-out forwards;
+    animation: dash .9s .35s ease-in-out forwards;
+
+}
+
+
+.path_check {
+  stroke-dasharray: 1000;
+
+    stroke-dashoffset: -100;
+    -webkit-animation: dash-check 1.9s .3s ease-in-out forwards;
+    animation: dash-check 1.9s ease-in-out forwards;
+  
+}
+
+
+
+
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-webkit-keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}
+
+@keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}
+
+
+
+
 .topnav {
 	background-color: #333;
 	overflow: hidden;
