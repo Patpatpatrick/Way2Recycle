@@ -24,6 +24,14 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 
 class LogIn extends React.Component{
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            loginFail: false,
+        };
+
+    }
+
   changedEmailInputBox  = (event) => {
     this.props.updateEmailText(event.target.value)
   };
@@ -42,7 +50,7 @@ class LogIn extends React.Component{
         Meteor.loginWithPassword(id, pass, (err) => {
             console.log("meteor login invoked")
             if (err) {
-                alert("Please check your id/pass")
+                this.setState({loginFail:true})
                 console.log(err)
             }
             if (Meteor.userId()) {
@@ -71,9 +79,16 @@ class LogIn extends React.Component{
             <div style={{paddingTop:20}}>
             <div className={"logInBorder"}>
               <div>
-                  <Typography component="h1" variant="h5">
+                  <Typography component="h1" variant="h3">
                       Welcome back!
                   </Typography>
+                  {this.state.loginFail?
+                      <div>
+                           < br/>
+                          <Typography component="h1" variant="h5" color={"error"}>
+                              Please check your email or password
+                          </Typography>
+                      </div>:null}
               </div>
         <form>
           <TextField

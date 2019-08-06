@@ -24,9 +24,9 @@ class home extends Component {
     //
     // componentWillMount() {
     //     console.log("componentWillMount begin")
-    //     Meteor.call('getItems', (error, result) => {
-    //         if (error) {
-    //             console.log(error.reason);
+    //     Meteor.call('getItems', (failResetByMeteor, result) => {
+    //         if (failResetByMeteor) {
+    //             console.log(failResetByMeteor.reason);
     //             return;
     //         }
     //         // do something with result
@@ -42,9 +42,9 @@ class home extends Component {
         // this.props.dataToStore();
 
 
-        // Meteor.call('mySearch', "Bose", function(error, result) {
+        // Meteor.call('mySearch', "Bose", function(failResetByMeteor, result) {
         //     // console.log(result);
-        //     // console.log(error);
+        //     // console.log(failResetByMeteor);
         //     console.log(result);
         //
         // }.bind(this));

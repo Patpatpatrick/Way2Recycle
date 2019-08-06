@@ -32,7 +32,7 @@ Meteor.call('getItems', function (err, result) {
 // get the result from the callback function
 Meteor.call('getOneItem', "5bvHMHYRoAevZLCqQ", function (err, result) {
     if(err){
-        console.log("getOneItem error");
+        console.log("getOneItem failResetByMeteor");
     }
 
     //get result

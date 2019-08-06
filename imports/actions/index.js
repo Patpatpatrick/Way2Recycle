@@ -106,7 +106,15 @@ export const unlikeItem = (userId, postId) => {
         idToRemoveFromLike: userId,
         postUnliked: postId
     }
-} 
+}
+
+export const changeUnsubmittedItem = (key, value) => {
+    return {
+        type: CHANGE_INPUT,
+        keyToChange: key,
+        valueToUpdate: value
+    };
+};
 
 // this is for post!
 export const changeUnPostedItem = (key, value) => {
@@ -235,7 +243,7 @@ export const searchWordFromNav = (string) => {
 //     return (dispatch) => {
 // 		Meteor.call('getItems', function (err, result) {
 // 			if(err){
-// 				console.log("error");
+// 				console.log("failResetByMeteor");
 // 			}
 // 			console.log(result);
 // 			dispatch(assignItemsToStoreItemArray(result));

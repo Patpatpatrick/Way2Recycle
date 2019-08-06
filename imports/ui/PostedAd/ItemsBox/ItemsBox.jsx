@@ -158,7 +158,8 @@ class ItemsBox extends React.Component {
             currentPage:1,
             itemsPerPage:5,
             predictedNumPages:5,
-            inputString:""
+            inputString:"",
+            date: "latest"
         }
     }
 
@@ -179,7 +180,7 @@ class ItemsBox extends React.Component {
         } else {
             Meteor.call('getItems', function (err, result) {
                 if(err){
-                    console.log("error getting default list of items");
+                    console.log("failResetByMeteor getting default list of items");
                 }
                 this.props.dataToStore(result);
             }.bind(this));
@@ -201,7 +202,7 @@ class ItemsBox extends React.Component {
     }
 
     formatDate = (date) => {
-        return new Date().toISOString().replace('-', '/').split('T')[0].replace('-', '/');
+        return new Date(date).toISOString().replace('-', '/').split('T')[0].replace('-', '/');
     }
 
     searchByParam = () => {
@@ -210,27 +211,36 @@ class ItemsBox extends React.Component {
             minPrice: 0,
             maxPrice: 0,
             category: "",
-            keyword: ""
+            keyword: "",
+            sortDate:""
         }
 
         let minPrice = this.state.queryMinPrice
         let maxPrice = this.state.queryMaxPrice
         let category = this.state.queryCategory
         let keyWord = this.state.inputString
+        let sortDate = this.state.date
 
         queryParam.minPrice = minPrice
         queryParam.maxPrice = maxPrice
         queryParam.category = category
         queryParam.keyword = keyWord
+        queryParam.sortDate=sortDate
+
 
         Meteor.call('getItemsByParam',queryParam, function (err, result) {
             if(err){
-                console.log("error querying items by filter");
+                console.log("failResetByMeteor querying items by filter");
             }
             this.props.dataToStore(result);
             this.setState({itemsPerPage:this.state.predictedNumPages})
             //this.setState({currentPage:1})
         }.bind(this));
+    }
+
+
+    changeSortDate = (event) => {
+        this.setState({date: event.target.value})
     }
 
 
@@ -343,6 +353,21 @@ class ItemsBox extends React.Component {
                                 onChange={(event, value) =>this.changeNumPages(event, value)}
                                 /*onDragStop={this.changeNumPages}*/
                             />
+
+                            <div>Sort by Date</div>
+                            <FormControl  className={classes.formControl}>
+                                <FormHelperText>Date</FormHelperText>
+                                <Select
+                                    value={this.state.date}
+                                    onChange={this.changeSortDate}
+                                    input={<OutlinedInput labelWidth={0} name="" id="" />}
+                                >
+                                    <MenuItem value={"latest"}>Sort by Latest</MenuItem>
+                                    <MenuItem value={"oldest"}>Sort by Oldest</MenuItem>
+
+                                </Select>
+                            </FormControl>
+
                             <div>
                                 <button onClick={this.searchByParam}>Submit</button>
                             </div>
@@ -389,7 +414,9 @@ class ItemsBox extends React.Component {
                                                                 <div>--------------------------</div>
                                                                 <div>Price: ${item.price}</div>
                                                                 <div>Category: {item.category}</div>
-                                                                <div>Description: {item.description}</div>
+                                                                <div className={"descriptionStyle"}>
+                                                                    Description: {item.description}
+                                                                </div>
                                                                 <div>Date: {this.formatDate(item.date.toString())}</div>
 
                                                                 <br/>
