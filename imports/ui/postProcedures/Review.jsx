@@ -80,20 +80,32 @@ class Popup extends React.Component {
                 <br/>
                 <button type = 'close' onClick = {this.resetAndclose}>Close</button>
               </div>
-            : <div>
+            : <div style={{paddingTop:50}}>
                 <h2>Your item info :</h2>
                 <br/>
-                <div>Title: {this.props.detail.title}</div>
+                  <div><b>Title:</b> {this.props.detail.title}</div>
                 <br/>
-                <div>Price : {this.props.detail.price}</div>
+                  <div><b>Price :</b> {this.props.detail.price}</div>
                 <br/>
-                <div>Category: {this.props.detail.category}</div>
+                  <div><b>Category: </b> {this.props.detail.category}</div>
                 <br/>
-                <div>Description: {this.props.detail.description}</div>
+                  <div> <b>Post Date: </b> {this.props.detail.date.toString()}</div>
+                  <br/>
+                  <span><b>Description: </b>
+                      {(this.props.detail.description==="")?
+                          <span>No description provided</span>:
+                          <span>{this.props.detail.description}</span>
+                      }
+                  </span>
                 <br/>
-                <div>Post Date: {this.props.detail.date.toString()}</div>
+
                 <br/>
-                <div>Location: {this.props.detail.locationStr}</div>
+                  <span><b>Location: </b>
+                      {(this.props.detail.locationStr==="")?
+                          <span>No location provided</span>:
+                          <span>{this.props.detail.locationStr}</span>
+                  }
+                  </span>
                 <br/>
                 <div>{this.props.detail.imagePreviewUrl !== '' ? <img src={this.props.detail.imagePreviewUrl} style={{
                                         "width": "350px",
@@ -101,8 +113,11 @@ class Popup extends React.Component {
                                     }}/> : <span></span>}
                 </div>
                 <br/>
-                <button type = 'close' onClick={this.props.close}>Need Revise</button>
+                <span>
+                  <button type = 'close' onClick={this.props.close}>Need Revise</button>
+                    &nbsp;&nbsp;
                 <button type = 'submit' onClick={this.handleClick}>Submit</button>
+                </span>
               </div>
           }
           </div>        

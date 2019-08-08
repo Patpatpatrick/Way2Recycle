@@ -100,16 +100,16 @@ body{
   left: 0;
   right: 0;
   bottom: 0;
-  margin-left: 100 px;
-  background-color: rgb(0, 0, 0);
+  /*margin-left: 100px;*/
+    background: rgba(0, 0, 0, 0.7);
 }
 .popup_inner {
   position: absolute;
   left: 15%;
   right: 15%;
   top: 10%;
-  bottom: 0%;
-  margin-left: 100;
+  bottom: 10%;
+  margin-left: 100px;
   text-align: center;
   background: white;
 }

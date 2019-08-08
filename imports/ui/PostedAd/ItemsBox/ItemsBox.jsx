@@ -294,7 +294,7 @@ class ItemsBox extends React.Component {
                     <div className={classes.padding.toString() + " column1"}>
                         <Paper className={classes.filterPaper}>
                             <div style={{zIndex:-1}} >
-                                <div>Category</div>
+                                <div><b>Category</b></div>
                                 <FormControl  className={classes.formControl}>
                                     <FormHelperText>Category</FormHelperText>
                                     <Select
@@ -314,7 +314,7 @@ class ItemsBox extends React.Component {
                             </div>
                             <div>
                                 <br/>
-                                <div>Price Range</div>
+                                <div><b>Price Range</b></div>
                                 <span>
                             <TextField
                                 placeholder="min"
@@ -340,7 +340,7 @@ class ItemsBox extends React.Component {
 
                             <br/>
                             <Typography id="discrete-slider-restrict" gutterBottom>
-                                Number of Items per Page
+                                <b>Number of Items per Page </b>
                             </Typography>
                             <Slider
                                 defaultValue={5}
@@ -354,8 +354,8 @@ class ItemsBox extends React.Component {
                                 onChange={(event, value) =>this.changeNumPages(event, value)}
                                 /*onDragStop={this.changeNumPages}*/
                             />
-
-                            <div>Sort by Date</div>
+                            <div><br/></div>
+                            <div><b>Sort by:</b></div>
                             <FormControl  className={classes.formControl}>
                                 <FormHelperText>Date</FormHelperText>
                                 <Select

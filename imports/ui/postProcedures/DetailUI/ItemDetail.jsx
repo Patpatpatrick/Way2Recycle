@@ -16,8 +16,6 @@ class ItemDetail extends Component {
         this.handleImageChange = this.handleImageChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onSuggestSelect = this.onSuggestSelect.bind(this);
-        this.state = {priceError: false}
-
     }
 
     handleChange(event) {
@@ -78,9 +76,13 @@ class ItemDetail extends Component {
                                 <label htmlFor="iname"><b>Posting title</b></label>
                                 <input type="text" onChange={this.handleChange} id="title" name="title"
                                        placeholder="Item's name.." required="required"></input>
-                                <label htmlFor="lname"><b>Price</b></label>
-                                <input type="text" onChange={this.handleChange} id="price" name="price"
-                                       placeholder="Price.." required="required"></input>
+                                <label htmlFor="price"><b>Price</b></label>
+
+                               <div>
+                                <input type="number"   style={{width:350}} onChange={this.handleChange} id="price" name="price"
+                                      placeholder="Price..." required="required" min="0" max="10000000" ></input>
+                               </div>
+
                                 <label htmlFor="subject"><b>Description</b></label>
                                 <textarea onChange={this.handleChange} id="subject" name="description"
                                           placeholder="Write something.."></textarea>

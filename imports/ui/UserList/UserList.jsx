@@ -16,7 +16,7 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
-import {red} from "@material-ui/core/colors";
+import {grey, red} from "@material-ui/core/colors";
 import { popUpItem}  from '../../actions';
 import Button from '@material-ui/core/Button';
 import Popup from '../utilitycomponent/PopUpForUserEdit';
@@ -40,7 +40,8 @@ const styles = theme => {
             paper: {
                 padding: theme.spacing(1),
                 textAlign: 'center',
-                color: theme.palette.text.secondary,
+                color: theme.palette.text.primary,
+                backgroundColor: grey[200]
             },
             icon: {
                 margin: theme.spacing(1),
@@ -152,8 +153,8 @@ class UserList extends React.Component {
                                     <div><strong>Item: </strong>{(item.title)}</div>
                                     <div><strong>Price:</strong> ${item.price}</div>
                                     <div><strong>Category:</strong> {item.category}</div>
-                                    <div><strong>Description:</strong> {(item.description)}</div>
                                     <div><strong>Uploaded Date:</strong> {this.formatDate(item.date)}</div>
+                                    <div><strong>Description:</strong> {(item.description)}</div>
                                 </div>
                                 <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <Grid item xs={8} >
