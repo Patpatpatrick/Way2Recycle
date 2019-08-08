@@ -16,6 +16,8 @@ class ItemDetail extends Component {
         this.handleImageChange = this.handleImageChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onSuggestSelect = this.onSuggestSelect.bind(this);
+        this.state = {priceError: false}
+
     }
 
     handleChange(event) {
@@ -73,20 +75,20 @@ class ItemDetail extends Component {
                             <br></br>
                             <form style={{"width": "350px", "verticalAlign": "0%"}} onSubmit={this.handleSubmit}
                                   className="form" ref="inputform">
-                                <label htmlFor="iname">Item's Name is</label>
+                                <label htmlFor="iname"><b>Posting title</b></label>
                                 <input type="text" onChange={this.handleChange} id="title" name="title"
                                        placeholder="Item's name.." required="required"></input>
-                                <label htmlFor="lname">Price</label>
+                                <label htmlFor="lname"><b>Price</b></label>
                                 <input type="text" onChange={this.handleChange} id="price" name="price"
                                        placeholder="Price.." required="required"></input>
-                                <label htmlFor="subject">description</label>
+                                <label htmlFor="subject"><b>Description</b></label>
                                 <textarea onChange={this.handleChange} id="subject" name="description"
                                           placeholder="Write something.."></textarea>
-                                <label htmlFor="locationLabel">Your location is</label>
+                                <label htmlFor="locationLabel"><b>Your location is</b></label>
                                 <br/>
                                 <label htmlFor="location">{this.props.item.locationStr}</label>
                                 <br/>
-                                <label htmlFor="uploadImg">Upload Picture</label>
+                                <label htmlFor="uploadImg"><b>Upload Picture</b></label>
                                 <input type="file" onChange={this.handleImageChange}/>
                                 <div>
                                     {this.props.item.imagePreviewUrl !== '' ? <img src={this.props.item.imagePreviewUrl} style={{
@@ -101,7 +103,7 @@ class ItemDetail extends Component {
                         <td style={{"verticalAlign": "0%"}}>
                             <br></br>
                             <div>
-                                <div>Type in to set your location</div>
+                                <div><b>Type in to set your location</b></div>
                                     <Geosuggest
                                         placeholder = {"search and we'll give you suggestion"}
                                         onSuggestSelect={this.onSuggestSelect}
@@ -109,7 +111,7 @@ class ItemDetail extends Component {
                                         radius="20"
                                         className='geoLocation'
                                     />
-                                    <div>Or put a marker to set your location</div>
+                                <div><b>Or put a marker to set your location</b></div>
                                 <MapContainer mapContainerSize = {{
                                                                     height: "400px",
                                                                     width: "800px",

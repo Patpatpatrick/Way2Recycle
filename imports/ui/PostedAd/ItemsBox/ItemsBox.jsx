@@ -36,6 +36,7 @@ import Divider from "@material-ui/core/Divider";
 import SearchIcon from '@material-ui/icons/Search';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => {
     return ({
@@ -369,7 +370,11 @@ class ItemsBox extends React.Component {
                             </FormControl>
 
                             <div>
-                                <button onClick={this.searchByParam}>Submit</button>
+                               {/* <button onClick={this.searchByParam}>Submit</button>*/}
+
+                                <Button variant="contained" color="primary" onClick={this.searchByParam}>
+                                    Submit
+                                </Button>
                             </div>
                         </Paper>
                     </div>
@@ -411,13 +416,14 @@ class ItemsBox extends React.Component {
                                                             <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
                                                             <TableCell align="left" style={{verticalAlign:'top'}} >
                                                                 <span className={classes.titleFont}>{item.title}</span>
-                                                                <div>--------------------------</div>
-                                                                <div>Price: ${item.price}</div>
-                                                                <div>Category: {item.category}</div>
+                                                                <div><br/></div>
+                                                                <div><b>Price:</b> ${item.price}</div>
+                                                                <div><b>Category:</b> {item.category}</div>
+                                                                <div><b>Date:</b> {this.formatDate(item.date.toString())}</div>
                                                                 <div className={"descriptionStyle"}>
-                                                                    Description: {item.description}
+                                                                    <b>Description:</b> {item.description}
                                                                 </div>
-                                                                <div>Date: {this.formatDate(item.date.toString())}</div>
+
 
                                                                 <br/>
                                                                 <div><ViewOneItem index = {idx + (this.state.currentPage -1) * (this.state.itemsPerPage)}/></div>
