@@ -49,7 +49,6 @@ class List_ele extends React.Component {
 }
 
   handleClick(){
-    console.log(this.props.element._id);
     this.props.showIndex(this.props.element._id);
 }
 

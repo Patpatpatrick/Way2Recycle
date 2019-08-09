@@ -1,8 +1,6 @@
 
 //create one item
 // pass a new JSON
-
-
 const new_obj = {
     "user_id" : "test2",
     "title" : "car1",
@@ -22,7 +20,6 @@ Meteor.call('getItems', function (err, result) {
     if(err){
         console.log("error");
     }
-    // console.log(result);
 });
 
 
@@ -34,9 +31,6 @@ Meteor.call('getOneItem', "5bvHMHYRoAevZLCqQ", function (err, result) {
     if(err){
         console.log("getOneItem failResetByMeteor");
     }
-
-    //get result
-    // console.log(result);
 });
 
 
@@ -47,7 +41,6 @@ Meteor.call('deleteOneItem', "5bvHMHYRoAevZLCqQ", function (err, result) {
     if(err){
         console.log("error");
     }
-    // console.log(result);
 });
 
 

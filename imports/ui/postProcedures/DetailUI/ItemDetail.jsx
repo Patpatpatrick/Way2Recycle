@@ -44,7 +44,6 @@ class ItemDetail extends Component {
         let meteorUserId = Meteor.userId();
 
         if (meteorUserId==='' || meteorUserId===undefined) {
-            console.log("Error: The user is attempting to submit item without being logged in!")
             alert("Error: The user is attempting to submit item without being logged in!")
             return;
         }
@@ -56,11 +55,6 @@ class ItemDetail extends Component {
     onSuggestSelect(suggest) {
         this.props.changeItem('location',suggest.location);
         this.props.changeItem('locationStr',suggest.description);
-        // this.setState({
-        //     location: suggest.location,
-        //     locationStr: suggest.description
-        // });
-        // console.log(suggest);
     }
 
     render() {

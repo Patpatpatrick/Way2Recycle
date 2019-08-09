@@ -9,14 +9,11 @@ const fadeProperties = {
   infinite: false,
   indicators: true,
   onChange: (oldIndex, newIndex) => {
-    console.log(`fade transition from ${oldIndex} to ${newIndex}`);
   }
 }
 class Slideshow extends React.Component{
       render() {
         var array = this.props.itemArray.filter((item) => item.category === this.props.chosenCategory);
-        console.log(this.props.itemArray);
-
 
         if (array.length < 3) {
             return (<div>
@@ -55,18 +52,6 @@ class Slideshow extends React.Component{
                 </div>
                 <h2>{array[2].title}</h2>
               </div>
-              {/* {this.props.itemArray.filter((item) => item.category === this.props.chosenCategory).map( (item, idx) => {
-                    console.log("1");
-                    return (
-                        <div className="each-fade">
-                            <div className="image-container">
-                            <img src={item.imagePreviewUrl} />
-                            </div>
-                            <h2>{item.itemname}</h2>
-                        </div> 
-                    )
-                    })
-                } */}
             </Fade>
           </div>
 

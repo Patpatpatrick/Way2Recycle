@@ -9,7 +9,6 @@ class SeeOne extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick(){
-        console.log(this.props.index);
         this.props.showIndex(this.props.index);
     }
 	render() {

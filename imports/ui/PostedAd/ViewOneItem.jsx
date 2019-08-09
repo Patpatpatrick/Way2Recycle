@@ -12,11 +12,7 @@ class SeeOne extends React.Component {
     }
 
     handleClick(){
-        // console.log(this.props.detail);
-        // console.log(this.props);
         this.props.showIndex(this.props.index);
-        // Meteor.call('getOneItem', this.props.index);
-        // console.log('get one item')
     }
 
 	render() {

@@ -44,7 +44,6 @@ class Popup extends React.Component {
         this.resetAndclose = this.resetAndclose.bind(this);
     }
     handleClick(){
-      console.log(Meteor.user());
       let withOwnerInfo_Item;
       if(Meteor.user().emails){
         withOwnerInfo_Item = Object.assign({},this.props.detail,{
@@ -58,7 +57,6 @@ class Popup extends React.Component {
         var Email;
         Meteor.call('getGoogleUserEmail', (err, email) => {
             Email = email;
-            console.log(Email);
             withOwnerInfo_Item = Object.assign({},this.props.detail,{
               owner:
                   {username:Meteor.user().profile.name,

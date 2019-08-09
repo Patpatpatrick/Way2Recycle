@@ -20,7 +20,6 @@ WebApp.connectHandlers.use('/v1/item/', (req, res, next) => {
     let oneItem = Items.findOne({_id: token});
     res.setHeader('Content-Type', 'application/json');
     res.writeHead(200);
-    // // console.log(JSON.stringify(json));
     res.end(JSON.stringify(oneItem));
 });
 
@@ -34,14 +33,12 @@ WebApp.connectHandlers.use('/v1/items', (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.writeHead(200);
     const json = Meteor.call('getItems');
-    // console.log(JSON.stringify(json));
     res.end(JSON.stringify(json));
 });
 
 //Meteor.call('mySearch', "Bose", (failResetByMeteor, result) => { console.log(result) });
 Meteor.methods({
     'mySearch': function (searchValue) {
-        console.log("search by keyword with search value: " + searchValue)
         let items = [];
         // Search  by empty keyword
         if (searchValue === "" || searchValue === undefined) {
@@ -63,18 +60,15 @@ Meteor.methods({
         item.price = parseInt(item['price'])
         item.date = new Date(item.date)
         Items.insert(item);
-        console.log("add one");
     }
 });
 
 Meteor.methods({
     'getItems': function () {
-
         let items = [];
         Items.find({}, {sort: {date: -1}}).forEach((entry) => {
             items.push(entry);
         })
-        console.log("get all items");
         return items;
     }
 });
@@ -85,8 +79,6 @@ Meteor.methods({
         let queryArray = [{}]
 
         //{category : 'Appliance'}
-
-        console.log(queryParam)
         if (queryParam['category'] !== 'None') {
             let categoryQuery = {category: ''}
             categoryQuery.category = queryParam['category']
@@ -132,7 +124,6 @@ Meteor.methods({
         if (queryParam['sortDate']==="latest") dateQuery.date = -1
 
         let itemArray = Items.find({$and: queryArray}, {sort: dateQuery}).fetch()
-        console.log("get items by query params");
         return itemArray;
     }
 });
@@ -141,7 +132,6 @@ Meteor.methods({
 Meteor.methods({
     'getOneItem': function (pass_id) {
         let oneItem = Items.findOne({_id: pass_id});
-        console.log("get one item id is" + pass_id);
         return oneItem;
     }
 });
@@ -149,9 +139,7 @@ Meteor.methods({
 
 Meteor.methods({
     'getUserItem': function (user_id) {
-        console.log("getUserItem");
         let items = Items.find({user_id: user_id}).fetch();
-        // console.log("get user's " + user_id + "items are" + items);
         return items;
     }
 });
@@ -160,16 +148,12 @@ Meteor.methods({
 Meteor.methods({
     'deleteOneItem': function (pass_id) {
         Items.remove({_id: pass_id});
-        console.log("delete one item id is " + pass_id);
     }
 });
 
 
 Meteor.methods({
     'updateOneItem': function (pass_id, obj) {
-        //console.log("liked" + pass_id);
-        //console.log(obj);
-        //console.log(obj.like.join());
         Items.update({_id: pass_id}, {
             $set: {
                 title: obj.title,
@@ -183,8 +167,6 @@ Meteor.methods({
                 like: obj.like,
             }
         });
-        //console.log("update one item id is " + pass_id);
-       
     }
 });
 Meteor.methods({
@@ -204,11 +186,6 @@ Meteor.startup(() => {
             "description": "text"
         })
     }
-
-    // password and token, etc should be moved out as env variable when deployed
-
-    console.log('Setting up email environment for forgot password')
-   // process.env.MAIL_URL = 'smtp://way2recycle%40gmail.com:cpsc436i@smtp.gmail.com:587';
 
 
     process.env.MAIL_URL = 'smtp://apikey:' +
