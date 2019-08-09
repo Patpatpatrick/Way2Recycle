@@ -13,7 +13,6 @@ class List extends React.Component {
     
     handleClick(){
         Meteor.call('getItemsByParam', this.props.chosenCategory);
-        console.log();
     }
     
 	render() {

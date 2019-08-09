@@ -40,7 +40,6 @@ class SearchBar extends React.Component{
         let queryParam = this.state.inputString
         Meteor.call('mySearch',queryParam, function (err, result) {
             if(err){
-                console.log("failResetByMeteor querying items by keyword");
             }
             //this.props.dataToStore(result);
             this.props.searchFromNavBar(true)

@@ -17,8 +17,6 @@ let renderResetPasswordPage = false
 let passwordTokenFromEmail ='default'
 
 Accounts.onResetPasswordLink((token,done)=>{
-    console.log('token received from email URL')
-    console.log(token)
     renderResetPasswordPage = true
     passwordTokenFromEmail = token
 })
@@ -34,7 +32,6 @@ class App extends React.Component{
     conditionalRender(){
 
         if (this.props.choice ==='resetPasswordByEmail') {
-            console.log(passwordTokenFromEmail)
             return (<ResetPasswordByEmail token={passwordTokenFromEmail}/>)
         }
 
@@ -43,7 +40,6 @@ class App extends React.Component{
         }
 
         if (this.props.choice === "home") {
-            // console.log('should be here');
             return (<Home/>);
         } else if (this.props.choice === "post") {
             return (<PostUI/>);

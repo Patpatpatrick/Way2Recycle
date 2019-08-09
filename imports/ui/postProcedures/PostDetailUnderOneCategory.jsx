@@ -10,7 +10,6 @@ class PostDetailUnderOneCategory extends React.Component {
     }
     conditionalRender(){
         if (this.props.unposted.category !== "") {
-            console.log("render item detail panel");
             return (<ItemDetail/>);
         }
     }

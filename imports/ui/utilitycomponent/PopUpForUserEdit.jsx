@@ -87,20 +87,12 @@ class Popup extends React.Component {
             this.setState({isClicked: true, inputError: true})
             return;
         }
-        // console.log(this.props.detail);
-        // console.log(this.props);
-        //this.props.updatePostedItem(this.props.index);
-        // var newOBJ = Object.assign(this.props.itemForPopUp,)
-
 
         let newObject = this.props.itemForPopUp
         this.props.itemForPopUp.date = this.state.date
 
         Meteor.call('updateOneItem', this.props.itemForPopUp._id, newObject); // need to confirm
-        //console.log(this.props.itemForPopUp._id);
-        alert('Update one item!');
         this.props.closePopeditem()
-        // this.props.close();
     }
 
 
@@ -109,11 +101,7 @@ class Popup extends React.Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        console.log('-----------------------')
-        console.log(name);
-        console.log(value);
         this.props.changeUnsubmittedItem(name, value);
-        //console.log(this.props.changeUnsubmittedItem);
     }
 
     handleImageChange(event) {
@@ -296,27 +284,3 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Popup)
-
-
-// handleClick(){
-//   Meteor.call('deleteOneItem', this.props.index, function (err, result) {
-//       if(err){
-//           console.log("failResetByMeteor");
-//       }
-//       // console.log(result);
-//   });
-//   this.props.cOne(this.props.index);
-// }
-// render() {
-//   return (
-//       <Button type="button" onClick = {this.handleClick} id={this.props.index + 'Clear'}>Clear</Button>
-//   );
-// }
-// }
-// const mapDispatchToProps = (dispatch) => {
-// return {
-// cOne: (index) => {
-//   dispatch(clearItem(index));
-// }
-// }
-// };

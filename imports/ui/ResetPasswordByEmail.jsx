@@ -28,15 +28,12 @@ class ResetPasswordByEmail extends React.Component {
     }
 
     resetPassword = () => {
-        console.log(this.state.password)
-
         if (this.state.password !== this.state.confirmPassword || this.state.password === '') {
             this.setState({pressedButton: true, failResetByMeteor: false})
             //alert("Please check that both password fields are same")
         } else {
             Accounts.resetPassword(this.props.token, String(this.state.password), (err) => {
                 if (err) {
-                    console.log("failResetByMeteor changing password")
                     this.setState({pressedButton: true, failResetByMeteor: true})
                 }
                 alert('Password changed successfully!')

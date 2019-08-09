@@ -50,7 +50,6 @@ class Nav extends React.Component{
       if (err) {
         alert('Failed to logout for the user: ' + Meteor.userId())
       }
-      console.log("Successfully logged out for user: " + Meteor.userId())
       //this.props.changeChoiceOnNav("home")
       this.setState({flag: !this.state.loginFlag})
       //  Log-out should redirect user to home page and that dashboard and add post should be not rendered.

@@ -24,39 +24,10 @@ class Popup extends React.Component {
 
 
 handleClick(){
-  // console.log(this.props.detail);
-  console.log(this.props);
-  //this.props.updatePostedItem(this.props.index);
-  // var newOBJ = Object.assign(this.props.itemForPopUp,)
-  console.log(this.props.itemForPopUp);
-  // var newItemWithLikeUpdated = Object.assign({},this.props.itemForPopUp,{
-  //   like:[...this.itemForPopUp.like,Meteor.userId()]
-  // });
   Meteor.call('updateOneItem', this.props.itemForPopUp._id, this.props.itemForPopUp);
   this.props.likeItem(this.props.itemForPopUp.user_id, this.props.itemForPopUp._id);
-  console.log(this.props.itemForPopUp.user_id);
-  console.log(this.props.itemForPopUp._id);
-  console.log(this.props);
-  console.log(this.props.likeItem);
-  alert('Liked one item!');
-  // this.props.close();
 }
 
-
-
-// handleImageChange(event) {
-//   event.preventDefault();
-//   let reader = new FileReader();
-//   let file = event.target.files[0];
-//   reader.onloadend = () => {
-//       this.setState({
-//           file: file,
-//           imagePreviewUrl: reader.result,
-//           date: new Date().toLocaleString()
-//       });
-//   }
-//   reader.readAsDataURL(file)
-// }
 
   render() {
     
@@ -108,27 +79,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Popup)
-
-
-// handleClick(){
-//   Meteor.call('deleteOneItem', this.props.index, function (err, result) {
-//       if(err){
-//           console.log("failResetByMeteor");
-//       }
-//       // console.log(result);
-//   });
-//   this.props.cOne(this.props.index);
-// }
-// render() {
-//   return (
-//       <Button type="button" onClick = {this.handleClick} id={this.props.index + 'Clear'}>Clear</Button>
-//   );
-// }
-// }
-// const mapDispatchToProps = (dispatch) => {
-// return {
-// cOne: (index) => {
-//   dispatch(clearItem(index));
-// }
-// }
-// };

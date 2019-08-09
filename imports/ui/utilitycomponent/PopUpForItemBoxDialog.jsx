@@ -74,24 +74,15 @@ class CustomizedDialogs extends React.Component {
     }
     
     handleClose() {
-        console.log('close it ');
-        console.log(this.props.itemForPopUp);   
         this.props.closePopeditem();
     };
 
     handleClick(){
-      console.log(this.props.liked);
-      console.log(this.props);
-      console.log(this.props.itemForPopUp);
       this.props.likeItem(Meteor.userId(), this.props.itemForPopUp._id);
-      console.log(this.props.itemForPopUp);
 
       if (!this.props.itemForPopUp.like.includes(Meteor.userId())) {
       let newLike = [...this.props.itemForPopUp.like];
-      //console.log(newLike);
-      //console.log(newLike.length);
       newLike.splice(newLike.length, 0, Meteor.userId());
-      // console.log(newLike);
       let revisedPopUpItem=  Object.assign({},this.props.itemForPopUp, 
           {
           like: newLike,
@@ -99,16 +90,7 @@ class CustomizedDialogs extends React.Component {
       );
  
       Meteor.call('updateOneItem', this.props.itemForPopUp._id, revisedPopUpItem);
-    
-      console.log(this.props.itemForPopUp.user_id);
-      console.log(this.props.itemForPopUp._id);
-      console.log(this.props);
-      console.log(this.props.likeItem);
-
-      console.log('liked status is:' + this.props.liked);
-      alert('Liked one item!');
-     
-      // this.props.close();
+  
       } else {
       //alert('Already Liked!');
       }

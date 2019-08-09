@@ -13,48 +13,12 @@ import useStyles from './style/NavStyle';
 import UserList from "./UserList/UserList.jsx";
 import {Meteor} from "meteor/meteor";
 class home extends Component {
-
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this.state = {
-    //         items: [],
-    //     };
-    // }
-    //
-    // componentWillMount() {
-    //     console.log("componentWillMount begin")
-    //     Meteor.call('getItems', (failResetByMeteor, result) => {
-    //         if (failResetByMeteor) {
-    //             console.log(failResetByMeteor.reason);
-    //             return;
-    //         }
-    //         // do something with result
-    //         // console.log(result);
-    //         this.setState({
-    //             items: [...result]
-    //         })
-    //     });
-    //
-    // }
-
+ 
     componentDidMount() {
-        // this.props.dataToStore();
-
-
-        // Meteor.call('mySearch', "Bose", function(failResetByMeteor, result) {
-        //     // console.log(result);
-        //     // console.log(failResetByMeteor);
-        //     console.log(result);
-        //
-        // }.bind(this));
-
 
         Meteor.call('getItems', function (err, result) {
             if (err) {
-                console.log("error");
             }
-            // console.log(result);
             this.props.dataToStore(result);
         }.bind(this));
     }
@@ -85,35 +49,3 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 export default connect(null, mapDispatchToProps)(home);
-
-// export default function Nav() {
-//   const classes = useStyles();
-
-//   return (
-//     <React.Fragment>
-//       <CssBaseline />
-//       <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
-//         <Toolbar className={classes.toolbar}>
-//           <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-//             Way2Recycle
-//           </Typography>
-//           <SearchBar/>
-//           <nav>
-//             <Link variant="button" color="textPrimary" href="/" className={classes.link}>
-//               Home
-//             </Link>
-//             <Link variant="button" color="textPrimary" href="/postAd" className={classes.link}>
-//               Post ad
-//             </Link>
-//             <Link variant="button" color="textPrimary" href="/group" className={classes.link}>
-//               Group
-//             </Link>
-//           </nav>
-//           <Button href="/login" color="primary" variant="outlined" className={classes.link}>
-//             Login
-//           </Button>
-//         </Toolbar>
-//       </AppBar>
-//     </React.Fragment>
-//   );
-// }

@@ -174,15 +174,12 @@ class ItemsBox extends React.Component {
             let searchString = this.props.keywordFromNavBar
             Meteor.call('mySearch', searchString, (error, result) => {
                 if (error) {
-                    console.log("failed to view items searched from nav bar")
                 }
                 this.props.dataToStore(result);
-                console.log(result)
             });
         } else {
             Meteor.call('getItems', function (err, result) {
                 if(err){
-                    console.log("failResetByMeteor getting default list of items");
                 }
                 this.props.dataToStore(result);
             }.bind(this));
@@ -197,7 +194,6 @@ class ItemsBox extends React.Component {
                 Meteor.call('mySearch', searchString, (error, result) => {
                     this.props.searchFromNavBar(false)
                     this.props.dataToStore(result);
-                    console.log(result)
                 });
             }
         }
@@ -238,7 +234,6 @@ class ItemsBox extends React.Component {
 
         Meteor.call('getItemsByParam',queryParam, function (err, result) {
             if(err){
-                console.log("failResetByMeteor querying items by filter");
             }
             this.props.dataToStore(result);
             this.setState({itemsPerPage:this.state.predictedNumPages})

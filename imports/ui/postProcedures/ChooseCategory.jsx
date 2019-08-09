@@ -10,8 +10,6 @@ class ChooseCategory extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        console.log(value);
-        console.log(name);
         this.props.changeUnPostedItem(name,value);
     }
 	render() {

@@ -36,8 +36,6 @@ class MyComponents extends Component {
     }
     addMarker(e) {
         const newPlace = { lat: e.latLng.lat(), lng: e.latLng.lng() };
-        console.log(newPlace);
-        console.log(this.map);
         this.setState({
             isMarkerShown: true,
         })
@@ -45,22 +43,17 @@ class MyComponents extends Component {
         Geocode.fromLatLng(newPlace.lat, newPlace.lng).then(
             response => {
                 const address = response.results[0].formatted_address;
-                console.log(address);
                 this.props.changeItem("locationStr",address);
             },
             error => {
-                console.error(error);
             }
         );
     }
     handleMapLoad(map){
-        console.log(map);
         this.map = map;
     }
     resetCenter(){
         let mapRef = this.map;
-        console.log(mapRef);
-        console.log(mapRef.getCenter().lat()+'; '+mapRef.getCenter().lng());
         this.setState({
             center: {lat: mapRef.getCenter().lat(), lng: mapRef.getCenter().lng()}
         })
@@ -83,7 +76,6 @@ class MyComponents extends Component {
 
                 <Marker
                 onLoad={marker => {
-                    console.log('marker: ', marker)
                 }}
                 position={this.props.item.location}
                 />

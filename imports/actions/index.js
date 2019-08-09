@@ -239,19 +239,6 @@ export const searchWordFromNav = (string) => {
     }
 }
 
-// export const dataToStore = () => {
-//     return (dispatch) => {
-// 		Meteor.call('getItems', function (err, result) {
-// 			if(err){
-// 				console.log("failResetByMeteor");
-// 			}
-// 			console.log(result);
-// 			dispatch(assignItemsToStoreItemArray(result));
-// 		});
-//     };
-// }
-
-
 export const assignItemsToStoreItemArray = (itemsFromServer) => {
 	return {
 		type: ASSIGN_SERVER_ITEMS_TO_STORE,

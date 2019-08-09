@@ -42,7 +42,6 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
                 }
             );
         case actions.VIEW_ONE_IN_ITEM_BOX:
-            console.log('View one item!')
             return Object.assign({}, state,
                 {
                     shouldPopUpInitemBox: true,
@@ -50,7 +49,6 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
                 }
             );
         case actions.CLOSE_ONE_IN_ITEM_BOX:
-            console.log('Close one item!');
             return Object.assign({}, state,
                 {
                     shouldPopUpInitemBox: false,
@@ -59,26 +57,14 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
         
         case actions.LIKE_ITEM:
             if (!state.popUpItemInItemBox.like.includes(action.idToAddToLike)) {
-                console.log('like one item!');
                 let newLike = [...state.popUpItemInItemBox.like];
-                console.log(newLike);
-                console.log(newLike.length);
                 newLike.splice(newLike.length, 0, action.idToAddToLike);
-                console.log(newLike);
                 let revisedPopUpItem=  Object.assign({},state.popUpItemInItemBox, 
                     {
                     like: newLike,
                 }
                 );
-                console.log(newLike);
-                console.log(revisedPopUpItem);
-                console.log(Object.assign({}, state,
-                    {
-                        shouldPopUpInitemBox: true,
-                        popUpItemInItemBox:revisedPopUpItem,
-                        liked: true,
-                    }
-                ));
+
                 return Object.assign({}, state,
                     {
                         shouldPopUpInitemBox: true,
@@ -97,49 +83,8 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
                 );
             }
 
+        // case actions.UNLIKE_ITEM:
 
-        
-        case actions.UNLIKE_ITEM:
-            // if (state.popUpItemInItemBox.like.includes(action.idToRemoveFromLike)) {
-            //     console.log('unlike one item!');
-            //     let updatedLike = [...state.popUpItemInItemBox.like];
-            //     console.log(updatedLike);
-            //     console.log(updatedLike.length);
-            //     let removeIndex = updatedLike.indexOf(idToRemoveFromLike);
-            //     updatedLike.splice(removeIndex , 1, action.idToAddToLike);
-            //     console.log(updatedLike);
-            //     let revisedPopUpItem=  Object.assign({},state.popUpItemInItemBox, 
-            //         {
-            //         like: updatedLike,
-            //     }
-            //     );
-            //     console.log(updatedLike);
-            //     console.log(revisedPopUpItem);
-            //     console.log(Object.assign({}, state,
-            //         {
-            //             shouldPopUpInitemBox: true,
-            //             popUpItemInItemBox:revisedPopUpItem,
-            //             liked: true,
-            //         }
-            //     ));
-
-            //     return Object.assign({}, state,
-            //         {
-            //             shouldPopUpInitemBox: true,
-            //             popUpItemInItemBox:revisedPopUpItem,
-            //             liked: true,
-            //         }
-            //     );
-            // }
-
-
-            // return Object.assign({}, state,
-            //     {
-            //         shouldPopUpInitemBox: true,
-            //         popUpItemInItemBox:state.itemArray[action.indexToPop],
-            //         unliked: true,
-            //     }
-            // );
         default:
             return state;
     }
@@ -147,7 +92,6 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
 
 // this reducer is for showing items in dashboard, defaulte state is just an array, make by henry
 const userItemReducer = (state = [], action) => {
-    console.log(action.items);
     if (action.type === actions.Load_User_Items) {
         return [...action.items];
     }
@@ -163,7 +107,6 @@ const userEditReducerDefaultState = {
 const userEditReducer = (state = userEditReducerDefaultState, action) => {
     switch (action.type) {
         case actions.VIEW_ONE:
-            console.log(action.type);
             return {
                 popUp: true,
                 itemForPopUp:action.itemForPopUp
@@ -226,11 +169,8 @@ const postNULLState = {
 const postItemReducer = (state = postDefaultState, action) => {
     let new_date = new Date();
     new_date = new_date.toLocaleString();
-    console.log(postDefaultState.user_id);
-    console.log(postDefaultState.owner);
     switch (action.type) {
         case actions.CHANGE_UNSUBMITTED_ITEM:
-            console.log("change unsubmitted item!");
             var newitem = Object.assign({}, state,
                 {
                     [action.keyToChange]: action.valueToUpdate,
@@ -239,7 +179,6 @@ const postItemReducer = (state = postDefaultState, action) => {
                 }
             );
             // line for debugging change in state for changing appliance post ad fields
-            //console.log(newitem);
             return newitem
         case actions.RESET_POST_TO_INITIAL:
             return postNULLState;
@@ -310,17 +249,6 @@ const displayReview = (popReviewWindow = false, action) => {
     return popReviewWindow;
 }
 
-// update Item for ViewOneItem component
-// const updateItem = (state = defaultState, action) => { // should use 'updateOneItem'
-// 	if (action.type === actions.ALLOW_EDIT){
-// 		console.log('editing posted item!')
-// 	}
-// 	if (action.type === actions.CONFIRM_EDIT) {
-// 		console.log('confirming the update!')
-// 	}
-// 	return updateOneItem;
-// }
-
 // const renderChoices = ['home','post','viewPost','login','signup']
 // const renderChoices = ['home','post','viewPost','login','signup',''User']
 const renderChoiceAssigner = (renderChoice = 'home', action) => {
@@ -345,24 +273,6 @@ const keywordFromNavBar = (string = 'test', action) => {
     }
     return string;
 }
-
-// const userItemReducer = (state = defaultState, action) => {
-// 	switch(action.type){
-//
-// 		case 'xxx' :
-// 			console.log('xxx');
-// 			console.log(action.items);
-// 			return Object.assign({}, state,
-// 				{
-// 					itemArray: action.itemsFromServer,
-// 				}
-// 			);
-// 		default:
-// 			console.log(action.type);
-// 			return state;
-// 	}
-// };
-
 
 
 export default combineReducers({

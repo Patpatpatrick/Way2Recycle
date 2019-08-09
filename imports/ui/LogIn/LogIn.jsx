@@ -48,10 +48,8 @@ class LogIn extends React.Component{
         let pass = (String(this.props.passwordInput).trim())
 
         Meteor.loginWithPassword(id, pass, (err) => {
-            console.log("meteor login invoked")
             if (err) {
                 this.setState({loginFail:true})
-                console.log(err)
             }
             if (Meteor.userId()) {
                 this.props.updateEmailText('')
@@ -64,9 +62,7 @@ class LogIn extends React.Component{
     pressLogInWithGoogle  = () => {
         Meteor.loginWithGoogle({}, (err) => {
             if (err) {
-                console.log('google log in fail')
             } else {
-                console.log('google login success for : '+ JSON.stringify(Meteor.user()));
                 this.props.changeChoiceOnNav('home')
             }
         })

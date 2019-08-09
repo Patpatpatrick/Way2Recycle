@@ -72,9 +72,6 @@ class UserList extends React.Component {
                 console.log(error.reason);
                 return;
             }
-            // do something with result
-            // console.log(result);
-            // this.props.dataToStore(result);
             this.props.loadUserItems(result);
 
         }.bind(this));
@@ -93,7 +90,6 @@ class UserList extends React.Component {
         }
     }
     clickDelete = (itemId) => {
-        console.log('Deleting initiated for:' + itemId)
         Meteor.call("deleteOneItem",itemId, (err)=> {
             if (err) {
                 console.log(err.reason)
@@ -114,9 +110,7 @@ class UserList extends React.Component {
     }
 
     clickEdit = (item) => {
-
         this.props.showItem(item);
-        console.log(item);
     }
 
 
@@ -128,7 +122,6 @@ class UserList extends React.Component {
     render() {
         const { classes } = this.props;
         let likesNum = this.props.popUp._id;
-        console.log(likesNum);
         return (
         <div>
             <br/>
