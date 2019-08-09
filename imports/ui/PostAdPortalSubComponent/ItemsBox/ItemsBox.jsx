@@ -1,7 +1,7 @@
 import React from 'react';
 import ClearOne from '../ClearOne';
 import SeeOne from '../ViewOneItem';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import useStyles from '../../style/itemTableStyle';
 
 import Table from '@material-ui/core/Table';
@@ -11,9 +11,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-class ItemsBox extends React.Component { 
- 
-	render() {
+class ItemsBox extends React.Component {
+
+    render() {
         const classes = useStyles;
         return (
             <Paper className={classes.root}>
@@ -29,28 +29,29 @@ class ItemsBox extends React.Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                    {this.props.itemArray.map( (item, idx) => {
-                        return (
-                            <TableRow key={item.itemname + idx}>
-                                <TableCell component="th" scope="row">
-                                    {item.itemname}
-                                </TableCell>
-                                <TableCell align="right">{item.price}</TableCell>
-                                <TableCell align="right">{item.category}</TableCell>
-                                <TableCell align="left">{item.description}</TableCell>
-                                <TableCell align="right">{item.date.toString()}</TableCell>
-                                <TableCell align="right"><ClearOne index = {idx}/><SeeOne index = {idx}/></TableCell>
-                            </TableRow>
-                        )
+                        {this.props.itemArray.map((item, idx) => {
+                            return (
+                                <TableRow key={item.itemname + idx}>
+                                    <TableCell component="th" scope="row">
+                                        {item.itemname}
+                                    </TableCell>
+                                    <TableCell align="right">{item.price}</TableCell>
+                                    <TableCell align="right">{item.category}</TableCell>
+                                    <TableCell align="left">{item.description}</TableCell>
+                                    <TableCell align="right">{item.date.toString()}</TableCell>
+                                    <TableCell align="right"><ClearOne index={idx}/><SeeOne index={idx}/></TableCell>
+                                </TableRow>
+                            )
                         })
-                    }
+                        }
                     </TableBody>
                 </Table>
             </Paper>
         );
     }
 }
+
 const mapStateToProps = (state) => {
-    return { itemArray: state.itemProcess.itemArray};
+    return {itemArray: state.itemProcess.itemArray};
 }
-export default connect(mapStateToProps,null)(ItemsBox);
+export default connect(mapStateToProps, null)(ItemsBox);

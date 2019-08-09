@@ -204,17 +204,17 @@ export const closePostReview = () => {
 
 
 export const updatePostedItem = (index) => {
-	return {
-		type: ALLOW_EDIT,
-		toUpdateIndex : index
-	}
+    return {
+        type: ALLOW_EDIT,
+        toUpdateIndex: index
+    }
 }
 
 
 export const confirmUpdatePostedItem = () => {
-	return {
-		type: CONFIRM_EDIT
-	}
+    return {
+        type: CONFIRM_EDIT
+    }
 }
 
 // create an action to indicate a change of choice
@@ -228,22 +228,22 @@ export const changeChoiceOnNav = (choice) => {
 export const searchFromNavBar = (boolean) => {
     return {
         type: 'SEARCH_FROM_NAV_BAR',
-        payload:boolean
+        payload: boolean
     }
 }
 
 export const searchWordFromNav = (string) => {
     return {
         type: "KEYWORD_NAV_BAR",
-        payload:string
+        payload: string
     }
 }
 
 export const assignItemsToStoreItemArray = (itemsFromServer) => {
-	return {
-		type: ASSIGN_SERVER_ITEMS_TO_STORE,
-		itemsFromServer
-	}
+    return {
+        type: ASSIGN_SERVER_ITEMS_TO_STORE,
+        itemsFromServer
+    }
 };
 
 
@@ -252,6 +252,6 @@ export const loadUserItems = (items) => ({
     items
 });
 
-export const resetCate = () =>({
+export const resetCate = () => ({
     type: reset_cate_in_post
 })

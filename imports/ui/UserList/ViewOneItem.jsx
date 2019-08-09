@@ -1,35 +1,39 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { popUpItem}  from '../../actions';
+import {connect} from 'react-redux';
+import {popUpItem} from '../../actions';
 import Button from '@material-ui/core/Button';
 import Popup from './PopUp'
+
 class SeeOne extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
-    handleClick(){
+
+    handleClick() {
         this.props.showIndex(this.props.index);
     }
-	render() {
+
+    render() {
         return (
             <div>
-                <Button type="view" onClick = {this.handleClick} id={this.props.index + 'View'}>ViewInPopUp</Button>
+                <Button type="view" onClick={this.handleClick} id={this.props.index + 'View'}>ViewInPopUp</Button>
                 {this.props.toPop && <Popup/>}
-            </div>   
+            </div>
         );
     }
 }
+
 const mapStateToProps = (state) => {
-    return { 
+    return {
         toPop: state.itemProcess.popUp,
     };
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-      showIndex: (index) => {
-        dispatch(popUpItem(index));
-      }
+        showIndex: (index) => {
+            dispatch(popUpItem(index));
+        }
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SeeOne);

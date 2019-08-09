@@ -84,10 +84,10 @@
 //       transition: theme.transitions.create('opacity'),
 //     },
 //   });
-  
+
 //   function Category_ele(props) {
 //     const { classes } = props;
-  
+
 //     const images = [
 //       {
 //         url:
@@ -126,7 +126,7 @@
 //         width: '24%',
 //       },
 //     ];
-  
+
 //     return (
 //       <Container className={classes.root} component="section">
 //         <Typography variant="h4" marked="center" align="center" component="h2">
@@ -165,13 +165,13 @@
 //       </Container>
 //     );
 //   }
-  
+
 //   Category_ele.propTypes = {
 //     classes: PropTypes.object.isRequired,
 //   };
-  
+
 //   export default withStyles(styles)(Category_ele);
-  
+
 // // class Category_ele extends Component {
 // //     constructor(props) {
 // //         super(props);

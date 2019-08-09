@@ -12,8 +12,9 @@ import Link from '@material-ui/core/Link';
 import useStyles from './style/NavStyle';
 import UserList from "./UserList/UserList.jsx";
 import {Meteor} from "meteor/meteor";
+
 class home extends Component {
- 
+
     componentDidMount() {
 
         Meteor.call('getItems', function (err, result) {

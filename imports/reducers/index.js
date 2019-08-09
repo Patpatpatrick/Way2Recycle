@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import * as actions from '../actions';
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 
 // this reducer process state relevant to homepage, it has homePgdefaultState
 // itemArray is fetched from meteor and it is the total array regardless of user, cate ...
@@ -29,7 +29,7 @@ const homePageReducer = (state = homePgdefaultState, action) => {
 const itemBoxfaultState = {
     itemArray: [],
     shouldPopUpInitemBox: false,
-    popUpItemInItemBox:{},
+    popUpItemInItemBox: {},
     liked: false,
     Unliked: false,
 }
@@ -45,7 +45,7 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
             return Object.assign({}, state,
                 {
                     shouldPopUpInitemBox: true,
-                    popUpItemInItemBox:state.itemArray[action.indexToPop]
+                    popUpItemInItemBox: state.itemArray[action.indexToPop]
                 }
             );
         case actions.CLOSE_ONE_IN_ITEM_BOX:
@@ -54,21 +54,21 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
                     shouldPopUpInitemBox: false,
                 }
             );
-        
+
         case actions.LIKE_ITEM:
             if (!state.popUpItemInItemBox.like.includes(action.idToAddToLike)) {
                 let newLike = [...state.popUpItemInItemBox.like];
                 newLike.splice(newLike.length, 0, action.idToAddToLike);
-                let revisedPopUpItem=  Object.assign({},state.popUpItemInItemBox, 
+                let revisedPopUpItem = Object.assign({}, state.popUpItemInItemBox,
                     {
-                    like: newLike,
-                }
+                        like: newLike,
+                    }
                 );
 
                 return Object.assign({}, state,
                     {
                         shouldPopUpInitemBox: true,
-                        popUpItemInItemBox:revisedPopUpItem,
+                        popUpItemInItemBox: revisedPopUpItem,
                         liked: true,
                     }
                 );
@@ -77,7 +77,7 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
                 return Object.assign({}, state,
                     {
                         shouldPopUpInitemBox: true,
-                        popUpItemInItemBox:state.popUpItemInItemBox,
+                        popUpItemInItemBox: state.popUpItemInItemBox,
                         liked: true,
                     }
                 );
@@ -102,24 +102,24 @@ const userItemReducer = (state = [], action) => {
 // popup components, it will also be modified to store the latest user input of the item to edit.
 const userEditReducerDefaultState = {
     popUp: false,
-    itemForPopUp:{}
+    itemForPopUp: {}
 }
 const userEditReducer = (state = userEditReducerDefaultState, action) => {
     switch (action.type) {
         case actions.VIEW_ONE:
             return {
                 popUp: true,
-                itemForPopUp:action.itemForPopUp
-			};
-		case actions.ALLOW_EDIT:
-			return {
-                popUp : true,
-                itemForPopUp:state.itemForPopUp
-			}
+                itemForPopUp: action.itemForPopUp
+            };
+        case actions.ALLOW_EDIT:
+            return {
+                popUp: true,
+                itemForPopUp: state.itemForPopUp
+            }
         case actions.UNVIEW_ONE:
             return {
                 popUp: false,
-                itemForPopUp:state.itemForPopUp
+                itemForPopUp: state.itemForPopUp
             };
         case actions.CHANGE_INPUT :
             var newitem = Object.assign({}, state.itemForPopUp,
@@ -129,8 +129,8 @@ const userEditReducer = (state = userEditReducerDefaultState, action) => {
                 }
             );
             return {
-                popUp:state.popUp,
-				itemForPopUp:newitem,
+                popUp: state.popUp,
+                itemForPopUp: newitem,
             };
         default:
             return state;
@@ -148,7 +148,7 @@ const postDefaultState = {
     file: '',
     imagePreviewUrl: '',
     attribute: "",
-    like:[],
+    like: [],
     owner: {}
 }
 const postNULLState = {
@@ -163,7 +163,7 @@ const postNULLState = {
     file: '',
     imagePreviewUrl: '',
     attribute: "",
-    like:[],
+    like: [],
     owner: {}
 }
 const postItemReducer = (state = postDefaultState, action) => {
@@ -301,13 +301,13 @@ export default combineReducers({
 
     // for postItem show review
     displayReview,
-	// for viewOneItem allow edit posted items
-	// updateItem,
+    // for viewOneItem allow edit posted items
+    // updateItem,
     // for change choice on Nav
     renderChoiceAssigner,
 
     // Item was searched from Nav bar
-    isSearchedFromNavBar:isSearchedFromNavBar,
+    isSearchedFromNavBar: isSearchedFromNavBar,
     // keyword from Nav Bar
     keywordFromNavBar: keywordFromNavBar
 });

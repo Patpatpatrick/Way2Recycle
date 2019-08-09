@@ -14,28 +14,29 @@ import UserList from "./UserList/UserList";
 
 // import './style/style.css'
 let renderResetPasswordPage = false
-let passwordTokenFromEmail ='default'
+let passwordTokenFromEmail = 'default'
 
-Accounts.onResetPasswordLink((token,done)=>{
+Accounts.onResetPasswordLink((token, done) => {
     renderResetPasswordPage = true
     passwordTokenFromEmail = token
 })
 
 
-class App extends React.Component{
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.conditionalRender = this.conditionalRender.bind(this);
     }
+
 // const renderChoices = ['home','post','viewPost','login','signup']
 
-    conditionalRender(){
+    conditionalRender() {
 
-        if (this.props.choice ==='resetPasswordByEmail') {
+        if (this.props.choice === 'resetPasswordByEmail') {
             return (<ResetPasswordByEmail token={passwordTokenFromEmail}/>)
         }
 
-        if (this.props.choice ==='sendPasswordToEmail') {
+        if (this.props.choice === 'sendPasswordToEmail') {
             return (<SendPasswordToEmail/>)
         }
 
@@ -56,24 +57,25 @@ class App extends React.Component{
     }
 
     render() {
-      if (renderResetPasswordPage) {
-          this.props.changeChoiceOnNav('resetPasswordByEmail')
-          renderResetPasswordPage = false
-      }
+        if (renderResetPasswordPage) {
+            this.props.changeChoiceOnNav('resetPasswordByEmail')
+            renderResetPasswordPage = false
+        }
 
-      return (
-        <div>
-            <Nav/>
-            {this.conditionalRender()}
-        </div>
-      )}
-  }
-  
-  const mapStateToProps = (state) => {
-    return {
-      choice: state.renderChoiceAssigner
+        return (
+            <div>
+                <Nav/>
+                {this.conditionalRender()}
+            </div>
+        )
     }
-  };
+}
+
+const mapStateToProps = (state) => {
+    return {
+        choice: state.renderChoiceAssigner
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -82,4 +84,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-  export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
