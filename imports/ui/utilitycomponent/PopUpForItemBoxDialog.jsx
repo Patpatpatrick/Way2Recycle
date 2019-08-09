@@ -23,6 +23,7 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 import SvgIcon from '@material-ui/core/SvgIcon';
+import TableCell from "../PostedAd/ItemsBox/ItemsBox";
 
 const styles = theme => ({
   root: {
@@ -129,6 +130,11 @@ class CustomizedDialogs extends React.Component {
                     <img src={this.props.itemForPopUp.imagePreviewUrl} width={"150"} height={"150"}/>:
                     null
                 }
+                <div>
+                <span><Favorite color="secondary"
+                /> {this.props.itemForPopUp.like.length}
+                                                                </span>
+                </div>
                 <Typography gutterBottom>
                     <b>Price:</b>                $ {this.props.itemForPopUp.price}
                 </Typography>

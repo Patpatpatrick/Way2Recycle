@@ -37,6 +37,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import Button from "@material-ui/core/Button";
+import Favorite from '@material-ui/icons/Favorite';
 
 const styles = theme => {
     return ({
@@ -200,6 +201,12 @@ class ItemsBox extends React.Component {
                 });
             }
         }
+
+        if (prevProps.shouldOpen !==this.props.shouldOpen) {
+            this.searchByParam()
+        }
+
+
     }
 
     formatDate = (date) => {
@@ -417,6 +424,10 @@ class ItemsBox extends React.Component {
                                                             <TableCell align="left" style={{verticalAlign:'top'}} >
                                                                 <span className={classes.titleFont}>{item.title}</span>
                                                                 <div><br/></div>
+
+                                                                <span><Favorite color="secondary"
+                                                                /> {item.like.length}
+                                                                </span>
                                                                 <div><b>Price:</b> ${item.price}</div>
                                                                 <div><b>Category:</b> {item.category}</div>
                                                                 <div><b>Date:</b> {this.formatDate(item.date.toString())}</div>
@@ -465,7 +476,8 @@ const mapStateToProps = (state) => {
     return { itemArray: state.itemBoxReducer.itemArray,
         isSearchedFromNavBar: state.isSearchedFromNavBar,
         keywordFromNavBar: state.keywordFromNavBar,
-        renderChoiceAssigner: state.renderChoiceAssigner
+        renderChoiceAssigner: state.renderChoiceAssigner,
+        shouldOpen: state.itemBoxReducer.shouldPopUpInitemBox,
     };
 }
 

@@ -136,8 +136,8 @@ class UserList extends React.Component {
                 <h3>Welcome Back,  {Meteor.user().profile.name}</h3>
 
                 {(this.props.itemArray.length===0)?
-                    <div className={"centerAndWidth"} style={{marginTop:50, fontSize:20}}><b>You do not have any postings yet!</b></div>:
-                    <div className={"centerAndWidth"}style={{marginTop:50, fontSize:20}}><b>Your current postings:</b></div>
+                    <div  style={{marginTop:50, fontSize:20, textAlign:"center"}}><b>You do not have any postings yet!</b></div>:
+                    <div style={{marginTop:50, fontSize:20, textAlign:"center"}}><b>Your current postings:</b></div>
                 }
                 <GridList cellHeight={"auto"}  cols={3} spacing={25}>
                     {this.props.itemArray.map(item => (
