@@ -24,9 +24,11 @@ const styles = theme => {
             toolbarTitle: {
               flexGrow: 1,
               margin: theme.spacing(1, 1.5),
+              cursor:"default"
             },
             link: {
               margin: theme.spacing(1, 1.5),
+              cursor: "pointer"
             },
             searchBar: {
               margin: theme.spacing(1, 1.5),

@@ -23,6 +23,7 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 import SvgIcon from '@material-ui/core/SvgIcon';
+import TableCell from "../PostedAd/ItemsBox/ItemsBox";
 
 const styles = theme => ({
   root: {
@@ -125,35 +126,56 @@ class CustomizedDialogs extends React.Component {
             {this.props.itemForPopUp.title}
             </DialogTitle>
             <DialogContent dividers>
+                {this.props.itemForPopUp.imagePreviewUrl!==undefined ?
+                    <img src={this.props.itemForPopUp.imagePreviewUrl} width={"150"} height={"150"}/>:
+                    null
+                }
+                <div>
+                <span><Favorite color="secondary"
+                /> {this.props.itemForPopUp.like.length}
+                                                                </span>
+                </div>
                 <Typography gutterBottom>
-                    Price($):                {this.props.itemForPopUp.price}
+                    <b>Price:</b>                $ {this.props.itemForPopUp.price}
                 </Typography>
                 <Typography gutterBottom>
-                    Category:                {this.props.itemForPopUp.category}
+                    <b>Category: </b>                {this.props.itemForPopUp.category}
                 </Typography>
                 <Typography gutterBottom>
-                    Description:                {this.props.itemForPopUp.description}
+                    <b>Posted on: </b>                {this.props.itemForPopUp.date.toString()}
                 </Typography>
                 <Typography gutterBottom>
-                    DatePosted:                {this.props.itemForPopUp.date.toString()}
+                    {(this.props.itemForPopUp.locationStr===""|| this.props.itemForPopUp.locationStr===undefined)?
+                        <div> <b>Location: </b>   Not Provided</div>:
+                        <div>
+                        <b>Location: </b>                {this.props.itemForPopUp.locationStr}
+                        </div>}
+
+
                 </Typography>
                 <Typography gutterBottom>
-                    Location:                {this.props.itemForPopUp.locationStr}
-                </Typography>
-                <Typography gutterBottom>
-                    UserEmail:                
+                    <b>Contact Info: </b>
                     {this.props.itemForPopUp.owner.owner_email}
                 </Typography>
                 <Typography gutterBottom>
-                    UserName:                
+                    <b>User Name: </b>
                     {this.props.itemForPopUp.owner.username}
                 </Typography>
-                <MapContainer mapContainerSize = {{
-                                                                    height: "300px",
-                                                                    width: "500px",
-                                                                    }} 
-                                fatherLetShow = {true}
-                                markerLocation = {this.props.itemForPopUp.location}/>
+                <div><br/></div>
+                <Typography gutterBottom>
+                    <b>Description: </b>                {this.props.itemForPopUp.description}
+                </Typography>
+
+                {(this.props.itemForPopUp.location["lat"]===999 &&this.props.itemForPopUp.location["lng"]===-999)?
+                    <div><b>Map is not available for this posting</b></div>:
+                    <MapContainer mapContainerSize = {{
+                        height: "300px",
+                        width: "500px",
+                    }}
+                                  fatherLetShow = {true}
+                                  markerLocation = {this.props.itemForPopUp.location}/>
+                }
+
             </DialogContent>
             <DialogActions>
 

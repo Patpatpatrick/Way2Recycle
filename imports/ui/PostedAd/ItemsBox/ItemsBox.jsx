@@ -36,6 +36,8 @@ import Divider from "@material-ui/core/Divider";
 import SearchIcon from '@material-ui/icons/Search';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import Button from "@material-ui/core/Button";
+import Favorite from '@material-ui/icons/Favorite';
 
 const styles = theme => {
     return ({
@@ -199,6 +201,12 @@ class ItemsBox extends React.Component {
                 });
             }
         }
+
+        if (prevProps.shouldOpen !==this.props.shouldOpen) {
+            this.searchByParam()
+        }
+
+
     }
 
     formatDate = (date) => {
@@ -293,7 +301,7 @@ class ItemsBox extends React.Component {
                     <div className={classes.padding.toString() + " column1"}>
                         <Paper className={classes.filterPaper}>
                             <div style={{zIndex:-1}} >
-                                <div>Category</div>
+                                <div><b>Category</b></div>
                                 <FormControl  className={classes.formControl}>
                                     <FormHelperText>Category</FormHelperText>
                                     <Select
@@ -313,7 +321,7 @@ class ItemsBox extends React.Component {
                             </div>
                             <div>
                                 <br/>
-                                <div>Price Range</div>
+                                <div><b>Price Range</b></div>
                                 <span>
                             <TextField
                                 placeholder="min"
@@ -339,7 +347,7 @@ class ItemsBox extends React.Component {
 
                             <br/>
                             <Typography id="discrete-slider-restrict" gutterBottom>
-                                Number of Items per Page
+                                <b>Number of Items per Page </b>
                             </Typography>
                             <Slider
                                 defaultValue={5}
@@ -353,8 +361,8 @@ class ItemsBox extends React.Component {
                                 onChange={(event, value) =>this.changeNumPages(event, value)}
                                 /*onDragStop={this.changeNumPages}*/
                             />
-
-                            <div>Sort by Date</div>
+                            <div><br/></div>
+                            <div><b>Sort by:</b></div>
                             <FormControl  className={classes.formControl}>
                                 <FormHelperText>Date</FormHelperText>
                                 <Select
@@ -369,7 +377,11 @@ class ItemsBox extends React.Component {
                             </FormControl>
 
                             <div>
-                                <button onClick={this.searchByParam}>Submit</button>
+                               {/* <button onClick={this.searchByParam}>Submit</button>*/}
+
+                                <Button variant="contained" color="primary" onClick={this.searchByParam}>
+                                    Submit
+                                </Button>
                             </div>
                         </Paper>
                     </div>
@@ -411,13 +423,18 @@ class ItemsBox extends React.Component {
                                                             <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
                                                             <TableCell align="left" style={{verticalAlign:'top'}} >
                                                                 <span className={classes.titleFont}>{item.title}</span>
-                                                                <div>--------------------------</div>
-                                                                <div>Price: ${item.price}</div>
-                                                                <div>Category: {item.category}</div>
+                                                                <div><br/></div>
+
+                                                                <span><Favorite color="secondary"
+                                                                /> {item.like.length}
+                                                                </span>
+                                                                <div><b>Price:</b> ${item.price}</div>
+                                                                <div><b>Category:</b> {item.category}</div>
+                                                                <div><b>Date:</b> {this.formatDate(item.date.toString())}</div>
                                                                 <div className={"descriptionStyle"}>
-                                                                    Description: {item.description}
+                                                                    <b>Description:</b> {item.description}
                                                                 </div>
-                                                                <div>Date: {this.formatDate(item.date.toString())}</div>
+
 
                                                                 <br/>
                                                                 <div><ViewOneItem index = {idx + (this.state.currentPage -1) * (this.state.itemsPerPage)}/></div>
@@ -459,7 +476,8 @@ const mapStateToProps = (state) => {
     return { itemArray: state.itemBoxReducer.itemArray,
         isSearchedFromNavBar: state.isSearchedFromNavBar,
         keywordFromNavBar: state.keywordFromNavBar,
-        renderChoiceAssigner: state.renderChoiceAssigner
+        renderChoiceAssigner: state.renderChoiceAssigner,
+        shouldOpen: state.itemBoxReducer.shouldPopUpInitemBox,
     };
 }
 

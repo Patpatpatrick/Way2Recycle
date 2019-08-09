@@ -16,9 +16,9 @@ class ChooseCategory extends Component {
     }
 	render() {
         return (
-            <div className="container" style={{display: 'flex', justifyContent: 'center'}}>
+            <div className="container" style={{display: 'flex', justifyContent: 'center', marginTop:50}}>
                 <form style={{"width": "350px","verticalAlign": "0%"}} onChange={this.handleChange} className="form" ref = "inputform">
-                    <label htmlFor="Category">Category</label>
+                    <label htmlFor="Category"><b>Category</b></label>
                     <select id="category" name="category" value = {this.props.cateValue.category}>
                         <option selected="selected" value="">Please Choose</option>
                         <option value="Car">Car</option>

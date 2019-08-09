@@ -1,6 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { resetPost,closePostReview } from '../../actions';
+import Dialog from "@material-ui/core/Dialog";
+import {withStyles} from "@material-ui/core";
+import MuiDialogTitle from "../utilitycomponent/PopUpForUserEdit";
+import MuiDialogContent from "@material-ui/core/DialogContent/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions/DialogActions";
+import {grey, red} from "@material-ui/core/colors";
+import {compose} from "redux";
 
 
 // user_id : Meteor.userId(),
@@ -14,6 +21,19 @@ import { resetPost,closePostReview } from '../../actions';
 //             file : '',
 //             imagePreviewUrl : '',
 //             attribute : ""
+
+const styles = theme => {
+    return ({
+            dialogPaper: {
+                minHeight: '80vh',
+                maxHeight: '80vh',
+                minWidth: '80vh',
+                maxWidth: '80vh'
+            },
+        }
+    );
+};
+
 class Popup extends React.Component {
     constructor(props) {
         super(props);
@@ -59,9 +79,17 @@ class Popup extends React.Component {
       this.props.reset();
     }
     render() {
-      return (
-          <div className='popup'>
-          <div className='popup_inner'>
+        const { classes } = this.props;
+
+        return (
+          <div>
+          <Dialog
+              classes={{ paper: classes.dialogPaper }}
+              onClose={this.props.close}
+              open={true}
+      /*        fullWidth={true}
+              maxWidth={"80%"}*/
+          >
           {this.state.isDone
             ? <div>
                 <br/>
@@ -78,22 +106,38 @@ class Popup extends React.Component {
                 <br/>
                 <br/>
                 <br/>
+                  <div style={{textAlign:"center"}}>
                 <button type = 'close' onClick = {this.resetAndclose}>Close</button>
+                  </div>
               </div>
-            : <div>
-                <h2>Your item info :</h2>
+            : <div style={{paddingTop:50}}>
+                <h2 style={{textAlign:"center"}}>Your item info :</h2>
+
+                <div style={{paddingLeft:20}}>
+                  <br/>
+                  <div><b>Title:</b> {this.props.detail.title}</div>
                 <br/>
-                <div>Title: {this.props.detail.title}</div>
+                  <div><b>Price :</b> {this.props.detail.price}</div>
                 <br/>
-                <div>Price : {this.props.detail.price}</div>
+                  <div><b>Category: </b> {this.props.detail.category}</div>
                 <br/>
-                <div>Category: {this.props.detail.category}</div>
+                  <div> <b>Post Date: </b> {this.props.detail.date.toString()}</div>
+                  <br/>
+                  <span><b>Description: </b>
+                      {(this.props.detail.description==="")?
+                          <span>No description provided</span>:
+                          <span>{this.props.detail.description}</span>
+                      }
+                  </span>
                 <br/>
-                <div>Description: {this.props.detail.description}</div>
+
                 <br/>
-                <div>Post Date: {this.props.detail.date.toString()}</div>
-                <br/>
-                <div>Location: {this.props.detail.locationStr}</div>
+                  <span><b>Location: </b>
+                      {(this.props.detail.locationStr==="")?
+                          <span>No location provided</span>:
+                          <span>{this.props.detail.locationStr}</span>
+                  }
+                  </span>
                 <br/>
                 <div>{this.props.detail.imagePreviewUrl !== '' ? <img src={this.props.detail.imagePreviewUrl} style={{
                                         "width": "350px",
@@ -101,11 +145,18 @@ class Popup extends React.Component {
                                     }}/> : <span></span>}
                 </div>
                 <br/>
-                <button type = 'close' onClick={this.props.close}>Need Revise</button>
+
+              </div>
+                  <div style={{textAlign:"center", paddingBottom:25}}>
+                <span >
+                  <button type = 'close' onClick={this.props.close}>Need Revise</button>
+                    &nbsp;&nbsp;
                 <button type = 'submit' onClick={this.handleClick}>Submit</button>
+                </span>
+                  </div>
               </div>
           }
-          </div>        
+          </Dialog>
         </div>
       );
     }
@@ -127,4 +178,5 @@ const mapDispatchToProps = (dispatch) => {
       }
     }
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Popup);
+export default compose( withStyles(styles),
+    connect(mapStateToProps, mapDispatchToProps))(Popup);

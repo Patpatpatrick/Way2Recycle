@@ -16,7 +16,7 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
-import {red} from "@material-ui/core/colors";
+import {grey, red} from "@material-ui/core/colors";
 import { popUpItem}  from '../../actions';
 import Button from '@material-ui/core/Button';
 import Popup from '../utilitycomponent/PopUpForUserEdit';
@@ -40,7 +40,8 @@ const styles = theme => {
             paper: {
                 padding: theme.spacing(1),
                 textAlign: 'center',
-                color: theme.palette.text.secondary,
+                color: theme.palette.text.primary,
+                backgroundColor: grey[200]
             },
             icon: {
                 margin: theme.spacing(1),
@@ -133,7 +134,11 @@ class UserList extends React.Component {
             <br/>
             <div className={"centerAndWidth"}>
                 <h3>Welcome Back,  {Meteor.user().profile.name}</h3>
-                <div>Your current postings:</div>
+
+                {(this.props.itemArray.length===0)?
+                    <div  style={{marginTop:50, fontSize:20, textAlign:"center"}}><b>You do not have any postings yet!</b></div>:
+                    <div style={{marginTop:50, fontSize:20, textAlign:"center"}}><b>Your current postings:</b></div>
+                }
                 <GridList cellHeight={"auto"}  cols={3} spacing={25}>
                     {this.props.itemArray.map(item => (
                         <GridListTile key={item._id}>
@@ -148,8 +153,8 @@ class UserList extends React.Component {
                                     <div><strong>Item: </strong>{(item.title)}</div>
                                     <div><strong>Price:</strong> ${item.price}</div>
                                     <div><strong>Category:</strong> {item.category}</div>
-                                    <div><strong>Description:</strong> {(item.description)}</div>
                                     <div><strong>Uploaded Date:</strong> {this.formatDate(item.date)}</div>
+                                    <div><strong>Description:</strong> {(item.description)}</div>
                                 </div>
                                 <div style={{display: 'flex', justifyContent: 'center'}}>
                                     <Grid item xs={8} >
