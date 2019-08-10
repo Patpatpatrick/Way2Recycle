@@ -125,20 +125,6 @@ class Popup extends React.Component {
         reader.readAsDataURL(file)
     }
 
-// handleImageChange(event) {
-//   event.preventDefault();
-//   let reader = new FileReader();
-//   let file = event.target.files[0];
-//   reader.onloadend = () => {
-//       this.setState({
-//           file: file,
-//           imagePreviewUrl: reader.result,
-//           date: new Date().toLocaleString()
-//       });
-//   }
-//   reader.readAsDataURL(file)
-// }
-
     changeDate = (date) => {
 
         if (new Date() < date) {
@@ -235,35 +221,10 @@ class Popup extends React.Component {
     }
 }
 
-/*
-const useStyles = makeStyles(theme => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: fullWidth,
-        height: 150,
-    },
-    dense: {
-        marginTop: 19,
-    },
-    menu: {
-        width: 200,
-    },
-}));
-*/
-
 const mapStateToProps = (state) => {
     return {
         itemForPopUp: state.userEditReducer.itemForPopUp,
         toPop: state.userEditReducer.popUp
-
-        // shouldUpdateItem: state.updateItem, // updated to update item
-        // toPopThisIndex : state.itemProcess.popUpitemIndex,
-        // item: state.itemProcess.itemArray[state.itemProcess.popUpitemIndex],
     };
 }
 

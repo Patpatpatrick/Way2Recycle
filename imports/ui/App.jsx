@@ -28,7 +28,6 @@ class App extends React.Component {
         this.conditionalRender = this.conditionalRender.bind(this);
     }
 
-// const renderChoices = ['home','post','viewPost','login','signup']
 
     conditionalRender() {
 

@@ -66,14 +66,6 @@ class SearchBar extends React.Component {
                         type={""}
                         onChange={this.changeInputString}
                     />
-                    {/* <InputBase
-              placeholder="Search…"
-              classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'Search' }}
-              /> */}
                 </div>
 
                 <Button color="primary" variant="outlined" size="large" className={classes.btn}
@@ -90,9 +82,6 @@ class SearchBar extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        /*dataToStore: (boolean) => {
-            dispatch(searchFromNavBar(result));
-        }*/
         searchFromNavBar: (text) => dispatch(searchFromNavBar(text)),
         changeChoiceOnNav: (choice) => dispatch(changeChoiceOnNav(choice)),
         searchWordFromNav: (string) => dispatch(searchWordFromNav(string))

@@ -10,18 +10,6 @@ import {grey, red} from "@material-ui/core/colors";
 import {compose} from "redux";
 
 
-// user_id : Meteor.userId(),
-//             title: 'An item',
-//             price: 0,
-//             category : 'Appliance',
-//             description : 'Description',
-//             location :  {lat: 49.2827291, lng: -123.12073750000002},
-//             locationStr : "Vancouver,BC,Canada",
-//             date : new Date().toLocaleString(),
-//             file : '',
-//             imagePreviewUrl : '',
-//             attribute : ""
-
 const styles = theme => {
     return ({
             dialogPaper: {

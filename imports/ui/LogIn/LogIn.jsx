@@ -68,7 +68,6 @@ class LogIn extends React.Component {
         })
     }
 
-
     render() {
         return (
             <Container component="main" maxWidth="xs">
@@ -158,7 +157,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         updateEmailText: (text) => dispatch(updateEmailInputBox(text)),
         updatePasswordText: (text) => dispatch(updatePasswordInputBox(text)),
-        logInFlag: () => dispatch(logInFlag()),
         changeChoiceOnNav: (choice) => dispatch(changeChoiceOnNav(choice))
     }
 }

@@ -26,7 +26,6 @@ class home extends Component {
 
 
     render() {
-
         return (
             <React.Fragment>
 

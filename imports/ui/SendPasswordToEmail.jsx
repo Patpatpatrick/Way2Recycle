@@ -32,11 +32,9 @@ class SendPasswordToEmail extends React.Component {
 
     pressSendEmail = () => {
         if (this.state.email === '') {
-            /* alert("Please enter an email address")*/
             this.setState({pressedButton: true, loginSuccess: false})
         } else {
             Accounts.forgotPassword({email: this.state.email}, (err) => {
-                /*alert('Please check your email')*/
                 if (err) {
                     this.setState({loginSuccess: false, pressedButton: true})
                 } else {
@@ -57,7 +55,6 @@ class SendPasswordToEmail extends React.Component {
     render() {
         return (
             <Container component="main" maxWidth="xs">
-                {/*  <CssBaseline />*/}
                 <div style={{paddingTop: 20}}>
                     <div className={"logInBorder"}>
                         <div>

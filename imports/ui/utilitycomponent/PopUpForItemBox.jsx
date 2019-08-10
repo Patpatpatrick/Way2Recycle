@@ -69,10 +69,6 @@ class Popup extends React.Component {
 const mapStateToProps = (state) => {
     return {
         itemForPopUp: state.itemBoxReducer.popUpItemInItemBox,
-
-        // shouldUpdateItem: state.updateItem, // updated to update item
-        // toPopThisIndex : state.itemProcess.popUpitemIndex,
-        // item: state.itemProcess.itemArray[state.itemProcess.popUpitemIndex],
     };
 }
 

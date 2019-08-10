@@ -112,7 +112,6 @@ const styles = theme => {
 
                 margin: 10,
 
-                /* backgroundColor: blue[50]*/
                 '&:hover': {
                     backgroundColor: blue[50]
                 }
@@ -372,8 +371,6 @@ class ItemsBox extends React.Component {
                             </FormControl>
 
                             <div>
-                               {/* <button onClick={this.searchByParam}>Submit</button>*/}
-
                                 <Button variant="contained" color="primary" onClick={this.searchByParam}>
                                     Submit
                                 </Button>
@@ -382,7 +379,6 @@ class ItemsBox extends React.Component {
                     </div>
 
                     <Paper className={classes.paper.toString() + " column2"}>
-                        {/*<Paper className={classes.rootSearchBar}>*/}
                         <span>
                     <InputBase
                         className={classes.input}
@@ -396,8 +392,6 @@ class ItemsBox extends React.Component {
                         <SearchIcon />
                     </IconButton>
                    </span>
-                        {/* </Paper>*/}
-
                         {this.props.itemArray.length===0?
                             <div>
                                 No result found!
@@ -411,9 +405,6 @@ class ItemsBox extends React.Component {
                                         return (
                                             <TableRow key={idx + (this.state.currentPage -1) * (this.state.itemsPerPage)} >
                                                 <div>
-{/*
-                                                    <CardActionArea className={classes.cardActionCSS}>
-*/}
                                                         <Card className={classes.cardColor}>
                                                             <TableCell style={{ width: 1 }}>{ <img src={item.imagePreviewUrl} width={150} height={150}/>}</TableCell>
                                                             <TableCell align="left" style={{verticalAlign:'top'}} >
@@ -436,8 +427,6 @@ class ItemsBox extends React.Component {
                                                             </TableCell>
 
                                                         </Card>
-                                                  {/*  </CardActionArea>*/}
-
                                                 </div>
                                             </TableRow>
                                         )
@@ -475,8 +464,6 @@ const mapStateToProps = (state) => {
         shouldOpen: state.itemBoxReducer.shouldPopUpInitemBox,
     };
 }
-
-//export default connect(mapStateToProps,null)(ItemsBox);
 
 export default compose (
     withStyles(styles),

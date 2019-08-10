@@ -82,9 +82,6 @@ const itemBoxReducer = (state = itemBoxfaultState, action) => {
                     }
                 );
             }
-
-        // case actions.UNLIKE_ITEM:
-
         default:
             return state;
     }
@@ -276,36 +273,27 @@ const keywordFromNavBar = (string = 'test', action) => {
 
 
 export default combineReducers({
-
     homePageReducer,
-
     userItemReducer,
     userEditReducer,
-
     itemBoxReducer,
-
     // for post Item change and submit
     postItemReducer,
-
     // for LogIn Page
     emailInput: updateEmailInput,
     passwordInput: updatePasswordInput,
     toggleLogin: toggleLogin,
-
-
     // for Sign Up Page
     fNameInput: updateFNameInput,
     lNameInput: updateLNameInput,
     createEmailInput: updateCreateEmailInput,
     createPasswordInput: updateCreatePasswordInput,
-
     // for postItem show review
     displayReview,
     // for viewOneItem allow edit posted items
     // updateItem,
     // for change choice on Nav
     renderChoiceAssigner,
-
     // Item was searched from Nav bar
     isSearchedFromNavBar: isSearchedFromNavBar,
     // keyword from Nav Bar

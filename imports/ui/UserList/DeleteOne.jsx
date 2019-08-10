@@ -11,7 +11,6 @@ class DeleteOne extends React.Component {
 
     handleClick() {
         alert("delete");
-        // this.props.cOne(this.props.index);
     }
 
     render() {

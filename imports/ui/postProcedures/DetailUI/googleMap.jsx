@@ -24,14 +24,6 @@ class MyComponents extends Component {
             this.setState({
                 isMarkerShown: true,
             })
-            // if(this.state.center.lat - this.props.item.location.lat < 49.03714345215196 - 49.05818322998725
-            //     || this.state.center.lat - this.props.item.location.lat > 49.05818322998725 - 49.03714345215196
-            //  ||  this.state.center.lng - this.props.item.location.lng > -122.42424320117186 + 122.48724292651366
-            //  || this.state.center.lng - this.props.item.location.lng < 122.42424320117186  -122.48724292651366 ){
-            //     this.setState({
-            //         center: this.props.item.location
-            //     })
-            //  }
         }
     }
     addMarker(e) {
@@ -66,9 +58,6 @@ class MyComponents extends Component {
                 zoom={11}
                 center= {this.state.center}
                 onClick = {this.addMarker}
-                // ref={map => {
-                //     this.map = map;
-                // }}
                 onLoad = {this.handleMapLoad}
                 onDragEnd={this.resetCenter}
             >

@@ -11,7 +11,6 @@ class EditOne extends React.Component {
 
     handleClick() {
         alert("Edit");
-        // this.props.cOne(this.props.index);
     }
 
     render() {

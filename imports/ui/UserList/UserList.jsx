@@ -197,9 +197,7 @@ const mapStateToProps = (state) => {
     };
 
 }
-//export default connect(mapStateToProps,{loadUserItems})(UserList);
-//export const styles= withStyles(styles)(UserList);
-//export default withStyles(styles)(UserList);
+
 
 export default compose(
     withStyles(styles),

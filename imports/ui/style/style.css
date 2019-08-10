@@ -141,7 +141,6 @@ svg {
 
 }
 
-
 .path_check {
   stroke-dasharray: 1000;
 
@@ -150,9 +149,6 @@ svg {
     animation: dash-check 1.9s ease-in-out forwards;
   
 }
-
-
-
 
 @-webkit-keyframes dash {
   0% {

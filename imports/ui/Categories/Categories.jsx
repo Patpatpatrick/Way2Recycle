@@ -106,7 +106,6 @@ function Categories(props) {
                                 width: image.width,
                             }}
                             onClick={() => props.dispatch({type: 'CHANGE_CATEGORY', chosenCategory: image.title})}
-                            // href = {'/categories/'+image.title}
                         >
                             <div
                                 className={classes.imageSrc}
@@ -140,23 +139,3 @@ Categories.propTypes = {
 };
 
 export default withStylesCategories = withStyles(styles)(connect(null, null)(Categories));
-
-
-// import React, {Component} from 'react';
-// import Category_ele from "./Category_ele";
-
-// class Categories extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {}
-//     }
-
-//     render() {
-//         return (
-//             <div className="row">
-//                 {this.props.categories.map(ele => <Category_ele title={ele}/>)}
-//             </div>);
-//     }
-// }
-
-// export default Categories;

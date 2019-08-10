@@ -5,18 +5,6 @@ export default useStyles = makeStyles(theme => ({
         body: {
             backgroundColor: theme.palette.common.black,
         },
-        // ul: {
-        //   margin: 0,
-        //   padding: 0,
-        // },
-        // li: {
-        //   listStyle: 'none',
-        // },
     },
-    // categories: {
-    //   // borderBottom: `1px solid ${theme.palette.divider}`,
-    // },
-    // list: {
-    //   // flexWrap: 'wrap',
-    // }
+
 }));

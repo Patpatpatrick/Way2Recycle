@@ -10,7 +10,6 @@ function insertLink(title, url) {
     Links.insert({title, url, createdAt: new Date()});
 }
 
-// http://localhost:3000/v1/item/Eb54N4kdLapYb87CC
 WebApp.connectHandlers.use('/v1/item/', (req, res, next) => {
 
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -36,7 +35,6 @@ WebApp.connectHandlers.use('/v1/items', (req, res, next) => {
     res.end(JSON.stringify(json));
 });
 
-//Meteor.call('mySearch', "Bose", (failResetByMeteor, result) => { console.log(result) });
 Meteor.methods({
     'mySearch': function (searchValue) {
         let items = [];
@@ -110,14 +108,11 @@ Meteor.methods({
             queryArray.push(maxQuery)
         }
 
-        // {sort: {createdAt: -1}}
         if (queryParam['keyword'] !== "" || queryParam['keyword'] ===undefined) {
             let textQuery = {$text: {$search: ''}}
             textQuery.$text.$search = queryParam['keyword']
             queryArray.push(textQuery)
         }
-
-        let sortDateOptions = queryParam['sortDate']
 
         let dateQuery  = {date:1}
 
@@ -202,9 +197,6 @@ Meteor.startup(() => {
     Accounts.emailTemplates.from = "Way2Recycle <no-reply@way2recycle.herokuapp.com>"
 
 
-    // For google log in: Need to go to console.developers.google.com --> credential
-    // TODO: need to go to console.developers.google.com and change configurations when deployed to real site
-    // right now , it is set for localhost:3000
     ServiceConfiguration.configurations.remove({service: 'google'})
     ServiceConfiguration.configurations.insert({
         service: 'google',

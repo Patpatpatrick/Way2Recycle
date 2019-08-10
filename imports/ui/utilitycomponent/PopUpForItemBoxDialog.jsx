@@ -91,8 +91,6 @@ class CustomizedDialogs extends React.Component {
 
             Meteor.call('updateOneItem', this.props.itemForPopUp._id, revisedPopUpItem);
 
-        } else {
-            //alert('Already Liked!');
         }
     }
 

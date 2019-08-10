@@ -1,10 +1,8 @@
 // for itemsBox
 export const VIEW_ONE_IN_ITEM_BOX = 'VIEW_ONE_IN_ITEM_BOX';
 export const CLOSE_ONE_IN_ITEM_BOX = 'CLOSE_ONE_IN_ITEM_BOX';
-
 export const LIKE_ITEM = 'LIKE_ITEM';
 export const UNLIKE_ITEM = 'UNLIKE_ITEM';
-
 export const GEN_ITEM = 'GEN_ITEM';
 export const CLEAR_ALL = 'CLEAR_ALL';
 export const CLEAR_ONE = 'CLEAR_ONE';
@@ -38,7 +36,6 @@ export const CHANGE_CHOICE_ON_NAV = 'CHANGE_CHOICE_ON_NAV'
 // for assign fetched data to store
 export const ASSIGN_SERVER_ITEMS_TO_STORE = 'ASSIGN_SERVER_ITEMS_TO_STORE'
 export const reset_cate_in_post = 'reset_cate_in_post'
-
 
 export const Load_User_Items = 'Load_User_Items'
 export const popUpItemInItemsBox = (index) => {
@@ -189,7 +186,6 @@ export const resetPost = () => {
     };
 };
 
-
 export const showPostReview = () => {
     return {
         type: SHOW_REVIEW,
@@ -201,7 +197,6 @@ export const closePostReview = () => {
         type: CLOSE_REVIEW
     };
 };
-
 
 export const updatePostedItem = (index) => {
     return {
