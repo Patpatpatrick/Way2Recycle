@@ -44,23 +44,23 @@ The Mobile app was in an independent repo: https://github.com/zhuliangyu/ionic4-
 
 ## Team Member Contribution Summary:
 ### Workflow:
-At the beginning of each iteration, team members decide on basic outcomes and expectations of new features or visualization, basic idea to implement the new features. We would split the work based on the workload and each members’ command of the required technology.
-Each member maintain an independent remote branch, after implementation and testing, team members would create a pull request to develop branch.
-Occasional bug fix branch would be created and done under the inspection of more than one group member.
+At the beginning of each iteration, the team meet and discuss the outcomes and expectations of new features or visualization, and basic ideas to implement the new features. We split the work based on each members’ familiarity with the required technology and their availability during that iteration.
+Each member maintains an independent remote branch. After implementation and testing, team members created a pull request to develop branch.
+Occasionally, bug-fixing branch were created and inspected by more than one group members.
 ### Examples of team members’ contribution
-* Front-End(Each member took significant leadership role and made contributions to the final presentation of the project):
-   - Ricky: Lead us to finished the basic sketch and mock up. 
-   - Henry: Took the leadership role in completing the User Module, Make contribution on styling and the implementation of Item Search List, User Dashboard.
-   - Cynthia: Creating helpful utility components that can be shared among different pages, add reducers to the project to enrich the functionality, and make a contribution to the implementation of Home Page.
-   - Guoyang: Mainly responsible for maintaining redux store to make sure actions and reducers are not misused, responsible for the Post Ads Module implementation and Google Map module, and assist Cynthia in implementing Home Page.
+* Front-End (Each member took significant leadership role and made contributions to the final presentation of the project):
+   - Ricky: Led the group to finish the basic sketch and mock-up. 
+   - Henry: Took the leadership role in completing the User Module. Made contributions to styling and the implementation of Item Search List and User Dashboard.
+   - Cynthia: Created helpful utility components that can be shared among different pages, added reducers to the project to enrich the functionality, and made a contribution to the implementation of Home Page.
+   - Guoyang: Mainly responsible for maintaining redux store to make sure actions and reducers are not misused. Also responsible for the Post Ads Module implementation and Google Map module, and assisted Cynthia in implementing Home Page.
 * Back-End:
-   - Ricky & Cynthia: Finish CRUD Meteor backend operations.
-   - Henry: Explore Users module configuration in the backend.
-   - Ricky & Henry: Explore search functionality in the backend.
-   - Guoyang: Offering suggestions for backend call arguments and expected interaction between front end and back end.
+   - Ricky & Cynthia: Finished CRUD Meteor backend operations.
+   - Henry: Explored Users module configuration in the backend.
+   - Ricky & Henry: Explored search functionality in the backend.
+   - Guoyang: Offered suggestions for backend call arguments and expected interaction between front end and back end.
 * Bug identifying and fixing:
-   - Members identify bugs mostly before each pull request was finally merged. The person who initiates the pull request would describe the new feature usage, other members would test on the new feature as well as test regressively so as to make sure the new feature is interacting well with other existing parts.
-   - Each members found some bugs on others’ pull request, and we would fix the bug individually or collaboratively before the commit is finally accepted.
+   - Members identified bugs before each pull request was merged to the develop branch. The member who initiates the pull request describes the new feature usage, other members test on the new feature as well as test regressively to make sure the new features interact well with existing parts.
+   - Members occasionally find bugs on others’ pull request, and we fix the bug individually or collaboratively before the commit is finally accepted.
 
 ## Problems intended to solve:
 
