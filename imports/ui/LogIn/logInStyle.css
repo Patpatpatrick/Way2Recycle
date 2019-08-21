@@ -1,0 +1,105 @@
+.popup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup_inner {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+    margin: auto;
+    background: white;
+}
+
+.fontStyle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+}
+
+.align-mid {
+    margin: 0;
+    position: relative;
+    top: 45%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.left-align {
+    text-align: left;
+    padding-left: 20%
+}
+
+.right-align {
+    position: absolute;
+    width: 35%;
+    right: 20%;
+    font-size: 20px;
+    border-radius: 0.5rem;
+}
+
+
+.buttonWrap {
+    text-align: center;
+}
+
+.loginButton {
+    background-color: darkblue;
+    color: white;
+    width: 40%;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border-radius: 0.5rem;
+}
+
+.loginButton:hover {
+    background-color: #2e8dff;
+}
+
+
+.textBox {
+    height: 2.5rem;
+}
+
+.closeButton {
+    border-radius: 0.5rem;
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    width: 5%;
+    height: 5%;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.checkMark {
+    color: green;
+    right: 35%;
+}
+
+
+.closeButton:hover {
+    background-color: red;
+    color: white;
+}
+
+.logInBorder {
+    padding: 1rem;
+    border-style: solid;
+    border-color: #dddddd;
+    border-radius: 10px;
+    border-width: thin;
+}

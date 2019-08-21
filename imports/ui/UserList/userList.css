@@ -1,0 +1,19 @@
+/*
+ Style for managing user item (login req)
+ */
+.centerAndWidth {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.centerItem {
+    float: none;
+    margin: 0 auto;
+}
+
+.preventOverFlow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}

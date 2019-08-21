@@ -1,0 +1,26 @@
+.row1{
+    display:flex;
+    flex-direction:row;
+   /*justify-content: space-around;*/
+}
+
+.column1{
+    display:flex;
+    flex-direction:column;
+    width:20%;
+    padding-right: 20px;
+
+}
+
+.column2{
+    display:flex;
+    flex-direction:column;
+    width:80%
+}
+
+.descriptionStyle{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
